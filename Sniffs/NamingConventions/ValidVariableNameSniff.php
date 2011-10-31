@@ -98,10 +98,6 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
                         $error = 'Variable "%s" is not in valid camel caps format';
                         $data  = array($originalVarName);
                         $phpcsFile->addError($error, $var, 'NotCamelCaps', $data);
-                    } else if (preg_match('|\d|', $objVarName)) {
-                        $warning = 'Variable "%s" contains numbers but this is discouraged';
-                        $data    = array($originalVarName);
-                        $phpcsFile->addWarning($warning, $stackPtr, 'ContainsNumbers', $data);
                     }
                 }//end if
             }//end if
