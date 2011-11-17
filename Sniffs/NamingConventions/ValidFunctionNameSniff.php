@@ -153,7 +153,7 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 			$error = '%s method name "%s" is not in camel caps format';
 			$data  = array(
 					  ucfirst($scope),
-					  $errorData,
+					  $methodName,
 					 );
 			$phpcsFile->addError($error, $stackPtr, 'ScopeNotCamelCaps', $data);
             return;
