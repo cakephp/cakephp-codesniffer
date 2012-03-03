@@ -15,7 +15,7 @@
  */
 
 /**
- * Squiz_Sniffs_WhiteSpace_FunctionSpacingSniff.
+ * CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff.
  *
  * Checks the separation between methods in a class or interface.
  *

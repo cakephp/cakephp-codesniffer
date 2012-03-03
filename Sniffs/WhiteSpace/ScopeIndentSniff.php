@@ -15,7 +15,7 @@
  */
 
 /**
- * Generic_Sniffs_Whitespace_ScopeIndentSniff.
+ * CakePHP_Sniffs_Whitespace_ScopeIndentSniff.
  *
  * Checks that control structures are structured correctly, and their content
  * is indented correctly. This sniff will throw errors if tabs are used
