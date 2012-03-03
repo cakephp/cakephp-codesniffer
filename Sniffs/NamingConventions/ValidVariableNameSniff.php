@@ -94,7 +94,8 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
                         $objVarName = substr($objVarName, 1);
                     }
 
-                    if (PHP_CodeSniffer::isCamelCaps($objVarName, false, true, false) === false) {
+                    // $fooBar or $FooBar are both valid variable formats.
+                    if ($this->isValidVar($varName) === false) {
                         $error = 'Variable "%s" is not in valid camel caps format';
                         $data  = array($originalVarName);
                         $phpcsFile->addError($error, $var, 'NotCamelCaps', $data);
@@ -122,7 +123,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
             }
         }
 
-        if (PHP_CodeSniffer::isCamelCaps($varName, false, true, false) === false) {
+        if ($this->isValidVar($varName) === false) {
             $error = 'Variable "%s" is not in valid camel caps format';
             $data  = array($originalVarName);
             $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
@@ -183,8 +184,8 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
             }
         }
 
-        if (PHP_CodeSniffer::isCamelCaps($varName, false, $public, false) === false) {
-            $error = 'Variable "%s" is not in valid camel caps format';
+        if ($this->isValidVar($varName, $public) === false) {
+            $error = 'Member variable "%s" is not in valid camel caps format';
             $data  = array($varName);
             $phpcsFile->addError($error, $stackPtr, 'MemberVarNotCamelCaps', $data);
         } else if (preg_match('|\d|', $varName)) {
@@ -238,7 +239,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
                     }
                 }
 
-                if (PHP_CodeSniffer::isCamelCaps($varName, false, true, false) === false) {
+                if ($this->isValidVar($varName) === false) {
                     $varName = $matches[0];
                     $error   = 'Variable "%s" is not in valid camel caps format';
                     $data    = array($originalVarName);
@@ -248,6 +249,32 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
         }//end if
 
     }//end processVariableInString()
+
+    /**
+     * Check that a variable is a valid shape.
+     *
+     * Variables in CakePHP can either be $fooBar, $FooBar, $_fooBar, or $_FooBar.
+     * 
+     * @param string $string The variable to check.
+     * @param boolea $public Whether or not the variable is public.
+     * @return boolean
+     */
+    protected function isValidVar($string, $public = true)
+    {
+        $firstChar = '[a-zA-Z]';
+        if (!$public) {
+            $firstChar = '[_]' . $firstChar;
+        }
+        if (preg_match("|^$firstChar|", $string) === 0) {
+            return false;
+        }
+        // Check that the name only contains legal characters.
+        $legalChars = 'a-zA-Z0-9';
+        if (preg_match("|[^$legalChars]|", substr($string, 1)) > 0) {
+            return false;
+        }
+        return true;
+    }
 
 
 }//end class
