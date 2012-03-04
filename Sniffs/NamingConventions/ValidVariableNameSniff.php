@@ -94,8 +94,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
                         $objVarName = substr($objVarName, 1);
                     }
 
-                    // $fooBar or $FooBar are both valid variable formats.
-                    if ($this->isValidVar($varName) === false) {
+                    if ($this->isValidVar($objVarName) === false) {
                         $error = 'Variable "%s" is not in valid camel caps format';
                         $data  = array($originalVarName);
                         $phpcsFile->addError($error, $var, 'NotCamelCaps', $data);
