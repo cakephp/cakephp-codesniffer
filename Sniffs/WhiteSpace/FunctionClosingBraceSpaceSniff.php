@@ -15,7 +15,7 @@
  */
 
 /**
- * Squiz_Sniffs_WhiteSpace_FunctionClosingBraceSpaceSniff.
+ * CakePHP_Sniffs_WhiteSpace_FunctionClosingBraceSpaceSniff.
  *
  * Checks that there is one empty line before the closing brace of a function.
  *
@@ -80,7 +80,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionClosingBraceSpaceSniff implements PHP_Co
             }
         } else {
             if ($found !== 0) {
-                $error = 'Expected 0 blank line before closing function brace; %s found';
+                $error = 'Expected 0 blank lines before closing function brace; %s found';
                 $data  = array($found);
                 $phpcsFile->addError($error, $closeBrace, 'SpacingBeforeClose', $data);
             }

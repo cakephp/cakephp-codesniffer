@@ -1,6 +1,6 @@
 <?php
 /**
- * Squiz_Sniffs_Formatting_FunctionSpacingSniff.
+ * CakePHP_Sniffs_Formatting_FunctionSpacingSniff.
  *
  * PHP version 5
  *
@@ -30,7 +30,6 @@
  */
 class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_Sniff
 {
-
 
     /**
      * Returns an array of tokens this test wants to listen for.
