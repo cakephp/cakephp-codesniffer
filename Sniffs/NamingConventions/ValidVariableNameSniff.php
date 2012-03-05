@@ -79,6 +79,34 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
             return;
         }
 
+        $objOperator = $phpcsFile->findNext(array(T_WHITESPACE), ($stackPtr + 1), null, true);
+        if ($tokens[$objOperator]['code'] === T_OBJECT_OPERATOR) {
+            // Check to see if we are using a variable from an object.
+            $var = $phpcsFile->findNext(array(T_WHITESPACE), ($objOperator + 1), null, true);
+            if ($tokens[$var]['code'] === T_STRING) {
+                // Either a var name or a function call, so check for bracket.
+                $bracket = $phpcsFile->findNext(array(T_WHITESPACE), ($var + 1), null, true);
+
+                if ($tokens[$bracket]['code'] !== T_OPEN_PARENTHESIS) {
+                    $objVarName = $tokens[$var]['content'];
+
+                    // There is no way for us to know if the var is public or private,
+                    // so we have to ignore any leading underscores and just
+                    // check the main part of the variable name.
+                    $originalVarName = $objVarName;
+                    if (substr($objVarName, 0, 1) === '_') {
+                        $objVarName = ltrim($objVarName, '_');
+                    }
+
+                    if ($this->isValidVar($objVarName) === false) {
+                        $error = 'Object property "%s" is not in valid camel caps format';
+                        $data  = array($originalVarName);
+                        $phpcsFile->addError($error, $var, 'NotCamelCaps', $data);
+                    }
+                }//end if
+            }//end if
+        }//end if
+
         // There is no way for us to know if the var is public or private,
         // so we have to ignore a leading underscore if there is one and just
         // check the main part of the variable name.
@@ -238,7 +266,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
     {
         $firstChar = '[a-zA-Z]';
         if (!$public) {
-            $firstChar = '[_]' . $firstChar;
+            $firstChar = '[_]{1,2}' . $firstChar;
         }
         if (preg_match("|^$firstChar|", $string) === 0) {
             return false;
