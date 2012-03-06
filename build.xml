@@ -70,7 +70,7 @@
 			<license>MIT License</license>
 			<version release="${version}" api="${version}" />
 			<stability release="stable" api="stable" />
-			<notes>http://github.com/cakephp/CakePHP-CodeSniffer/blob/master/README</notes>
+			<notes>http://github.com/cakephp/cakephp-codesniffer/blob/master/README</notes>
 			<dependencies>
 				<php minimum_version="5.2.8" />
 				<pear minimum_version="1.9.0" recommended_version="1.9.4" />
