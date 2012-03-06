@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Phing build file for CakePHP coding standards.
+	Used to create pear pacakages.
+	Requires the d51PearPkg2 to be installed:
+
+	pear channel-discover pear.domain51.com
+	pear install domain51/Phing_d51PearPkg2Task
+
+	Use the `build` task to create a pear package based on the current working copy.
+	Use the `distribute` task to upload the pear package.
+	Use the `clean` task to clean up packaging artifacts.
+-->
+<project name="CakePHP-CodeSniffer" default="build">
+
+	<taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
+
+	<!-- Update this version when making new packages -->
+	<property name="version" value="0.1.0" />
+
+	<!-- Shouldn't have to change these -->
+	<property name="build.dir" value="build" />
+	<property name="dist.dir" value="dist" />
+	<property name="project.name" value="CakePHP_CodeSniffer" />
+	<property name="pear.package" value="${project.name}-${version}" />
+	<property name="pirum.dir" value="/home/cakephp/www-live/pear.cakephp.org" />
+
+	<!--
+		The set of files we're going to package
+	 -->
+	<fileset id="files" dir="./">
+		<include name="**" />
+		<exclude name="build.xml" />
+		<exclude name="README.mdown" />
+	</fileset>
+
+	<!-- start fresh each time.  Remove the dist and build dirs -->
+	<target name="clean">
+		<delete dir="${build.dir}" includeemptydirs="true" />
+		<delete dir="${dist.dir}" includeemptydirs="true" />
+	</target>
+
+	<!--
+		Copy all the files to build/ so they can be packaged up.
+	-->
+	<target name="copy-files" depends="clean">
+		<echo msg="Creating build + dist directories." />
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${dist.dir}" />
+
+		<echo msg="Copying files to build directory" />
+		<copy todir="${build.dir}/${pear.package}">
+			<fileset refid="files" />
+		</copy>
+	</target>
+
+	<!--
+		Define the package.xml.  Using xml to make xml is fun!
+	-->
+	<target name="define-pear-package" depends="copy-files">
+		<d51pearpkg2 baseinstalldir="PHP/CodeSniffer/Standards/CakePHP" dir="${build.dir}/${pear.package}">
+			<name>CakePHP_CodeSniffer</name>
+			<summary>PHP_CodeSniffer rules for CakePHP</summary>
+			<channel>pear.cakephp.org</channel>
+			<description>PHP_CodeSniffer rules for checking code against the CakePHP coding standards.</description>
+
+			<lead user="mark_story" name="Mark Story" email="mark@mark-story.com" />
+			<developer user="jrbasso" name="Juan Basso" email="" />
+
+			<license>MIT License</license>
+			<version release="${version}" api="${version}" />
+			<stability release="stable" api="stable" />
+			<notes>http://github.com/cakephp/CakePHP-CodeSniffer/blob/master/README</notes>
+			<dependencies>
+				<php minimum_version="5.2.8" />
+				<pear minimum_version="1.9.0" recommended_version="1.9.4" />
+			</dependencies>
+			<exceptions key="ruleset.xml">php</exceptions>
+		</d51pearpkg2>
+	</target>
+
+	<!-- Generate the PEAR package from a directory and move the files to the dist folder -->
+	<target name="generate-package" depends="define-pear-package">
+		<exec command="pear package" dir="${build.dir}/${pear.package}" passthru="true"/>
+		<echo msg="Moving ${pear.package}.tgz"/>
+		<move file="${build.dir}/${pear.package}/${pear.package}.tgz" todir="${dist.dir}" />
+	</target>
+
+	<!--
+		Upload to pirum pear channel.
+	-->
+	<target name="distribute">
+		<echo msg="Uploading tgz file to cakephp.org" />
+		<exec command="scp ${dist.dir}/${pear.package}.tgz cakephp@cakephp.org:${pirum.dir}" dir="." checkreturn="true"  />
+
+		<echo msg="Adding new release to pirum" />
+		<exec command="ssh cakephp@cakephp.org pirum add ${pirum.dir} ${pirum.dir}/${pear.package}.tgz" checkreturn="true" />
+	</target>
+
+	<!--
+		Top level easy to type targets
+	-->
+	<target name="build" depends="generate-package" />
+	<target name="release" depends="build,distribute" />
+
+</project>
+
