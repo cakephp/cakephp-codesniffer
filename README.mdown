@@ -11,7 +11,7 @@ Its generally recommended to install these code sniffs with the PEAR
 installer:
 
 	pear channel-discover pear.cakephp.org
-	pear install cakephp/cakephp-codesniffer
+	pear install cakephp/CakePHP_CodeSniffer
 
 Usage
 -----
