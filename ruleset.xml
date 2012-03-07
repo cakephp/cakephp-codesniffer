@@ -68,4 +68,11 @@
  <rule ref="Squiz.WhiteSpace.ScopeClosingBrace"/>
  <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
+ 
+ <rule ref="PEAR.Commenting.ClassComment"/>
+ <rule ref="PEAR.Commenting.FileComment"/>
+ <rule ref="PEAR.Commenting.FunctionComment"/>
+ <rule ref="PEAR.Commenting.InlineComment"/> 
+
+ 
 </ruleset>
