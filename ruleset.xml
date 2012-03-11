@@ -35,8 +35,6 @@
  <rule ref="Generic.NamingConventions.ConstructorName"/>
  <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
  <rule ref="PEAR.NamingConventions.ValidClassName"/>
- <rule ref="CakePHP.NamingConventions.ValidFunctionName"/>
- <rule ref="CakePHP.NamingConventions.ValidVariableName"/>
 
  <rule ref="Squiz.Operators.ValidLogicalOperators"/>
 
@@ -55,12 +53,6 @@
  <rule ref="Squiz.Scope.StaticThisUsage"/>
 
  <rule ref="Squiz.WhiteSpace.CastSpacing"/>
- <rule ref="CakePHP.WhiteSpace.FunctionClosingBraceSpace"/>
- <rule ref="CakePHP.WhiteSpace.FunctionOpeningBraceSpace"/>
- <rule ref="CakePHP.WhiteSpace.FunctionSpacing"/>
- <rule ref="CakePHP.WhiteSpace.ObjectOperatorSpacing"/>
- <rule ref="CakePHP.WhiteSpace.ScopeIndent"/>
-
  <rule ref="Squiz.WhiteSpace.LanguageConstructSpacing"/>
  <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
  <rule ref="Squiz.WhiteSpace.MemberVarSpacing"/>
@@ -68,4 +60,6 @@
  <rule ref="Squiz.WhiteSpace.ScopeClosingBrace"/>
  <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
+
+ <!-- All rules in ./Sniffs are included automatically -->
 </ruleset>
