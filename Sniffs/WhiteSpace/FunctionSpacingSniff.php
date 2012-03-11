@@ -86,8 +86,8 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
         } else {
             $nextContent = $phpcsFile->findNext(array(T_WHITESPACE), ($nextLineToken + 1), null, true);
             if ($nextContent === false) {
-                // We are at the end of the file.
-                $foundLines = 0;
+                // We are at the end of the file. That is acceptable as well.
+                $foundLines = 1;
             } else {
                 $foundLines = ($tokens[$nextContent]['line'] - $tokens[$nextLineToken]['line']);
             }
