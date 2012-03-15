@@ -16,7 +16,7 @@
 	<taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
 
 	<!-- Update this version when making new packages -->
-	<property name="version" value="0.1.0" />
+	<property name="version" value="0.1.1" />
 
 	<!-- Shouldn't have to change these -->
 	<property name="build.dir" value="build" />
