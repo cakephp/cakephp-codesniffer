@@ -128,6 +128,10 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 				$phpcsFile->addError($error, $stackPtr, 'PublicWithUnderscore', $errorData);
 				return;
 			}
+            // Underscored public methods in controller are allowed to break our rules.
+            if (substr($className, -10) === 'Controller') {
+                return;
+            }
 		} elseif ($isPrivate === true) {
             if (substr($methodName, 0, 2) !== '__') {
                 $error = 'Private method name "%s" must be prefixed with 2 underscores';
