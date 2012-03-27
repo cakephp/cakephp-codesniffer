@@ -271,6 +271,10 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
         if (preg_match("|^$firstChar|", $string) === 0) {
             return false;
         }
+		$firstStringCount = 1;
+		if (preg_match("|^__|", $string)) {
+			$firstStringCount = 2;
+		}
         // Check that the name only contains legal characters.
         $legalChars = 'a-zA-Z0-9';
         if (preg_match("|[^$legalChars]|", substr($string, 1)) > 0) {
