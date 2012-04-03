@@ -39,7 +39,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
  *
  * @var array(int)
  */
-	protected $nonIndentingScopes = array();
+	protected $_nonIndentingScopes = array();
 
 /**
  * Returns an array of tokens this test wants to listen for.
@@ -97,7 +97,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
 
 		// Based on the conditions that surround this token, determine the
 		// indent that we expect this current content to be.
-		$expectedIndent = $this->calculateExpectedIndent($tokens, $firstToken);
+		$expectedIndent = $this->_calculateExpectedIndent($tokens, $firstToken);
 
 		if ($tokens[$stackPtr]['code'] !== T_COMMENT && $tokens[$firstToken]['column'] !== $expectedIndent) {
 			$error = 'Line indented incorrectly; expected %s spaces, found %s';
@@ -112,7 +112,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
 		$scopeCloser = $tokens[$stackPtr]['scope_closer'];
 
 		// Some scopes are expected not to have indents.
-		if (in_array($tokens[$firstToken]['code'], $this->nonIndentingScopes) === false) {
+		if (in_array($tokens[$firstToken]['code'], $this->_nonIndentingScopes) === false) {
 			$indent = ($expectedIndent + $this->indent);
 		} else {
 			$indent = $expectedIndent;
@@ -277,7 +277,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
  * @param int $stackPtr The position of the token to get indent for.
  * @return int
  */
-	protected function calculateExpectedIndent(array $tokens, $stackPtr) {
+	protected function _calculateExpectedIndent(array $tokens, $stackPtr) {
 		$conditionStack = array();
 
 		// Empty conditions array (top level structure).
@@ -299,7 +299,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
 		foreach ($tokenConditions as $id => $condition) {
 			// If it's an indenting scope ie. it's not in our array of
 			// scopes that don't indent, add it to our condition stack.
-			if (in_array($condition, $this->nonIndentingScopes) === false) {
+			if (in_array($condition, $this->_nonIndentingScopes) === false) {
 				$conditionStack[$id] = $condition;
 			}
 		}

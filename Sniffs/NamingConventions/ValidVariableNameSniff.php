@@ -31,16 +31,6 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractVariableSniff', true) === fa
 class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff {
 
 /**
- * Tokens to ignore so that we can find a DOUBLE_COLON.
- *
- * @var array
- */
-	private $_ignore = array(
-		T_WHITESPACE,
-		T_COMMENT,
-	);
-
-/**
  * Processes this test, when one of its tokens is encountered.
  *
  * Processes variables, we skip processing object properties because
@@ -92,7 +82,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 						$objVarName = ltrim($objVarName, '_');
 					}
 
-					if ($this->isValidVar($objVarName) === false) {
+					if ($this->_isValidVar($objVarName) === false) {
 						$error = 'Object property "%s" is not in valid camel caps format';
 						$data  = array($originalVarName);
 						$phpcsFile->addError($error, $var, 'NotCamelCaps', $data);
@@ -120,7 +110,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 			}
 		}
 
-		if ($this->isValidVar($varName) === false) {
+		if ($this->_isValidVar($varName) === false) {
 			$error = 'Variable "%s" is not in valid camel caps format';
 			$data  = array($originalVarName);
 			$phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
@@ -177,7 +167,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 			}
 		}
 
-		if ($this->isValidVar($varName, $public) === false) {
+		if ($this->_isValidVar($varName, $public) === false) {
 			$error = 'Member variable "%s" is not in valid camel caps format';
 			$data = array($varName);
 			$phpcsFile->addError($error, $stackPtr, 'MemberVarNotCamelCaps', $data);
@@ -227,7 +217,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 					}
 				}
 
-				if ($this->isValidVar($varName) === false) {
+				if ($this->_isValidVar($varName) === false) {
 					$varName = $matches[0];
 					$error = 'Variable "%s" is not in valid camel caps format';
 					$data = array($originalVarName);
@@ -246,7 +236,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
  * @param boolea $public Whether or not the variable is public.
  * @return boolean
  */
-	protected function isValidVar($string, $public = true) {
+	protected function _isValidVar($string, $public = true) {
 		$firstChar = '[a-zA-Z]';
 		if (!$public) {
 			$firstChar = '[_]{1,2}' . $firstChar;

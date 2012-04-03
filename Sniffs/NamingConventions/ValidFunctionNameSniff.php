@@ -38,7 +38,7 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
  *
  * @var array
  */
-	protected $magicMethods = array(
+	protected $_magicMethods = array(
 		'construct',
 		'destruct',
 		'call',
@@ -54,13 +54,6 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 		'clone',
 		'invoke',
 	);
-
-/**
- * A list of all PHP magic functions.
- *
- * @var array
- */
-	protected $magicFunctions = array('autoload');
 
 /**
  * Constructs a PEAR_Sniffs_NamingConventions_ValidFunctionNameSniff.
@@ -98,7 +91,7 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 		}
 
 		// Ignore magic methods
-		if (preg_match('/^__(' . implode('|', $this->magicMethods) . ')$/', $methodName)) {
+		if (preg_match('/^__(' . implode('|', $this->_magicMethods) . ')$/', $methodName)) {
 			return;
 		}
 
