@@ -31,96 +31,88 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractScopeSniff', true) === false
  * @version   1.0
  * @link      http://pear.php.net/package/PHP_CodeSniffer_CakePHP
  */
-class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff
-{
+class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff {
 
-    /**
-     * A list of all PHP magic methods.
-     *
-     * @var array
-     */
-    protected $magicMethods = array(
-                               'construct',
-                               'destruct',
-                               'call',
-                               'callStatic',
-                               'get',
-                               'set',
-                               'isset',
-                               'unset',
-                               'sleep',
-                               'wakeup',
-                               'toString',
-                               'set_state',
-                               'clone',
-                               'invoke',
-                              );
+/**
+ * A list of all PHP magic methods.
+ *
+ * @var array
+ */
+	protected $magicMethods = array(
+		'construct',
+		'destruct',
+		'call',
+		'callStatic',
+		'get',
+		'set',
+		'isset',
+		'unset',
+		'sleep',
+		'wakeup',
+		'toString',
+		'set_state',
+		'clone',
+		'invoke',
+	);
 
-    /**
-     * A list of all PHP magic functions.
-     *
-     * @var array
-     */
-    protected $magicFunctions = array('autoload');
+/**
+ * A list of all PHP magic functions.
+ *
+ * @var array
+ */
+	protected $magicFunctions = array('autoload');
 
+/**
+ * Constructs a PEAR_Sniffs_NamingConventions_ValidFunctionNameSniff.
+ */
+	public function __construct() {
+		parent::__construct(array(T_CLASS, T_INTERFACE), array(T_FUNCTION), true);
+	}
 
-    /**
-     * Constructs a PEAR_Sniffs_NamingConventions_ValidFunctionNameSniff.
-     */
-    public function __construct()
-    {
-        parent::__construct(array(T_CLASS, T_INTERFACE), array(T_FUNCTION), true);
+/**
+ * Processes the tokens within the scope.
+ *
+ * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
+ * @param int $stackPtr The position where this token was found.
+ * @param int $currScope The position of the current scope.
+ * @return void
+ */
+	protected function processTokenWithinScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $currScope) {
+		$methodName = $phpcsFile->getDeclarationName($stackPtr);
+		if ($methodName === null) {
+			// Ignore closures.
+			return;
+		}
 
-    }//end __construct()
+		$className = $phpcsFile->getDeclarationName($currScope);
+		$errorData = array($className . '::' . $methodName);
 
+		// PHP4 constructors are allowed to break our rules.
+		if ($methodName === $className) {
+			return;
+		}
 
-    /**
-     * Processes the tokens within the scope.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
-     * @param int                  $stackPtr  The position where this token was
-     *                                        found.
-     * @param int                  $currScope The position of the current scope.
-     *
-     * @return void
-     */
-    protected function processTokenWithinScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $currScope)
-    {
-        $methodName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($methodName === null) {
-            // Ignore closures.
-            return;
-        }
-
-        $className = $phpcsFile->getDeclarationName($currScope);
-        $errorData = array($className.'::'.$methodName);
-
-        // PHP4 constructors are allowed to break our rules.
-        if ($methodName === $className) {
-            return;
-        }
-
-        // PHP4 destructors are allowed to break our rules.
-        if ($methodName === '_'.$className) {
-            return;
-        }
+		// PHP4 destructors are allowed to break our rules.
+		if ($methodName === '_' . $className) {
+			return;
+		}
 
 		// Ignore magic methods
 		if (preg_match('/^__(' . implode('|', $this->magicMethods) . ')$/', $methodName)) {
 			return;
 		}
 
-        $methodProps = $phpcsFile->getMethodProperties($stackPtr);
+		$methodProps = $phpcsFile->getMethodProperties($stackPtr);
 		if ($methodProps['scope_specified'] === false) {
 			$error = 'All methods must have a scope specified';
 			$phpcsFile->addError($error, $stackPtr, 'NoScopeSpecified', $errorData);
 			return;
 		}
 
-        $isPublic       = $methodProps['scope'] === 'public';
-		$isProtected    = $methodProps['scope'] === 'protected';
-		$isPrivate      = $methodProps['scope'] === 'private';
-        $scope          = $methodProps['scope'];
+		$isPublic = $methodProps['scope'] === 'public';
+		$isProtected = $methodProps['scope'] === 'protected';
+		$isPrivate = $methodProps['scope'] === 'private';
+		$scope = $methodProps['scope'];
 
 		if ($isPublic === true) {
 			if ($methodName[0] === '_') {
@@ -128,57 +120,50 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 				$phpcsFile->addError($error, $stackPtr, 'PublicWithUnderscore', $errorData);
 				return;
 			}
-            // Underscored public methods in controller are allowed to break our rules.
-            if (substr($className, -10) === 'Controller') {
-                return;
-            }
+			// Underscored public methods in controller are allowed to break our rules.
+			if (substr($className, -10) === 'Controller') {
+				return;
+			}
 		} elseif ($isPrivate === true) {
-            if (substr($methodName, 0, 2) !== '__') {
-                $error = 'Private method name "%s" must be prefixed with 2 underscores';
-                $phpcsFile->addError($error, $stackPtr, 'PrivateNoUnderscore', $errorData);
-                return;
-            } else {
-                $filename = $phpcsFile->getFilename();
-                if (strpos($filename, '/lib/Cake/') === false) {
-                    $warning = 'Private method name "%s" in CakePHP core is discouraged';
-                    $phpcsFile->addWarning($warning, $stackPtr, 'PrivateMethodInCore', $errorData);
-                }
-            }
+			if (substr($methodName, 0, 2) !== '__') {
+				$error = 'Private method name "%s" must be prefixed with 2 underscores';
+				$phpcsFile->addError($error, $stackPtr, 'PrivateNoUnderscore', $errorData);
+				return;
+			} else {
+				$filename = $phpcsFile->getFilename();
+				if (strpos($filename, '/lib/Cake/') === false) {
+					$warning = 'Private method name "%s" in CakePHP core is discouraged';
+					$phpcsFile->addWarning($warning, $stackPtr, 'PrivateMethodInCore', $errorData);
+				}
+			}
 		} else {
 			if ($methodName[0] !== '_') {
-                $error = 'Protected method name "%s" must be prefixed with an underscore';
-                $phpcsFile->addError($error, $stackPtr, 'ProtectedNoUnderscore', $errorData);
-                return;
-            }
+				$error = 'Protected method name "%s" must be prefixed with an underscore';
+				$phpcsFile->addError($error, $stackPtr, 'ProtectedNoUnderscore', $errorData);
+				return;
+			}
 		}
 
-        $testMethodName = ltrim($methodName, '_');
-        if (PHP_CodeSniffer::isCamelCaps($testMethodName, false, true, false) === false) {
+		$testMethodName = ltrim($methodName, '_');
+		if (PHP_CodeSniffer::isCamelCaps($testMethodName, false, true, false) === false) {
 			$error = '%s method name "%s" is not in camel caps format';
-			$data  = array(
-					  ucfirst($scope),
-					  $methodName,
-					 );
+			$data = array(
+				ucfirst($scope),
+				$methodName,
+			);
 			$phpcsFile->addError($error, $stackPtr, 'ScopeNotCamelCaps', $data);
-            return;
-        }
+			return;
+		}
+	}
 
-    }//end processTokenWithinScope()
+/**
+ * Processes the tokens outside the scope.
+ *
+ * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
+ * @param int $stackPtr  The position where this token was found.
+ * @return void
+ */
+	protected function processTokenOutsideScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
+	}
 
-
-    /**
-     * Processes the tokens outside the scope.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
-     * @param int                  $stackPtr  The position where this token was
-     *                                        found.
-     *
-     * @return void
-     */
-    protected function processTokenOutsideScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
-    {
-        return;
-    }//end processTokenOutsideScope()
-
-
-}//end class
+}

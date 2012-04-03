@@ -1,20 +1,5 @@
 <?php
 /**
- * CakePHP_Sniffs_Formatting_FunctionSpacingSniff.
- *
- * PHP version 5
- *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
- * @version   CVS: $Id: FunctionSpacingSniff.php 301632 2010-07-28 01:57:56Z squiz $
- * @link      http://pear.php.net/package/PHP_CodeSniffer
- */
-
-/**
  * CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff.
  *
  * Checks the separation between methods in a class or interface.
@@ -26,145 +11,132 @@
  * @copyright 2006 Squiz Pty Ltd (ABN 77 084 670 600)
  * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
  * @version   Release: 1.3.0
- * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_Sniff
-{
+class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_Sniff {
 
-    /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return array
-     */
-    public function register()
-    {
-        return array(T_FUNCTION);
+/**
+ * Returns an array of tokens this test wants to listen for.
+ *
+ * @return array
+ */
+	public function register() {
+		return array(T_FUNCTION);
+	}
 
-    }//end register()
+/**
+ * Processes this sniff, when one of its tokens is encountered.
+ *
+ * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+ * @param int $stackPtr The position of the current token in the stack passed in $tokens.
+ * @return void
+ */
+	public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
+		$tokens = $phpcsFile->getTokens();
 
+		/*
+			Check the number of blank lines
+			after the function.
+		*/
 
-    /**
-     * Processes this sniff, when one of its tokens is encountered.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                  $stackPtr  The position of the current token
-     *                                        in the stack passed in $tokens.
-     *
-     * @return void
-     */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
-    {
-        $tokens = $phpcsFile->getTokens();
+		if (isset($tokens[$stackPtr]['scope_closer']) === false) {
+			// Must be an interface method, so the closer is the semi-colon.
+			$closer = $phpcsFile->findNext(T_SEMICOLON, $stackPtr);
+		} else {
+			$closer = $tokens[$stackPtr]['scope_closer'];
+		}
 
-        /*
-            Check the number of blank lines
-            after the function.
-        */
+		// There needs to be 1 blank lines after the closer.
+		$nextLineToken = null;
+		for ($i = $closer; $i < $phpcsFile->numTokens; $i++) {
+			if (strpos($tokens[$i]['content'], $phpcsFile->eolChar) === false) {
+				continue;
+			} else {
+				$nextLineToken = ($i + 1);
+				break;
+			}
+		}
 
-        if (isset($tokens[$stackPtr]['scope_closer']) === false) {
-            // Must be an interface method, so the closer is the semi-colon.
-            $closer = $phpcsFile->findNext(T_SEMICOLON, $stackPtr);
-        } else {
-            $closer = $tokens[$stackPtr]['scope_closer'];
-        }
+		if (is_null($nextLineToken) === true) {
+			// Never found the next line, which means
+			// there are 0 blank lines after the function.
+			$foundLines = 0;
+		} else {
+			$nextContent = $phpcsFile->findNext(array(T_WHITESPACE), ($nextLineToken + 1), null, true);
+			if ($nextContent === false) {
+				// We are at the end of the file. That is acceptable as well.
+				$foundLines = 1;
+			} else {
+				$foundLines = ($tokens[$nextContent]['line'] - $tokens[$nextLineToken]['line']);
+			}
+		}
 
-        // There needs to be 1 blank lines after the closer.
-        $nextLineToken = null;
-        for ($i = $closer; $i < $phpcsFile->numTokens; $i++) {
-            if (strpos($tokens[$i]['content'], $phpcsFile->eolChar) === false) {
-                continue;
-            } else {
-                $nextLineToken = ($i + 1);
-                break;
-            }
-        }
+		if ($foundLines !== 1) {
+			$error = 'Expected 1 blank lines after function; %s found';
+			$data = array($foundLines);
+			$phpcsFile->addError($error, $closer, 'After', $data);
+		}
 
-        if (is_null($nextLineToken) === true) {
-            // Never found the next line, which means
-            // there are 0 blank lines after the function.
-            $foundLines = 0;
-        } else {
-            $nextContent = $phpcsFile->findNext(array(T_WHITESPACE), ($nextLineToken + 1), null, true);
-            if ($nextContent === false) {
-                // We are at the end of the file. That is acceptable as well.
-                $foundLines = 1;
-            } else {
-                $foundLines = ($tokens[$nextContent]['line'] - $tokens[$nextLineToken]['line']);
-            }
-        }
+		/*
+			Check the number of blank lines
+			before the function.
+		*/
 
-        if ($foundLines !== 1) {
-            $error = 'Expected 1 blank lines after function; %s found';
-            $data  = array($foundLines);
-            $phpcsFile->addError($error, $closer, 'After', $data);
-        }
+		$prevLineToken = null;
+		for ($i = $stackPtr; $i > 0; $i--) {
+			if (strpos($tokens[$i]['content'], $phpcsFile->eolChar) === false) {
+				continue;
+			} else {
+				$prevLineToken = $i;
+				break;
+			}
+		}
 
-        /*
-            Check the number of blank lines
-            before the function.
-        */
+		if (is_null($prevLineToken) === true) {
+			// Never found the previous line, which means
+			// there are 0 blank lines before the function.
+			$foundLines = 0;
+		} else {
+			$prevContent = $phpcsFile->findPrevious(array(T_WHITESPACE, T_DOC_COMMENT), $prevLineToken, null, true);
 
-        $prevLineToken = null;
-        for ($i = $stackPtr; $i > 0; $i--) {
-            if (strpos($tokens[$i]['content'], $phpcsFile->eolChar) === false) {
-                continue;
-            } else {
-                $prevLineToken = $i;
-                break;
-            }
-        }
+			// Before we throw an error, check that we are not throwing an error
+			// for another function. We don't want to error for no blank lines after
+			// the previous function and no blank lines before this one as well.
+			$currentLine = $tokens[$stackPtr]['line'];
+			$prevLine = ($tokens[$prevContent]['line'] - 1);
+			$i = ($stackPtr - 1);
+			$foundLines  = 0;
+			while ($currentLine != $prevLine && $currentLine > 1 && $i > 0) {
+				if (isset($tokens[$i]['scope_condition']) === true) {
+					$scopeCondition = $tokens[$i]['scope_condition'];
+					if ($tokens[$scopeCondition]['code'] === T_FUNCTION) {
+						// Found a previous function.
+						return;
+					}
+				} else if ($tokens[$i]['code'] === T_FUNCTION) {
+					// Found another interface function.
+					return;
+				}
 
-        if (is_null($prevLineToken) === true) {
-            // Never found the previous line, which means
-            // there are 0 blank lines before the function.
-            $foundLines = 0;
-        } else {
-            $prevContent = $phpcsFile->findPrevious(array(T_WHITESPACE, T_DOC_COMMENT), $prevLineToken, null, true);
+				$currentLine = $tokens[$i]['line'];
+				if ($currentLine === $prevLine) {
+					break;
+				}
 
-            // Before we throw an error, check that we are not throwing an error
-            // for another function. We don't want to error for no blank lines after
-            // the previous function and no blank lines before this one as well.
-            $currentLine = $tokens[$stackPtr]['line'];
-            $prevLine    = ($tokens[$prevContent]['line'] - 1);
-            $i           = ($stackPtr - 1);
-            $foundLines  = 0;
-            while ($currentLine != $prevLine && $currentLine > 1 && $i > 0) {
-                if (isset($tokens[$i]['scope_condition']) === true) {
-                    $scopeCondition = $tokens[$i]['scope_condition'];
-                    if ($tokens[$scopeCondition]['code'] === T_FUNCTION) {
-                        // Found a previous function.
-                        return;
-                    }
-                } else if ($tokens[$i]['code'] === T_FUNCTION) {
-                    // Found another interface function.
-                    return;
-                }
+				if ($tokens[($i - 1)]['line'] < $currentLine && $tokens[($i + 1)]['line'] > $currentLine) {
+					// This token is on a line by itself. If it is whitespace, the line is empty.
+					if ($tokens[$i]['code'] === T_WHITESPACE) {
+						$foundLines++;
+					}
+				}
+				$i--;
+			}
+		}
 
-                $currentLine = $tokens[$i]['line'];
-                if ($currentLine === $prevLine) {
-                    break;
-                }
+		if ($foundLines !== 1) {
+			$error = 'Expected 1 blank lines before function; %s found';
+			$data = array($foundLines);
+			$phpcsFile->addError($error, $stackPtr, 'Before', $data);
+		}
+	}
 
-                if ($tokens[($i - 1)]['line'] < $currentLine && $tokens[($i + 1)]['line'] > $currentLine) {
-                    // This token is on a line by itself. If it is whitespace, the line is empty.
-                    if ($tokens[$i]['code'] === T_WHITESPACE) {
-                        $foundLines++;
-                    }
-                }
-
-                $i--;
-            }//end while
-        }//end if
-
-        if ($foundLines !== 1) {
-            $error = 'Expected 1 blank lines before function; %s found';
-            $data  = array($foundLines);
-            $phpcsFile->addError($error, $stackPtr, 'Before', $data);
-        }
-
-    }//end process()
-
-
-}//end class
-
-?>
+}
