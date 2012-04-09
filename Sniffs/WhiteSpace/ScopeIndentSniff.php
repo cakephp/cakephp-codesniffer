@@ -224,7 +224,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
 							$commentOpen = true;
 							$isDocComment = (substr($content, 0, 3) === '/**');
 						}
-					} else if ($commentOpen === true) {
+					} elseif ($commentOpen === true) {
 						if ($content === '') {
 							// We are in a comment, but this line has nothing on it
 							// so let's skip it.
@@ -241,11 +241,10 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
 					}
 				}
 
-				// The token at the start of the line, needs to have its' column
-				// greater than the relative indent we set above. If it is less,
-				// an error should be shown, except for doc comment
 				if ($isDocComment === true) {
-					if ($column !== 1) {
+					// Doc block comments should be indented one less than the
+					// code that precedes them.
+					if ($indent - 1 !== $column) {
 						$error = 'The DOC Comment must be not spaced';
 						$phpcsFile->addError($error, $firstToken, 'DocCommentStartColumn');
 					}
