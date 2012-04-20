@@ -117,6 +117,10 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 			if (substr($className, -10) === 'Controller') {
 				return;
 			}
+			// Underscored public methods in shells are allowed to break our rules.
+			if (substr($className, -5) === 'Shell') {
+				return;
+			}
 		} elseif ($isPrivate === true) {
 			if (substr($methodName, 0, 2) !== '__') {
 				$error = 'Private method name "%s" must be prefixed with 2 underscores';
