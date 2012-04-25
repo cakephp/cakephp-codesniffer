@@ -14,11 +14,11 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testFiles() {
 		$files = scandir(__DIR__ . '/files');
-		foreach($files as $file) {
+		foreach ($files as $file) {
 			if ($file[0] === '.') {
 				continue;
 			}
-			$expectPass = (bool)strpos('pass.php', $file);
+			$expectPass = (substr($file, -8) === 'pass.php');
 			$this->_testFile(__DIR__ . '/files/' . $file, $expectPass);
 		}
 	}
@@ -35,16 +35,18 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 		exec("phpcs --standard=CakePHP $file", $output, $return);
 		$outputStr = implode($output, "\n");
 		if ($expectPass) {
-			$this->assertRegExp(
+			$this->assertSame(0, $return, 'Expected return code of 0 for ' . basename($file));
+			$this->assertNotRegExp(
 				"/FAILURES!/",
 				$outputStr,
 				basename($file) . ' - expected failures, none reported. ' . $outputStr
 			);
 		} else {
-			$this->assertNotRegExp(
+			$this->assertSame(1, $return, 'Expected none-zero return code for ' . basename($file));
+			$this->assertRegExp(
 				"/FAILURES!/",
 				$outputStr,
-				basename($file) . ' - expected no failure, some were reported. ' . $outputStr
+				basename($file) . ' - expected to pass with no errors, some were reported. ' . $outputStr
 			);
 		}
 	}
