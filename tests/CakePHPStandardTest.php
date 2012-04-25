@@ -13,13 +13,18 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 	 * @return void
 	 */
 	public function testFiles() {
+		$standard = dirname(__DIR__);
+		if (basename($standard) !== 'CakePHP') {
+			$this->fail("The dirname for the standard must be CakePHP");
+		}
+
 		$files = scandir(__DIR__ . '/files');
 		foreach ($files as $file) {
 			if ($file[0] === '.') {
 				continue;
 			}
 			$expectPass = (substr($file, -8) === 'pass.php');
-			$this->_testFile(__DIR__ . '/files/' . $file, $expectPass);
+			$this->_testFile(__DIR__ . '/files/' . $file, $standard, $expectPass);
 		}
 	}
 
@@ -31,20 +36,20 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 * @return void
 	 */
-	protected function _testFile($file, $expectPass = true) {
-		exec("phpcs --standard=CakePHP $file", $output, $return);
+	protected function _testFile($file, $standard, $expectPass) {
+		exec("phpcs --standard=$standard $file", $output, $return);
 		$outputStr = implode($output, "\n");
 		if ($expectPass) {
 			$this->assertSame(0, $return, 'Expected return code of 0 for ' . basename($file));
 			$this->assertNotRegExp(
-				"/FAILURES!/",
+				"/FOUND \d+ ERROR/",
 				$outputStr,
 				basename($file) . ' - expected failures, none reported. ' . $outputStr
 			);
 		} else {
 			$this->assertSame(1, $return, 'Expected none-zero return code for ' . basename($file));
 			$this->assertRegExp(
-				"/FAILURES!/",
+				"/FOUND \d+ ERROR/",
 				$outputStr,
 				basename($file) . ' - expected to pass with no errors, some were reported. ' . $outputStr
 			);
