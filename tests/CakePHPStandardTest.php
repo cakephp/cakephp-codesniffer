@@ -4,14 +4,11 @@
  */
 class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 
-	/**
-	 * testFiles
-	 *
-	 * Run simple syntax checks, if the filename ends with pass.php - expect it to pass
-	 *
-	 * @access public
-	 * @return void
-	 */
+/**
+ * testFiles
+ *
+ * Run simple syntax checks, if the filename ends with pass.php - expect it to pass
+ */
 	public function testFiles() {
 		$standard = dirname(__DIR__);
 		if (basename($standard) !== 'CakePHP') {
@@ -28,14 +25,13 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
-	/**
-	 * Test a file
-	 *
-	 * @param mixed $file
-	 * @param mixed $expectPass
-	 * @access protected
-	 * @return void
-	 */
+/**
+ * _testFile
+ *
+ * @param string $file
+ * @param string $standard
+ * @param boolean $expectPass
+ */
 	protected function _testFile($file, $standard, $expectPass) {
 		exec("phpcs --standard=$standard $file", $output, $return);
 		$outputStr = implode($output, "\n");
