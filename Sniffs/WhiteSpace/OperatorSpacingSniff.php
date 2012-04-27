@@ -156,11 +156,20 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 							return;
 						}
 					}
+
 					if (
 						($prev !== false && $tokens[$prev]['code'] === T_CASE) &&
 						$tokens[$semi]['code'] === T_COLON
 					) {
 						// Inside a case statement
+						return;
+					}
+
+					if (
+						$prev !== false && in_array($tokens[$prev]['code'], array(T_INLINE_THEN)) &&
+						$tokens[$semi]['code'] === T_COLON
+					) {
+						// Inside a ternary op.
 						return;
 					}
 				}
