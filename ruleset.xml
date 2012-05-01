@@ -2,6 +2,8 @@
 <ruleset name="CakePHP">
  <description>CakePHP coding standard</description>
 
+ <exclude-pattern>*/Config/*.ini.php</exclude-pattern>
+
  <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
 
  <rule ref="Squiz.Classes.LowercaseClassKeywords"/>
