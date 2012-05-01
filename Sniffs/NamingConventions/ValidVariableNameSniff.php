@@ -34,7 +34,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
  * Processes this test, when one of its tokens is encountered.
  *
  * Processes variables, we skip processing object properties because
- * they could come from things like PDO which doesn't follow the normal 
+ * they could come from things like PDO which doesn't follow the normal
  * conventions and causes additional failures.
  *
  * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
@@ -114,10 +114,6 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 			$error = 'Variable "%s" is not in valid camel caps format';
 			$data  = array($originalVarName);
 			$phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
-		} else if (preg_match('|\d|', $varName)) {
-			$warning = 'Variable "%s" contains numbers but this is discouraged';
-			$data	 = array($originalVarName);
-			$phpcsFile->addWarning($warning, $stackPtr, 'ContainsNumbers', $data);
 		}
 	}
 
@@ -171,10 +167,6 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 			$error = 'Member variable "%s" is not in valid camel caps format';
 			$data = array($varName);
 			$phpcsFile->addError($error, $stackPtr, 'MemberVarNotCamelCaps', $data);
-		} else if (preg_match('|\d|', $varName)) {
-			$warning = 'Variable "%s" contains numbers but this is discouraged';
-			$data = array($varName);
-			$phpcsFile->addWarning($warning, $stackPtr, 'MemberVarContainsNumbers', $data);
 		}
 	}
 
