@@ -128,7 +128,7 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 				return;
 			} else {
 				$filename = $phpcsFile->getFilename();
-				if (strpos($filename, '/lib/Cake/') === false) {
+				if (strpos($filename, '/lib/Cake/') === true) {
 					$warning = 'Private method name "%s" in CakePHP core is discouraged';
 					$phpcsFile->addWarning($warning, $stackPtr, 'PrivateMethodInCore', $errorData);
 				}
