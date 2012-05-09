@@ -36,19 +36,19 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 		exec("phpcs --standard=$standard $file", $output, $return);
 		$outputStr = implode($output, "\n");
 		if ($expectPass) {
-			$this->assertSame(0, $return, 'Expected return code of 0 for ' . basename($file));
 			$this->assertNotRegExp(
 				"/FOUND \d+ ERROR/",
 				$outputStr,
 				basename($file) . ' - expected failures, none reported. ' . $outputStr
 			);
+			$this->assertSame(0, $return, 'Expected return code of 0 for ' . basename($file));
 		} else {
-			$this->assertSame(1, $return, 'Expected none-zero return code for ' . basename($file));
 			$this->assertRegExp(
 				"/FOUND \d+ ERROR/",
 				$outputStr,
 				basename($file) . ' - expected to pass with no errors, some were reported. ' . $outputStr
 			);
+			$this->assertSame(1, $return, 'Expected none-zero return code for ' . basename($file));
 		}
 	}
 }
