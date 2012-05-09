@@ -163,6 +163,14 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 			}
 		}
 
+		$conditions = array_keys($tokens[$stackPtr]['conditions']);
+		$className = $phpcsFile->getDeclarationName($conditions[0]);
+
+		// Schema properties are allowed to not be CamelCase.
+		if (substr($className, -6) === 'Schema') {
+			return;
+		}
+
 		if ($this->_isValidVar($varName, $public) === false) {
 			$error = 'Member variable "%s" is not in valid camel caps format';
 			$data = array($varName);
