@@ -164,7 +164,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 		}
 
 		$conditions = array_keys($tokens[$stackPtr]['conditions']);
-		$className = $phpcsFile->getDeclarationName($conditions[0]);
+		$className = $phpcsFile->getDeclarationName(array_pop($conditions));
 
 		// Schema properties are allowed to not be CamelCase.
 		if (substr($className, -6) === 'Schema') {
