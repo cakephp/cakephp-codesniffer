@@ -148,7 +148,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 				return;
 			} else {
 				$filename = $phpcsFile->getFilename();
-				if (strpos($filename, '/lib/Cake/') === false) {
+				if (strpos($filename, '/lib/Cake/') !== false) {
 					$warning = 'Private variable "%s" in CakePHP core is discouraged';
 					$data = array($varName);
 					$phpcsFile->addWarning($warning, $stackPtr, 'PrivateInCore', $data);
