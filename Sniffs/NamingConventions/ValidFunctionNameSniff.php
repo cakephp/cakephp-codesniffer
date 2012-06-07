@@ -134,8 +134,8 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 				}
 			}
 		} else {
-			if ($methodName[0] !== '_') {
-				$error = 'Protected method name "%s" must be prefixed with an underscore';
+			if ($methodName[0] !== '_' || substr($methodName, 0, 2) === '__') {
+				$error = 'Protected method name "%s" must be prefixed with one underscore';
 				$phpcsFile->addError($error, $stackPtr, 'ProtectedNoUnderscore', $errorData);
 				return;
 			}
