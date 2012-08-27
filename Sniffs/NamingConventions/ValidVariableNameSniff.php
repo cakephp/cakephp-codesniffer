@@ -110,6 +110,12 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 			}
 		}
 
+		// $title_for_layout is allowed on controllers
+		$fileName = basename($phpcsFile->getFilename(), '.php');
+		if ((substr($fileName, -10) === 'Controller') && ($varName == 'title_for_layout')) {
+			return;
+		}
+
 		if ($this->_isValidVar($varName) === false) {
 			$error = 'Variable "%s" is not in valid camel caps format';
 			$data  = array($originalVarName);
