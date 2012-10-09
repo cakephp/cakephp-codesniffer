@@ -9,7 +9,9 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
  *
  * Run simple syntax checks, if the filename ends with pass.php - expect it to pass
  */
-	public function testFiles() {
+	public static function testProvider() {
+		$tests = array();
+
 		$standard = dirname(__DIR__);
 		if (basename($standard) !== 'CakePHP') {
 			$this->fail("The dirname for the standard must be CakePHP");
@@ -21,18 +23,25 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 				continue;
 			}
 			$expectPass = (substr($file, -8) === 'pass.php');
-			$this->_testFile(__DIR__ . '/files/' . $file, $standard, $expectPass);
+			$tests[] = array(
+				__DIR__ . '/files/' . $file,
+				$standard,
+				$expectPass
+			);
 		}
+		return $tests;
 	}
 
 /**
  * _testFile
  *
+ * @dataProvider testProvider
+ *
  * @param string $file
  * @param string $standard
  * @param boolean $expectPass
  */
-	protected function _testFile($file, $standard, $expectPass) {
+	public function testFile($file, $standard, $expectPass) {
 		exec("phpcs --standard=$standard $file", $output, $return);
 		$outputStr = implode($output, "\n");
 		if ($expectPass) {
@@ -48,7 +57,7 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 				$outputStr,
 				basename($file) . ' - expected to pass with no errors, some were reported. ' . $outputStr
 			);
-			$this->assertSame(1, $return, 'Expected none-zero return code for ' . basename($file));
+			$this->assertSame(1, $return, 'Expected non-zero return code for ' . basename($file));
 		}
 	}
 }

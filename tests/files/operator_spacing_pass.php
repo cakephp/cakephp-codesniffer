@@ -7,3 +7,5 @@ switch($foo) {
 }
 $bar = isset($foo) ? -2 : 0;
 $ten = 10 * 2;
+$dec = -0.001;
+$dec = -1;
