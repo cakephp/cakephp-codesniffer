@@ -65,7 +65,7 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 		) {
 			if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
 				$parenthesis = array_keys($tokens[$stackPtr]['nested_parenthesis']);
-				$bracket	 = array_pop($parenthesis);
+				$bracket = array_pop($parenthesis);
 				if (isset($tokens[$bracket]['parenthesis_owner']) === true) {
 					$function = $tokens[$bracket]['parenthesis_owner'];
 					if ($tokens[$function]['code'] === T_FUNCTION) {
@@ -148,7 +148,7 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 				}
 
 				$number = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
-				if (in_array($tokens[$number]['code'], array(T_LNUMBER, T_VARIABLE)) === true) {
+				if (in_array($tokens[$number]['code'], array(T_LNUMBER, T_DNUMBER, T_VARIABLE)) === true) {
 					$semi = $phpcsFile->findNext(T_WHITESPACE, ($number + 1), null, true);
 					if ($tokens[$semi]['code'] === T_SEMICOLON) {
 						if ($prev !== false && (in_array($tokens[$prev]['code'], PHP_CodeSniffer_Tokens::$assignmentTokens) === true)) {
