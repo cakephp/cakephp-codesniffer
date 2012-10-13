@@ -5,7 +5,7 @@ use More;
 
 class Foo {
 
-	use Bar;
-	use First;
+	use BarTrait;
+	use FirstTrait;
 
 }
