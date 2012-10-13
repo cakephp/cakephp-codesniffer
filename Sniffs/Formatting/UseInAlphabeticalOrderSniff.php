@@ -29,11 +29,11 @@
 class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeSniffer_Sniff {
 
 /**
- * Declared uses
+ * Processed files
  *
  * @var array
  */
-	protected $_uses = array();
+	protected $_processed = array();
 
 /**
  * Returns an array of tokens this test wants to listen for.
@@ -41,7 +41,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
  * @return array
  */
 	public function register() {
-		return array(T_USE, T_CLASS);
+		return array(T_USE);
 	}
 
 /**
@@ -52,31 +52,51 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
  * @return void
  */
 	public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
-		$tokens = $phpcsFile->getTokens();
-		if ($tokens[$stackPtr]['code'] === T_CLASS) {
-			if (!isset($this->_uses[$phpcsFile->getFilename()])) {
-				return;
-			}
-
-			$ordered = $this->_uses[$phpcsFile->getFilename()];
-			sort($ordered);
-
-			if ($this->_uses[$phpcsFile->getFilename()] !== $ordered) {
-				$error = 'Use classes must be in alphabetical order.';
-				$phpcsFile->addError($error, $stackPtr, 'UseInAlphabeticalOrder', array());
-			}
+		if (isset($this->_processed[$phpcsFile->getFilename()])) {
 			return;
 		}
 
-		$i = 2; // Ignore use word and whitespace
-		$filename = $phpcsFile->getFilename();
+		$tokens = $phpcsFile->getTokens();
 
-		$class = '';
-		while (in_array($tokens[$stackPtr + $i]['code'], array(T_STRING, T_NS_SEPARATOR))) {
-			$class .= $tokens[$stackPtr + $i]['content'];
-			$i++;
+		$uses = array();
+		do {
+			$scope = 0;
+			if (!empty($tokens[$stackPtr]['conditions'])) {
+				$scope = key($tokens[$stackPtr]['conditions']);
+			}
+			if (!isset($uses[$scope]['__line__'])) {
+				$uses[$scope]['__line__'] = $tokens[$stackPtr]['line'];
+			}
+
+			$stackPtr += 2; // use keyword and whitespace
+
+			$code = '';
+			while (!in_array($tokens[$stackPtr]['code'], array(T_SEMICOLON, T_OPEN_CURLY_BRACKET))) {
+				$code .= $tokens[$stackPtr++]['content'];
+			}
+			foreach (explode(',', $code) as $part) {
+				list($use) = explode(' ', $part);
+				$use = trim($use, "\n\t\\ ");
+			}
+			$uses[$scope][] = $use;
+
+			$stackPtr = $phpcsFile->findNext(T_USE, $stackPtr);
+		} while ($stackPtr !== false);
+
+		foreach ($uses as $useScope) {
+			$line = $useScope['__line__'];
+			unset($useScope['__line__']);
+
+			$ordered = $useScope;
+			sort($ordered);
+
+			if ($useScope !== $ordered) {
+				$error = 'Use classes must be in alphabetical order.';
+				$phpcsFile->addError($error, $line, 'UseInAlphabeticalOrder', array());
+			}
 		}
-		$this->_uses[$phpcsFile->getFilename()][] = ltrim($class, '\\');
+
+		$this->_processed[$phpcsFile->getFilename()] = true;
 	}
 
 }
