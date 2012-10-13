@@ -166,7 +166,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSni
  * @return string
  */
 	protected function _getNamespace(PHP_CodeSniffer_File $phpcsFile, $currScope) {
-		$nsPos = $phpcsFile->findPrevious(T_NAMESPACE, $currScope -1);
+		$nsPos = $phpcsFile->findPrevious(T_NAMESPACE, $currScope - 1);
 		if (!$nsPos) {
 			return '';
 		}

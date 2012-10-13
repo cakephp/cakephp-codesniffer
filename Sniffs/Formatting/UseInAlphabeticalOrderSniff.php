@@ -33,7 +33,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
  *
  * @var array
  */
-	protected $uses = array();
+	protected $_uses = array();
 
 /**
  * Returns an array of tokens this test wants to listen for.
@@ -54,14 +54,14 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
 	public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
 		$tokens = $phpcsFile->getTokens();
 		if ($tokens[$stackPtr]['code'] === T_CLASS) {
-			if (!isset($this->uses[$phpcsFile->getFilename()])) {
+			if (!isset($this->_uses[$phpcsFile->getFilename()])) {
 				return;
 			}
 
-			$ordered = $this->uses[$phpcsFile->getFilename()];
+			$ordered = $this->_uses[$phpcsFile->getFilename()];
 			sort($ordered);
 
-			if ($this->uses[$phpcsFile->getFilename()] !== $ordered) {
+			if ($this->_uses[$phpcsFile->getFilename()] !== $ordered) {
 				$error = 'Use classes must be in alphabetical order.';
 				$phpcsFile->addError($error, $stackPtr, 'UseInAlphabeticalOrder', array());
 			}
@@ -76,7 +76,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
 			$class .= $tokens[$stackPtr + $i]['content'];
 			$i++;
 		}
-		$this->uses[$phpcsFile->getFilename()][] = ltrim($class, '\\');
+		$this->_uses[$phpcsFile->getFilename()][] = ltrim($class, '\\');
 	}
 
 }
