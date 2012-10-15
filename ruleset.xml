@@ -19,7 +19,6 @@
 
  <rule ref="Squiz.Commenting.DocCommentAlignment"/>
  <rule ref="Generic.Commenting.Todo"/>
- <rule ref="Squiz.Commenting.FunctionCommentThrowTag"/>
 
  <rule ref="PEAR.ControlStructures.ControlSignature"/>
  <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration"/>

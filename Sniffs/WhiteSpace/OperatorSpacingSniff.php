@@ -24,6 +24,7 @@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_Sniff {
+
 /**
  * A list of tokenizers this sniff supports.
  *
@@ -46,7 +47,6 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 
 		return array_unique(array_merge($comparison, $operators, $assignment));
 	}
-
 
 /**
  * Processes this sniff, when one of its tokens is encountered.
