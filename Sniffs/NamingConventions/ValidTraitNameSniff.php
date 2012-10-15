@@ -53,7 +53,7 @@ class CakePHP_Sniffs_NamingConventions_ValidTraitNameSniff implements PHP_CodeSn
 		$traitName = $tokens[$stackPtr + 2]['content'];
 
 		if (substr($traitName, -5) !== 'Trait') {
-			$error = 'Trait must use "Trait" suffix.';
+			$error = 'Traits must have a "Trait" suffix.';
 			$phpcsFile->addError($error, $stackPtr, 'InvalidTraitName', array());
 		}
 	}

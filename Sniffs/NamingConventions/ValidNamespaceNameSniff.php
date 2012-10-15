@@ -59,7 +59,7 @@ class CakePHP_Sniffs_NamingConventions_ValidNamespaceNameSniff implements PHP_Co
 		$path = dirname($filename);
 
 		if (substr(str_replace('/', '\\', $path), -1 * strlen($ns)) !== $ns) {
-			$error = 'Namespace do not match with the folder name';
+			$error = 'Namespace does not match with the directory name';
 			$phpcsFile->addError($error, $stackPtr, 'InvalidNamespace', array());
 		}
 	}
