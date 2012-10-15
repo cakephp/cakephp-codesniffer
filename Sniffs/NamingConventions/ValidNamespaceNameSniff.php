@@ -50,7 +50,7 @@ class CakePHP_Sniffs_NamingConventions_ValidNamespaceNameSniff implements PHP_Co
 		$filename = $phpcsFile->getFilename();
 		$ns = '';
 
-		while ($tokens[$stackPtr + $i]['code'] !== T_SEMICOLON) {
+		while (!in_array($tokens[$stackPtr + $i]['code'], array(T_SEMICOLON, T_WHITESPACE, T_OPEN_CURLY_BRACKET))) {
 			$ns .= $tokens[$stackPtr + $i]['content'];
 			$i++;
 		}
