@@ -17,14 +17,16 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 			PHPUnit_Framework_TestCase::fail("The dirname for the standard must be CakePHP");
 		}
 
-		$files = scandir(__DIR__ . '/files');
-		foreach ($files as $file) {
-			if ($file[0] === '.') {
+		$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__ . '/files'));
+		foreach ($iterator as $dir) {
+			if ($dir->isDir()) {
 				continue;
 			}
+
+			$file = $dir->getPathname();
 			$expectPass = (substr($file, -8) === 'pass.php');
 			$tests[] = array(
-				__DIR__ . '/files/' . $file,
+				$file,
 				$standard,
 				$expectPass
 			);
