@@ -13,10 +13,6 @@
  * @link      http://pear.php.net/package/PHP_CodeSniffer_CakePHP
  */
 
-if (!defined('T_TRAIT')) {
-	define('T_TRAIT', 355);
-}
-
 /**
  * CakePHP_Sniffs_NamingConventions_ValidTraitNameSniff.
  *
@@ -35,9 +31,15 @@ class CakePHP_Sniffs_NamingConventions_ValidTraitNameSniff implements PHP_CodeSn
 /**
  * Returns an array of tokens this test wants to listen for.
  *
+ * If the constant is not defined, ignore because probably the PHP version
+ * is under 5.4.0 and don't have traits in use
+ *
  * @return array
  */
 	public function register() {
+		if (!defined('T_TRAIT')) {
+			return array();
+		}
 		return array(T_TRAIT);
 	}
 
