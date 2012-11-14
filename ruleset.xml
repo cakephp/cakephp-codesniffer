@@ -18,8 +18,7 @@
  <rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
 
  <rule ref="Squiz.Commenting.DocCommentAlignment"/>
- <rule ref="Generic.Commenting.Todo"/>
-
+ 
  <rule ref="PEAR.ControlStructures.ControlSignature"/>
  <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration"/>
  <rule ref="Squiz.ControlStructures.LowercaseDeclaration"/>
