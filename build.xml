@@ -16,7 +16,7 @@
 	<taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
 
 	<!-- Update this version when making new packages -->
-	<property name="version" value="0.1.9" />
+	<property name="version" value="0.1.10" />
 
 	<!-- Shouldn't have to change these -->
 	<property name="build.dir" value="build" />
@@ -78,6 +78,20 @@
 				<package name="PHP_CodeSniffer" channel="pear.php.net" minimum_version="1.3.3" />
 			</dependencies>
 			<exceptions key="ruleset.xml">php</exceptions>
+
+                        <changelog version="0.1.10" date="2012-11-14" license="MIT">
+                                * Supporting namespaces using block format
+                                * Validating trait names
+                                * Checking use in alphabetical order more properly and supporting traits
+                                * Fixed code standard issues
+                                * Implemented sniff to validate @throws in PHPDoc with support to namespaces
+                                * Fixed use alphabetical order to check per file.
+                                * Added sniff for require use in alphabetical order
+                                * Added validation for one class per use
+                                * Added validation for namespaces
+                                * Changed to test files recursively.
+                                * Fixed call for the fail on test case
+			</changelog>
 
 			<changelog version="0.1.9" date="2012-10-08" license="MIT">
 				* Small bug fix for operator spacing sniff.
