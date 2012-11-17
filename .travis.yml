@@ -7,7 +7,7 @@ php:
 
 before_script:
   - mv ../cakephp-codesniffer ../CakePHP && cd ../CakePHP
-  - pyrus install pear/PHP_CodeSniffer
+  - pear install PHP_CodeSniffer
   - phpenv rehash
 
 script:
