@@ -50,14 +50,14 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 			$this->assertNotRegExp(
 				"/FOUND \d+ ERROR/",
 				$outputStr,
-				basename($file) . ' - expected failures, none reported. ' . $outputStr
+				basename($file) . ' - expected to pass with no errors, some were reported. ' . $outputStr
 			);
 			$this->assertSame(0, $return, 'Expected return code of 0 for ' . basename($file));
 		} else {
 			$this->assertRegExp(
 				"/FOUND \d+ ERROR/",
 				$outputStr,
-				basename($file) . ' - expected to pass with no errors, some were reported. ' . $outputStr
+				basename($file) . ' - expected failures, none reported. ' . $outputStr
 			);
 			$this->assertSame(1, $return, 'Expected non-zero return code for ' . basename($file));
 		}
