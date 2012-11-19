@@ -1,0 +1,17 @@
+language: php
+
+php:
+  - 5.2
+  - 5.3
+  - 5.4
+
+before_script:
+  - mv ../cakephp-codesniffer ../CakePHP && cd ../CakePHP
+  - pear install PHP_CodeSniffer
+  - phpenv rehash
+
+script:
+  - phpunit tests
+
+notifications:
+  email: false
