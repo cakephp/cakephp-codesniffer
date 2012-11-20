@@ -140,6 +140,8 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 					T_OPEN_SQUARE_BRACKET,
 					T_DOUBLE_ARROW,
 					T_COLON,
+					T_INLINE_THEN,
+					T_INLINE_ELSE,
 				);
 
 				if (in_array($tokens[$prev]['code'], $invalidTokens) === true) {
@@ -153,6 +155,13 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 					if ($tokens[$semi]['code'] === T_SEMICOLON) {
 						if ($prev !== false && (in_array($tokens[$prev]['code'], PHP_CodeSniffer_Tokens::$assignmentTokens) === true)) {
 							// This is a negative assignment.
+							return;
+						}
+					}
+
+					if (in_array($tokens[$semi]['code'], PHP_CodeSniffer_Tokens::$operators)) {
+						if ($prev !== false && (in_array($tokens[$prev]['code'], PHP_CodeSniffer_Tokens::$assignmentTokens) === true)) {
+							// This is an assignment with calculation; eg. $foo = -1 + 5;
 							return;
 						}
 					}
