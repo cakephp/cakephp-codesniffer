@@ -142,45 +142,16 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 					T_COLON,
 					T_INLINE_THEN,
 					T_INLINE_ELSE,
+					T_CASE,
 				);
 
 				if (in_array($tokens[$prev]['code'], $invalidTokens) === true) {
 					// Just trying to use a negative value; eg. myFunction($var, -2).
 					return;
 				}
-
-				$number = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
-				if (in_array($tokens[$number]['code'], array(T_LNUMBER, T_DNUMBER, T_VARIABLE)) === true) {
-					$semi = $phpcsFile->findNext(T_WHITESPACE, ($number + 1), null, true);
-					if ($tokens[$semi]['code'] === T_SEMICOLON) {
-						if ($prev !== false && (in_array($tokens[$prev]['code'], PHP_CodeSniffer_Tokens::$assignmentTokens) === true)) {
-							// This is a negative assignment.
-							return;
-						}
-					}
-
-					if (in_array($tokens[$semi]['code'], PHP_CodeSniffer_Tokens::$operators)) {
-						if ($prev !== false && (in_array($tokens[$prev]['code'], PHP_CodeSniffer_Tokens::$assignmentTokens) === true)) {
-							// This is an assignment with calculation; eg. $foo = -1 + 5;
-							return;
-						}
-					}
-
-					if (
-						($prev !== false && $tokens[$prev]['code'] === T_CASE) &&
-						$tokens[$semi]['code'] === T_COLON
-					) {
-						// Inside a case statement
-						return;
-					}
-
-					if (
-						$prev !== false && in_array($tokens[$prev]['code'], array(T_INLINE_THEN)) &&
-						$tokens[$semi]['code'] === T_COLON
-					) {
-						// Inside a ternary op.
-						return;
-					}
+				if (in_array($tokens[$prev]['code'], PHP_CodeSniffer_Tokens::$assignmentTokens) === true) {
+					// Just trying to assign a negative value; eg. ($var = -1).
+					return;
 				}
 			}
 
