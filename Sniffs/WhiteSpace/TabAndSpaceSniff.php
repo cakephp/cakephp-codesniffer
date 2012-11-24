@@ -13,8 +13,27 @@
  * @version   Release: 1.0
  * @link      http://pear.php.net/package/PHP_CodeSniffer_CakePHP
  */
-class CakePHP_Sniffs_WhiteSpace_ForceTabIndentSniff extends Generic_Sniffs_WhiteSpace_DisallowTabIndentSniff
-{
+class CakePHP_Sniffs_WhiteSpace_TabAndSpaceSniff implements PHP_CodeSniffer_Sniff {
+
+/**
+ * A list of tokenizers this sniff supports.
+ *
+ * @var array
+ */
+	public $supportedTokenizers = array(
+		'PHP',
+		'JS',
+		'CSS'
+	);
+
+/**
+ * Returns an array of tokens this test wants to listen for.
+ *
+ * @return array
+ */
+	public function register() {
+		return array(T_WHITESPACE);
+	}
 
 /**
  * Processes this test, when one of its tokens is encountered.
@@ -28,16 +47,21 @@ class CakePHP_Sniffs_WhiteSpace_ForceTabIndentSniff extends Generic_Sniffs_White
 		$tokens = $phpcsFile->getTokens();
 
 		$line = $tokens[$stackPtr]['line'];
-		if ($stackPtr > 0 && $tokens[($stackPtr - 1)]['line'] === $line) {
+		if ($stackPtr > 0 && $tokens[($stackPtr - 1)]['line'] !== $line) {
 			return;
 		}
 
-		if (preg_match('@^  @', $tokens[$stackPtr]['content'])) {
-			$error = 'Space indented: Tabs for indents, spaces for alignment';
+		if (strpos($tokens[$stackPtr]['content'], "  ") !== false) {
+			$error = 'Double space found';
 			$phpcsFile->addError($error, $stackPtr);
-		} elseif (preg_match('@\t [^\*]@', $tokens[$stackPtr]['content'])) {
-			$error = 'Tab followed by space - bad indentation';
-			$phpcsFile->addWarning($error, $stackPtr);
+		}
+		if (strpos($tokens[$stackPtr]['content'], " \t") !== false) {
+			$error = 'Space and tab found';
+			$phpcsFile->addError($error, $stackPtr);
+		}
+		if (strpos($tokens[$stackPtr]['content'], "\t ") !== false) {
+			$error = 'Tab and space found';
+			$phpcsFile->addError($error, $stackPtr);
 		}
 	}
 
