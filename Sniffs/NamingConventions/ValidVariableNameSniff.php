@@ -106,7 +106,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 			}
 
 			if ($inClass === true) {
-				$varName = substr($varName, 1);
+				$varName = ltrim($varName, '_');
 			}
 		}
 
