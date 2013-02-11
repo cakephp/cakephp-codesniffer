@@ -2,7 +2,7 @@
 <ruleset name="CakePHP">
  <description>CakePHP coding standard</description>
 
- <exclude-pattern>.git</exclude-pattern>
+ <exclude-pattern>\.git</exclude-pattern>
  <exclude-pattern>*/Config/*.ini.php</exclude-pattern>
  <exclude-pattern>*/tmp/</exclude-pattern>
 
