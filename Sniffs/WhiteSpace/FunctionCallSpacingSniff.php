@@ -24,6 +24,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionCallSpacingSniff implements PHP_CodeSnif
 			T_INCLUDE_ONCE,
 			T_REQUIRE,
 			T_REQUIRE_ONCE,
+			T_STRING,
 		);
 	}
 
@@ -35,9 +36,16 @@ class CakePHP_Sniffs_WhiteSpace_FunctionCallSpacingSniff implements PHP_CodeSnif
  * @return void
  */
 	public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
+		$tokens = $phpcsFile->getTokens();
+
 		// Find the next non-empty token.
 		$openBracket = $phpcsFile->findNext(PHP_CodeSniffer_Tokens::$emptyTokens, ($stackPtr + 1), null, true);
-		
+
+		if ($tokens[$openBracket]['code'] !== T_OPEN_PARENTHESIS) {
+			// Not a function call.
+			return;
+		}
+
 		// Look for funcName (
 		if (($stackPtr + 1) !== $openBracket) {
 			$error = 'Space before opening parenthesis of function call not allowed';
