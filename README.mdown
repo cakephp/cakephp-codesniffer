@@ -29,3 +29,7 @@ Releasing CakePHP Code Sniffer
 * Commit changes.
 * Create git tag.
 * Run `phing release`
+
+Memo
+==============================
+スネークケースの判定のため、FuelPHPの規約のインストールが必要
