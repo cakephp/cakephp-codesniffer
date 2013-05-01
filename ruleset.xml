@@ -57,13 +57,15 @@
  <rule ref="Squiz.Scope.StaticThisUsage"/>
 
  <rule ref="Squiz.WhiteSpace.CastSpacing"/>
- <rule ref="Generic.WhiteSpace.DisallowTabIndentSniff"/>
+ <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+ <rule ref="Generic.WhiteSpace.ScopeIndent"/>
  <rule ref="Squiz.WhiteSpace.LanguageConstructSpacing"/>
  <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
  <rule ref="Squiz.WhiteSpace.MemberVarSpacing"/>
  <rule ref="Squiz.WhiteSpace.ScopeClosingBrace"/>
  <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
+ 
 
  <!-- All rules in ./Sniffs are included automatically -->
 </ruleset>
