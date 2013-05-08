@@ -1,6 +1,5 @@
 <?php
 namespace CakePHP\SniffTest;
 
-class TestFile
-{
+class TestFile {
 }
