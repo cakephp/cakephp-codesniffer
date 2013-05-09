@@ -1,6 +1,6 @@
 <?php
 /**
- * aa
+ * aa bb
  * CakePHP_Sniffs_WhiteSpace_ForceTabIndentSniff
  *
  * Check for any line starting with 2 spaces - which would indicate space indenting
