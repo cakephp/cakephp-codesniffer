@@ -99,15 +99,6 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
 		// indent that we expect this current content to be.
 		$expectedIndent = $this->_calculateExpectedIndent($tokens, $firstToken);
 
-		if ($tokens[$stackPtr]['code'] !== T_COMMENT && $tokens[$firstToken]['column'] !== $expectedIndent) {
-			$error = 'Line indented incorrectly; expected %s spaces, found %s';
-			$data  = array(
-				($expectedIndent - 1),
-				($tokens[$firstToken]['column'] - 1),
-			);
-			$phpcsFile->addError($error, $stackPtr, 'Incorrect', $data);
-		}
-
 		$scopeOpener = $tokens[$stackPtr]['scope_opener'];
 		$scopeCloser = $tokens[$stackPtr]['scope_closer'];
 
@@ -189,6 +180,15 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
 
 					$contentLength = strlen($tokens[$firstToken]['content']);
 					$column = ($contentLength - $trimmedContentLength + 1);
+				}
+
+				// If we're starting a new PHP block that has the scope closer
+				// as the next token we'll skip the remaining checks as the scope is closed.
+				if (
+					$tokens[$firstToken]['code'] === T_OPEN_TAG &&
+					$scopeCloser == $firstToken + 1
+				) {
+					continue;
 				}
 
 				// Check to see if this constant string spans multiple lines.
