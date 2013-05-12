@@ -20,10 +20,6 @@ class CakePHP_Sniffs_WhiteSpace_FunctionCallSpacingSniff implements PHP_CodeSnif
 		return array(
 			T_ISSET,
 			T_EMPTY,
-			T_INCLUDE,
-			T_INCLUDE_ONCE,
-			T_REQUIRE,
-			T_REQUIRE_ONCE,
 			T_STRING,
 		);
 	}
