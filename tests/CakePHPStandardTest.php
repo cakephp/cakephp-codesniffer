@@ -4,6 +4,13 @@
  */
 class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 
+	public function setUp() {
+		parent::setUp();
+		if (empty($this->helper)) {
+			$this->helper = new TestHelper();
+		}
+	}
+
 /**
  * testFiles
  *
@@ -13,9 +20,6 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 		$tests = array();
 
 		$standard = dirname(dirname(__FILE__));
-		if (basename($standard) !== 'CakePHP') {
-			PHPUnit_Framework_TestCase::fail("The dirname for the standard must be CakePHP");
-		}
 
 		$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(dirname(__FILE__) . '/files'));
 		foreach ($iterator as $dir) {
@@ -44,22 +48,20 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
  * @param boolean $expectPass
  */
 	public function testFile($file, $standard, $expectPass) {
-		exec("phpcs --standard=$standard $file", $output, $return);
-		$outputStr = implode($output, "\n");
+		$outputStr = $this->helper->runPhpCs($file);
 		if ($expectPass) {
 			$this->assertNotRegExp(
 				"/FOUND \d+ ERROR/",
 				$outputStr,
 				basename($file) . ' - expected to pass with no errors, some were reported. '
 			);
-			$this->assertSame(0, $return, 'Expected return code of 0 for ' . basename($file));
 		} else {
 			$this->assertRegExp(
 				"/FOUND \d+ ERROR/",
 				$outputStr,
 				basename($file) . ' - expected failures, none reported. '
 			);
-			$this->assertSame(1, $return, 'Expected non-zero return code for ' . basename($file));
 		}
 	}
+
 }
