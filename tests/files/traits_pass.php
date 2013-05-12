@@ -1,7 +1,7 @@
 <?php
 
-use Last;
-use More;
+use Cake\Last;
+use Cake\More;
 
 class Foo {
 

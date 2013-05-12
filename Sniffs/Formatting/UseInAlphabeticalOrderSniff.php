@@ -58,45 +58,60 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
 
 		$tokens = $phpcsFile->getTokens();
 
+		// Only one USE declaration allowed per statement.
+		$next = $phpcsFile->findNext(array(T_COMMA, T_SEMICOLON), ($stackPtr + 1));
+		if ($tokens[$next]['code'] === T_COMMA) {
+			$error = 'There must be one USE keyword per declaration';
+			$phpcsFile->addError($error, $stackPtr, 'MultipleDeclarations');
+		}
+
 		$uses = array();
-		do {
+
+		$next = $stackPtr;
+		while (true) {
+			$content = '';
+
+			$end = $phpcsFile->findNext(array(T_SEMICOLON, T_OPEN_CURLY_BRACKET),  $next);
+			$useTokens = array_slice($tokens, $next, $end - $next, true);
+			foreach ($useTokens as $index => $token) {
+				if ($token['type'] === 'T_STRING' || $token['type'] === 'T_NS_SEPARATOR') {
+					$content .= $token['content'];
+				}
+			}
+
+			// Check for class scoping on use. Traits should be
+			// ordered independently.
 			$scope = 0;
-			if (!empty($tokens[$stackPtr]['conditions'])) {
-				$scope = key($tokens[$stackPtr]['conditions']);
+			if (!empty($token['conditions'])) {
+				$scope = key($token['conditions']);
 			}
-			if (!isset($uses[$scope]['__line__'])) {
-				$uses[$scope]['__line__'] = $tokens[$stackPtr]['line'];
-			}
+			$uses[$scope][$content] = $index;
 
-			$stackPtr += 2; // use keyword and whitespace
-
-			$code = '';
-			while (!in_array($tokens[$stackPtr]['code'], array(T_SEMICOLON, T_OPEN_CURLY_BRACKET))) {
-				$code .= $tokens[$stackPtr++]['content'];
-			}
-			foreach (explode(',', $code) as $part) {
-				list($use) = explode(' ', $part);
-				$use = trim($use, "\n\t\\ ");
-			}
-			$uses[$scope][] = $use;
-
-			$stackPtr = $phpcsFile->findNext(T_USE, $stackPtr);
-		} while ($stackPtr !== false);
-
-		foreach ($uses as $useScope) {
-			$line = $useScope['__line__'];
-			unset($useScope['__line__']);
-
-			$ordered = $useScope;
-			sort($ordered);
-
-			if ($useScope !== $ordered) {
-				$error = 'Use classes must be in alphabetical order.';
-				$phpcsFile->addError($error, $line, 'UseInAlphabeticalOrder', array());
+			$next = $phpcsFile->findNext(T_USE, $end);
+			if (!$next) {
+				break;
 			}
 		}
 
+		// Prevent multiple uses in the same file from entering
 		$this->_processed[$phpcsFile->getFilename()] = true;
+
+		foreach ($uses as $scope => $used) {
+			$defined = $sorted = array_keys($used);
+
+			natcasesort($sorted);
+			$sorted = array_values($sorted);
+			if ($sorted === $defined) {
+				continue;
+			}
+
+			foreach ($defined as $i => $name) {
+				if ($name !== $sorted[$i]) {
+					$error = 'Use classes must be in alphabetical order.';
+					$phpcsFile->addError($error, $used[$name], 'UseInAlphabeticalOrder', array());
+				}
+			}
+		}
 	}
 
 }
