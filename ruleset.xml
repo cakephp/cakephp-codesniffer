@@ -40,7 +40,6 @@
  <rule ref="Generic.NamingConventions.ConstructorName"/>
  <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
  <rule ref="PEAR.NamingConventions.ValidClassName"/>
- <rule ref="FuelPHP.NamingConventions.ConciseUnderscoredVariableName"/>
 
  <rule ref="Squiz.Operators.ValidLogicalOperators"/>
 
@@ -62,7 +61,7 @@
  <rule ref="Generic.WhiteSpace.ScopeIndent"/>
  <rule ref="Squiz.WhiteSpace.LanguageConstructSpacing"/>
  <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
- <rule ref="Squiz.WhiteSpace.MemberVarSpacing"/>
+<!-- <rule ref="Squiz.WhiteSpace.MemberVarSpacing"/>-->
  <rule ref="Squiz.WhiteSpace.ScopeClosingBrace"/>
  <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
 <!-- <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>-->
