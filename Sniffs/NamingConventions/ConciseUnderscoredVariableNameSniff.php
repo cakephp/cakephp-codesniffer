@@ -91,11 +91,12 @@ class CakePHP_Sniffs_NamingConventions_ConciseUnderscoredVariableNameSniff
             $phpcsFile->addError($error, $stackPtr, 'NotUnderscore');
         }
 
-        if (strlen($name) > $this->maxlength) {
-            $warning = 'Variable name "%s" should be more concise.
-                Actually more than ' . $this->maxlength . ' chars.';
-            $phpcsFile->addWarning($warning, $stackPtr, 'VariableNameTooLong');
-        }
+        // 変数名の長さ エラーにしない
+//        if (strlen($name) > $this->maxlength) {
+//            $warning = 'Variable name "%s" should be more concise.
+//                Actually more than ' . $this->maxlength . ' chars.';
+//            $phpcsFile->addWarning($warning, $stackPtr, 'VariableNameTooLong');
+//        }
     }
 }
 ?>
