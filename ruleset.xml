@@ -53,7 +53,7 @@
  <rule ref="Generic.PHP.LowerCaseConstant"/>
 
  <rule ref="Squiz.Scope.MemberVarScope"/>
- <rule ref="Squiz.Scope.MethodScope"/>
+<!-- <rule ref="Squiz.Scope.MethodScope"/>-->
  <rule ref="Squiz.Scope.StaticThisUsage"/>
 
  <rule ref="Squiz.WhiteSpace.CastSpacing"/>
