@@ -206,6 +206,7 @@ class CakePHP_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_CodeSn
                 Check for multiple blanks lines in a function.
             */
 
+            /* メソッド中の複数空行 エラーにしない
             if ($phpcsFile->hasCondition($stackPtr, T_FUNCTION) === true) {
                 if ($tokens[($stackPtr - 1)]['line'] < $tokens[$stackPtr]['line'] && $tokens[($stackPtr - 2)]['line'] === $tokens[($stackPtr - 1)]['line']) {
                     // This is an empty line and the line before this one is not
@@ -220,6 +221,7 @@ class CakePHP_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_CodeSn
                     }
                 }
             }
+            */
 
         }//end if
 
