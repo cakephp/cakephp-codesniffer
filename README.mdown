@@ -1,4 +1,4 @@
-CakePHP Code Sniffer
+CakePHP Code Sniffer [![Build Status](https://travis-ci.org/cakephp/cakephp-codesniffer.png?branch=master)](http://travis-ci.org/cakephp/cakephp-codesniffer)
 ====================
 
 This code works with [phpcs](http://pear.php.net/manual/en/package.php.php-codesniffer.php)
