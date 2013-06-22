@@ -10,7 +10,7 @@ Installation
 Its generally recommended to install these code sniffs with the PEAR
 installer:
 
-	pear channel-discover pear.cakephp.org
+    pear channel-discover pear.cakephp.org
 	pear install cakephp/CakePHP_CodeSniffer
 
 Usage
@@ -20,6 +20,13 @@ After installation you can check code compliance to the standard using
 `phpcs`:
 
 	phpcs --standard=CakePHP /path/to/code
+
+Contributing
+------------
+
+If you'd like to contribute to the Code Sniffer, you can fork the project add features and send pull requests.
+
+Make sure to clone the repository to something like **cakephp_codesniffer** (instead of the default **cakephp-codesniffer**) because otherwise `phpunit` will fail to run the tests.
 
 Releasing CakePHP Code Sniffer
 ==============================
