@@ -74,7 +74,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
 			$end = $phpcsFile->findNext(array(T_SEMICOLON, T_OPEN_CURLY_BRACKET),  $next);
 			$useTokens = array_slice($tokens, $next, $end - $next, true);
 			foreach ($useTokens as $index => $token) {
-				if ($token['type'] === 'T_STRING' || $token['type'] === 'T_NS_SEPARATOR') {
+				if ($token['code'] === T_STRING || $token['code'] === T_NS_SEPARATOR) {
 					$content .= $token['content'];
 				}
 			}
