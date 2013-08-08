@@ -1,16 +1,23 @@
 <?php
 /**
- * CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff.
+ * PHP Version 5
  *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.1
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
+/**
  * Checks the separation between methods in a class or interface.
  *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
- * @version   Release: 1.3.0
  */
 class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_Sniff {
 
@@ -104,7 +111,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
 			$currentLine = $tokens[$stackPtr]['line'];
 			$prevLine = ($tokens[$prevContent]['line'] - 1);
 			$i = ($stackPtr - 1);
-			$foundLines  = 0;
+			$foundLines = 0;
 			while ($currentLine != $prevLine && $currentLine > 1 && $i > 0) {
 				if (isset($tokens[$i]['scope_condition']) === true) {
 					$scopeCondition = $tokens[$i]['scope_condition'];
@@ -112,7 +119,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
 						// Found a previous function.
 						return;
 					}
-				} else if ($tokens[$i]['code'] === T_FUNCTION) {
+				} elseif ($tokens[$i]['code'] === T_FUNCTION) {
 					// Found another interface function.
 					return;
 				}

@@ -1,17 +1,23 @@
 <?php
 /**
- * CakePHP_Sniffs_WhiteSpace_FunctionClosingBraceSpaceSniff.
+ * PHP Version 5
  *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.1
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
+/**
  * Checks that there is one empty line before the closing brace of a function.
  *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
- * @version   Release: 1.3.0
- * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 class CakePHP_Sniffs_WhiteSpace_FunctionClosingBraceSpaceSniff implements PHP_CodeSniffer_Sniff {
 
@@ -40,11 +46,11 @@ class CakePHP_Sniffs_WhiteSpace_FunctionClosingBraceSpaceSniff implements PHP_Co
 			return;
 		}
 
-		$closeBrace  = $tokens[$stackPtr]['scope_closer'];
+		$closeBrace = $tokens[$stackPtr]['scope_closer'];
 		$prevContent = $phpcsFile->findPrevious(T_WHITESPACE, ($closeBrace - 1), null, true);
 
 		$braceLine = $tokens[$closeBrace]['line'];
-		$prevLine  = $tokens[$prevContent]['line'];
+		$prevLine = $tokens[$prevContent]['line'];
 
 		$found = ($braceLine - $prevLine - 1);
 		if ($phpcsFile->hasCondition($stackPtr, T_FUNCTION) === true || isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
@@ -52,7 +58,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionClosingBraceSpaceSniff implements PHP_Co
 			if ($found < 0) {
 				$error = 'Closing brace of nested function must be on a new line';
 				$phpcsFile->addError($error, $closeBrace, 'ContentBeforeClose');
-			} else if ($found > 0) {
+			} elseif ($found > 0) {
 				$error = 'Expected 0 blank lines before closing brace of nested function; %s found';
 				$data = array($found);
 				$phpcsFile->addError($error, $closeBrace, 'SpacingBeforeNestedClose', $data);

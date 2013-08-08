@@ -1,27 +1,23 @@
 <?php
 /**
- * CakePHP_WhiteSpace_OperatorSpacingSniff.
+ * PHP Version 5
  *
- * PHP version 5
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @author    Mark Story <mark@mark-story.com>
- * @copyright 2006-2011 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
- * @link      http://pear.php.net/package/PHP_CodeSniffer
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.6
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 /**
- * CakePHP_WhiteSpace_OperatorSpacingSniff.
- *
  * Verifies that operators have valid spacing surrounding them.
  *
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006-2011 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
- * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_Sniff {
 
@@ -94,7 +90,7 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 					if (strlen($tokens[($stackPtr - 1)]['content']) !== 1) {
 						$found = strlen($tokens[($stackPtr - 1)]['content']);
 						$error = 'Expected 1 space before "&" operator; %s found';
-						$data  = array($found);
+						$data = array($found);
 						$phpcsFile->addError($error, $stackPtr, 'SpacingBeforeAmp', $data);
 					}
 				}
@@ -107,7 +103,7 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 					if (strlen($tokens[($stackPtr + 1)]['content']) !== 1) {
 						$found = strlen($tokens[($stackPtr + 1)]['content']);
 						$error = 'Expected 1 space after "&" operator; %s found';
-						$data  = array($found);
+						$data = array($found);
 						$phpcsFile->addError($error, $stackPtr, 'SpacingAfterAmp', $data);
 					}
 				}
@@ -160,13 +156,13 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 			if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
 				$error = "Expected 1 space before \"$operator\"; 0 found";
 				$phpcsFile->addError($error, $stackPtr, 'NoSpaceBefore');
-			} else if (strlen($tokens[($stackPtr - 1)]['content']) !== 1) {
+			} elseif (strlen($tokens[($stackPtr - 1)]['content']) !== 1) {
 				// Don't throw an error for assignments, because other standards allow
 				// multiple spaces there to align multiple assignments.
 				if (in_array($tokens[$stackPtr]['code'], PHP_CodeSniffer_Tokens::$assignmentTokens) === false) {
 					$found = strlen($tokens[($stackPtr - 1)]['content']);
 					$error = 'Expected 1 space before "%s"; %s found';
-					$data  = array(
+					$data = array(
 						$operator,
 						$found,
 					);
@@ -177,10 +173,10 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 			if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
 				$error = "Expected 1 space after \"$operator\"; 0 found";
 				$phpcsFile->addError($error, $stackPtr, 'NoSpaceAfter');
-			} else if (strlen($tokens[($stackPtr + 1)]['content']) !== 1) {
+			} elseif (strlen($tokens[($stackPtr + 1)]['content']) !== 1) {
 				$found = strlen($tokens[($stackPtr + 1)]['content']);
 				$error = 'Expected 1 space after "%s"; %s found';
-				$data  = array(
+				$data = array(
 					$operator,
 					$found,
 				);

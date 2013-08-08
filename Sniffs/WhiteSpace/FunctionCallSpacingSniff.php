@@ -1,13 +1,23 @@
 <?php
 /**
- * CakePHP_Sniffs_WhiteSpace_FunctionCallSpacingSniff.
+ * PHP Version 5
  *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.12
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
+/**
  * Checks the separation between methods in a class or interface.
  *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Mark Story <mark@mark-story.com>
- * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
  */
 class CakePHP_Sniffs_WhiteSpace_FunctionCallSpacingSniff implements PHP_CodeSniffer_Sniff {
 

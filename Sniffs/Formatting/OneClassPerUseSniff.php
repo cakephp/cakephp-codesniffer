@@ -1,30 +1,23 @@
 <?php
 /**
- * CakePHP_Sniffs_Formatting_OneClassPerUseSniff
+ * PHP Version 5
  *
- * PHP version 5
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
- * @category  PHP
- * @package   PHP_CodeSniffer_CakePHP
- * @author    Juan Basso <jrbasso@gmail.com>
- * @copyright Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- * @version   1.0
- * @link      http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.10
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 /**
- * CakePHP_Sniffs_Formatting_OneClassPerUseSniff.
- *
  * Ensures the use contains only one class.
  *
- * @category  PHP
- * @package   PHP_CodeSniffer_CakePHP
- * @author    Juan Basso <jrbasso@gmail.com>
- * @copyright Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- * @version   1.0
- * @link      http://pear.php.net/package/PHP_CodeSniffer_CakePHP
  */
 class CakePHP_Sniffs_Formatting_OneClassPerUseSniff implements PHP_CodeSniffer_Sniff {
 

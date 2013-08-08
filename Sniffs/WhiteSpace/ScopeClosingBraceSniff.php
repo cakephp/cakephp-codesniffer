@@ -1,31 +1,23 @@
 <?php
 /**
- * CakePHP_Sniffs_Whitespace_ScopeClosingBraceSniff.
+ * PHP Version 5
  *
- * PHP version 5
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
- * @link      http://pear.php.net/package/PHP_CodeSniffer
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.12
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 /**
- * CakePHP_Squiz_Sniffs_Whitespace_ScopeClosingBraceSniff.
- *
  * Checks that the closing braces of scopes are aligned correctly.
  *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
- * @version   Release: 1.4.4
- * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 class CakePHP_Sniffs_WhiteSpace_ScopeClosingBraceSniff implements PHP_CodeSniffer_Sniff {
 
@@ -37,7 +29,6 @@ class CakePHP_Sniffs_WhiteSpace_ScopeClosingBraceSniff implements PHP_CodeSniffe
 	public function register() {
 		return PHP_CodeSniffer_Tokens::$scopeOpeners;
 	}
-
 
 /**
  * Processes this test, when one of its tokens is encountered.
@@ -113,6 +104,5 @@ class CakePHP_Sniffs_WhiteSpace_ScopeClosingBraceSniff implements PHP_CodeSniffe
 			}
 		}
 	}
-
 
 }
