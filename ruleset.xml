@@ -4,7 +4,7 @@
 
  <exclude-pattern>\.git</exclude-pattern>
  <exclude-pattern>*/Config/*.ini.php</exclude-pattern>
- <exclude-pattern>*/tmp/</exclude-pattern>
+ <exclude-pattern>/*/tmp/</exclude-pattern>
 
  <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
 
