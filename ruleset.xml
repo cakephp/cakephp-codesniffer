@@ -45,7 +45,6 @@
 
  <rule ref="Generic.PHP.DeprecatedFunctions"/>
  <rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops"/>
- <rule ref="Generic.PHP.DisallowShortOpenTag"/>
  <rule ref="Squiz.PHP.Eval"/>
  <rule ref="Generic.PHP.ForbiddenFunctions"/>
  <rule ref="Squiz.PHP.NonExecutableCode"/>
