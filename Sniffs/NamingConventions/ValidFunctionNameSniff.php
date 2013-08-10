@@ -1,35 +1,24 @@
 <?php
 /**
- * CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff
+ * PHP Version 5
  *
- * PHP version 5
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
- * @category  PHP
- * @package   PHP_CodeSniffer_CakePHP
- * @author    Juan Basso <jrbasso@gmail.com>
- * @copyright Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- * @version   1.0
- * @link      http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.1
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-if (class_exists('PHP_CodeSniffer_Standards_AbstractScopeSniff', true) === false) {
-	throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_Standards_AbstractScopeSniff not found');
-}
-
 /**
- * CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff.
- *
  * Ensures method names are correct depending on whether they are public
  * or private, and that functions are named correctly.
  *
- * @category  PHP
- * @package   PHP_CodeSniffer_CakePHP
- * @author    Juan Basso <jrbasso@gmail.com>
- * @copyright Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- * @version   1.0
- * @link      http://pear.php.net/package/PHP_CodeSniffer_CakePHP
  */
 class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff {
 

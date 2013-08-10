@@ -1,18 +1,22 @@
 <?php
 /**
- * CakePHP_Sniffs_WhiteSpace_ObjectOperatorSpacingSniff.
+ * PHP Version 5
  *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * This file is originally written by Greg Sherwood and Marc McIntyre, but
+ * modified for CakePHP.
+ *
+ * @copyright     2006 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.1
+ * @license       https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ */
+
+/**
  * Ensure there is no whitespace before a semicolon.
  *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @author    Mark Story <mark@mark-story.com>
- * @copyright 2006-2011 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
- * @version   Release: 1.3.3
- * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 class CakePHP_Sniffs_WhiteSpace_ObjectOperatorSpacingSniff implements PHP_CodeSniffer_Sniff {
 

@@ -1,19 +1,24 @@
 <?php
 /**
- * CakePHP_Sniffs_Whitespace_ScopeIndentSniff.
+ * PHP Version 5
  *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * This file is originally written by Greg Sherwood and Marc McIntyre, but
+ * modified for CakePHP.
+ *
+ * @copyright     2006 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.1
+ * @license       https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ */
+
+/**
  * Checks that control structures are structured correctly, and their content
  * is indented correctly. This sniff will throw errors if tabs are used
  * for indentation rather than spaces.
  *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
- * @version   Release: 1.3.0
- * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Sniff {
 
@@ -150,7 +155,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
 			if ($tokens[$i]['code'] === T_START_HEREDOC) {
 				$inHereDoc = true;
 				continue;
-			} else if ($inHereDoc === true) {
+			} elseif ($inHereDoc === true) {
 				if ($tokens[$i]['code'] === T_END_HEREDOC) {
 					$inHereDoc = false;
 				}
@@ -248,9 +253,9 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
 						$error = 'Doc blocks must not be indented';
 						$phpcsFile->addError($error, $firstToken, 'DocCommentStartColumn');
 					}
-				} else if ($column !== $indent) {
+				} elseif ($column !== $indent) {
 					if ($this->exact === true || $column < $indent) {
-						$type  = 'IncorrectExact';
+						$type = 'IncorrectExact';
 						$error = 'Line indented incorrectly; expected ';
 						if ($this->exact === false) {
 							$error .= 'at least ';

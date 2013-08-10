@@ -1,15 +1,18 @@
 <?php
 /**
- * CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff
+ * PHP Version 5
  *
- * PHP version 5
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
- * @category  PHP
- * @package   PHP_CodeSniffer_CakePHP
- * @author    Juan Basso <jrbasso@gmail.com>
- * @copyright Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- * @version   1.0
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.1
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 if (class_exists('PHP_CodeSniffer_Standards_AbstractVariableSniff', true) === false) {
@@ -17,16 +20,8 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractVariableSniff', true) === fa
 }
 
 /**
- * CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff.
- *
  * Checks the naming of variables and member variables.
  *
- * @category  PHP
- * @package   PHP_CodeSniffer_CakePHP
- * @author    Juan Basso <jrbasso@gmail.com>
- * @copyright Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- * @version   1.0
  */
 class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff {
 
@@ -43,7 +38,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
  * @return void
  */
 	protected function processVariable(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
-		$tokens  = $phpcsFile->getTokens();
+		$tokens = $phpcsFile->getTokens();
 		$varName = ltrim($tokens[$stackPtr]['content'], '$');
 
 		$phpReservedVars = array(
@@ -84,7 +79,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 
 					if ($this->_isValidVar($objVarName) === false) {
 						$error = 'Object property "%s" is not in valid camel caps format';
-						$data  = array($originalVarName);
+						$data = array($originalVarName);
 						$phpcsFile->addError($error, $var, 'NotCamelCaps', $data);
 					}
 				}
@@ -118,7 +113,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 
 		if ($this->_isValidVar($varName) === false) {
 			$error = 'Variable "%s" is not in valid camel caps format';
-			$data  = array($originalVarName);
+			$data = array($originalVarName);
 			$phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
 		}
 	}
@@ -146,7 +141,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 				$phpcsFile->addError($error, $stackPtr, 'PublicHasUnderscore', $data);
 				return;
 			}
-		} else if ($private === true) {
+		} elseif ($private === true) {
 			if (substr($varName, 0, 2) !== '__') {
 				$error = 'Private member variable "%s" must contain a leading underscore';
 				$data = array($varName);

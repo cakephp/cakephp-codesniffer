@@ -1,31 +1,22 @@
 <?php
 /**
- * CakePHP_Sniffs_Whitespace_ScopeClosingBraceSniff.
+ * PHP Version 5
  *
- * PHP version 5
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
- * @link      http://pear.php.net/package/PHP_CodeSniffer
+ * This file is originally written by Greg Sherwood and Marc McIntyre, but
+ * modified for CakePHP.
+ *
+ * @copyright     2006 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.12
+ * @license       https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 /**
- * CakePHP_Squiz_Sniffs_Whitespace_ScopeClosingBraceSniff.
- *
  * Checks that the closing braces of scopes are aligned correctly.
  *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
- * @version   Release: 1.4.4
- * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 class CakePHP_Sniffs_WhiteSpace_ScopeClosingBraceSniff implements PHP_CodeSniffer_Sniff {
 
@@ -37,7 +28,6 @@ class CakePHP_Sniffs_WhiteSpace_ScopeClosingBraceSniff implements PHP_CodeSniffe
 	public function register() {
 		return PHP_CodeSniffer_Tokens::$scopeOpeners;
 	}
-
 
 /**
  * Processes this test, when one of its tokens is encountered.
@@ -113,6 +103,5 @@ class CakePHP_Sniffs_WhiteSpace_ScopeClosingBraceSniff implements PHP_CodeSniffe
 			}
 		}
 	}
-
 
 }
