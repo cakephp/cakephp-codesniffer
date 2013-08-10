@@ -1,35 +1,27 @@
 <?php
 /**
- * CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff
+ * PHP Version 5
  *
- * PHP version 5
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
- * @category  PHP
- * @package   PHP_CodeSniffer_CakePHP
- * @author    Juan Basso <jrbasso@gmail.com>
- * @copyright Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- * @version   1.0
- * @link      http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.10
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 if (class_exists('PHP_CodeSniffer_Standards_AbstractScopeSniff', true) === false) {
 	$error = 'Class PHP_CodeSniffer_Standards_AbstractScopeSniff not found';
 	throw new PHP_CodeSniffer_Exception($error);
 }
 
 /**
- * CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff.
- *
  * Ensures the throws in the code are declared in the PHPDoc
  *
- * @category  PHP
- * @package   PHP_CodeSniffer_CakePHP
- * @author    Juan Basso <jrbasso@gmail.com>
- * @copyright Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- * @version   1.0
- * @link      http://pear.php.net/package/PHP_CodeSniffer_CakePHP
  */
 class CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff {
 
@@ -113,7 +105,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSni
 		if (empty($throws) === true) {
 			$error = 'Missing @throws tag in function comment';
 			$phpcsFile->addError($error, $commentEnd, 'Missing');
-		} else if (empty($throwTokens) === true) {
+		} elseif (empty($throwTokens) === true) {
 			// If token count is zero, it means that only variables are being
 			// thrown, so we need at least one @throws tag (checked above).
 			// Nothing more to do.

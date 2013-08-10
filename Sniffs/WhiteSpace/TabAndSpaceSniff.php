@@ -1,17 +1,24 @@
 <?php
 /**
- * CakePHP_Sniffs_WhiteSpace_ForceTabIndentSniff
+ * PHP Version 5
  *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.11
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
+/**
  * Check for any line starting with 2 spaces - which would indicate space indenting
  * Also check for "\t " - a tab followed by a space, which is a common similar mistake
  *
- * @category  PHP
- * @package   PHP_CodeSniffer_CakePHP
- * @author    Andy Dawson <andydawson76@gmail.com>
- * @copyright Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- * @version   Release: 1.0
- * @link      http://pear.php.net/package/PHP_CodeSniffer_CakePHP
  */
 class CakePHP_Sniffs_WhiteSpace_TabAndSpaceSniff implements PHP_CodeSniffer_Sniff {
 

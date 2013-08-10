@@ -1,16 +1,22 @@
 <?php
 /**
- * CakePHP_Sniffs_WhiteSpace_FunctionOpeningBraceSpaceSniff.
+ * PHP Version 5
  *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * This file is originally written by Greg Sherwood and Marc McIntyre, but
+ * modified for CakePHP.
+ *
+ * @copyright     2006 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @since         CakePHP CodeSniffer 0.1.1
+ * @license       https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ */
+
+/**
  * Checks that there is no empty line after the opening brace of a function.
  *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
- * @version   Release: 1.3.0
  */
 class CakePHP_Sniffs_WhiteSpace_FunctionOpeningBraceSpaceSniff implements PHP_CodeSniffer_Sniff {
 
@@ -43,9 +49,9 @@ class CakePHP_Sniffs_WhiteSpace_FunctionOpeningBraceSpaceSniff implements PHP_Co
 		$nextContent = $phpcsFile->findNext(T_WHITESPACE, ($openBrace + 1), null, true);
 
 		if ($nextContent === $tokens[$stackPtr]['scope_closer']) {
-			 // The next bit of content is the closing brace, so this
-			 // is an empty function and should have a blank line
-			 // between the opening and closing braces.
+			// The next bit of content is the closing brace, so this
+			// is an empty function and should have a blank line
+			// between the opening and closing braces.
 			return;
 		}
 
