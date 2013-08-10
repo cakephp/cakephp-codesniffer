@@ -5,14 +5,13 @@
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
+ * This file is originally written by Greg Sherwood and Marc McIntyre, but
+ * modified for CakePHP.
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     2006 Squiz Pty Ltd (ABN 77 084 670 600)
  * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
  * @since         CakePHP CodeSniffer 0.1.1
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @license       https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 /**
