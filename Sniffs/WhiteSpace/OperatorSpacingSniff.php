@@ -152,14 +152,15 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 
 			$operator = $tokens[$stackPtr]['content'];
 
+			$content = str_replace("\r\n", "\n", $tokens[($stackPtr - 1)]['content']);
 			if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
 				$error = "Expected 1 space before \"$operator\"; 0 found";
 				$phpcsFile->addError($error, $stackPtr, 'NoSpaceBefore');
-			} elseif (strlen($tokens[($stackPtr - 1)]['content']) !== 1) {
+			} elseif (strlen($content) !== 1) {
 				// Don't throw an error for assignments, because other standards allow
 				// multiple spaces there to align multiple assignments.
 				if (in_array($tokens[$stackPtr]['code'], PHP_CodeSniffer_Tokens::$assignmentTokens) === false) {
-					$found = strlen($tokens[($stackPtr - 1)]['content']);
+					$found = strlen($content);
 					$error = 'Expected 1 space before "%s"; %s found';
 					$data = array(
 						$operator,
@@ -169,11 +170,12 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 				}
 			}
 
+			$content = str_replace("\r\n", "\n", $tokens[($stackPtr + 1)]['content']);
 			if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
 				$error = "Expected 1 space after \"$operator\"; 0 found";
 				$phpcsFile->addError($error, $stackPtr, 'NoSpaceAfter');
-			} elseif (strlen($tokens[($stackPtr + 1)]['content']) !== 1) {
-				$found = strlen($tokens[($stackPtr + 1)]['content']);
+			} elseif (strlen($content) !== 1) {
+				$found = strlen($content);
 				$error = 'Expected 1 space after "%s"; %s found';
 				$data = array(
 					$operator,
