@@ -45,7 +45,8 @@ class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffe
 			$message = 'Expected 1 space before ., but 0 found';
 			$phpcsFile->addError($message, $stackPtr, 'MissingBefore');
 		} else {
-			$spaces = strlen($tokens[($stackPtr - 1)]['content']);
+			$content = str_replace("\r\n", "\n", $tokens[($stackPtr - 1)]['content']);
+			$spaces = strlen($content);
 			if ($spaces > 1) {
 				$message = 'Expected 1 space before ., but %d found';
 				$data = array($spaces);
@@ -57,7 +58,8 @@ class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffe
 			$message = 'Expected 1 space after ., but 0 found';
 			$phpcsFile->addError($message, $stackPtr, 'MissingAfter');
 		} else {
-			$spaces = strlen($tokens[($stackPtr + 1)]['content']);
+			$content = str_replace("\r\n", "\n", $tokens[($stackPtr + 1)]['content']);
+			$spaces = strlen($content);
 			if ($spaces > 1) {
 				$message = 'Expected 1 space after ., but %d found';
 				$data = array($spaces);
