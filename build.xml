@@ -96,6 +96,18 @@
 				* Private static variable names no longer cause violations.
 			</changelog>
 
+			<changelog version="0.1.13" date="2013-05-12" license="MIT">
+				* Fix issues with parenthesis on include/require statements.
+			</changelog>
+
+			<changelog version="0.1.12" date="2013-05-11" license="MIT">
+				* Use sniff for traits/namespaces now works correctly.
+				* Sniffs for blank lines after namespaces added.
+				* .git should not be checked, but paths containing it should.
+				* Make tests simpler to setup/run.
+				* Add sniff for class brace placement.
+			</changelog>
+
 			<changelog version="0.1.11" date="2012-12-10" license="MIT">
 				* Use Generic.WhiteSpace.DisallowSpaceIndent instead of ForceTabIndentSniff
 				* Adding sniff for space and tab mixing
