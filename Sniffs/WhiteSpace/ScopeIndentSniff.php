@@ -59,7 +59,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
  * Processes this test, when one of its tokens is encountered.
  *
  * @param PHP_CodeSniffer_File $phpcsFile All the tokens found in the document.
- * @param int $stackPtr The position of the current token
+ * @param integer $stackPtr The position of the current token
  *    in the stack passed in $tokens.
  * @return void
  */
@@ -278,7 +278,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
  * Calculates the expected indent of a token.
  *
  * @param array $tokens The stack of tokens for this file.
- * @param int $stackPtr The position of the token to get indent for.
+ * @param integer $stackPtr The position of the token to get indent for.
  * @return int
  */
 	protected function _calculateExpectedIndent(array $tokens, $stackPtr) {
