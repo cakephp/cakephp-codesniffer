@@ -55,8 +55,8 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
  * Processes the tokens within the scope.
  *
  * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
- * @param int $stackPtr The position where this token was found.
- * @param int $currScope The position of the current scope.
+ * @param integer $stackPtr The position where this token was found.
+ * @param integer $currScope The position of the current scope.
  * @return void
  */
 	protected function processTokenWithinScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $currScope) {
@@ -150,7 +150,7 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
  * Processes the tokens outside the scope.
  *
  * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
- * @param int $stackPtr  The position where this token was found.
+ * @param integer $stackPtr  The position where this token was found.
  * @return void
  */
 	protected function processTokenOutsideScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
