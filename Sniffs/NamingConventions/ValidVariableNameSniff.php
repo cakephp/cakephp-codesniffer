@@ -33,7 +33,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
  * conventions and causes additional failures.
  *
  * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param int $stackPtr  The position of the current token in the
+ * @param integer $stackPtr  The position of the current token in the
  *    stack passed in $tokens.
  * @return void
  */
@@ -122,7 +122,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
  * Processes class member variables.
  *
  * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param int $stackPtr  The position of the current token in the
+ * @param integer $stackPtr  The position of the current token in the
  *    stack passed in $tokens.
  * @return void
  */
@@ -183,7 +183,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
  * Processes the variable found within a double quoted string.
  *
  * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param int $stackPtr The position of the double quoted string.
+ * @param integer $stackPtr The position of the double quoted string.
  * @return void
  */
 	protected function processVariableInString(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
