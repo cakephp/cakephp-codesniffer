@@ -58,6 +58,18 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
 
 		$tokens = $phpcsFile->getTokens();
 
+		$isClosure = $phpcsFile->findPrevious(
+			array(T_CLOSURE),
+			($stackPtr - 1),
+			null,
+			false,
+			null,
+			true
+		);
+		if ($isClosure) {
+			return;
+		}
+
 		// Only one USE declaration allowed per statement.
 		$next = $phpcsFile->findNext(array(T_COMMA, T_SEMICOLON), ($stackPtr + 1));
 		if ($tokens[$next]['code'] === T_COMMA) {
