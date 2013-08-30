@@ -49,8 +49,15 @@ class TestHelper {
 		$options = array_merge($options, array(
 			'encoding' => 'utf-8',
 			'files' => array($file),
-			'standard' => $this->_rootDir . '/ruleset.xml',
+			'standard' => array($this->_rootDir . '/ruleset.xml'),
 		));
+
+		// New PHPCS has a strange issue where the method arguments
+		// are not stored on the instance causing weird errors.
+		$reflection = new ReflectionProperty($this->_phpcs, 'values');
+		$reflection->setAccessible(true);
+		$reflection->setValue($this->_phpcs, $options);
+
 		ob_start();
 		$this->_phpcs->process($options);
 		$result = ob_get_contents();
