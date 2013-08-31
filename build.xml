@@ -16,7 +16,7 @@
 	<taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
 
 	<!-- Update this version when making new packages -->
-	<property name="version" value="0.1.15" />
+	<property name="version" value="0.1.16" />
 
 	<!-- Shouldn't have to change these -->
 	<property name="build.dir" value="build" />
@@ -79,6 +79,10 @@
 				<package name="PHP_CodeSniffer" channel="pear.php.net" minimum_version="1.3.3" />
 			</dependencies>
 			<exceptions key="ruleset.xml">php</exceptions>
+
+			<changelog version="0.1.16" date="2013-08-31" license="MIT">
+				* Fix constant sniff to not flag renamed trait methods.
+			</changelog>
 
 			<changelog version="0.1.15" date="2013-08-19" license="MIT">
 				* Fix use sniff for closures.
