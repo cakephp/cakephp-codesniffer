@@ -98,6 +98,9 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
                              T_AS,
                              T_GOTO,
                              T_INSTEADOF,
+                             T_PROTECTED,
+                             T_PRIVATE,
+                             T_PUBLIC
                             );
 
             if (in_array($tokens[$functionKeyword]['code'], $declarations) === true) {
