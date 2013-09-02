@@ -49,7 +49,7 @@ class TestHelper {
 		$options = array_merge($options, array(
 			'encoding' => 'utf-8',
 			'files' => array($file),
-			'standard' => array($this->_rootDir . '/ruleset.xml'),
+			'standard' => $this->_rootDir . '/ruleset.xml'
 		));
 
 		// New PHPCS has a strange issue where the method arguments
