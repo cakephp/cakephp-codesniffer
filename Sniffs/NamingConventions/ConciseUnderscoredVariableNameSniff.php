@@ -1,25 +1,7 @@
 <?php
 
 /**
- * FuelPHP_Sniffs_NamingConventions_ConciseUnderscoredVariableNameSniff.
- *
- * PHP version 5
- *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Eric VILLARD <dev@eviweb.fr>
- * @copyright 2012 Eric VILLARD <dev@eviweb.fr>
- * @license   http://opensource.org/licenses/MIT MIT License
- * @link      http://pear.php.net/package/PHP_CodeSniffer
- */
-if (class_exists('FuelPHP_Sniffs_NamingConventions_UnderscoredWithScopeFunctionNameSniff', true) === false) {
-    throw new PHP_CodeSniffer_Exception(
-        'Class FuelPHP_Sniffs_NamingConventions_UnderscoredWithScopeFunctionNameSniff not found'
-    );
-}
-
-/**
- * FuelPHP_Sniffs_NamingConventions_ConciseUnderscoredVariableNameSniff.
+ * CakePHP_Sniffs_NamingConventions_ConciseUnderscoredVariableNameSniff.
  *
  * Ensures variable names use underscore format and are not too long;
  *
@@ -85,7 +67,7 @@ class CakePHP_Sniffs_NamingConventions_ConciseUnderscoredVariableNameSniff
 
         $name = $tokens[$stackPtr]['content'];
 
-        if (FuelPHP_Sniffs_NamingConventions_UnderscoredWithScopeFunctionNameSniff::isUnderscoreName($name) === false) {
+        if (self::isUnderscoreName($name) === false) {
             $error = 'Variable name "%s" does not use underscore format.
                 Upper case forbidden.';
             $phpcsFile->addError($error, $stackPtr, 'NotUnderscore');
@@ -98,5 +80,41 @@ class CakePHP_Sniffs_NamingConventions_ConciseUnderscoredVariableNameSniff
 //            $phpcsFile->addWarning($warning, $stackPtr, 'VariableNameTooLong');
 //        }
     }
+
+    /**
+     * Returns true if the specified string is in the underscore caps format.
+     *
+     * @param string $string The string to verify.
+     *
+     * @return boolean
+     */
+    public static function isUnderscoreName($string)
+    {
+        // If there are space in the name, it can't be valid.
+        if (strpos($string, ' ') !== false) {
+            return false;
+        }
+
+        if ($string !== strtolower($string)) {
+            return false;
+        }
+
+        $validName = true;
+        $nameBits  = explode('_', $string);
+
+        foreach ($nameBits as $bit) {
+            if ($bit === '') {
+                continue;
+            }
+
+            if ($bit{0} !== strtolower($bit{0})) {
+                $validName = false;
+                break;
+            }
+        }
+
+        return $validName;
+
+    }//end isUnderscoreName()
 }
 ?>
