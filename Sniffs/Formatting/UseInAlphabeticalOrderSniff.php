@@ -10,7 +10,6 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
  * @since         CakePHP CodeSniffer 0.1.10
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
@@ -27,6 +26,13 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
  * @var array
  */
 	protected $_processed = array();
+
+/**
+ * The list of use statements, their content and scope.
+ *
+ * @var array
+ */
+	protected $_uses = array();
 
 /**
  * Returns an array of tokens this test wants to listen for.
@@ -48,60 +54,20 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
 		if (isset($this->_processed[$phpcsFile->getFilename()])) {
 			return;
 		}
+		$filename = $phpcsFile->getFilename();
 
-		$tokens = $phpcsFile->getTokens();
-
-		$isClosure = $phpcsFile->findPrevious(
-			array(T_CLOSURE),
-			($stackPtr - 1),
-			null,
-			false,
-			null,
-			true
-		);
-		if ($isClosure) {
-			return;
-		}
-
-		// Only one USE declaration allowed per statement.
-		$next = $phpcsFile->findNext(array(T_COMMA, T_SEMICOLON), ($stackPtr + 1));
-		if ($tokens[$next]['code'] === T_COMMA) {
-			$error = 'There must be one USE keyword per declaration';
-			$phpcsFile->addError($error, $stackPtr, 'MultipleDeclarations');
-		}
-
-		$uses = array();
-
+		$this->_uses = array();
 		$next = $stackPtr;
-		while (true) {
-			$content = '';
 
-			$end = $phpcsFile->findNext(array(T_SEMICOLON, T_OPEN_CURLY_BRACKET), $next);
-			$useTokens = array_slice($tokens, $next, $end - $next, true);
-			foreach ($useTokens as $index => $token) {
-				if ($token['code'] === T_STRING || $token['code'] === T_NS_SEPARATOR) {
-					$content .= $token['content'];
-				}
-			}
-
-			// Check for class scoping on use. Traits should be
-			// ordered independently.
-			$scope = 0;
-			if (!empty($token['conditions'])) {
-				$scope = key($token['conditions']);
-			}
-			$uses[$scope][$content] = $index;
-
-			$next = $phpcsFile->findNext(T_USE, $end);
-			if (!$next) {
-				break;
-			}
+		while ($next !== false) {
+			$this->_checkUseToken($phpcsFile, $next);
+			$next = $phpcsFile->findNext(T_USE, $next + 1);
 		}
 
 		// Prevent multiple uses in the same file from entering
 		$this->_processed[$phpcsFile->getFilename()] = true;
 
-		foreach ($uses as $scope => $used) {
+		foreach ($this->_uses as $scope => $used) {
 			$defined = $sorted = array_keys($used);
 
 			natcasesort($sorted);
@@ -117,6 +83,65 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
 				}
 			}
 		}
+	}
+
+/**
+ * Check all the use tokens in a file.
+ *
+ * @param $phpcsFile The file to check.
+ * @param int $stackPtr The index of the first use token.
+ */
+	protected function _checkUseToken($phpcsFile, $stackPtr) {
+		// If the use token is for a closure we want to ignore it.
+		$isClosure = $this->_isClosure($phpcsFile, $stackPtr);
+		if ($isClosure) {
+			return;
+		}
+
+		$tokens = $phpcsFile->getTokens();
+
+		// Only one USE declaration allowed per statement.
+		$next = $phpcsFile->findNext(array(T_COMMA, T_SEMICOLON), ($stackPtr + 1));
+		if ($tokens[$next]['code'] === T_COMMA) {
+			$error = 'There must be one USE keyword per declaration';
+			$phpcsFile->addError($error, $stackPtr, 'MultipleDeclarations');
+		}
+
+		$content = '';
+		$end = $phpcsFile->findNext(array(T_SEMICOLON, T_OPEN_CURLY_BRACKET), $stackPtr);
+		$useTokens = array_slice($tokens, $stackPtr, $end - $stackPtr, true);
+
+		foreach ($useTokens as $index => $token) {
+			if ($token['code'] === T_STRING || $token['code'] === T_NS_SEPARATOR) {
+				$content .= $token['content'];
+			}
+		}
+
+		// Check for class scoping on use. Traits should be
+		// ordered independently.
+		$scope = 0;
+		if (!empty($token['conditions'])) {
+			$scope = key($token['conditions']);
+		}
+		$this->_uses[$scope][$content] = 1;
+	}
+
+/**
+ * Check if the current stackPtr is a use token that is for a closure.
+ *
+ * @param $phpcsFile
+ * @param int $stackPtr
+ * @return boolean
+ */
+	protected function _isClosure($phpcsFile, $stackPtr) {
+		return $phpcsFile->findPrevious(
+			array(T_CLOSURE),
+			($stackPtr - 1),
+			null,
+			false,
+			null,
+			true
+		);
 	}
 
 }
