@@ -89,7 +89,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
  * Check all the use tokens in a file.
  *
  * @param $phpcsFile The file to check.
- * @param int $stackPtr The index of the first use token.
+ * @param integer $stackPtr The index of the first use token.
  */
 	protected function _checkUseToken($phpcsFile, $stackPtr) {
 		// If the use token is for a closure we want to ignore it.
@@ -130,7 +130,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
  * Check if the current stackPtr is a use token that is for a closure.
  *
  * @param $phpcsFile
- * @param int $stackPtr
+ * @param integer $stackPtr
  * @return boolean
  */
 	protected function _isClosure($phpcsFile, $stackPtr) {

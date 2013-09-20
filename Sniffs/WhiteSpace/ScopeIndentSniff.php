@@ -25,7 +25,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
 /**
  * The number of spaces code should be indented.
  *
- * @var int
+ * @var integer
  */
 	public $indent = 1;
 
@@ -35,7 +35,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
  * If TRUE, indent needs to be exactly $ident spaces. If FALSE,
  * indent needs to be at least $ident spaces (but can be more).
  *
- * @var bool
+ * @var boolean
  */
 	public $exact = false;
 
@@ -279,7 +279,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
  *
  * @param array $tokens The stack of tokens for this file.
  * @param integer $stackPtr The position of the token to get indent for.
- * @return int
+ * @return integer
  */
 	protected function _calculateExpectedIndent(array $tokens, $stackPtr) {
 		$conditionStack = array();
