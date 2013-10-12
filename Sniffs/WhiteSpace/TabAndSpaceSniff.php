@@ -58,17 +58,26 @@ class CakePHP_Sniffs_WhiteSpace_TabAndSpaceSniff implements PHP_CodeSniffer_Snif
 			return;
 		}
 
-		if (strpos($tokens[$stackPtr]['content'], "  ") !== false) {
+		if (strpos($tokens[$stackPtr]['content'], '  ') !== false) {
 			$error = 'Double space found';
-			$phpcsFile->addError($error, $stackPtr);
+			$phpcsFile->addFixableError($error, $stackPtr);
+			if ($phpcsFile->fixer->enabled === true) {
+				$phpcsFile->fixer->replaceToken($stackPtr, ' ');
+			}
 		}
 		if (strpos($tokens[$stackPtr]['content'], " \t") !== false) {
 			$error = 'Space and tab found';
-			$phpcsFile->addError($error, $stackPtr);
+			$phpcsFile->addFixableError($error, $stackPtr);
+			if ($phpcsFile->fixer->enabled === true) {
+				$phpcsFile->fixer->replaceToken($stackPtr, ' ');
+			}
 		}
 		if (strpos($tokens[$stackPtr]['content'], "\t ") !== false) {
 			$error = 'Tab and space found';
-			$phpcsFile->addError($error, $stackPtr);
+			$phpcsFile->addFixableError($error, $stackPtr);
+			if ($phpcsFile->fixer->enabled === true) {
+				$phpcsFile->fixer->replaceToken($stackPtr, ' ');
+			}
 		}
 	}
 

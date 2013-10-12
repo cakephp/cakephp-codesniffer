@@ -43,29 +43,62 @@ class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffe
 		$tokens = $phpcsFile->getTokens();
 		if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
 			$message = 'Expected 1 space before ., but 0 found';
-			$phpcsFile->addError($message, $stackPtr, 'MissingBefore');
+			$phpcsFile->addFixableError($message, $stackPtr, 'MissingBefore');
+			$this->_addSpace($phpcsFile, $stackPtr - 1);
 		} else {
 			$content = str_replace("\r\n", "\n", $tokens[($stackPtr - 1)]['content']);
 			$spaces = strlen($content);
 			if ($spaces > 1) {
 				$message = 'Expected 1 space before ., but %d found';
 				$data = array($spaces);
-				$phpcsFile->addError($message, $stackPtr, 'TooManyBefore', $data);
+				$phpcsFile->addFixableError($message, $stackPtr, 'TooManyBefore', $data);
+				$this->_removeSpace($phpcsFile, $stackPtr - 1);
 			}
 		}
 
 		if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
 			$message = 'Expected 1 space after ., but 0 found';
-			$phpcsFile->addError($message, $stackPtr, 'MissingAfter');
+			$phpcsFile->addFixableError($message, $stackPtr, 'MissingAfter');
+			$this->_addSpace($phpcsFile, $stackPtr);
 		} else {
 			$content = str_replace("\r\n", "\n", $tokens[($stackPtr + 1)]['content']);
 			$spaces = strlen($content);
 			if ($spaces > 1) {
 				$message = 'Expected 1 space after ., but %d found';
 				$data = array($spaces);
-				$phpcsFile->addError($message, $stackPtr, 'TooManyAfter', $data);
+				$phpcsFile->addFixableError($message, $stackPtr, 'TooManyAfter', $data);
+				$this->_removeSpace($phpcsFile, $stackPtr + 1);
 			}
 		}
+	}
+
+/**
+ * Add a single space on the right sight.
+ *
+ * @param object $phpcsFile
+ * @param integer $location
+ * @return void
+ */
+	protected function _addSpace($phpcsFile, $location) {
+		if ($phpcsFile->fixer->enabled !== true) {
+			return;
+		}
+		$phpcsFile->fixer->addContent($location, ' ');
+	}
+
+/**
+ * Remove spaces expect for one on the right sight.
+ *
+ * @param object $phpcsFile
+ * @param integer $location
+ * @return void
+ */
+	protected function _removeSpace($phpcsFile, $location) {
+		if ($phpcsFile->fixer->enabled !== true) {
+			return;
+		}
+		//$content = $tokens[$location]['content'];
+		$phpcsFile->fixer->replaceToken($location, ' ');
 	}
 
 }
