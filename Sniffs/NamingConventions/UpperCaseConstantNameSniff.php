@@ -108,7 +108,7 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
 				// This is a class constant.
 				if (strtoupper($constName) !== $constName) {
 					$error = 'Class constants must be uppercase; expected %s but found %s';
-					$data  = array(
+					$data = array(
 						strtoupper($constName),
 						$constName,
 					);
@@ -221,8 +221,8 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
 			if (strtoupper($constName) !== $constName) {
 				$error = 'Constants must be uppercase; expected %s but found %s';
 				$data = array(
-					$prefix.strtoupper($constName),
-					$prefix.$constName,
+					$prefix . strtoupper($constName),
+					$prefix . $constName,
 				);
 				$phpcsFile->addError($error, $stackPtr, 'ConstantNotUpperCase', $data);
 			}
