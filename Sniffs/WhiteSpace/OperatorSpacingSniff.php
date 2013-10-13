@@ -106,7 +106,7 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 						$phpcsFile->addError($error, $stackPtr, 'SpacingAfterAmp', $data);
 					}
 				}
-			}//end if
+			}
 		} else {
 			if ($tokens[$stackPtr]['code'] === T_MINUS) {
 				// Check minus spacing, but make sure we aren't just assigning

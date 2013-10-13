@@ -58,7 +58,7 @@ class CakePHP_Sniffs_WhiteSpace_TabAndSpaceSniff implements PHP_CodeSniffer_Snif
 			return;
 		}
 
-		if (strpos($tokens[$stackPtr]['content'], "  ") !== false) {
+		if (strpos($tokens[$stackPtr]['content'], '  ') !== false) {
 			$error = 'Double space found';
 			$phpcsFile->addError($error, $stackPtr);
 		}
