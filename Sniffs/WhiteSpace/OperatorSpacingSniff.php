@@ -84,13 +84,19 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 				// Check there is one space before the & operator.
 				if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
 					$error = 'Expected 1 space before "&" operator; 0 found';
-					$phpcsFile->addError($error, $stackPtr, 'NoSpaceBeforeAmp');
+					$phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceBeforeAmp');
+					if ($phpcsFile->fixer->enabled === true) {
+						$phpcsFile->fixer->addContent($stackPtr - 1, ' ');
+					}
 				}
 
 				// Check there is one space after the & operator.
 				if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
 					$error = 'Expected 1 space after "&" operator; 0 found';
-					$phpcsFile->addError($error, $stackPtr, 'NoSpaceAfterAmp');
+					$phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceAfterAmp');
+					if ($phpcsFile->fixer->enabled === true) {
+						$phpcsFile->fixer->addContent($stackPtr, ' ');
+					}
 				}
 			}
 		} else {
@@ -140,12 +146,18 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 
 			if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
 				$error = "Expected 1 space before \"$operator\"; 0 found";
-				$phpcsFile->addError($error, $stackPtr, 'NoSpaceBefore');
+				$phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceBefore');
+				if ($phpcsFile->fixer->enabled === true) {
+					$phpcsFile->fixer->addContent($stackPtr - 1, ' ');
+				}
 			}
 
 			if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
 				$error = "Expected 1 space after \"$operator\"; 0 found";
-				$phpcsFile->addError($error, $stackPtr, 'NoSpaceAfter');
+				$phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceAfter');
+				if ($phpcsFile->fixer->enabled === true) {
+					$phpcsFile->fixer->addContent($stackPtr, ' ');
+				}
 			}
 		}
 	}
