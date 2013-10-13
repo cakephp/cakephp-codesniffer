@@ -147,13 +147,12 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 				$data = array($varName);
 				$phpcsFile->addError($error, $stackPtr, 'PrivateNoUnderscore', $data);
 				return;
-			} else {
-				$filename = $phpcsFile->getFilename();
-				if (strpos($filename, '/lib/Cake/') !== false) {
-					$warning = 'Private variable "%s" in CakePHP core is discouraged';
-					$data = array($varName);
-					$phpcsFile->addWarning($warning, $stackPtr, 'PrivateInCore', $data);
-				}
+			}
+			$filename = $phpcsFile->getFilename();
+			if (strpos($filename, '/lib/Cake/') !== false) {
+				$warning = 'Private variable "%s" in CakePHP core is discouraged';
+				$data = array($varName);
+				$phpcsFile->addWarning($warning, $stackPtr, 'PrivateInCore', $data);
 			}
 		} else {
 			if (substr($varName, 0, 1) !== '_') {
@@ -219,7 +218,6 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 				}
 
 				if ($this->_isValidVar($varName) === false) {
-					$varName = $matches[0];
 					$error = 'Variable "%s" is not in valid camel caps format';
 					$data = array($originalVarName);
 					$phpcsFile->addError($error, $stackPtr, 'StringVarNotCamelCaps', $data);
