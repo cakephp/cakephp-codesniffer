@@ -86,8 +86,7 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 
 		$methodProps = $phpcsFile->getMethodProperties($stackPtr);
 		if ($methodProps['scope_specified'] === false) {
-			$error = 'All methods must have a scope specified';
-			$phpcsFile->addError($error, $stackPtr, 'NoScopeSpecified', $errorData);
+			// Let another sniffer take care of that
 			return;
 		}
 
