@@ -62,7 +62,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
 			}
 		}
 
-		if (is_null($nextLineToken) === true) {
+		if ($nextLineToken === null) {
 			// Never found the next line, which means
 			// there are 0 blank lines after the function.
 			$foundLines = 0;
@@ -97,7 +97,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
 			}
 		}
 
-		if (is_null($prevLineToken) === true) {
+		if ($prevLineToken === null) {
 			// Never found the previous line, which means
 			// there are 0 blank lines before the function.
 			$foundLines = 0;
@@ -111,7 +111,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
 			$prevLine = ($tokens[$prevContent]['line'] - 1);
 			$i = ($stackPtr - 1);
 			$foundLines = 0;
-			while ($currentLine != $prevLine && $currentLine > 1 && $i > 0) {
+			while ($currentLine !== $prevLine && $currentLine > 1 && $i > 0) {
 				if (isset($tokens[$i]['scope_condition']) === true) {
 					$scopeCondition = $tokens[$i]['scope_condition'];
 					if ($tokens[$scopeCondition]['code'] === T_FUNCTION) {
