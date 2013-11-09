@@ -37,7 +37,6 @@
  <rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
  <rule ref="PSR2.Namespaces.UseDeclaration"/>
 
- <rule ref="Generic.NamingConventions.ConstructorName"/>
  <!--
  Disabled and replaced with local copy. See http://pear.php.net/bugs/bug.php?id=19957
  <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
