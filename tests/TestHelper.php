@@ -46,10 +46,17 @@ class TestHelper {
  */
 	public function runPhpCs($file) {
 		$options = $this->_phpcs->getDefaults();
+		$standard = $this->_rootDir . '/ruleset.xml';
+		if (
+			defined('PHP_CodeSniffer::VERSION') &&
+			version_compare(PHP_CodeSniffer::VERSION, '1.5.0') != -1
+		) {
+			$standard = array($standard);
+		}
 		$options = array_merge($options, array(
 			'encoding' => 'utf-8',
 			'files' => array($file),
-			'standard' => $this->_rootDir . '/ruleset.xml'
+			'standard' => $standard,
 		));
 
 		// New PHPCS has a strange issue where the method arguments
