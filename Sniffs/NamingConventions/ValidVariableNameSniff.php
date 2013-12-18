@@ -97,7 +97,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 				// this: MyClass::$_variable, so we don't know its scope.
 				$inClass = true;
 			} else {
-				$inClass = $phpcsFile->hasCondition($stackPtr, array(T_CLASS, T_INTERFACE));
+				$inClass = $phpcsFile->hasCondition($stackPtr, array(T_TRAIT, T_CLASS, T_INTERFACE));
 			}
 
 			if ($inClass === true) {
