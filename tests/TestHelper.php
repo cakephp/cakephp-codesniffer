@@ -4,7 +4,9 @@ require_once 'PHP/CodeSniffer/CLI.php';
 class TestHelper {
 
 	protected $_rootDir;
+
 	protected $_dirName;
+
 	protected $_phpcs;
 
 	public function __construct() {

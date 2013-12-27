@@ -226,7 +226,6 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
 				$phpcsFile->addError($error, $stackPtr, 'ConstantNotUpperCase', $data);
 			}
 		}
-
 	}
 
 }
