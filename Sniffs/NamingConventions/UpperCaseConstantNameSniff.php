@@ -37,8 +37,7 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
  */
 	public function register() {
 		return array(T_STRING);
-
-	}//end register()
+	}
 
 /**
  * Processes this test, when one of its tokens is encountered.
@@ -226,8 +225,7 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
 				);
 				$phpcsFile->addError($error, $stackPtr, 'ConstantNotUpperCase', $data);
 			}
-		}//end if
+		}
+	}
 
-	}//end process()
-
-}//end class
+}
