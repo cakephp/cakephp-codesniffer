@@ -16,7 +16,7 @@
 	<taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
 
 	<!-- Update this version when making new packages -->
-	<property name="version" value="0.1.19" />
+	<property name="version" value="0.1.20" />
 
 	<!-- Shouldn't have to change these -->
 	<property name="build.dir" value="build" />
@@ -79,6 +79,14 @@
 				<package name="PHP_CodeSniffer" channel="pear.php.net" minimum_version="1.3.3" />
 			</dependencies>
 			<exceptions key="ruleset.xml">php</exceptions>
+
+			<changelog version="0.1.20" date="2013-12-29" license="MIT">
+				* Useless method override sniff was removed. It created many false
+				  positives and rarely provided any valuable feedback.
+				* Using underscored property names no longer triggers errors. The
+				  new ORM in 3.0 will have widespread use of underscored properties, we
+				  cannot treat them as errors.
+			</changelog>
 
 			<changelog version="0.1.19" date="2013-12-17" license="MIT">
 				* Protected properties on traits no longer trigger warnings.
