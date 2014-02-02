@@ -95,6 +95,11 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 			}
 		} else {
 			if ($tokens[$stackPtr]['code'] === T_MINUS) {
+				// Skip declaration of negative value in new array format; eg. $arr = [-1].
+				if ($tokens[($stackPtr - 1)]['code'] === T_OPEN_SHORT_ARRAY) {
+					return;
+				}
+
 				// Check minus spacing, but make sure we aren't just assigning
 				// a minus value or returning one.
 				$prev = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
