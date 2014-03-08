@@ -32,6 +32,7 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 		'destruct',
 		'call',
 		'callStatic',
+		'debugInfo',
 		'get',
 		'set',
 		'isset',
