@@ -18,7 +18,7 @@
  * Ensures all the use are in alphabetical order.
  *
  */
-class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * Processed files

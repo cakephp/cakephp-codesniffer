@@ -21,7 +21,7 @@
  * But permit short-open echo tags (<?=) [T_OPEN_TAG_WITH_ECHO] as they are part of PHP 5.4+
  *
  */
-class CakePHP_Sniffs_PHP_DisallowShortOpenTagSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_PHP_DisallowShortOpenTagSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * Returns an array of tokens this test wants to listen for.

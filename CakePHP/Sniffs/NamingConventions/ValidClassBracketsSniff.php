@@ -19,7 +19,7 @@
  * Ensures curly brackets are on the same line as the Class declaration
  *
  */
-class CakePHP_Sniffs_NamingConventions_ValidClassBracketsSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_NamingConventions_ValidClassBracketsSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * Returns an array of tokens this test wants to listen for.

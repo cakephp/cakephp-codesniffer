@@ -19,7 +19,7 @@
  * Ensures that elseif is used instead of else if
  *
  */
-class CakePHP_Sniffs_ControlStructures_ElseIfDeclarationSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_ControlStructures_ElseIfDeclarationSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * Returns an array of tokens this test wants to listen for.

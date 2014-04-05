@@ -27,7 +27,7 @@
  * @version   Release: 1.5.0RC3
  * @link	  http://pear.php.net/package/PHP_CodeSniffer
  */
-class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP_CodeSniffer_Sniff
+class Loadsys_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP_CodeSniffer_Sniff
 {
 
 /**

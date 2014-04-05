@@ -10,8 +10,8 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
- * @since         CakePHP CodeSniffer 0.1.10
+ * @link          https://github.com/loadsys/loadsys-codesniffer
+ * @since         Loadsys CodeSniffer 0.1.24
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 if (class_exists('PHP_CodeSniffer_Standards_AbstractScopeSniff', true) === false) {
@@ -23,7 +23,7 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractScopeSniff', true) === false
  * Ensures the throws in the code are declared in the PHPDoc
  *
  */
-class CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff {
+class Loadsys_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff {
 
 /**
  * Constructs a CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff.

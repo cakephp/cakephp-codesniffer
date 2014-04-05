@@ -19,7 +19,7 @@
  * Ensures that while and do-while use curly brackets
  *
  */
-class CakePHP_Sniffs_ControlStructures_WhileStructuresSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_ControlStructures_WhileStructuresSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * Returns an array of tokens this test wants to listen for.

@@ -19,7 +19,7 @@
  * Ensures the use contains only one class.
  *
  */
-class CakePHP_Sniffs_Formatting_OneClassPerUseSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_Formatting_OneClassPerUseSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * Returns an array of tokens this test wants to listen for.

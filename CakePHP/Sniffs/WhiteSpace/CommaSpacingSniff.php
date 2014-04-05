@@ -19,7 +19,7 @@
  * Ensures no whitespaces and one whitespace is placed around each comma
  *
  */
-class CakePHP_Sniffs_WhiteSpace_CommaSpacingSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_WhiteSpace_CommaSpacingSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * Returns an array of tokens this test wants to listen for.

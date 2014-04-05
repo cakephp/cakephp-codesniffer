@@ -19,7 +19,7 @@
  * Ensures trait names are correct depending on the folder of the file.
  *
  */
-class CakePHP_Sniffs_NamingConventions_ValidTraitNameSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_NamingConventions_ValidTraitNameSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * Returns an array of tokens this test wants to listen for.

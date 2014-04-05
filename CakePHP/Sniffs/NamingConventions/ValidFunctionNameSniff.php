@@ -20,7 +20,7 @@
  * or private, and that functions are named correctly.
  *
  */
-class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff {
+class Loadsys_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff {
 
 /**
  * A list of all PHP magic methods.

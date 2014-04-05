@@ -19,7 +19,7 @@
  * Checks the separation between methods in a class or interface.
  *
  */
-class CakePHP_Sniffs_WhiteSpace_FunctionCallSpacingSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_WhiteSpace_FunctionCallSpacingSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * Returns an array of tokens this test wants to listen for.

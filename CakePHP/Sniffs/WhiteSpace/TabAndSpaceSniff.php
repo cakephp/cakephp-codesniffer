@@ -20,7 +20,7 @@
  * Also check for "\t " - a tab followed by a space, which is a common similar mistake
  *
  */
-class CakePHP_Sniffs_WhiteSpace_TabAndSpaceSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_WhiteSpace_TabAndSpaceSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * A list of tokenizers this sniff supports.

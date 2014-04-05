@@ -18,7 +18,7 @@
  * Checks that the closing braces of scopes are aligned correctly.
  *
  */
-class CakePHP_Sniffs_WhiteSpace_ScopeClosingBraceSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_WhiteSpace_ScopeClosingBraceSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * Returns an array of tokens this test wants to listen for.

@@ -23,7 +23,7 @@ if (class_exists('Squiz_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff
  * Ensures the spacing of function declaration arguments is correct.
  *
  */
-class CakePHP_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff extends
+class Loadsys_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff extends
 	Squiz_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff {
 
 	/**

@@ -20,7 +20,7 @@
  * the strings being concatenated.
  *
  */
-class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * Returns an array of tokens this test wants to listen for.

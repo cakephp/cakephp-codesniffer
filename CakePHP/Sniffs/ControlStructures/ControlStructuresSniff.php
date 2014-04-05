@@ -20,7 +20,7 @@
  * while and dowhile are covered elsewhere
  *
  */
-class CakePHP_Sniffs_ControlStructures_ControlStructuresSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_ControlStructures_ControlStructuresSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * Returns an array of tokens this test wants to listen for.

@@ -20,7 +20,7 @@
  * for indentation rather than spaces.
  *
  */
-class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Sniff {
 
 /**
  * The number of spaces code should be indented.
