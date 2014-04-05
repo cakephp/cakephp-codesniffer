@@ -7,7 +7,7 @@ php:
   - 5.6
 
 before_script:
-  - mv ../cakephp-codesniffer ../cakephp_codesniffer && cd ../cakephp_codesniffer
+  - mv ../loadsys-codesniffer ../loadsys_codesniffer && cd ../loadsys_codesniffer
   - composer selfupdate
   - composer install
 

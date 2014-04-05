@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="CakePHP">
- <description>CakePHP coding standard</description>
+<ruleset name="Loadsys">
+ <description>Loadsys coding standard</description>
 
  <exclude-pattern>\.git</exclude-pattern>
  <exclude-pattern>*/Config/*.ini.php</exclude-pattern>
