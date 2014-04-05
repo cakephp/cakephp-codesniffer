@@ -1,5 +1,5 @@
 {
-    "name": "loadsys/loadsys-codesniffer",
+    "name": "loadsys/loadsys_codesniffer",
     "description": "Works with phpcs to check code against common coding standards used by Loadsys.",
     "keywords": ["codesniffer"],
     "homepage": "https://github.com/cakephp/cakephp-codesniffer",

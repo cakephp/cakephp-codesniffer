@@ -1,4 +1,4 @@
-Loadsys Code Sniffer [![Build Status](https://travis-ci.org/loadsys/loadsys-codesniffer.png?branch=master)](http://travis-ci.org/loadsys/loadsys-codesniffer)
+Loadsys Code Sniffer [![Build Status](https://travis-ci.org/loadsys/loadsys_codesniffer.png?branch=master)](http://travis-ci.org/loadsys/loadsys_codesniffer)
 ====================
 
 This code works with [phpcs](http://pear.php.net/manual/en/package.php.php-codesniffer.php)
@@ -17,6 +17,8 @@ Its generally recommended to install these code sniffs via composer:
 }
 ```
 
+
+
 Usage
 -----
 
@@ -28,7 +30,7 @@ After installation you can check code compliance to the standard using
 Contributing
 ------------
 
-Make sure to clone the repository to something like **loadsys_codesniffer** (instead of the default **loadsys-codesniffer**) because otherwise `phpunit` will fail to run the tests.
+`phpunit` will fail to run the test when the root directory contains a dash. (Hence **loadsys_codesniffer** instead of **loadsys-codesniffer**).
 
 Releasing Loadsys Code Sniffer
 ==============================

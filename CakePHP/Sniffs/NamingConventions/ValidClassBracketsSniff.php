@@ -10,7 +10,7 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @link          https://github.com/loadsys/loadsys_codesniffer
  * @since         CakePHP CodeSniffer 0.1.12
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
