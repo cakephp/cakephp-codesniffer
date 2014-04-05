@@ -2,7 +2,8 @@ Loadsys Code Sniffer [![Build Status](https://travis-ci.org/loadsys/loadsys_code
 ====================
 
 This code works with [phpcs](http://pear.php.net/manual/en/package.php.php-codesniffer.php)
-and checks code against the coding standards used by Loadsys.
+and checks code against the coding standards used by Loadsys. This package is based upon the
+[CakePHP coding standards](https://github.com/cakephp/cakephp-codesniffer) with some customizations.
 
 Installation
 ------------
