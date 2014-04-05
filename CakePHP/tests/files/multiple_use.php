@@ -1,6 +1,6 @@
 <?php
-use CakePHP\Test,
-	CakePHP\Fail;
+use Loadsys\Test,
+	Loadsys\Fail;
 
 class Foo {
 }

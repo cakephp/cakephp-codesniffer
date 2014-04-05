@@ -1,5 +1,5 @@
 <?php
-use CakePHP\Test as Test;
+use Loadsys\Test as Test;
 use Testing\Ok;
 
 class Foo {
