@@ -126,13 +126,13 @@ class Loadsys_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 				$data = array($varName);
 				$phpcsFile->addWarning($warning, $stackPtr, 'PrivateInCore', $data);
 			}
-		} else {
-			if (substr($varName, 0, 1) !== '_') {
-				$error = 'Protected member variable "%s" must contain a leading underscore';
-				$data = array($varName);
-				$phpcsFile->addError($error, $stackPtr, 'ProtectedNoUnderscore', $data);
-				return;
-			}
+		} else {  // protected var
+// 			if (substr($varName, 0, 1) !== '_') {
+// 				$error = 'Protected member variable "%s" must contain a leading underscore';
+// 				$data = array($varName);
+// 				$phpcsFile->addError($error, $stackPtr, 'ProtectedNoUnderscore', $data);
+// 				return;
+// 			}
 		}
 
 		$conditions = array_keys($tokens[$stackPtr]['conditions']);
