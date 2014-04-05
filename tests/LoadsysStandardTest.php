@@ -19,7 +19,7 @@ class LoadsysStandardTest extends PHPUnit_Framework_TestCase {
 	public static function testProvider() {
 		$tests = array();
 
-		$standard = dirname(dirname(__FILE__));
+		$standard = 'Loadsys';
 
 		$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(dirname(__FILE__) . '/files'));
 		foreach ($iterator as $dir) {

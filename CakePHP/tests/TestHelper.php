@@ -17,26 +17,17 @@ class TestHelper {
 	protected $_phpcs;
 
 	public function __construct() {
-		$this->_rootDir = dirname(dirname(__FILE__));
-		$this->_dirName = basename($this->_rootDir);
+		$this->_rootDir = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'Loadsys';
+
+		$includePath = explode(PATH_SEPARATOR, get_include_path());
+		array_unshift($includePath,
+			$this->_rootDir,
+			$this->_rootDir . '/Sniffs'
+		);
+		set_include_path(implode(PATH_SEPARATOR, array_unique($includePath)));
+
 		$this->_phpcs = new PHP_CodeSniffer_CLI();
 		spl_autoload_register(array($this, 'autoload'), true, true);
-	}
-
-/**
- * Because PHPCS will assume our classes will contain the name
- * of the checked out code directory we have to make a class that matches that.
- *
- * @param string $class The classname to try and load.
- */
-	public function autoload($class) {
-		$originalClass = $class;
-		if (strpos($class, $this->_dirName) !== false) {
-			$class = str_replace($this->_dirName, 'Loadsys', $class);
-		}
-		if (class_exists($class, false)) {
-			eval('class ' . $originalClass . ' extends ' . $class . '{}');
-		}
 	}
 
 /**
