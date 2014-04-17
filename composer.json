@@ -17,7 +17,7 @@
         "irc": "irc://irc.freenode.org/cakephp",
         "source": "https://github.com/cakephp/cakephp"
     },
-	"require": {
-		"squizlabs/php_codesniffer": "dev-master",
-	}
+    "require": {
+        "squizlabs/php_codesniffer": "dev-master",
+    }
 }
