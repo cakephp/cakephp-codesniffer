@@ -13,13 +13,22 @@ installer:
 	pear channel-discover pear.cakephp.org
 	pear install cakephp/CakePHP_CodeSniffer
 
+You can also install the code sniffs with `composer`:
+
+	php composer.phar require cakephp/cakephp-codesniffer
+
 Usage
 -----
 
-After installation you can check code compliance to the standard using
-`phpcs`:
+Depending on how you installed the code sniffer changes how you run it. If you have
+installed phpcs, and this package with PEAR, you can do the following:
 
 	phpcs --standard=CakePHP /path/to/code
+
+If you have installed `phpcs` and this package with `composer`, you can run it
+with the following:
+
+	vendor/bin/phpcs --standard=./vendor/cakephp/cakephp-codesniffer .
 
 Contributing
 ------------
