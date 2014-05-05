@@ -15,6 +15,7 @@ class Throws {
  * @throws CakePHP\Error\Boom
  * @throws Other\Crap
  * @throws Other\Error\Issue
+ * @return void
  */
 	public function test() {
 		switch ($a) {
