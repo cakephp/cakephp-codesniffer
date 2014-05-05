@@ -18,6 +18,6 @@
         "source": "https://github.com/cakephp/cakephp-codesniffer"
     },
     "require": {
-        "squizlabs/php_codesniffer": "*"
+        "squizlabs/php_codesniffer": ">=1.4"
     }
 }
