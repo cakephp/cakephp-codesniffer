@@ -352,33 +352,6 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
 
                 $paramName = ($param->getVarName() !== '') ? $param->getVarName() : '[ UNKNOWN ]';
 
-                if ($previousParam !== null) {
-                    $previousName = ($previousParam->getVarName() !== '') ? $previousParam->getVarName() : 'UNKNOWN';
-
-                    // Check to see if the parameters align properly.
-                    if ($param->alignsVariableWith($previousParam) === false) {
-                        $error = 'The variable names for parameters %s (%s) and %s (%s) do not align';
-                        $data  = array(
-                                  $previousName,
-                                  ($pos - 1),
-                                  $paramName,
-                                  $pos,
-                                 );
-                        $this->currentFile->addError($error, $errorPos, 'ParameterNamesNotAligned', $data);
-                    }
-
-                    if ($param->alignsCommentWith($previousParam) === false) {
-                        $error = 'The comments for parameters %s (%s) and %s (%s) do not align';
-                        $data  = array(
-                                  $previousName,
-                                  ($pos - 1),
-                                  $paramName,
-                                  $pos,
-                                 );
-                        $this->currentFile->addError($error, $errorPos, 'ParameterCommentsNotAligned', $data);
-                    }
-                }//end if
-
                 // Make sure the names of the parameter comment matches the
                 // actual parameter.
                 if (isset($realParams[($pos - 1)]) === true) {
