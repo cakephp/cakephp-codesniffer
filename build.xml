@@ -58,7 +58,7 @@
 		Define the package.xml.  Using xml to make xml is fun!
 	-->
 	<target name="define-pear-package" depends="copy-files">
-		<d51pearpkg2 baseinstalldir="PHP/CodeSniffer/Standards/CakePHP" dir="${build.dir}/${pear.package}">
+		<d51pearpkg2 baseinstalldir="PHP/CodeSniffer/Standards" dir="${build.dir}/${pear.package}">
 			<name>CakePHP_CodeSniffer</name>
 			<summary>PHP_CodeSniffer rules for CakePHP</summary>
 			<channel>pear.cakephp.org</channel>

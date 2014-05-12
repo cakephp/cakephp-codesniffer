@@ -10,7 +10,7 @@ before_script:
   - phpenv rehash
 
 script:
-  - phpunit
+  - cd CakePHP && phpunit
 
 notifications:
   email: false

@@ -1,5 +1,7 @@
 <?php
-require_once 'PHP/CodeSniffer/CLI.php';
+if (!class_exists('PHP_CodeSniffer_CLI')) {
+	require_once 'PHP/CodeSniffer/CLI.php';
+}
 
 class TestHelper {
 
@@ -12,32 +14,7 @@ class TestHelper {
 	public function __construct() {
 		$this->_rootDir = dirname(dirname(__FILE__));
 		$this->_dirName = basename($this->_rootDir);
-
-		set_include_path(
-			$this->_rootDir .
-			PATH_SEPARATOR .
-			$this->_rootDir . '/Sniffs' .
-			PATH_SEPARATOR .
-			get_include_path()
-		);
 		$this->_phpcs = new PHP_CodeSniffer_CLI();
-		spl_autoload_register(array($this, 'autoload'), true, true);
-	}
-
-/**
- * Because PHPCS will assume our classes will contain the name
- * of the checked out code directory we have to make a class that matches that.
- *
- * @param string $class The classname to try and load.
- */
-	public function autoload($class) {
-		$originalClass = $class;
-		if (strpos($class, $this->_dirName) !== false) {
-			$class = str_replace($this->_dirName, 'CakePHP', $class);
-		}
-		if (class_exists($class, false)) {
-			eval('class ' . $originalClass . ' extends ' . $class . '{}');
-		}
 	}
 
 /**
