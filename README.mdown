@@ -7,7 +7,7 @@ and checks code against the coding standards used in CakePHP.
 Installation
 ------------
 
-Its generally recommended to install these code sniffs with the PEAR
+It's generally recommended to install these code sniffs with the PEAR
 installer:
 
 	pear channel-discover pear.cakephp.org
@@ -16,6 +16,10 @@ installer:
 You can also install the code sniffs with `composer`:
 
 	php composer.phar require cakephp/cakephp-codesniffer
+	vendor/bin/phpcs --config-set installed_paths vendor/cakephp/cakephp-codesniffer
+
+The second command lets `phpcs` know where to find your new sniffs. Ensure that
+you do not overwrite any existing `installed_paths` value.
 
 Usage
 -----
@@ -25,12 +29,10 @@ installed phpcs, and this package with PEAR, you can do the following:
 
 	phpcs --standard=CakePHP /path/to/code
 
-*Warning* when these sniffs are installed with composer, you cannot use them as installed because
-of how phpcs handles classnames. It is advised that you symlink these sniffs into phpcs:
+*Warning* when these sniffs are installed with composer, ensure that you have
+configured the CodeSniffer `installed_paths` setting.
 
-	ln -s `pwd`/vendor/cakephp/cakephp-codesniffer vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/CakePHP
-
-Once the symlink has been created (or you copied the files over) you can run phpcs using:
+Once `installed_paths` is configured, you can run phpcs using:
 
 	vendor/bin/phpcs --standard=CakePHP
 
