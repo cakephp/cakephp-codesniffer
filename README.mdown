@@ -26,11 +26,11 @@ installed phpcs, and this package with PEAR, you can do the following:
 	phpcs --standard=CakePHP /path/to/code
 
 *Warning* when these sniffs are installed with composer, you cannot use them as installed because
-of how phpcs handles classnames. It is advised that you symlink these sniffs into phpcs:
+of how phpcs handles classnames. It is advised that you copy these sniffs into phpcs:
 
-	ln -s `pwd`/vendor/cakephp/cakephp-codesniffer vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/CakePHP
+	cp -R vendor/cakephp/cakephp-codesniffer vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/CakePHP
 
-Once the symlink has been created (or you copied the files over) you can run phpcs using:
+Once the standard has been put where phpcs can find it, you can run phpcs using:
 
 	vendor/bin/phpcs --standard=CakePHP
 
