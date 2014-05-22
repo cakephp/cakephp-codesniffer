@@ -16,7 +16,7 @@
 	<taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
 
 	<!-- Update this version when making new packages -->
-	<property name="version" value="0.1.23" />
+	<property name="version" value="0.1.24" />
 
 	<!-- Shouldn't have to change these -->
 	<property name="build.dir" value="build" />
@@ -79,6 +79,12 @@
 				<package name="PHP_CodeSniffer" channel="pear.php.net" minimum_version="1.3.3" />
 			</dependencies>
 			<exceptions key="ruleset.xml">php</exceptions>
+
+			<changelog version="0.1.24" date="2014-05-22" license="MIT">
+				* New FunctionCommentSniff added.
+				* Added composer.json
+				* Restructured repo to work better with composer.
+			</changelog>
 
 			<changelog version="0.1.23" date="2014-03-08" license="MIT">
 				* The `__debugInfo` magic method in PHP5.6 is not flagged as
