@@ -333,6 +333,12 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
                 $paramComment = trim($param->getComment());
                 $errorPos     = ($param->getLine() + $commentStart);
 
+                // Make sure that there is only one space before the var type.
+                if ($param->getWhitespaceBeforeType() !== ' ') {
+                    $error = 'Expected 1 space before variable type';
+                    $this->currentFile->addError($error, $errorPos, 'SpacingBeforeParamType');
+                }
+
                 $spaceCount = substr_count($param->getWhitespaceBeforeVarName(), ' ');
                 if ($spaceCount < $spaceBeforeVar) {
                     $spaceBeforeVar = $spaceCount;
