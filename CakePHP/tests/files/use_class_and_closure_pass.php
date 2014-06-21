@@ -7,7 +7,7 @@ class TraitUser {
 /**
  * [doThing description]
  *
- * @param  callable $callback [description]
+ * @param callable $callback [description]
  * @return void
  */
 	public function doThing(callable $callback) {
