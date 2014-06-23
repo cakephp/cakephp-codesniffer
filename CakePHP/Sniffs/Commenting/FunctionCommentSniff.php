@@ -160,8 +160,9 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
 
         // If the first T_OPEN_TAG is right before the comment, it is probably
         // a file comment.
-        $commentStart = ($phpcsFile->findPrevious(T_DOC_COMMENT, ($commentEnd - 1), null, true) + 1);
-        $prevToken    = $phpcsFile->findPrevious(T_WHITESPACE, ($commentStart - 1), null, true);
+        $commentStart  = ($phpcsFile->findPrevious(T_DOC_COMMENT, ($commentEnd - 1), null, true) + 1);
+        $commentString = $phpcsFile->getTokensAsString($commentStart, $commentEnd - $commentStart + 1);
+        $prevToken     = $phpcsFile->findPrevious(T_WHITESPACE, ($commentStart - 1), null, true);
         if ($tokens[$prevToken]['code'] === T_OPEN_TAG) {
             // Is this the first open tag?
             if ($stackPtr === 0 || $phpcsFile->findPrevious(T_OPEN_TAG, ($prevToken - 1)) === false) {
@@ -186,6 +187,22 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
         if (is_null($comment) === true) {
             $error = 'Function doc comment is empty';
             $phpcsFile->addError($error, $commentStart, 'Empty');
+            return;
+        }
+
+        // The first line of the comment should just be the /** code.
+        $eolPos    = strpos($commentString, $phpcsFile->eolChar);
+        $firstLine = substr($commentString, 0, $eolPos);
+        if ($firstLine !== '/**') {
+            $phpcsFile->addError($commentStart, 'ContentAfterOpen');
+        }
+
+        // If the comment has an inherit doc note just move on
+        if (preg_match('/\{\@inheritDoc\}/', $commentString)) {
+            return;
+        } elseif (preg_match('/\{?\@?inherit[dD]oc\}?/', $commentString)) {
+            $error = 'The inheritdoc statement is incorrect';
+            $phpcsFile->addError($error, $commentStart, 'IncorrectInheritDoc');
             return;
         }
 
@@ -332,6 +349,12 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
 
                 $paramComment = trim($param->getComment());
                 $errorPos     = ($param->getLine() + $commentStart);
+
+                // Make sure that there is only one space before the var type.
+                if ($param->getWhitespaceBeforeType() !== ' ') {
+                    $error = 'Expected 1 space before variable type';
+                    $this->currentFile->addError($error, $errorPos, 'SpacingBeforeParamType');
+                }
 
                 $spaceCount = substr_count($param->getWhitespaceBeforeVarName(), ' ');
                 if ($spaceCount < $spaceBeforeVar) {
