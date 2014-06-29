@@ -64,5 +64,12 @@
  <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
 
+ <!-- Relax commenting rules for test cases -->
+ <rule ref="CakePHP.Commenting.FunctionComment">
+  <exclude-pattern>*/lib/Cake/Test/Case/*</exclude-pattern>
+  <exclude-pattern>*/lib/Cake/Test/test_app/*</exclude-pattern>
+  <exclude-pattern>*/tests/TestCase/*</exclude-pattern>
+ </rule>
+
  <!-- All rules in ./Sniffs are included automatically -->
 </ruleset>
