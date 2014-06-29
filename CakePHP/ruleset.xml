@@ -66,8 +66,11 @@
 
  <!-- Relax commenting rules for test cases -->
  <rule ref="CakePHP.Commenting.FunctionComment">
-  <exclude-pattern>*/lib/Cake/Test/Case/*</exclude-pattern>
-  <exclude-pattern>*/lib/Cake/Test/test_app/*</exclude-pattern>
+  <!-- 2.x dir structure -->
+  <exclude-pattern>*/Test/Case/*</exclude-pattern>
+  <exclude-pattern>*/Test/test_app/*</exclude-pattern>
+
+  <!-- 3.x dir structure -->
   <exclude-pattern>*/tests/TestCase/*</exclude-pattern>
  </rule>
 
