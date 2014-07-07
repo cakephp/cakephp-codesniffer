@@ -13,7 +13,7 @@
  */
 
 /**
- * Asserts that function commends use the short form for types:
+ * Asserts that function comments use the short form for types:
  * - bool instead of boolean
  * - int instead of integer
  */
