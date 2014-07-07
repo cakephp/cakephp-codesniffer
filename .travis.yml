@@ -6,7 +6,8 @@ php:
 
 before_script:
   - mv ../cakephp-codesniffer ../cakephp_codesniffer && cd ../cakephp_codesniffer
-  - pear install PHP_CodeSniffer
+  - composer selfupdate
+  - composer update
   - phpenv rehash
 
 script:
