@@ -82,9 +82,9 @@ class CakePHP_Sniffs_Commenting_FunctionCommentTypeSniff implements PHP_CodeSnif
 		$content = $tokens[$stackPtr]['content'];
 
 		$matches = array();
-    if (preg_match('/\@(\w+)\s+([\w\\|\\\\]*?)' . $from . '\b/i', $content, $matches) === 0) {
-    	return;
-   	}
+		if (preg_match('/\@(\w+)\s+([\w\\|\\\\]*?)' . $from . '\b/i', $content, $matches) === 0) {
+			return;
+		}
 
 		$error = 'Please use "' . $to . '" instead of "' . $from . '" for types in doc blocks.';
 		$phpcsFile->addError($error, $stackPtr, 'WrongType');
