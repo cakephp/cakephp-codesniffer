@@ -8,7 +8,7 @@ php:
 before_script:
   - mv ../cakephp-codesniffer ../cakephp_codesniffer && cd ../cakephp_codesniffer
   - composer selfupdate
-  - composer update
+  - composer install
 
 script:
   - cd CakePHP && phpunit
