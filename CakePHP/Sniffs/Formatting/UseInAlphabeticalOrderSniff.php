@@ -78,7 +78,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
 
 			foreach ($defined as $i => $name) {
 				if ($name !== $sorted[$i]) {
-					$error = 'Use classes must be in alphabetical order.';
+					$error = 'Use classes must be in alphabetical order. Was expecting ' . $sorted[$i];
 					$phpcsFile->addError($error, $used[$name], 'UseInAlphabeticalOrder', array());
 				}
 			}
