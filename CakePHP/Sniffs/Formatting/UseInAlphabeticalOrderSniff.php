@@ -124,7 +124,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
 		if (!empty($token['conditions'])) {
 			$scope = key($token['conditions']);
 		}
-		$this->_uses[$scope][$content] = 1;
+		$this->_uses[$scope][$content] = $stackPtr;
 	}
 
 /**
