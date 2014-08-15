@@ -115,7 +115,7 @@ class Loadsys_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 			}
 		} elseif ($private === true) {
 			if (substr($varName, 0, 2) !== '__') {
-				$error = 'Private member variable "%s" must contain a leading underscore';
+				$error = 'Private member variable "%s" must contain two leading underscores';
 				$data = array($varName);
 				$phpcsFile->addError($error, $stackPtr, 'PrivateNoUnderscore', $data);
 				return;
@@ -127,12 +127,12 @@ class Loadsys_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 				$phpcsFile->addWarning($warning, $stackPtr, 'PrivateInCore', $data);
 			}
 		} else {  // protected var
-// 			if (substr($varName, 0, 1) !== '_') {
-// 				$error = 'Protected member variable "%s" must contain a leading underscore';
-// 				$data = array($varName);
-// 				$phpcsFile->addError($error, $stackPtr, 'ProtectedNoUnderscore', $data);
-// 				return;
-// 			}
+			if (substr($varName, 0, 1) !== '_') {
+				$error = 'Protected member variable "%s" must contain a leading underscore';
+				$data = array($varName);
+				$phpcsFile->addError($error, $stackPtr, 'ProtectedNoUnderscore', $data);
+				return;
+			}
 		}
 
 		$conditions = array_keys($tokens[$stackPtr]['conditions']);

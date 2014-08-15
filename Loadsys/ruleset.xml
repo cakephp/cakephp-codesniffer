@@ -65,4 +65,16 @@
  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
 
  <!-- All rules in ./Sniffs are included automatically -->
+
+  <!--
+    However, we can still include sniffs and essentially ignore them
+    as "errors" by setting their severity here.
+  -->
+  <rule ref="Loadsys.NamingConventions.ValidFunctionName.PublicWithUnderscore">
+    <severity>0</severity>
+  </rule>
+  <rule ref="Loadsys.NamingConventions.ValidFunctionName.ProtectedNoUnderscore">
+    <severity>0</severity>
+  </rule>
+
 </ruleset>
