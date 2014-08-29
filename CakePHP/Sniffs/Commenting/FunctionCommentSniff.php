@@ -194,7 +194,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
         $eolPos    = strpos($commentString, $phpcsFile->eolChar);
         $firstLine = substr($commentString, 0, $eolPos);
         if ($firstLine !== '/**') {
-            $error = 'The first line of the comment should just be the /** code';
+            $error = 'The first line of the comment should only contain /**. Ensure there is no trailing whitespace.';
             $phpcsFile->addError($error, $commentStart, 'ContentAfterOpen');
         }
 
