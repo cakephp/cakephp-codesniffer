@@ -194,7 +194,8 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
         $eolPos    = strpos($commentString, $phpcsFile->eolChar);
         $firstLine = substr($commentString, 0, $eolPos);
         if ($firstLine !== '/**') {
-            $phpcsFile->addError($commentStart, 'ContentAfterOpen');
+            $error = 'The first line of the comment should just be the /** code';
+            $phpcsFile->addError($error, $commentStart, 'ContentAfterOpen');
         }
 
         // If the comment has an inherit doc note just move on
