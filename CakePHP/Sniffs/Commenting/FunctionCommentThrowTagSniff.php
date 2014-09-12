@@ -104,7 +104,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSni
 		$throws = $this->commentParser->getThrows();
 		if (empty($throws) === true) {
 			$error = 'Missing @throws tag in function comment';
-			$phpcsFile->addError($error, $commentEnd, 'Missing');
+			$phpcsFile->addWarning($error, $commentEnd, 'Missing');
 		} elseif (empty($throwTokens) === true) {
 			// If token count is zero, it means that only variables are being
 			// thrown, so we need at least one @throws tag (checked above).
@@ -131,7 +131,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSni
 					$tokenCount,
 					$tagCount,
 				);
-				$phpcsFile->addError($error, $commentEnd, 'WrongNumber', $data);
+				$phpcsFile->addWarning($error, $commentEnd, 'WrongNumber', $data);
 				return;
 			} else {
 				// Exception type in @throws tag must be thrown in the function.
@@ -143,7 +143,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSni
 							$throwTokens[$i],
 							$throwTag,
 						);
-						$phpcsFile->addError($error, $errorPos, 'WrongType', $data);
+						$phpcsFile->addWarning($error, $errorPos, 'WrongType', $data);
 					}
 				}
 			}
