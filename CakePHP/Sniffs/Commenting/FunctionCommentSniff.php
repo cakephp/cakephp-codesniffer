@@ -128,10 +128,10 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
 
         if ($code === T_COMMENT) {
             $error = 'You must use "/**" style comments for a function comment';
-            $phpcsFile->addError($error, $stackPtr, 'WrongStyle');
+            $phpcsFile->addWarning($error, $stackPtr, 'WrongStyle');
             return;
         } else if ($code !== T_DOC_COMMENT) {
-            $phpcsFile->addError('Missing function doc comment', $stackPtr, 'Missing');
+            $phpcsFile->addWarning('Missing function doc comment', $stackPtr, 'Missing');
             return;
         }
 
@@ -144,7 +144,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
         $ignore[]  = T_FINAL;
         $prevToken = $phpcsFile->findPrevious($ignore, ($stackPtr - 1), null, true);
         if ($prevToken !== $commentEnd) {
-            $phpcsFile->addError('Missing function doc comment', $stackPtr, 'Missing');
+            $phpcsFile->addWarning('Missing function doc comment', $stackPtr, 'Missing');
             return;
         }
 
@@ -166,7 +166,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
         if ($tokens[$prevToken]['code'] === T_OPEN_TAG) {
             // Is this the first open tag?
             if ($stackPtr === 0 || $phpcsFile->findPrevious(T_OPEN_TAG, ($prevToken - 1)) === false) {
-                $phpcsFile->addError('Missing function doc comment', $stackPtr, 'Missing');
+                $phpcsFile->addWarning('Missing function doc comment', $stackPtr, 'Missing');
                 return;
             }
         }
@@ -186,7 +186,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
         $comment = $this->commentParser->getComment();
         if (is_null($comment) === true) {
             $error = 'Function doc comment is empty';
-            $phpcsFile->addError($error, $commentStart, 'Empty');
+            $phpcsFile->addWarning($error, $commentStart, 'Empty');
             return;
         }
 
@@ -195,7 +195,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
         $firstLine = substr($commentString, 0, $eolPos);
         if ($firstLine !== '/**') {
             $error = 'The first line of the comment should only contain /**. Ensure there is no trailing whitespace.';
-            $phpcsFile->addError($error, $commentStart, 'ContentAfterOpen');
+            $phpcsFile->addWarning($error, $commentStart, 'ContentAfterOpen');
         }
 
         // If the comment has an inherit doc note just move on
@@ -203,7 +203,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
             return;
         } elseif (preg_match('/\{?\@?inherit[dD]oc\}?/', $commentString)) {
             $error = 'The inheritdoc statement is incorrect';
-            $phpcsFile->addError($error, $commentStart, 'IncorrectInheritDoc');
+            $phpcsFile->addWarning($error, $commentStart, 'IncorrectInheritDoc');
             return;
         }
 
@@ -217,7 +217,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
         $newlineSpan  = strspn($short, $phpcsFile->eolChar);
         if ($short !== '' && $newlineSpan > 0) {
             $error = 'Extra newline(s) found before function comment short description';
-            $phpcsFile->addError($error, ($commentStart + 1), 'SpacingBeforeShort');
+            $phpcsFile->addWarning($error, ($commentStart + 1), 'SpacingBeforeShort');
         }
 
         $newlineCount = (substr_count($short, $phpcsFile->eolChar) + 1);
@@ -229,7 +229,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
             $newlineBetween = substr_count($between, $phpcsFile->eolChar);
             if ($newlineBetween !== 2) {
                 $error = 'There must be exactly one blank line between descriptions in function comment';
-                $phpcsFile->addError($error, ($commentStart + $newlineCount + 1), 'SpacingAfterShort');
+                $phpcsFile->addWarning($error, ($commentStart + $newlineCount + 1), 'SpacingAfterShort');
             }
 
             $newlineCount += $newlineBetween;
@@ -245,7 +245,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
                     $newlineCount += (substr_count($long, $phpcsFile->eolChar) - $newlineSpan + 1);
                 }
 
-                $phpcsFile->addError($error, ($commentStart + $newlineCount), 'SpacingBeforeTags');
+                $phpcsFile->addWarning($error, ($commentStart + $newlineCount), 'SpacingBeforeTags');
                 $short = rtrim($short, $phpcsFile->eolChar.' ');
             }
         }
@@ -274,7 +274,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
 
             if ($exception === '') {
                 $error = '@throws tag must contain the exception class name';
-                $this->currentFile->addError($error, $errorPos, 'EmptyThrows');
+                $this->currentFile->addWarning($error, $errorPos, 'EmptyThrows');
             }
         }
 
@@ -305,11 +305,11 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
             // Report missing return tag.
             if ($this->commentParser->getReturn() === null) {
                 $error = 'Missing @return tag in function comment';
-                $this->currentFile->addError($error, $commentEnd, 'MissingReturn');
+                $this->currentFile->addWarning($error, $commentEnd, 'MissingReturn');
             } else if (trim($this->commentParser->getReturn()->getRawContent()) === '') {
                 $error    = '@return tag is empty in function comment';
                 $errorPos = ($commentStart + $this->commentParser->getReturn()->getLine());
-                $this->currentFile->addError($error, $errorPos, 'EmptyReturn');
+                $this->currentFile->addWarning($error, $errorPos, 'EmptyReturn');
             }
         }
 
@@ -337,7 +337,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
             if ($params[0]->getOrder() !== 2) {
                 $error    = 'Parameters must appear immediately after the comment';
                 $errorPos = ($params[0]->getLine() + $commentStart);
-                $this->currentFile->addError($error, $errorPos, 'SpacingBeforeParams');
+                $this->currentFile->addWarning($error, $errorPos, 'SpacingBeforeParams');
             }
 
             $previousParam      = null;
@@ -354,7 +354,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
                 // Make sure that there is only one space before the var type.
                 if ($param->getWhitespaceBeforeType() !== ' ') {
                     $error = 'Expected 1 space before variable type';
-                    $this->currentFile->addError($error, $errorPos, 'SpacingBeforeParamType');
+                    $this->currentFile->addWarning($error, $errorPos, 'SpacingBeforeParamType');
                 }
 
                 $spaceCount = substr_count($param->getWhitespaceBeforeVarName(), ' ');
@@ -403,22 +403,22 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
 
                         $error .= 'actual variable name %s at position %s';
 
-                        $this->currentFile->addError($error, $errorPos, $code, $data);
+                        $this->currentFile->addWarning($error, $errorPos, $code, $data);
                     }
                 } else {
                     // We must have an extra parameter comment.
                     $error = 'Superfluous doc comment at position '.$pos;
-                    $this->currentFile->addError($error, $errorPos, 'ExtraParamComment');
+                    $this->currentFile->addWarning($error, $errorPos, 'ExtraParamComment');
                 }
 
                 if ($param->getVarName() === '') {
                     $error = 'Missing parameter name at position '.$pos;
-                     $this->currentFile->addError($error, $errorPos, 'MissingParamName');
+                     $this->currentFile->addWarning($error, $errorPos, 'MissingParamName');
                 }
 
                 if ($param->getType() === '') {
                     $error = 'Missing type at position '.$pos;
-                    $this->currentFile->addError($error, $errorPos, 'MissingParamType');
+                    $this->currentFile->addWarning($error, $errorPos, 'MissingParamType');
                 }
 
                 if ($paramComment === '') {
@@ -427,7 +427,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
                               $paramName,
                               $pos,
                              );
-                    $this->currentFile->addError($error, $errorPos, 'MissingParamComment', $data);
+                    $this->currentFile->addWarning($error, $errorPos, 'MissingParamComment', $data);
                 }
 
                 $previousParam = $param;
@@ -436,12 +436,12 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
 
             if ($spaceBeforeVar !== 1 && $spaceBeforeVar !== 10000 && $spaceBeforeComment !== 10000) {
                 $error = 'Expected 1 space after the longest type';
-                $this->currentFile->addError($error, $longestType, 'SpacingAfterLongType');
+                $this->currentFile->addWarning($error, $longestType, 'SpacingAfterLongType');
             }
 
             if ($spaceBeforeComment !== 1 && $spaceBeforeComment !== 10000) {
                 $error = 'Expected 1 space after the longest variable name';
-                $this->currentFile->addError($error, $longestVar, 'SpacingAfterLongName');
+                $this->currentFile->addWarning($error, $longestVar, 'SpacingAfterLongName');
             }
 
         }//end if
@@ -462,7 +462,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
 
             $error = 'Doc comment for "%s" missing';
             $data  = array($neededParam);
-            $this->currentFile->addError($error, $errorPos, 'MissingParamTag', $data);
+            $this->currentFile->addWarning($error, $errorPos, 'MissingParamTag', $data);
         }
 
     }//end processParams()

@@ -87,7 +87,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentTypeSniff implements PHP_CodeSnif
 		}
 
 		$error = 'Please use "' . $to . '" instead of "' . $from . '" for types in doc blocks.';
-		$phpcsFile->addError($error, $stackPtr, 'WrongType');
+		$phpcsFile->addWarning($error, $stackPtr, 'WrongType');
 	}
 
 }
