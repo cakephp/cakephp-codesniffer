@@ -16,7 +16,7 @@
 	<taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
 
 	<!-- Update this version when making new packages -->
-	<property name="version" value="0.1.27" />
+	<property name="version" value="0.1.28" />
 
 	<!-- Shouldn't have to change these -->
 	<property name="build.dir" value="build" />
@@ -79,6 +79,14 @@
 				<package name="PHP_CodeSniffer" channel="pear.php.net" minimum_version="1.3.3" />
 			</dependencies>
 			<exceptions key="CakePHP/ruleset.xml">php</exceptions>
+
+			<changelog version="0.1.28" date="2014-09-17" license="MIT">
+				* New Type casting sniff added.
+				* New function comment sniff added.
+				* Improved error messages for use statements.
+				* API doc block issues raise warnings.
+				* API doc block indentation issues are now a warning instead of an error.
+			</changelog>
 
 			<changelog version="0.1.27" date="2014-06-29" license="MIT">
 				* Documentation sniffs are no longer applied to test cases.
