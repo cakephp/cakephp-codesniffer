@@ -11,7 +11,7 @@
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
- * @since         CakePHP CodeSniffer 0.1.18
+ * @since         CakePHP CodeSniffer 0.1.28
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
