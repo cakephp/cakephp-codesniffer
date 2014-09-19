@@ -3,6 +3,6 @@
 $foo = 'bar';
 $bar = 'foo';
 
-$zum = function() use ($foo, $bar) {
+$zum = function () use ($foo, $bar) {
 	return $foo;
 };

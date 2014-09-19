@@ -11,7 +11,7 @@ class TraitUser {
  * @return void
  */
 	public function doThing(callable $callback) {
-		$visitor = function($expression) use (&$visitor, $callback) {
+		$visitor = function ($expression) use (&$visitor, $callback) {
 			echo 'It works';
 		};
 		$visitor($this);
