@@ -49,8 +49,8 @@ class CakePHP_Sniffs_ControlStructures_ElseIfDeclarationSniff implements PHP_Cod
 		}
 
 		$error = 'Usage of ELSE IF not allowed; use ELSEIF instead';
-		$phpcsFile->addFixableError($error, $stackPtr, 'NotAllowed');
-		if ($phpcsFile->fixer->enabled === true) {
+		$fix = $phpcsFile->addFixableError($error, $stackPtr, 'NotAllowed');
+		if ($fix) {
 			$phpcsFile->fixer->addContent($stackPtr, 'if');
 			$phpcsFile->fixer->replaceToken($nextToken, '');
 		}

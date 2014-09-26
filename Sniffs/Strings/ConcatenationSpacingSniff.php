@@ -43,31 +43,31 @@ class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffe
 		$tokens = $phpcsFile->getTokens();
 		if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
 			$message = 'Expected 1 space before ., but 0 found';
-			$phpcsFile->addFixableError($message, $stackPtr, 'MissingBefore');
-			$this->_addSpace($phpcsFile, $stackPtr - 1);
+			$fix = $phpcsFile->addFixableError($message, $stackPtr, 'MissingBefore');
+			$this->_addSpace($fix, $phpcsFile, $stackPtr - 1);
 		} else {
 			$content = str_replace("\r\n", "\n", $tokens[($stackPtr - 1)]['content']);
 			$spaces = strlen($content);
 			if ($spaces > 1) {
 				$message = 'Expected 1 space before ., but %d found';
 				$data = array($spaces);
-				$phpcsFile->addFixableError($message, $stackPtr, 'TooManyBefore', $data);
-				$this->_removeSpace($phpcsFile, $stackPtr - 1);
+				$fix = $phpcsFile->addFixableError($message, $stackPtr, 'TooManyBefore', $data);
+				$this->_removeSpace($fix, $phpcsFile, $stackPtr - 1);
 			}
 		}
 
 		if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
 			$message = 'Expected 1 space after ., but 0 found';
-			$phpcsFile->addFixableError($message, $stackPtr, 'MissingAfter');
-			$this->_addSpace($phpcsFile, $stackPtr);
+			$fix = $phpcsFile->addFixableError($message, $stackPtr, 'MissingAfter');
+			$this->_addSpace($fix, $phpcsFile, $stackPtr);
 		} else {
 			$content = str_replace("\r\n", "\n", $tokens[($stackPtr + 1)]['content']);
 			$spaces = strlen($content);
 			if ($spaces > 1) {
 				$message = 'Expected 1 space after ., but %d found';
 				$data = array($spaces);
-				$phpcsFile->addFixableError($message, $stackPtr, 'TooManyAfter', $data);
-				$this->_removeSpace($phpcsFile, $stackPtr + 1);
+				$fix = $phpcsFile->addFixableError($message, $stackPtr, 'TooManyAfter', $data);
+				$this->_removeSpace($fix, $phpcsFile, $stackPtr + 1);
 			}
 		}
 	}
@@ -75,12 +75,13 @@ class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffe
 /**
  * Add a single space on the right sight.
  *
+ * @param bool $fix Whether or not the fix should be applied.
  * @param object $phpcsFile
  * @param integer $location
  * @return void
  */
-	protected function _addSpace($phpcsFile, $location) {
-		if ($phpcsFile->fixer->enabled !== true) {
+	protected function _addSpace($fix, $phpcsFile, $location) {
+		if ($fix !== true) {
 			return;
 		}
 		$phpcsFile->fixer->addContent($location, ' ');
@@ -89,12 +90,13 @@ class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffe
 /**
  * Remove spaces expect for one on the right sight.
  *
+ * @param bool $fix Whether or not the fix should be applied.
  * @param object $phpcsFile
  * @param integer $location
  * @return void
  */
-	protected function _removeSpace($phpcsFile, $location) {
-		if ($phpcsFile->fixer->enabled !== true) {
+	protected function _removeSpace($fix, $phpcsFile, $location) {
+		if ($fix !== true) {
 			return;
 		}
 		//$content = $tokens[$location]['content'];

@@ -53,15 +53,6 @@ class CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSni
 		$commentStart = ($phpcsFile->findPrevious(T_DOC_COMMENT, ($commentEnd - 1), null, true) + 1);
 		$comment = $phpcsFile->getTokensAsString($commentStart, ($commentEnd - $commentStart + 1));
 
-		try {
-			$this->commentParser = new PHP_CodeSniffer_CommentParser_FunctionCommentParser($comment, $phpcsFile);
-			$this->commentParser->parse();
-		} catch (PHP_CodeSniffer_CommentParser_ParserException $e) {
-			$line = ($e->getLineWithinComment() + $commentStart);
-			$phpcsFile->addError($e->getMessage(), $line, 'FailedParse');
-			return;
-		}
-
 		// Find the position where the current function scope ends.
 		$currScopeEnd = 0;
 		if (isset($tokens[$currScope]['scope_closer']) === true) {
@@ -101,7 +92,8 @@ class CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSni
 		$uses = $this->_readUses($phpcsFile);
 		$throwTokens = $this->_adjustThrows($throwTokens, $namespace, $uses);
 
-		$throws = $this->commentParser->getThrows();
+		// $throws = $this->commentParser->getThrows();
+		$throws = array();
 		if (empty($throws) === true) {
 			$error = 'Missing @throws tag in function comment';
 			$phpcsFile->addError($error, $commentEnd, 'Missing');

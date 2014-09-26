@@ -47,10 +47,8 @@ class CakePHP_Sniffs_WhiteSpace_CommaSpacingSniff implements PHP_CodeSniffer_Sni
 			// Last character in a line is ok.
 			if ($tokens[$next]['line'] === $tokens[$stackPtr]['line']) {
 				$error = 'Missing space after comma';
-				$phpcsFile->addFixableError($error, $next);
-
-				// Fix the error
-				if ($phpcsFile->fixer->enabled === true) {
+				$fix = $phpcsFile->addFixableError($error, $next);
+				if ($fix) {
 					$phpcsFile->fixer->addContent($stackPtr, ' ');
 				}
 			}
@@ -60,10 +58,8 @@ class CakePHP_Sniffs_WhiteSpace_CommaSpacingSniff implements PHP_CodeSniffer_Sni
 
 		if ($tokens[$previous]['code'] !== T_WHITESPACE && ($previous !== $stackPtr - 1)) {
 			$error = 'Space before comma, expected none, though';
-			$phpcsFile->addFixableError($error, $next);
-
-			// Fix the error
-			if ($phpcsFile->fixer->enabled === true) {
+			$fix = $phpcsFile->addFixableError($error, $next);
+			if ($fix) {
 				$content = $tokens[$previous]['content'];
 				$phpcsFile->fixer->replaceToken($previous + 1, '');
 			}

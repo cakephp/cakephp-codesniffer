@@ -55,8 +55,8 @@ class CakePHP_Sniffs_WhiteSpace_FunctionCallSpacingSniff implements PHP_CodeSnif
 		// Look for funcName (
 		if (($stackPtr + 1) !== $openBracket) {
 			$error = 'Space before opening parenthesis of function call not allowed';
-			$phpcsFile->addFixableError($error, $stackPtr, 'SpaceBeforeOpenBracket');
-			if ($phpcsFile->fixer->enabled === true) {
+			$fix = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceBeforeOpenBracket');
+			if ($fix) {
 				$phpcsFile->fixer->replaceToken($stackPtr + 1, '');
 			}
 		}

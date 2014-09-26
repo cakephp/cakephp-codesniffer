@@ -54,8 +54,8 @@ class CakePHP_Sniffs_PHP_DisallowShortOpenTagSniff implements PHP_CodeSniffer_Sn
 		if (trim($openTag['content']) === '<?') {
 			$error = 'Short PHP opening tag used; expected "<?php" but found "%s"';
 			$data = array(trim($openTag['content']));
-			$phpcsFile->addFixableError($error, $stackPtr, 'Found', $data);
-			if ($phpcsFile->fixer->enabled === true) {
+			$fix = $phpcsFile->addFixableError($error, $stackPtr, 'Found', $data);
+			if ($fix) {
 				// Make sure the following whitespace is preserved
 				$content = str_replace('<?', '<?php', $openTag['content']);
 				$phpcsFile->fixer->replaceToken($stackPtr, $content);
