@@ -84,8 +84,8 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 				// Check there is one space before the & operator.
 				if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
 					$error = 'Expected 1 space before "&" operator; 0 found';
-					$phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceBeforeAmp');
-					if ($phpcsFile->fixer->enabled === true) {
+					$fix = $phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceBeforeAmp');
+					if ($fix) {
 						$phpcsFile->fixer->addContent($stackPtr - 1, ' ');
 					}
 				}
@@ -93,8 +93,8 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 				// Check there is one space after the & operator.
 				if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
 					$error = 'Expected 1 space after "&" operator; 0 found';
-					$phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceAfterAmp');
-					if ($phpcsFile->fixer->enabled === true) {
+					$fix = $phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceAfterAmp');
+					if ($fix) {
 						$phpcsFile->fixer->addContent($stackPtr, ' ');
 					}
 				}
@@ -146,16 +146,16 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 
 			if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
 				$error = "Expected 1 space before \"$operator\"; 0 found";
-				$phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceBefore');
-				if ($phpcsFile->fixer->enabled === true) {
+				$fix = $phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceBefore');
+				if ($fix) {
 					$phpcsFile->fixer->addContent($stackPtr - 1, ' ');
 				}
 			}
 
 			if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
 				$error = "Expected 1 space after \"$operator\"; 0 found";
-				$phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceAfter');
-				if ($phpcsFile->fixer->enabled === true) {
+				$fix = $phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceAfter');
+				if ($fix) {
 					$phpcsFile->fixer->addContent($stackPtr, ' ');
 				}
 			}
