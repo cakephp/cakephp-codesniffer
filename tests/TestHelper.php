@@ -1,5 +1,7 @@
 <?php
-require_once 'PHP/CodeSniffer/CLI.php';
+if (!class_exists('PHP_CodeSniffer_CLI')) {
+	require_once 'PHP/CodeSniffer/CLI.php';
+}
 
 class TestHelper {
 
