@@ -41,6 +41,7 @@ class TestHelper {
 			'encoding' => 'utf-8',
 			'files' => array($file),
 			'standard' => $standard,
+			'showSources' => true,
 		) + $defaults;
 
 		// New PHPCS has a strange issue where the method arguments
