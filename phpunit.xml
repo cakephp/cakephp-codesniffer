@@ -7,10 +7,10 @@
 	 mapTestClassNameToCoveredClassName="false"
 	 strict="false"
 	 verbose="false"
-	 bootstrap="./tests/bootstrap.php">
+	 bootstrap="./CakePHP/tests/bootstrap.php">
 	<testsuites>
 		<testsuite name="phpcs">
-			<file>./tests/CakePHPStandardTest.php</file>
+			<file>./CakePHP/tests/CakePHPStandardTest.php</file>
 		</testsuite>
 	</testsuites>
 </phpunit>

@@ -21,3 +21,5 @@ $dec = -0.001;
 $dec = -1;
 
 $arr = [-1];
+$refArr = [&$foo];
+$refArr = [$bar, &$foo];
