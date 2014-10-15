@@ -14,7 +14,7 @@ installer:
 You can also install the code sniffs with `composer`:
 
 	php composer.phar require cakephp/cakephp-codesniffer
-	vendor/bin/phpcs --config-set installed_paths vendor/cakephp/cakephp-codesniffer
+	bin/phpcs --config-set installed_paths vendor/cakephp/cakephp-codesniffer
 
 The second command lets `phpcs` know where to find your new sniffs. Ensure that
 you do not overwrite any existing `installed_paths` value.
@@ -31,7 +31,7 @@ configured the CodeSniffer `installed_paths` setting.
 
 Once `installed_paths` is configured, you can run phpcs using:
 
-	vendor/bin/phpcs --standard=CakePHP
+	bin/phpcs --standard=CakePHP
 
 ## Contributing
 
