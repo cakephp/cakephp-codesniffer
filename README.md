@@ -19,6 +19,8 @@ You can also install the code sniffs with `composer`:
 The second command lets `phpcs` know where to find your new sniffs. Ensure that
 you do not overwrite any existing `installed_paths` value.
 
+For CakePHP 3.x apps, the default composer bin is at root of your app, so replace `vendor/bin/` by `bin/` in all commands.
+
 ## Usage
 
 Depending on how you installed the code sniffer changes how you run it. If you have
