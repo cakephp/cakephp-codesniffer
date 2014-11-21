@@ -1,0 +1,43 @@
+Loadsys Code Sniffer [![Build Status](https://travis-ci.org/loadsys/loadsys_codesniffer.png?branch=master)](http://travis-ci.org/loadsys/loadsys_codesniffer)
+====================
+
+This code works with [phpcs](http://pear.php.net/manual/en/package.php.php-codesniffer.php)
+and checks code against the coding standards used by Loadsys. This package is based upon the
+[CakePHP coding standards](https://github.com/cakephp/cakephp-codesniffer) with some customizations.
+
+Installation
+------------
+
+Its generally recommended to install these code sniffs via composer:
+
+```json
+{
+	"require": {
+		"loadsys/loadsys-codesniffe": "dev-master"
+	}
+}
+```
+
+
+
+Usage
+-----
+
+After installation you can check code compliance to the standard using
+`phpcs`:
+
+	phpcs --standard=Loadsys /path/to/code
+
+Contributing
+------------
+
+`phpunit` will fail to run the test when the root directory contains a dash. (Hence **loadsys_codesniffer** instead of **loadsys-codesniffer**).
+
+Releasing Loadsys Code Sniffer
+==============================
+
+* Update version number in build.xml
+* Add changelog entry.
+* Commit changes.
+* Create git tag.
+* Push back to the repo. (Packagist will be notified.)
