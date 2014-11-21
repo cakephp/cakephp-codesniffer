@@ -17,7 +17,7 @@
  * - bool instead of boolean
  * - int instead of integer
  */
-class CakePHP_Sniffs_PHP_TypeCastingSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_PHP_TypeCastingSniff implements PHP_CodeSniffer_Sniff {
 
 	/**
 	 * Returns an array of tokens this test wants to listen for.

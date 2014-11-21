@@ -19,7 +19,7 @@
  * Ensures there is a space after the function keyword for closures.
  *
  */
-class CakePHP_Sniffs_Functions_ClosureDeclarationSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_Functions_ClosureDeclarationSniff implements PHP_CodeSniffer_Sniff {
 
 	public function register() {
 		return array(T_CLOSURE);

@@ -1,8 +1,8 @@
 <?php
 /**
- * CakePHPStandardTest
+ * Loadsys
  */
-class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
+class LoadsysStandardTest extends PHPUnit_Framework_TestCase {
 
 	public function setUp() {
 		parent::setUp();

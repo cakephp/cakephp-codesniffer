@@ -17,7 +17,7 @@
  * - bool instead of boolean
  * - int instead of integer
  */
-class CakePHP_Sniffs_Commenting_FunctionCommentTypeSniff implements PHP_CodeSniffer_Sniff {
+class Loadsys_Sniffs_Commenting_FunctionCommentTypeSniff implements PHP_CodeSniffer_Sniff {
 
 	/**
 	 * Returns an array of tokens this test wants to listen for.
@@ -70,7 +70,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentTypeSniff implements PHP_CodeSnif
 	}
 
 	/**
-	 * MyCakePHP_Sniffs_Commenting_DocBlockTypeSniff::_check()
+	 * MyLoadsysSniffs_Commenting_DocBlockTypeSniff::_check()
 	 *
 	 * @param int $stackPtr
 	 * @param string $from

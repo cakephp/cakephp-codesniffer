@@ -43,7 +43,7 @@ if (class_exists('PHP_CodeSniffer_CommentParser_FunctionCommentParser', true) ==
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sniff
+class Loadsys_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sniff
 {
 
     /**

@@ -1,6 +1,6 @@
 <?php
 /**
- * CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff.
+ * Loadsys_Sniffs_NamingConventions_UpperCaseConstantNameSniff.
  *
  * PHP version 5
  *
@@ -14,7 +14,7 @@
  */
 
 /**
- * CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff.
+ * Loadsys_Sniffs_NamingConventions_UpperCaseConstantNameSniff.
  *
  * Ensures that constant names are all uppercase.
  *

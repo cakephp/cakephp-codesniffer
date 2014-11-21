@@ -80,7 +80,7 @@ class Loadsys_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 		if ($tokens[$stackPtr]['code'] === T_BITWISE_AND) {
 			// If its not a reference, then we expect one space either side of the
 			// bitwise operator.
-			if ($phpcsFile->isReference($stackPtr) === false) {
+			if (!$phpcsFile->isReference($stackPtr) && !$this->_isVariable($stackPtr, $tokens, $phpcsFile)) {
 				// Check there is one space before the & operator.
 				if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
 					$error = 'Expected 1 space before "&" operator; 0 found';
@@ -153,6 +153,39 @@ class Loadsys_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 				$phpcsFile->addError($error, $stackPtr, 'NoSpaceAfter');
 			}
 		}
+	}
+
+/**
+ * Check if the current token is inside an array.
+ *
+ * @param int $stackPtr The current token offset.
+ * @param array $phpcsFile The current token list.
+ * @return bool
+ */
+	protected function _isVariable($stackPtr, $tokens, $phpcsFile) {
+		$tokenAfter = $phpcsFile->findNext(
+			PHP_CodeSniffer_Tokens::$emptyTokens,
+			($stackPtr + 1),
+			null,
+			true
+		);
+		$tokenBefore = $phpcsFile->findNext(
+			PHP_CodeSniffer_Tokens::$emptyTokens,
+			($stackPtr - 1),
+			null,
+			true
+		);
+
+		if ($tokens[$tokenAfter]['code'] === T_VARIABLE &&
+			(
+				$tokens[$tokenBefore]['code'] === T_OPEN_PARENTHESIS ||
+				$tokens[$tokenBefore]['code'] === T_COMMA ||
+				$tokens[$tokenBefore]['code'] === T_OPEN_SHORT_ARRAY
+			)
+		) {
+			return true;
+		}
+		return false;
 	}
 
 }

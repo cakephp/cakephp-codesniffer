@@ -57,3 +57,4 @@ class Loadsys_Sniffs_NamingConventions_ValidClassBracketsSniff implements PHP_Co
 	}
 
 }
+

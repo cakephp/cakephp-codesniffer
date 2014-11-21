@@ -26,7 +26,7 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractScopeSniff', true) === false
 class Loadsys_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff {
 
 /**
- * Constructs a CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff.
+ * Constructs a Loadsys_Sniffs_Commenting_FunctionCommentThrowTagSniff.
  */
 	public function __construct() {
 		parent::__construct(array(T_FUNCTION), array(T_THROW));
@@ -104,7 +104,7 @@ class Loadsys_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSni
 		$throws = $this->commentParser->getThrows();
 		if (empty($throws) === true) {
 			$error = 'Missing @throws tag in function comment';
-			$phpcsFile->addError($error, $commentEnd, 'Missing');
+			$phpcsFile->addWarning($error, $commentEnd, 'Missing');
 		} elseif (empty($throwTokens) === true) {
 			// If token count is zero, it means that only variables are being
 			// thrown, so we need at least one @throws tag (checked above).
@@ -131,7 +131,7 @@ class Loadsys_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSni
 					$tokenCount,
 					$tagCount,
 				);
-				$phpcsFile->addError($error, $commentEnd, 'WrongNumber', $data);
+				$phpcsFile->addWarning($error, $commentEnd, 'WrongNumber', $data);
 				return;
 			} else {
 				// Exception type in @throws tag must be thrown in the function.
@@ -143,7 +143,7 @@ class Loadsys_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSni
 							$throwTokens[$i],
 							$throwTag,
 						);
-						$phpcsFile->addError($error, $errorPos, 'WrongType', $data);
+						$phpcsFile->addWarning($error, $errorPos, 'WrongType', $data);
 					}
 				}
 			}
