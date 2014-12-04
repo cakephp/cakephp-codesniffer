@@ -32,7 +32,6 @@
  <rule ref="Generic.Formatting.NoSpaceAfterCast"/>
 
  <rule ref="Squiz.Functions.FunctionDeclaration"/>
- <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
  <rule ref="PEAR.Functions.ValidDefaultValue"/>
 
  <!--
