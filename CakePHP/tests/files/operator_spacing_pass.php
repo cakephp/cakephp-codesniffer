@@ -3,7 +3,7 @@ $foo = -1;
 
 switch($foo) {
     case -1:
-    break;
+        break;
     case 'negative':
         return -1;
 }

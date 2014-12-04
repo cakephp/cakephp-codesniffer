@@ -1,4 +1,5 @@
 <?php
+namespace Beakman;
 
 use Cake\Last;
 use Cake\More;
