@@ -1,6 +1,7 @@
 <?php
 
-class Foo {
+class Foo
+{
 
 /**
  * Some sentence.
@@ -9,7 +10,7 @@ class Foo {
  * @param bool $otherParam Some Other Param.
  * @return string Something.
  */
-	public function bar($param, $otherParam) {
-	}
-
+    public function bar($param, $otherParam)
+    {
+    }
 }

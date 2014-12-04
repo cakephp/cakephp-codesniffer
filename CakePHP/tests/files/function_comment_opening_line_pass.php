@@ -1,13 +1,14 @@
 <?php
 
-class Foo {
+class Foo
+{
 
-/**
- * Some sentence.
- *
- * @return void
- */
-	public function bar() {
-	}
-
+	/**
+	 * Some sentence.
+	 *
+	 * @return void
+	 */
+    public function bar()
+    {
+    }
 }

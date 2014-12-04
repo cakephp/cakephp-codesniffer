@@ -1,8 +1,9 @@
 <?php
 
-class TraitUser {
+class TraitUser
+{
 
-	use FunctionsTrait;
+    use FunctionsTrait;
 
 /**
  * [doThing description]
@@ -10,11 +11,12 @@ class TraitUser {
  * @param callable $callback [description]
  * @return void
  */
-	public function doThing(callable $callback) {
-		$visitor = function ($expression) use (&$visitor, $callback) {
-			echo 'It works';
-		};
-		$visitor($this);
-	}
+    public function doThing(callable $callback)
+    {
+        $visitor = function ($expression) use (&$visitor, $callback) {
+            echo 'It works';
+        };
+        $visitor($this);
+    }
 
 }

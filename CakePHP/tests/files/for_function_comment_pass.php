@@ -1,23 +1,25 @@
 <?php
-class Foo {
+class Foo
+{
 
-/**
- * [doThing description]
- *
- * @param string $foo Foo
- * @return void
- */
-	public function doThing($foo) {
-	}
-
+    /**
+     * [doThing description]
+     *
+     * @param string $foo Foo
+     * @return void
+     */
+    public function doThing($foo)
+    {
+    }
 }
 
-class Bar extends Foo {
+class Bar extends Foo
+{
 
-/**
- * {@inheritDoc}
- */
-	public function doThing($foo) {
-	}
-
+    /**
+     * {@inheritDoc}
+     */
+    public function doThing($foo)
+    {
+    }
 }
