@@ -6,6 +6,8 @@
  <exclude-pattern>*/Config/*.ini.php</exclude-pattern>
  <exclude-pattern>/*/tmp/</exclude-pattern>
 
+ <rule ref="PSR2"/>
+
  <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
 
  <rule ref="Squiz.Classes.LowercaseClassKeywords"/>
@@ -32,9 +34,6 @@
  <rule ref="Squiz.Functions.FunctionDeclaration"/>
  <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
  <rule ref="PEAR.Functions.ValidDefaultValue"/>
-
- <rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
- <rule ref="PSR2.Namespaces.UseDeclaration"/>
 
  <!--
  Disabled and replaced with local copy. See http://pear.php.net/bugs/bug.php?id=19957
