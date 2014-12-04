@@ -137,12 +137,6 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
 				$i--;
 			}
 		}
-
-		if ($foundLines !== 1) {
-			$error = 'Expected 1 blank lines before function; %s found';
-			$data = array($foundLines);
-			$phpcsFile->addError($error, $stackPtr, 'Before', $data);
-		}
 	}
 
 }
