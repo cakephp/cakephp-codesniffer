@@ -106,47 +106,13 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 		$public = ($memberProps['scope'] === 'public');
 		$private = ($memberProps['scope'] === 'private');
 
-		if ($public === true) {
-			if (substr($varName, 0, 1) === '_') {
-				$error = 'Public member variable "%s" must not contain a leading underscore';
-				$data = array($varName);
-				$phpcsFile->addError($error, $stackPtr, 'PublicHasUnderscore', $data);
-				return;
-			}
-		} elseif ($private === true) {
-			if (substr($varName, 0, 2) !== '__') {
-				$error = 'Private member variable "%s" must contain a leading underscore';
-				$data = array($varName);
-				$phpcsFile->addError($error, $stackPtr, 'PrivateNoUnderscore', $data);
-				return;
-			}
+		if ($private === true) {
 			$filename = $phpcsFile->getFilename();
 			if (strpos($filename, '/lib/Cake/') !== false) {
 				$warning = 'Private variable "%s" in CakePHP core is discouraged';
 				$data = array($varName);
 				$phpcsFile->addWarning($warning, $stackPtr, 'PrivateInCore', $data);
 			}
-		} else {
-			if (substr($varName, 0, 1) !== '_') {
-				$error = 'Protected member variable "%s" must contain a leading underscore';
-				$data = array($varName);
-				$phpcsFile->addError($error, $stackPtr, 'ProtectedNoUnderscore', $data);
-				return;
-			}
-		}
-
-		$conditions = array_keys($tokens[$stackPtr]['conditions']);
-		$className = $phpcsFile->getDeclarationName(array_pop($conditions));
-
-		// Schema properties are allowed to not be CamelCase.
-		if (substr($className, -6) === 'Schema') {
-			return;
-		}
-
-		if ($this->_isValidVar($varName, $public) === false) {
-			$error = 'Member variable "%s" is not in valid camel caps format';
-			$data = array($varName);
-			$phpcsFile->addError($error, $stackPtr, 'MemberVarNotCamelCaps', $data);
 		}
 	}
 
