@@ -246,14 +246,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
 					}
 				}
 
-				if ($isDocComment === true) {
-					// Doc block comments should be indented one less than the
-					// code that precedes them. In reality this means not indented at all
-					if ($indent - 1 !== $column) {
-						$error = 'Doc blocks must not be indented';
-						$phpcsFile->addWarning($error, $firstToken, 'DocCommentStartColumn');
-					}
-				} elseif ($column !== $indent) {
+				if ($column !== $indent) {
 					if ($this->exact === true || $column < $indent) {
 						$type = 'IncorrectExact';
 						$error = 'Line indented incorrectly; expected ';
