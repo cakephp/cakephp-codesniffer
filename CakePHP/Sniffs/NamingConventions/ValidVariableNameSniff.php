@@ -99,21 +99,6 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
  * @return void
  */
 	protected function processMemberVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
-		$tokens = $phpcsFile->getTokens();
-
-		$varName = ltrim($tokens[$stackPtr]['content'], '$');
-		$memberProps = $phpcsFile->getMemberProperties($stackPtr);
-		$public = ($memberProps['scope'] === 'public');
-		$private = ($memberProps['scope'] === 'private');
-
-		if ($private === true) {
-			$filename = $phpcsFile->getFilename();
-			if (strpos($filename, '/lib/Cake/') !== false) {
-				$warning = 'Private variable "%s" in CakePHP core is discouraged';
-				$data = array($varName);
-				$phpcsFile->addWarning($warning, $stackPtr, 'PrivateInCore', $data);
-			}
-		}
 	}
 
 /**
