@@ -5,7 +5,7 @@ use Two;
 
 class Foo {
 
-	use LogTrait;
-	use FirstTrait;
+    use LogTrait;
+    use FirstTrait;
 
 }

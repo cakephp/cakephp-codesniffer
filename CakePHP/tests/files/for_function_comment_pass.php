@@ -3,7 +3,6 @@ namespace Beakman;
 
 class Foo
 {
-
     /**
      * [doThing description]
      *

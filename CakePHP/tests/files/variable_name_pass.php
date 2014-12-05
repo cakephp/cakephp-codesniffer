@@ -3,7 +3,6 @@ namespace Beakman;
 
 class VariablenamePass
 {
-
     public $passing;
 
     public $passingPublic = 'defined';
