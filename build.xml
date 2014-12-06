@@ -77,7 +77,7 @@
 			<dependencies>
 				<php minimum_version="5.2.8" />
 				<pear minimum_version="1.9.0" recommended_version="1.9.4" />
-				<package name="PHP_CodeSniffer" channel="pear.php.net" minimum_version="1.3.3" />
+				<package name="PHP_CodeSniffer" channel="pear.php.net" maximum_version="1.5" minimum_version="1.4" />
 			</dependencies>
 			<exceptions key="CakePHP/ruleset.xml">php</exceptions>
 			<exceptions key="README.md">php</exceptions>
