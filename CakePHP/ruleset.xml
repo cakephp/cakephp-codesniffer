@@ -22,6 +22,7 @@
  <rule ref="PEAR.ControlStructures.ControlSignature"/>
  <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration"/>
  <rule ref="Squiz.ControlStructures.LowercaseDeclaration"/>
+ <rule ref="PSR2.ControlStructures.ControlStructureSpacing"/>
 
  <rule ref="Zend.Files.ClosingTag"/>
  <rule ref="Generic.Files.LineEndings"/>
