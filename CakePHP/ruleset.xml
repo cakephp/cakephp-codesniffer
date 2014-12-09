@@ -5,6 +5,7 @@
  <exclude-pattern>\.git</exclude-pattern>
  <exclude-pattern>*/Config/*.ini.php</exclude-pattern>
  <exclude-pattern>/*/tmp/</exclude-pattern>
+ <exclude-pattern>*/tests/*</exclude-pattern>
 
  <rule ref="PSR2"/>
 
@@ -59,17 +60,6 @@
  <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
  <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
-
- <!-- Relax commenting rules for test cases -->
- <rule ref="CakePHP.Commenting.FunctionComment">
-  <!-- 2.x dir structure -->
-  <exclude-pattern>*/Test/Case/*</exclude-pattern>
-  <exclude-pattern>*/Test/test_app/*</exclude-pattern>
-
-  <!-- 3.x dir structure -->
-  <exclude-pattern>*/tests/TestCase/*</exclude-pattern>
-  <exclude-pattern>*/tests/test_app/*</exclude-pattern>
- </rule>
 
  <!-- All rules in ./Sniffs are included automatically -->
 </ruleset>
