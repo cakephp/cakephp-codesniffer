@@ -16,7 +16,7 @@
 	<taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
 
 	<!-- Update this version when making new packages -->
-	<property name="version" value="0.1.29" />
+	<property name="version" value="0.1.30" />
 
 	<!-- Shouldn't have to change these -->
 	<property name="build.dir" value="build" />
@@ -77,10 +77,14 @@
 			<dependencies>
 				<php minimum_version="5.2.8" />
 				<pear minimum_version="1.9.0" recommended_version="1.9.4" />
-				<package name="PHP_CodeSniffer" channel="pear.php.net" minimum_version="1.3.3" />
+				<package name="PHP_CodeSniffer" channel="pear.php.net" maximum_version="1.5" minimum_version="1.4" />
 			</dependencies>
 			<exceptions key="CakePHP/ruleset.xml">php</exceptions>
 			<exceptions key="README.md">php</exceptions>
+
+			<changelog version="0.1.30" date="2014-12-05" license="MIT">
+				* Stick with 1.x version of PHP_CodeSniffer.
+			</changelog>
 
 			<changelog version="0.1.29" date="2014-10-04" license="MIT">
 				* Closure spacing sniff was added.
