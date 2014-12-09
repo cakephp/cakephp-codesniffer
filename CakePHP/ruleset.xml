@@ -72,8 +72,8 @@
  <rule ref="Generic.NamingConventions.CamelCapsFunctionName">
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
-  <rule ref="Squiz.Classes.ValidClassName">
- 	<exclude-pattern>*/tests/*</exclude-pattern>
+ <rule ref="Squiz.Classes.ValidClassName">
+  <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
 
  <!-- All rules in ./Sniffs are included automatically -->
