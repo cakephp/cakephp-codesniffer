@@ -212,9 +212,6 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
             if ($exception === null) {
                 $error = 'Exception type and comment missing for @throws tag in function comment';
                 $phpcsFile->addError($error, $tag, 'InvalidThrows');
-            } else if ($comment === null) {
-                $error = 'Comment missing for @throws tag in function comment';
-                $phpcsFile->addError($error, $tag, 'EmptyThrows');
             }//end if
         }//end foreach
 
