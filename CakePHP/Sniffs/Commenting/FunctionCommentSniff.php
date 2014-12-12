@@ -336,7 +336,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
             // Check the param type value.
             $typeNames = explode('|', $param['type']);
             foreach ($typeNames as $typeName) {
-                if (in_array($typeName, ['int', 'bool'])) {
+                if (in_array($typeName, array('int', 'bool'))) {
                     continue;
                 }
                 $suggestedName = PHP_CodeSniffer::suggestType($typeName);
