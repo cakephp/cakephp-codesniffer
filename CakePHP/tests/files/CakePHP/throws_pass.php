@@ -11,11 +11,11 @@ class Throws
     /**
      * Test throws
      *
-     * @throws Exception
-     * @throws CakePHP\Boom
-     * @throws CakePHP\Error\Boom
-     * @throws Other\Crap
-     * @throws Other\Error\Issue
+     * @throws Exception An expection happened.
+     * @throws CakePHP\Boom A boom went off!
+     * @throws CakePHP\Error\Boom Oh, shucks, another boom.
+     * @throws Other\Crap Oh boy.
+     * @throws Other\Error\Issue A missing tissue for your PSR-2 issues.
      * @return void
      */
     public function test()

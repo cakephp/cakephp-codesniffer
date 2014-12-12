@@ -8,7 +8,7 @@ class Foo
      *
      * @param int $param Some Param.
      * @param bool $otherParam Some Other Param.
-     * @return string Something.
+     * @return void
      */
     public function bar($param, $otherParam)
     {
