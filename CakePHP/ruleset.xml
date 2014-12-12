@@ -18,7 +18,6 @@
  <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
  <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
 
- <rule ref="CakePHP.Commenting.FunctionComment"/>
  <rule ref="Squiz.Commenting.DocCommentAlignment"/>
  <rule ref="Generic.Commenting.Todo"/>
 
