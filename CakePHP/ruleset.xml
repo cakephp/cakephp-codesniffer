@@ -70,10 +70,19 @@
  <rule ref="PSR1.Methods.CamelCapsMethodName">
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
- <rule ref="Generic.NamingConventions.CamelCapsFunctionName">
+ <rule ref="Squiz.Classes.ValidClassName">
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
- <rule ref="Squiz.Classes.ValidClassName">
+ <rule ref="Squiz.NamingConventions.ValidFunctionName">
+  <exclude-pattern>*/src/*</exclude-pattern>
+  <exclude-pattern>*/tests/*</exclude-pattern>
+ </rule>
+ <rule ref="Generic.NamingConventions.CamelCapsFunctionName">
+  <exclude-pattern>*/src/*</exclude-pattern>
+  <exclude-pattern>*/tests/*</exclude-pattern>
+ </rule>
+ <rule ref="PEAR.NamingConventions.ValidFunctionName">
+  <exclude-pattern>*/src/*</exclude-pattern>
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
 
