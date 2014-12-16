@@ -63,7 +63,7 @@
  <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
 
- <!-- Relax tests/* rules -->
+ <!-- Relax some src/* and tests/* rules -->
  <rule ref="PSR1.Classes.ClassDeclaration">
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
@@ -71,6 +71,9 @@
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="Squiz.Classes.ValidClassName">
+  <exclude-pattern>*/tests/*</exclude-pattern>
+ </rule>
+ <rule ref="CakePHP.Commenting.FunctionComment">
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="Squiz.NamingConventions.ValidFunctionName">
