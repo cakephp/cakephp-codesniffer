@@ -6,7 +6,7 @@ class Foo
     /**
      * [doThing description]
      *
-     * @param string $foo Foo
+     * @param string $foo Foo foo foo.
      * @return void
      */
     public function doThing($foo)
