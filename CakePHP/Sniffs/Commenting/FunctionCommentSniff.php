@@ -106,7 +106,11 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                 $typeNames      = explode('|', $content);
                 $suggestedNames = array();
                 foreach ($typeNames as $i => $typeName) {
-                    if ($typeName === 'int' || $typeName === 'bool') {
+                    if ($typeName === 'integer') {
+                        $suggestedName = 'int';
+                    } elseif ($typeName === 'boolean') {
+                        $suggestedName = 'bool';
+                    } elseif (in_array($typeName, array('int', 'bool'))) {
                         $suggestedName = $typeName;
                     } else {
                         $suggestedName = PHP_CodeSniffer::suggestType($typeName);
@@ -364,10 +368,16 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
             // Check the param type value.
             $typeNames = explode('|', $param['type']);
             foreach ($typeNames as $typeName) {
-                if (in_array($typeName, array('int', 'bool'))) {
-                    continue;
+                if ($typeName === 'integer') {
+                    $suggestedName = 'int';
+                } elseif ($typeName === 'boolean') {
+                    $suggestedName = 'bool';
+                } elseif (in_array($typeName, array('int', 'bool'))) {
+                    $suggestedName = $typeName;
+                } else {
+                    $suggestedName = PHP_CodeSniffer::suggestType($typeName);
                 }
-                $suggestedName = PHP_CodeSniffer::suggestType($typeName);
+
                 if ($typeName !== $suggestedName) {
                     $error = 'Expected "%s" but found "%s" for parameter type';
                     $data  = array(
