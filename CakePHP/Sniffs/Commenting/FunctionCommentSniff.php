@@ -92,87 +92,89 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
             }
         }
 
-        if ($isSpecialMethod === false && $methodName !== $className) {
-            if ($return !== null) {
-                $content = $tokens[($return + 2)]['content'];
-                if (empty($content) === true || $tokens[($return + 2)]['code'] !== T_DOC_COMMENT_STRING) {
-                    $error = 'Return type missing for @return tag in function comment';
-                    $phpcsFile->addError($error, $return, 'MissingReturnType');
-                } else {
-                    // Check return type (can be multiple, separated by '|').
-                    $typeNames      = explode('|', $content);
-                    $suggestedNames = array();
-                    foreach ($typeNames as $i => $typeName) {
-                        if ($typeName === 'int' || $typeName === 'bool') {
-                            $suggestedName = $typeName;
-                        } else {
-                            $suggestedName = PHP_CodeSniffer::suggestType($typeName);
-                        }
-                        if (in_array($suggestedName, $suggestedNames) === false) {
-                            $suggestedNames[] = $suggestedName;
-                        }
+        if ($isSpecialMethod === true) {
+            return;
+        }
+
+        if ($return !== null) {
+            $content = $tokens[($return + 2)]['content'];
+            if (empty($content) === true || $tokens[($return + 2)]['code'] !== T_DOC_COMMENT_STRING) {
+                $error = 'Return type missing for @return tag in function comment';
+                $phpcsFile->addError($error, $return, 'MissingReturnType');
+            } else {
+                // Check return type (can be multiple, separated by '|').
+                $typeNames      = explode('|', $content);
+                $suggestedNames = array();
+                foreach ($typeNames as $i => $typeName) {
+                    if ($typeName === 'int' || $typeName === 'bool') {
+                        $suggestedName = $typeName;
+                    } else {
+                        $suggestedName = PHP_CodeSniffer::suggestType($typeName);
                     }
-
-                    $suggestedType = implode('|', $suggestedNames);
-                    if ($content !== $suggestedType) {
-                        $error = 'Function return type "%s" is invalid';
-                        $error = 'Expected "%s" but found "%s" for function return type';
-                        $data  = array(
-                                  $suggestedType,
-                                  $content,
-                                 );
-                        $phpcsFile->addError($error, $return, 'InvalidReturn', $data);
+                    if (in_array($suggestedName, $suggestedNames) === false) {
+                        $suggestedNames[] = $suggestedName;
                     }
+                }
 
-                    // If the return type is void, make sure there is
-                    // no return statement in the function.
-                    if ($content === 'void') {
-                        if (isset($tokens[$stackPtr]['scope_closer']) === true) {
-                            $endToken = $tokens[$stackPtr]['scope_closer'];
-                            for ($returnToken = $stackPtr; $returnToken < $endToken; $returnToken++) {
-                                if ($tokens[$returnToken]['code'] === T_CLOSURE) {
-                                    $returnToken = $tokens[$returnToken]['scope_closer'];
-                                    continue;
-                                }
+                $suggestedType = implode('|', $suggestedNames);
+                if ($content !== $suggestedType) {
+                    $error = 'Function return type "%s" is invalid';
+                    $error = 'Expected "%s" but found "%s" for function return type';
+                    $data  = array(
+                              $suggestedType,
+                              $content,
+                             );
+                    $phpcsFile->addError($error, $return, 'InvalidReturn', $data);
+                }
 
-                                if ($tokens[$returnToken]['code'] === T_RETURN) {
-                                    break;
-                                }
+                // If the return type is void, make sure there is
+                // no return statement in the function.
+                if ($content === 'void') {
+                    if (isset($tokens[$stackPtr]['scope_closer']) === true) {
+                        $endToken = $tokens[$stackPtr]['scope_closer'];
+                        for ($returnToken = $stackPtr; $returnToken < $endToken; $returnToken++) {
+                            if ($tokens[$returnToken]['code'] === T_CLOSURE) {
+                                $returnToken = $tokens[$returnToken]['scope_closer'];
+                                continue;
                             }
 
-                            if ($returnToken !== $endToken) {
-                                // If the function is not returning anything, just
-                                // exiting, then there is no problem.
-                                $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
-                                if ($tokens[$semicolon]['code'] !== T_SEMICOLON) {
-                                    $error = 'Function return type is void, but function contains return statement';
-                                    $phpcsFile->addError($error, $return, 'InvalidReturnVoid');
-                                }
+                            if ($tokens[$returnToken]['code'] === T_RETURN) {
+                                break;
                             }
-                        }//end if
-                    } else if ($content !== 'mixed') {
-                        // If return type is not void, there needs to be a return statement
-                        // somewhere in the function that returns something.
-                        if (isset($tokens[$stackPtr]['scope_closer']) === true) {
-                            $endToken    = $tokens[$stackPtr]['scope_closer'];
-                            $returnToken = $phpcsFile->findNext(T_RETURN, $stackPtr, $endToken);
-                            if ($returnToken === false) {
-                                $error = 'Function return type is not void, but function has no return statement';
-                                $phpcsFile->addError($error, $return, 'InvalidNoReturn');
+                        }
+
+                        if ($returnToken !== $endToken) {
+                            // If the function is not returning anything, just
+                            // exiting, then there is no problem.
+                            $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
+                            if ($tokens[$semicolon]['code'] !== T_SEMICOLON) {
+                                $error = 'Function return type is void, but function contains return statement';
+                                $phpcsFile->addWarning($error, $return, 'InvalidReturnVoid');
                             }
                         }
                     }//end if
+                } else if ($content !== 'mixed') {
+                    // If return type is not void, there needs to be a return statement
+                    // somewhere in the function that returns something.
+                    if (isset($tokens[$stackPtr]['scope_closer']) === true) {
+                        $endToken    = $tokens[$stackPtr]['scope_closer'];
+                        $returnToken = $phpcsFile->findNext(T_RETURN, $stackPtr, $endToken);
+                        if ($returnToken === false) {
+                            $error = 'Function return type is not void, but function has no return statement';
+                            $phpcsFile->addWarning($error, $return, 'InvalidNoReturn');
+                        } else {
+                            $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
+                            if ($tokens[$semicolon]['code'] === T_SEMICOLON) {
+                                $error = 'Function return type is not void, but function is returning void here';
+                                $phpcsFile->addWarning($error, $returnToken, 'InvalidReturnNotVoid');
+                            }
+                        }
+                    }
                 }//end if
-            } else {
-                $error = 'Missing @return tag in function comment';
-                $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
             }//end if
         } else {
-            // No return tag for constructor and destructor.
-            if ($return !== null) {
-                $error = '@return tag is not required for constructor and destructor';
-                $phpcsFile->addError($error, $return, 'ReturnNotRequired');
-            }
+            $error = 'Missing @return tag in function comment';
+            $phpcsFile->addWarning($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
         }//end if
 
     }//end processReturn()
@@ -211,7 +213,36 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
 
             if ($exception === null) {
                 $error = 'Exception type and comment missing for @throws tag in function comment';
-                $phpcsFile->addError($error, $tag, 'InvalidThrows');
+                $phpcsFile->addWarning($error, $tag, 'InvalidThrows');
+            } else if ($comment === null) {
+                $error = 'Comment missing for @throws tag in function comment';
+                $phpcsFile->addWarning($error, $tag, 'EmptyThrows');
+            } else {
+                // Any strings until the next tag belong to this comment.
+                if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true) {
+                    $end = $tokens[$commentStart]['comment_tags'][($pos + 1)];
+                } else {
+                    $end = $tokens[$commentStart]['comment_closer'];
+                }
+
+                for ($i = ($tag + 3); $i < $end; $i++) {
+                    if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
+                        $comment .= ' '.$tokens[$i]['content'];
+                    }
+                }
+
+                // Starts with a capital letter and ends with a fullstop.
+                $firstChar = $comment{0};
+                if (strtoupper($firstChar) !== $firstChar) {
+                    $error = '@throws tag comment must start with a capital letter';
+                    $phpcsFile->addWarning($error, ($tag + 2), 'ThrowsNotCapital');
+                }
+
+                $lastChar = substr($comment, -1);
+                if ($lastChar !== '.') {
+                    $error = '@throws tag comment must end with a full stop';
+                    $phpcsFile->addWarning($error, ($tag + 2), 'ThrowsNoFullStop');
+                }
             }//end if
         }//end foreach
 
@@ -333,7 +364,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
             // Check the param type value.
             $typeNames = explode('|', $param['type']);
             foreach ($typeNames as $typeName) {
-                if (in_array($typeName, array('int', 'bool'))) {
+                if (in_array($typeName, ['int', 'bool'])) {
                     continue;
                 }
                 $suggestedName = PHP_CodeSniffer::suggestType($typeName);
@@ -353,7 +384,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                         $content .= $param['commentLines'][0]['comment'];
                         $phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
                     }
-                }//end if
+                }
             }//end foreach
 
             if ($param['var'] === '') {
@@ -380,7 +411,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
 
                     $error .= 'actual variable name %s';
 
-                    $phpcsFile->addError($error, $param['tag'], $code, $data);
+                    $phpcsFile->addWarning($error, $param['tag'], $code, $data);
                 }
             } else if (substr($param['var'], -4) !== ',...') {
                 // We must have an extra parameter comment.
@@ -391,7 +422,34 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
             if ($param['comment'] === '') {
                 continue;
             }
+
+            // Param comments must start with a capital letter and end with the full stop.
+            $firstChar = $param['comment']{0};
+            if (preg_match('|\p{Lu}|u', $firstChar) === 0) {
+                $error = 'Parameter comment must start with a capital letter';
+                $phpcsFile->addWarning($error, $param['tag'], 'ParamCommentNotCapital');
+            }
+
+            $lastChar = substr($param['comment'], -1);
+            if ($lastChar !== '.') {
+                $error = 'Parameter comment must end with a full stop';
+                $phpcsFile->addWarning($error, $param['tag'], 'ParamCommentFullStop');
+            }
         }//end foreach
+
+        $realNames = array();
+        foreach ($realParams as $realParam) {
+            $realNames[] = $realParam['name'];
+        }
+
+        // Report missing comments.
+        $diff = array_diff($realNames, $foundParams);
+        foreach ($diff as $neededParam) {
+            $error = 'Doc comment for parameter "%s" missing';
+            $data  = array($neededParam);
+            $phpcsFile->addWarning($error, $commentStart, 'MissingParamTag', $data);
+        }
+
     }//end processParams()
 
 
