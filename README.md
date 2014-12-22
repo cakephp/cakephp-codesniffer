@@ -3,6 +3,10 @@
 This code works with [phpcs](http://pear.php.net/manual/en/package.php.php-codesniffer.php)
 and checks code against the coding standards used in CakePHP.
 
+:warning: The `master` branch contains codesniffer rules that are based on the
+PSR2 standard. If you want to check against the historical CakePHP coding
+standard use any of the `1.x` releases.
+
 ## Installation
 
 You should install this codesniffer with composer:
@@ -20,8 +24,8 @@ installed phpcs, and this package with PEAR, you can do the following:
 
 	vendor/bin/phpcs --standard=CakePHP /path/to/code
 
-*Warning* when these sniffs are installed with composer, ensure that you have
-configured the CodeSniffer `installed_paths` setting.
+:warning: Warning when these sniffs are installed with composer, ensure that
+you have configured the CodeSniffer `installed_paths` setting.
 
 ## Contributing
 
