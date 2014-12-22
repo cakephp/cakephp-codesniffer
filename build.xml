@@ -16,7 +16,7 @@
 	<taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
 
 	<!-- Update this version when making new packages -->
-	<property name="version" value="0.1.31" />
+	<property name="version" value="1.0.0" />
 
 	<!-- Shouldn't have to change these -->
 	<property name="build.dir" value="build" />
@@ -81,6 +81,12 @@
 			</dependencies>
 			<exceptions key="CakePHP/ruleset.xml">php</exceptions>
 			<exceptions key="README.md">php</exceptions>
+
+			<changelog version="1.0.0" date="2014-12-21" license="MIT">
+				* Bump to 1.0.0 as development has already started
+				  on a PSR-2 compatible codesniffer that will be released
+				  at the 2.x version number.
+			</changelog>
 
 			<changelog version="0.1.31" date="2014-12-10" license="MIT">
 				* Stick with 1.x version of PHP_CodeSniffer.
