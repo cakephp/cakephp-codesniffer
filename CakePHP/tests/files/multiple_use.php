@@ -1,6 +1,6 @@
 <?php
 use CakePHP\Test,
-	CakePHP\Fail;
+    CakePHP\Fail;
 
 class Foo {
 }

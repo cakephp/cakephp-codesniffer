@@ -8,13 +8,13 @@
  * @package   PHP_CodeSniffer
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 
-if (class_exists('PHP_CodeSniffer_CommentParser_FunctionCommentParser', true) === false) {
-    throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_CommentParser_FunctionCommentParser not found');
+if (class_exists('PEAR_Sniffs_Commenting_FunctionCommentSniff', true) === false) {
+    throw new PHP_CodeSniffer_Exception('Class PEAR_Sniffs_Commenting_FunctionCommentSniff not found');
 }
 
 /**
@@ -23,451 +23,444 @@ if (class_exists('PHP_CodeSniffer_CommentParser_FunctionCommentParser', true) ==
  * Verifies that :
  * <ul>
  *  <li>A comment exists</li>
- *  <li>There is a blank newline after the short description.</li>
- *  <li>There is a blank newline between the long and short description.</li>
- *  <li>There is a blank newline between the long description and tags.</li>
- *  <li>Parameter names represent those in the method.</li>
+ *  <li>There is a blank newline after the short description</li>
+ *  <li>There is a blank newline between the long and short description</li>
+ *  <li>There is a blank newline between the long description and tags</li>
+ *  <li>Parameter names represent those in the method</li>
  *  <li>Parameter comments are in the correct order</li>
  *  <li>Parameter comments are complete</li>
+ *  <li>A type hint is provided for array and custom class</li>
+ *  <li>Type hint matches the actual variable/class type</li>
+ *  <li>A blank line is present before the first and after the last parameter</li>
  *  <li>A return type exists</li>
- *  <li>There must be one blank line between body and headline comments.</li>
- *  <li>Any throw tag must have an exception class.</li>
+ *  <li>Any throw tag must have a comment</li>
+ *  <li>The tag order and indentation are correct</li>
  * </ul>
  *
  * @category  PHP
  * @package   PHP_CodeSniffer
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sniff
+class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenting_FunctionCommentSniff
 {
-
-    /**
-     * The name of the method that we are currently processing.
-     *
-     * @var string
-     */
-    private $_methodName = '';
-
-    /**
-     * The position in the stack where the function token was found.
-     *
-     * @var int
-     */
-    private $_functionToken = null;
-
-    /**
-     * The position in the stack where the class token was found.
-     *
-     * @var int
-     */
-    private $_classToken = null;
-
-    /**
-     * The function comment parser for the current method.
-     *
-     * @var PHP_CodeSniffer_Comment_Parser_FunctionCommentParser
-     */
-    protected $commentParser = null;
-
-    /**
-     * The current PHP_CodeSniffer_File object we are processing.
-     *
-     * @var PHP_CodeSniffer_File
-     */
-    protected $currentFile = null;
-
-
-    /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return array
-     */
-    public function register()
-    {
-        return array(T_FUNCTION);
-
-    }//end register()
-
-
-    /**
-     * Processes this test, when one of its tokens is encountered.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                  $stackPtr  The position of the current token
-     *                                        in the stack passed in $tokens.
-     *
-     * @return void
-     */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
-    {
-        $find = array(
-                 T_COMMENT,
-                 T_DOC_COMMENT,
-                 T_CLASS,
-                 T_FUNCTION,
-                 T_OPEN_TAG,
-                );
-
-        $commentEnd = $phpcsFile->findPrevious($find, ($stackPtr - 1));
-
-        if ($commentEnd === false) {
-            return;
-        }
-
-        $this->currentFile = $phpcsFile;
-        $tokens            = $phpcsFile->getTokens();
-
-        // If the token that we found was a class or a function, then this
-        // function has no doc comment.
-        $code = $tokens[$commentEnd]['code'];
-
-        if ($code === T_COMMENT) {
-            $error = 'You must use "/**" style comments for a function comment';
-            $phpcsFile->addWarning($error, $stackPtr, 'WrongStyle');
-            return;
-        } else if ($code !== T_DOC_COMMENT) {
-            $phpcsFile->addWarning('Missing function doc comment', $stackPtr, 'Missing');
-            return;
-        }
-
-        // If there is any code between the function keyword and the doc block
-        // then the doc block is not for us.
-        $ignore    = PHP_CodeSniffer_Tokens::$scopeModifiers;
-        $ignore[]  = T_STATIC;
-        $ignore[]  = T_WHITESPACE;
-        $ignore[]  = T_ABSTRACT;
-        $ignore[]  = T_FINAL;
-        $prevToken = $phpcsFile->findPrevious($ignore, ($stackPtr - 1), null, true);
-        if ($prevToken !== $commentEnd) {
-            $phpcsFile->addWarning('Missing function doc comment', $stackPtr, 'Missing');
-            return;
-        }
-
-        $this->_functionToken = $stackPtr;
-
-        $this->_classToken = null;
-        foreach ($tokens[$stackPtr]['conditions'] as $condPtr => $condition) {
-            if ($condition === T_CLASS || $condition === T_INTERFACE) {
-                $this->_classToken = $condPtr;
-                break;
-            }
-        }
-
-        // If the first T_OPEN_TAG is right before the comment, it is probably
-        // a file comment.
-        $commentStart  = ($phpcsFile->findPrevious(T_DOC_COMMENT, ($commentEnd - 1), null, true) + 1);
-        $commentString = $phpcsFile->getTokensAsString($commentStart, $commentEnd - $commentStart + 1);
-        $prevToken     = $phpcsFile->findPrevious(T_WHITESPACE, ($commentStart - 1), null, true);
-        if ($tokens[$prevToken]['code'] === T_OPEN_TAG) {
-            // Is this the first open tag?
-            if ($stackPtr === 0 || $phpcsFile->findPrevious(T_OPEN_TAG, ($prevToken - 1)) === false) {
-                $phpcsFile->addWarning('Missing function doc comment', $stackPtr, 'Missing');
-                return;
-            }
-        }
-
-        $comment           = $phpcsFile->getTokensAsString($commentStart, ($commentEnd - $commentStart + 1));
-        $this->_methodName = $phpcsFile->getDeclarationName($stackPtr);
-
-        try {
-            $this->commentParser = new PHP_CodeSniffer_CommentParser_FunctionCommentParser($comment, $phpcsFile);
-            $this->commentParser->parse();
-        } catch (PHP_CodeSniffer_CommentParser_ParserException $e) {
-            $line = ($e->getLineWithinComment() + $commentStart);
-            $phpcsFile->addError($e->getMessage(), $line, 'FailedParse');
-            return;
-        }
-
-        $comment = $this->commentParser->getComment();
-        if (is_null($comment) === true) {
-            $error = 'Function doc comment is empty';
-            $phpcsFile->addWarning($error, $commentStart, 'Empty');
-            return;
-        }
-
-        // The first line of the comment should just be the /** code.
-        $eolPos    = strpos($commentString, $phpcsFile->eolChar);
-        $firstLine = substr($commentString, 0, $eolPos);
-        if ($firstLine !== '/**') {
-            $error = 'The first line of the comment should only contain /**. Ensure there is no trailing whitespace.';
-            $phpcsFile->addWarning($error, $commentStart, 'ContentAfterOpen');
-        }
-
-        // If the comment has an inherit doc note just move on
-        if (preg_match('/\{\@inheritDoc\}/', $commentString)) {
-            return;
-        } elseif (preg_match('/\{?\@?inherit[dD]oc\}?/', $commentString)) {
-            $error = 'The inheritdoc statement is incorrect';
-            $phpcsFile->addWarning($error, $commentStart, 'IncorrectInheritDoc');
-            return;
-        }
-
-        $this->processParams($commentStart);
-        $this->processReturn($commentStart, $commentEnd);
-        $this->processThrows($commentStart);
-
-        // No extra newline before short description.
-        $short        = $comment->getShortComment();
-        $newlineCount = 0;
-        $newlineSpan  = strspn($short, $phpcsFile->eolChar);
-        if ($short !== '' && $newlineSpan > 0) {
-            $error = 'Extra newline(s) found before function comment short description';
-            $phpcsFile->addWarning($error, ($commentStart + 1), 'SpacingBeforeShort');
-        }
-
-        $newlineCount = (substr_count($short, $phpcsFile->eolChar) + 1);
-
-        // Exactly one blank line between short and long description.
-        $long = $comment->getLongComment();
-        if (empty($long) === false) {
-            $between        = $comment->getWhiteSpaceBetween();
-            $newlineBetween = substr_count($between, $phpcsFile->eolChar);
-            if ($newlineBetween !== 2) {
-                $error = 'There must be exactly one blank line between descriptions in function comment';
-                $phpcsFile->addWarning($error, ($commentStart + $newlineCount + 1), 'SpacingAfterShort');
-            }
-
-            $newlineCount += $newlineBetween;
-        }
-
-        // Exactly one blank line before tags.
-        $params = $this->commentParser->getTagOrders();
-        if (count($params) > 1) {
-            $newlineSpan = $comment->getNewlineAfter();
-            if ($newlineSpan !== 2) {
-                $error = 'There must be exactly one blank line before the tags in function comment';
-                if ($long !== '') {
-                    $newlineCount += (substr_count($long, $phpcsFile->eolChar) - $newlineSpan + 1);
-                }
-
-                $phpcsFile->addWarning($error, ($commentStart + $newlineCount), 'SpacingBeforeTags');
-                $short = rtrim($short, $phpcsFile->eolChar.' ');
-            }
-        }
-
-    }//end process()
-
-
-    /**
-     * Process any throw tags that this function comment has.
-     *
-     * @param int $commentStart The position in the stack where the
-     *                          comment started.
-     *
-     * @return void
-     */
-    protected function processThrows($commentStart)
-    {
-        if (count($this->commentParser->getThrows()) === 0) {
-            return;
-        }
-
-        foreach ($this->commentParser->getThrows() as $throw) {
-
-            $exception = $throw->getValue();
-            $errorPos  = ($commentStart + $throw->getLine());
-
-            if ($exception === '') {
-                $error = '@throws tag must contain the exception class name';
-                $this->currentFile->addWarning($error, $errorPos, 'EmptyThrows');
-            }
-        }
-
-    }//end processThrows()
 
 
     /**
      * Process the return comment of this function comment.
      *
-     * @param int $commentStart The position in the stack where the comment started.
-     * @param int $commentEnd   The position in the stack where the comment ended.
+     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+     * @param int                  $stackPtr     The position of the current token
+     *                                           in the stack passed in $tokens.
+     * @param int                  $commentStart The position in the stack where the comment started.
      *
      * @return void
      */
-    protected function processReturn($commentStart, $commentEnd)
+    protected function processReturn(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
     {
+        $tokens = $phpcsFile->getTokens();
+
         // Skip constructor and destructor.
         $className = '';
-        if ($this->_classToken !== null) {
-            $className = $this->currentFile->getDeclarationName($this->_classToken);
-            $className = strtolower(ltrim($className, '_'));
-        }
-
-        $methodName      = strtolower(ltrim($this->_methodName, '_'));
-        $isSpecialMethod = ($this->_methodName === '__construct' || $this->_methodName === '__destruct');
-
-        if ($isSpecialMethod === false && $methodName !== $className) {
-            // Report missing return tag.
-            if ($this->commentParser->getReturn() === null) {
-                $error = 'Missing @return tag in function comment';
-                $this->currentFile->addWarning($error, $commentEnd, 'MissingReturn');
-            } else if (trim($this->commentParser->getReturn()->getRawContent()) === '') {
-                $error    = '@return tag is empty in function comment';
-                $errorPos = ($commentStart + $this->commentParser->getReturn()->getLine());
-                $this->currentFile->addWarning($error, $errorPos, 'EmptyReturn');
+        foreach ($tokens[$stackPtr]['conditions'] as $condPtr => $condition) {
+            if ($condition === T_CLASS || $condition === T_INTERFACE) {
+                $className = $phpcsFile->getDeclarationName($condPtr);
+                $className = strtolower(ltrim($className, '_'));
             }
         }
+
+        $methodName      = $phpcsFile->getDeclarationName($stackPtr);
+        $isSpecialMethod = ($methodName === '__construct' || $methodName === '__destruct');
+        if ($methodName !== '_') {
+            $methodName = strtolower(ltrim($methodName, '_'));
+        }
+
+        $return = null;
+        foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
+            if ($tokens[$tag]['content'] === '@return') {
+                if ($return !== null) {
+                    $error = 'Only 1 @return tag is allowed in a function comment';
+                    $phpcsFile->addError($error, $tag, 'DuplicateReturn');
+                    return;
+                }
+
+                $return = $tag;
+            }
+        }
+
+        if ($isSpecialMethod === true) {
+            return;
+        }
+
+        if ($return !== null) {
+            $content = $tokens[($return + 2)]['content'];
+            if (empty($content) === true || $tokens[($return + 2)]['code'] !== T_DOC_COMMENT_STRING) {
+                $error = 'Return type missing for @return tag in function comment';
+                $phpcsFile->addError($error, $return, 'MissingReturnType');
+            } else {
+                // Check return type (can be multiple, separated by '|').
+                $typeNames      = explode('|', $content);
+                $suggestedNames = array();
+                foreach ($typeNames as $i => $typeName) {
+                    if ($typeName === 'integer') {
+                        $suggestedName = 'int';
+                    } elseif ($typeName === 'boolean') {
+                        $suggestedName = 'bool';
+                    } elseif (in_array($typeName, array('int', 'bool'))) {
+                        $suggestedName = $typeName;
+                    } else {
+                        $suggestedName = PHP_CodeSniffer::suggestType($typeName);
+                    }
+                    if (in_array($suggestedName, $suggestedNames) === false) {
+                        $suggestedNames[] = $suggestedName;
+                    }
+                }
+
+                $suggestedType = implode('|', $suggestedNames);
+                if ($content !== $suggestedType) {
+                    $error = 'Function return type "%s" is invalid';
+                    $error = 'Expected "%s" but found "%s" for function return type';
+                    $data  = array(
+                              $suggestedType,
+                              $content,
+                             );
+                    $phpcsFile->addError($error, $return, 'InvalidReturn', $data);
+                }
+
+                // If the return type is void, make sure there is
+                // no return statement in the function.
+                if ($content === 'void') {
+                    if (isset($tokens[$stackPtr]['scope_closer']) === true) {
+                        $endToken = $tokens[$stackPtr]['scope_closer'];
+                        for ($returnToken = $stackPtr; $returnToken < $endToken; $returnToken++) {
+                            if ($tokens[$returnToken]['code'] === T_CLOSURE) {
+                                $returnToken = $tokens[$returnToken]['scope_closer'];
+                                continue;
+                            }
+
+                            if ($tokens[$returnToken]['code'] === T_RETURN) {
+                                break;
+                            }
+                        }
+
+                        if ($returnToken !== $endToken) {
+                            // If the function is not returning anything, just
+                            // exiting, then there is no problem.
+                            $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
+                            if ($tokens[$semicolon]['code'] !== T_SEMICOLON) {
+                                $error = 'Function return type is void, but function contains return statement';
+                                $phpcsFile->addWarning($error, $return, 'InvalidReturnVoid');
+                            }
+                        }
+                    }//end if
+                } else if ($content !== 'mixed') {
+                    // If return type is not void, there needs to be a return statement
+                    // somewhere in the function that returns something.
+                    if (isset($tokens[$stackPtr]['scope_closer']) === true) {
+                        $endToken    = $tokens[$stackPtr]['scope_closer'];
+                        $returnToken = $phpcsFile->findNext(T_RETURN, $stackPtr, $endToken);
+                        if ($returnToken === false) {
+                            $error = 'Function return type is not void, but function has no return statement';
+                            $phpcsFile->addWarning($error, $return, 'InvalidNoReturn');
+                        } else {
+                            $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
+                            if ($tokens[$semicolon]['code'] === T_SEMICOLON) {
+                                $error = 'Function return type is not void, but function is returning void here';
+                                $phpcsFile->addWarning($error, $returnToken, 'InvalidReturnNotVoid');
+                            }
+                        }
+                    }
+                }//end if
+            }//end if
+        } else {
+            $error = 'Missing @return tag in function comment';
+            $phpcsFile->addWarning($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
+        }//end if
 
     }//end processReturn()
 
 
     /**
-     * Process the function parameter comments.
+     * Process any throw tags that this function comment has.
      *
-     * @param int $commentStart The position in the stack where
-     *                          the comment started.
+     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+     * @param int                  $stackPtr     The position of the current token
+     *                                           in the stack passed in $tokens.
+     * @param int                  $commentStart The position in the stack where the comment started.
      *
      * @return void
      */
-    protected function processParams($commentStart)
+    protected function processThrows(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
     {
-        $realParams = $this->currentFile->getMethodParameters($this->_functionToken);
+        $tokens = $phpcsFile->getTokens();
 
-        $params      = $this->commentParser->getParams();
-        $foundParams = array();
-
-        if (empty($params) === false) {
-
-            // Parameters must appear immediately after the comment.
-            if ($params[0]->getOrder() !== 2) {
-                $error    = 'Parameters must appear immediately after the comment';
-                $errorPos = ($params[0]->getLine() + $commentStart);
-                $this->currentFile->addWarning($error, $errorPos, 'SpacingBeforeParams');
+        $throws = array();
+        foreach ($tokens[$commentStart]['comment_tags'] as $pos => $tag) {
+            if ($tokens[$tag]['content'] !== '@throws') {
+                continue;
             }
 
-            $previousParam      = null;
-            $spaceBeforeVar     = 10000;
-            $spaceBeforeComment = 10000;
-            $longestType        = 0;
-            $longestVar         = 0;
+            $exception = null;
+            $comment   = null;
+            if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING) {
+                $matches = array();
+                preg_match('/([^\s]+)(?:\s+(.*))?/', $tokens[($tag + 2)]['content'], $matches);
+                $exception = $matches[1];
+                if (isset($matches[2]) === true) {
+                    $comment = $matches[2];
+                }
+            }
 
-            foreach ($params as $param) {
-
-                $paramComment = trim($param->getComment());
-                $errorPos     = ($param->getLine() + $commentStart);
-
-                // Make sure that there is only one space before the var type.
-                if ($param->getWhitespaceBeforeType() !== ' ') {
-                    $error = 'Expected 1 space before variable type';
-                    $this->currentFile->addWarning($error, $errorPos, 'SpacingBeforeParamType');
+            if ($exception === null) {
+                $error = 'Exception type and comment missing for @throws tag in function comment';
+                $phpcsFile->addWarning($error, $tag, 'InvalidThrows');
+            } else if ($comment === null) {
+                $error = 'Comment missing for @throws tag in function comment';
+                $phpcsFile->addWarning($error, $tag, 'EmptyThrows');
+            } else {
+                // Any strings until the next tag belong to this comment.
+                if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true) {
+                    $end = $tokens[$commentStart]['comment_tags'][($pos + 1)];
+                } else {
+                    $end = $tokens[$commentStart]['comment_closer'];
                 }
 
-                $spaceCount = substr_count($param->getWhitespaceBeforeVarName(), ' ');
-                if ($spaceCount < $spaceBeforeVar) {
-                    $spaceBeforeVar = $spaceCount;
-                    $longestType    = $errorPos;
+                for ($i = ($tag + 3); $i < $end; $i++) {
+                    if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
+                        $comment .= ' '.$tokens[$i]['content'];
+                    }
                 }
 
-                $spaceCount = substr_count($param->getWhitespaceBeforeComment(), ' ');
-
-                if ($spaceCount < $spaceBeforeComment && $paramComment !== '') {
-                    $spaceBeforeComment = $spaceCount;
-                    $longestVar         = $errorPos;
+                // Starts with a capital letter and ends with a fullstop.
+                $firstChar = $comment{0};
+                if (strtoupper($firstChar) !== $firstChar) {
+                    $error = '@throws tag comment must start with a capital letter';
+                    $phpcsFile->addWarning($error, ($tag + 2), 'ThrowsNotCapital');
                 }
 
-                // Make sure they are in the correct order,
-                // and have the correct name.
-                $pos = $param->getPosition();
+                $lastChar = substr($comment, -1);
+                if ($lastChar !== '.') {
+                    $error = '@throws tag comment must end with a full stop';
+                    $phpcsFile->addWarning($error, ($tag + 2), 'ThrowsNoFullStop');
+                }
+            }//end if
+        }//end foreach
 
-                $paramName = ($param->getVarName() !== '') ? $param->getVarName() : '[ UNKNOWN ]';
+    }//end processThrows()
 
-                // Make sure the names of the parameter comment matches the
-                // actual parameter.
-                if (isset($realParams[($pos - 1)]) === true) {
-                    $realName      = $realParams[($pos - 1)]['name'];
-                    $foundParams[] = $realName;
 
-                    // Append ampersand to name if passing by reference.
-                    if ($realParams[($pos - 1)]['pass_by_reference'] === true) {
-                        $realName = '&'.$realName;
+    /**
+     * Process the function parameter comments.
+     *
+     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+     * @param int                  $stackPtr     The position of the current token
+     *                                           in the stack passed in $tokens.
+     * @param int                  $commentStart The position in the stack where the comment started.
+     *
+     * @return void
+     */
+    protected function processParams(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+    {
+        $tokens = $phpcsFile->getTokens();
+
+        $params  = array();
+        $maxType = 0;
+        $maxVar  = 0;
+        foreach ($tokens[$commentStart]['comment_tags'] as $pos => $tag) {
+            if ($tokens[$tag]['content'] !== '@param') {
+                continue;
+            }
+
+            $type         = '';
+            $typeSpace    = 0;
+            $var          = '';
+            $varSpace     = 0;
+            $comment      = '';
+            $commentLines = array();
+            if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING) {
+                $matches = array();
+                preg_match('/([^$&]+)(?:((?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/', $tokens[($tag + 2)]['content'], $matches);
+
+                $typeLen   = strlen($matches[1]);
+                $type      = trim($matches[1]);
+                $typeSpace = ($typeLen - strlen($type));
+                $typeLen   = strlen($type);
+                if ($typeLen > $maxType) {
+                    $maxType = $typeLen;
+                }
+
+                if (isset($matches[2]) === true) {
+                    $var    = $matches[2];
+                    $varLen = strlen($var);
+                    if ($varLen > $maxVar) {
+                        $maxVar = $varLen;
                     }
 
-                    if ($realName !== $paramName) {
-                        $code = 'ParamNameNoMatch';
-                        $data = array(
-                                 $paramName,
-                                 $realName,
-                                 $pos,
-                                );
+                    if (isset($matches[4]) === true) {
+                        $varSpace       = strlen($matches[3]);
+                        $comment        = $matches[4];
+                        $commentLines[] = array(
+                                           'comment' => $comment,
+                                           'token'   => ($tag + 2),
+                                           'indent'  => $varSpace,
+                                          );
 
-                        $error  = 'Doc comment for var %s does not match ';
-                        if (strtolower($paramName) === strtolower($realName)) {
-                            $error .= 'case of ';
-                            $code   = 'ParamNameNoCaseMatch';
+                        // Any strings until the next tag belong to this comment.
+                        if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true) {
+                            $end = $tokens[$commentStart]['comment_tags'][($pos + 1)];
+                        } else {
+                            $end = $tokens[$commentStart]['comment_closer'];
                         }
 
-                        $error .= 'actual variable name %s at position %s';
+                        for ($i = ($tag + 3); $i < $end; $i++) {
+                            if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
+                                $indent = 0;
+                                if ($tokens[($i - 1)]['code'] === T_DOC_COMMENT_WHITESPACE) {
+                                    $indent = strlen($tokens[($i - 1)]['content']);
+                                }
 
-                        $this->currentFile->addWarning($error, $errorPos, $code, $data);
-                    }
+                                $comment       .= ' '.$tokens[$i]['content'];
+                                $commentLines[] = array(
+                                                   'comment' => $tokens[$i]['content'],
+                                                   'token'   => $i,
+                                                   'indent'  => $indent,
+                                                  );
+                            }
+                        }
+                    } else {
+                        $error = 'Missing parameter comment';
+                        $phpcsFile->addError($error, $tag, 'MissingParamComment');
+                        $commentLines[] = array('comment' => '');
+                    }//end if
                 } else {
-                    // We must have an extra parameter comment.
-                    $error = 'Superfluous doc comment at position '.$pos;
-                    $this->currentFile->addWarning($error, $errorPos, 'ExtraParamComment');
+                    $error = 'Missing parameter name';
+                    $phpcsFile->addError($error, $tag, 'MissingParamName');
+                }//end if
+            } else {
+                $error = 'Missing parameter type';
+                $phpcsFile->addError($error, $tag, 'MissingParamType');
+            }//end if
+
+            $params[] = array(
+                         'tag'          => $tag,
+                         'type'         => $type,
+                         'var'          => $var,
+                         'comment'      => $comment,
+                         'commentLines' => $commentLines,
+                         'type_space'   => $typeSpace,
+                         'var_space'    => $varSpace,
+                        );
+        }//end foreach
+
+        $realParams  = $phpcsFile->getMethodParameters($stackPtr);
+        $foundParams = array();
+
+        foreach ($params as $pos => $param) {
+            // If the type is empty, the whole line is empty.
+            if ($param['type'] === '') {
+                continue;
+            }
+
+            // Check the param type value.
+            $typeNames = explode('|', $param['type']);
+            foreach ($typeNames as $typeName) {
+                if ($typeName === 'integer') {
+                    $suggestedName = 'int';
+                } elseif ($typeName === 'boolean') {
+                    $suggestedName = 'bool';
+                } elseif (in_array($typeName, array('int', 'bool'))) {
+                    $suggestedName = $typeName;
+                } else {
+                    $suggestedName = PHP_CodeSniffer::suggestType($typeName);
                 }
 
-                if ($param->getVarName() === '') {
-                    $error = 'Missing parameter name at position '.$pos;
-                     $this->currentFile->addWarning($error, $errorPos, 'MissingParamName');
-                }
-
-                if ($param->getType() === '') {
-                    $error = 'Missing type at position '.$pos;
-                    $this->currentFile->addWarning($error, $errorPos, 'MissingParamType');
-                }
-
-                if ($paramComment === '') {
-                    $error = 'Missing comment for param "%s" at position %s';
+                if ($typeName !== $suggestedName) {
+                    $error = 'Expected "%s" but found "%s" for parameter type';
                     $data  = array(
-                              $paramName,
-                              $pos,
+                              $suggestedName,
+                              $typeName,
                              );
-                    $this->currentFile->addWarning($error, $errorPos, 'MissingParamComment', $data);
+
+                    $fix = $phpcsFile->addFixableError($error, $param['tag'], 'IncorrectParamVarName', $data);
+                    if ($fix === true) {
+                        $content  = $suggestedName;
+                        $content .= str_repeat(' ', $param['type_space']);
+                        $content .= $param['var'];
+                        $content .= str_repeat(' ', $param['var_space']);
+                        $content .= $param['commentLines'][0]['comment'];
+                        $phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
+                    }
                 }
-
-                $previousParam = $param;
-
             }//end foreach
 
-            if ($spaceBeforeVar !== 1 && $spaceBeforeVar !== 10000 && $spaceBeforeComment !== 10000) {
-                $error = 'Expected 1 space after the longest type';
-                $this->currentFile->addWarning($error, $longestType, 'SpacingAfterLongType');
+            if ($param['var'] === '') {
+                continue;
             }
 
-            if ($spaceBeforeComment !== 1 && $spaceBeforeComment !== 10000) {
-                $error = 'Expected 1 space after the longest variable name';
-                $this->currentFile->addWarning($error, $longestVar, 'SpacingAfterLongName');
+            $foundParams[] = $param['var'];
+
+            // Make sure the param name is correct.
+            if (isset($realParams[$pos]) === true) {
+                $realName = $realParams[$pos]['name'];
+                if ($realName !== $param['var']) {
+                    $code = 'ParamNameNoMatch';
+                    $data = array(
+                             $param['var'],
+                             $realName,
+                            );
+
+                    $error = 'Doc comment for parameter %s does not match ';
+                    if (strtolower($param['var']) === strtolower($realName)) {
+                        $error .= 'case of ';
+                        $code   = 'ParamNameNoCaseMatch';
+                    }
+
+                    $error .= 'actual variable name %s';
+
+                    $phpcsFile->addWarning($error, $param['tag'], $code, $data);
+                }
+            } else if (substr($param['var'], -4) !== ',...') {
+                // We must have an extra parameter comment.
+                $error = 'Superfluous parameter comment';
+                $phpcsFile->addError($error, $param['tag'], 'ExtraParamComment');
+            }//end if
+
+            if ($param['comment'] === '') {
+                continue;
             }
 
-        }//end if
+            // Param comments must start with a capital letter and end with the full stop.
+            $firstChar = $param['comment']{0};
+            if (preg_match('|\p{Lu}|u', $firstChar) === 0) {
+                $error = 'Parameter comment must start with a capital letter';
+                $phpcsFile->addWarning($error, $param['tag'], 'ParamCommentNotCapital');
+            }
+
+            $lastChar = substr($param['comment'], -1);
+            if ($lastChar !== '.') {
+                $error = 'Parameter comment must end with a full stop';
+                $phpcsFile->addWarning($error, $param['tag'], 'ParamCommentFullStop');
+            }
+        }//end foreach
 
         $realNames = array();
         foreach ($realParams as $realParam) {
             $realNames[] = $realParam['name'];
         }
 
-        // Report and missing comments.
+        // Report missing comments.
         $diff = array_diff($realNames, $foundParams);
         foreach ($diff as $neededParam) {
-            if (count($params) !== 0) {
-                $errorPos = ($params[(count($params) - 1)]->getLine() + $commentStart);
-            } else {
-                $errorPos = $commentStart;
-            }
-
-            $error = 'Doc comment for "%s" missing';
+            $error = 'Doc comment for parameter "%s" missing';
             $data  = array($neededParam);
-            $this->currentFile->addWarning($error, $errorPos, 'MissingParamTag', $data);
+            $phpcsFile->addWarning($error, $commentStart, 'MissingParamTag', $data);
         }
 
     }//end processParams()
 
 
 }//end class
-
-?>

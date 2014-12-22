@@ -1,42 +1,45 @@
 <?php
+namespace Beakman;
 
-class VariablenamePass {
+class VariablenamePass
+{
+    public $passing;
 
-	public $passing;
+    public $passingPublic = 'defined';
 
-	public $passingPublic = 'defined';
+    protected $underScoredStart = 'OK';
 
-	protected $_underScoredStart = 'OK';
+    protected $underScored;
 
-	protected $_underScored;
+    private $doubleUnderscore = 'applications';
 
-	private $__doubleUnderscore = 'applications';
+    public static $publicStatic = true;
 
-	public static $publicStatic = true;
+    protected static $protectedStatic = true;
 
-	protected static $_protectedStatic = true;
+    private static $privateStatic = true;
 
-	private static $__privateStatic = true;
+    /**
+     * [setVariables description]
+     *
+     * @return void
+     */
+    public function setVariables()
+    {
+        $this->passingPublic = 'changed';
+        $this->underscored = 'has value now';
+        $this->doubleUnderscore = 'not recommended';
+    }
 
-/**
- * [setVariables description]
- *
- * @return void
- */
-	public function setVariables() {
-		$this->passingPublic = 'changed';
-		$this->_underscored = 'has value now';
-		$this->__doubleUnderscore = 'not recommended';
-	}
-
-/**
- * [setStatics description]
- *
- * @return void
- */
-	public static function setStatics() {
-		self::$publicStatic = true;
-		self::$_protectedStatic = true;
-		self::$__privateStatic = true;
-	}
+    /**
+     * [setStatics description]
+     *
+     * @return void
+     */
+    public static function setStatics()
+    {
+        self::$publicStatic = true;
+        self::$protectedStatic = true;
+        self::$privateStatic = true;
+    }
 }

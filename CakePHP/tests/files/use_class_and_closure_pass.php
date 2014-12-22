@@ -1,20 +1,22 @@
 <?php
+namespace Beakman;
 
-class TraitUser {
+class TraitUser
+{
 
-	use FunctionsTrait;
+    use FunctionsTrait;
 
-/**
- * [doThing description]
- *
- * @param callable $callback [description]
- * @return void
- */
-	public function doThing(callable $callback) {
-		$visitor = function ($expression) use (&$visitor, $callback) {
-			echo 'It works';
-		};
-		$visitor($this);
-	}
-
+    /**
+     * [doThing description]
+     *
+     * @param callable $callback The description.
+     * @return void
+     */
+    public function doThing(callable $callback)
+    {
+        $visitor = function ($expression) use (&$visitor, $callback) {
+            echo 'It works';
+        };
+        $visitor($this);
+    }
 }

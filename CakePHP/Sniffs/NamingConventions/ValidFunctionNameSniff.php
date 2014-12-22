@@ -133,17 +133,6 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 				return;
 			}
 		}
-
-		$testMethodName = ltrim($methodName, '_');
-		if (PHP_CodeSniffer::isCamelCaps($testMethodName, false, true, false) === false) {
-			$error = '%s method name "%s" is not in camel caps format';
-			$data = array(
-				ucfirst($scope),
-				$methodName,
-			);
-			$phpcsFile->addError($error, $stackPtr, 'ScopeNotCamelCaps', $data);
-			return;
-		}
 	}
 
 /**

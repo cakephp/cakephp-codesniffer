@@ -1,19 +1,19 @@
 <?php
 
 for ($i = 0; $i < 10; $i++) {
-	echo 'hello';
+    echo 'hello';
 }
 
 if ($i < 10) {
-	echo 'hello2';
+    echo 'hello2';
 } elseif ($i > 100) {
-	echo 'i > 100';
+    echo 'i > 100';
 }
 
 while (false) {
-	echo 'false';
+    echo 'false';
 }
 
 do {
-	echo 'dowhile test';
+    echo 'dowhile test';
 } while (false);
