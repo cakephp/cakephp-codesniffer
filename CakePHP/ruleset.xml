@@ -8,6 +8,14 @@
 
  <rule ref="PSR2"/>
 
+ <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
+  <severity>0</severity>
+ </rule>
+
+ <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
+  <severity>0</severity>
+ </rule>
+
  <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
 
  <rule ref="Squiz.Classes.LowercaseClassKeywords"/>
