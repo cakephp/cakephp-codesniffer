@@ -6,7 +6,10 @@
  <exclude-pattern>*/Config/*.ini.php</exclude-pattern>
  <exclude-pattern>/*/tmp/</exclude-pattern>
 
- <rule ref="PSR2"/>
+ <rule ref="PSR2">
+  <exclude name="PSR2.Methods.MethodDeclaration.Underscore"/>
+  <exclude name="PSR2.Classes.PropertyDeclaration.Underscore"/>
+ </rule>
 
  <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
 
