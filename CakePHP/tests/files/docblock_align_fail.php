@@ -18,11 +18,11 @@ class Foo extends Bar
      */
     public $brain = array();
 
-        /**
-         * Tell me your thoughts.
-         *
-         * @return void
-         */
+/**
+ * Tell me your thoughts.
+ *
+ * @return void
+ */
     public function dumpThoughts()
     {
         foreach ($thoughts as $thought) {
