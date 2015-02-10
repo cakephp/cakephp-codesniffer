@@ -53,17 +53,12 @@ class CakePHP_Sniffs_Commenting_DocBlockAlignmentSniff implements PHP_CodeSniffe
         );
         $allTokens = array_merge($leftWall, $oneIndentation);
 
-        foreach ($tokens as $key => $token) {
-            if ($token['code'] === T_DOC_COMMENT_OPEN_TAG) {
-                $next = $phpcsFile->findNext($allTokens, $key + 1, null);
-                if ($next) {
-                    if (in_array($tokens[$next]['code'], $leftWall) && $token['column'] > 1) {
-                        $phpcsFile->addError('Expected docblock to be against left wall.', $key, 'NotAllowed');
-                    }
-                    if (in_array($tokens[$next]['code'], $oneIndentation) && $token['column'] !== 5) {
-                        $phpcsFile->addError('Expected docblock to be indented.', $key, 'NotAllowed');
-                    }
-                }
+        $next = $phpcsFile->findNext($allTokens, $stackPtr + 1, null);
+        if ($next) {
+            $notWalled = (in_array($tokens[$next]['code'], $leftWall) && $tokens[$stackPtr]['column'] !== 1);
+            $notIndented = (in_array($tokens[$next]['code'], $oneIndentation) && $tokens[$stackPtr]['column'] !== 5);
+            if ($notWalled || $notIndented) {
+                $phpcsFile->addError('Expected docblock to be aligned with code.', $stackPtr, 'NotAllowed');
             }
         }
 
