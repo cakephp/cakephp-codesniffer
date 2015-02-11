@@ -52,8 +52,8 @@ class CakePHP_Sniffs_Commenting_DocBlockAlignmentSniff implements PHP_CodeSniffe
             T_CONST
         );
         $allTokens = array_merge($leftWall, $oneIndentation);
-        $notFlatFile = $phpcsFile->findNext(T_NAMESPACE, 0, null);
-        $next = $phpcsFile->findNext($allTokens, $stackPtr + 1, null);
+        $notFlatFile = $phpcsFile->findNext(T_NAMESPACE, 0);
+        $next = $phpcsFile->findNext($allTokens, $stackPtr + 1);
 
         if ($next && $notFlatFile) {
             $notWalled = (in_array($tokens[$next]['code'], $leftWall) && $tokens[$stackPtr]['column'] !== 1);
