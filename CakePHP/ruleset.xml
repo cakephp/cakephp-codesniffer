@@ -11,8 +11,20 @@
  <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
   <severity>0</severity>
  </rule>
-
  <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
+  <severity>0</severity>
+ </rule>
+
+ <rule ref="CakePHP.Commenting.FunctionComment.ParamCommentNotCapital">
+  <severity>0</severity>
+ </rule>
+ <rule ref="CakePHP.Commenting.FunctionComment.ParamCommentFullStop">
+  <severity>0</severity>
+ </rule>
+ <rule ref="CakePHP.Commenting.FunctionComment.ThrowsNotCapital">
+  <severity>0</severity>
+ </rule>
+ <rule ref="CakePHP.Commenting.FunctionComment.ThrowsNoFullStop">
   <severity>0</severity>
  </rule>
 
