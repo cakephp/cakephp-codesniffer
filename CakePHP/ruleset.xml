@@ -8,6 +8,10 @@
 
  <rule ref="PSR2"/>
 
+ <!--
+ Property and method names with underscore prefix are allowed in CakePHP.
+ Not using underscore prefix is a recommendation of PSR2 not a requirement.
+ -->
  <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
   <severity>0</severity>
  </rule>
@@ -15,6 +19,9 @@
   <severity>0</severity>
  </rule>
 
+ <!--
+ Temporary ignores until API docblock formatting and line length issues in core code are fixed.
+ -->
  <rule ref="CakePHP.Commenting.FunctionComment.ParamCommentNotCapital">
   <severity>0</severity>
  </rule>
@@ -50,10 +57,6 @@
 
  <rule ref="Generic.Formatting.NoSpaceAfterCast"/>
 
- <rule ref="PEAR.NamingConventions.ValidClassName">
- 	<exclude-pattern>*/tests/*</exclude-pattern>
- </rule>
-
  <rule ref="Squiz.Operators.ValidLogicalOperators"/>
 
  <rule ref="Generic.PHP.DeprecatedFunctions"/>
@@ -77,6 +80,9 @@
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="PSR1.Methods.CamelCapsMethodName">
+  <exclude-pattern>*/tests/*</exclude-pattern>
+ </rule>
+ <rule ref="PEAR.NamingConventions.ValidClassName">
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="Squiz.Classes.ValidClassName">
