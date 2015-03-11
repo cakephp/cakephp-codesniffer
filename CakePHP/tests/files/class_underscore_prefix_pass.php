@@ -1,4 +1,5 @@
 <?php
+namespace Cake;
 
 class ClassWithUndercore extends Object
 {
