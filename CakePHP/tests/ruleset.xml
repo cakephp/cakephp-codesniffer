@@ -62,5 +62,5 @@
  <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
 
- <!-- All rules in ./Sniffs are included automatically -->
+ <rule ref="../Sniffs"/>
 </ruleset>
