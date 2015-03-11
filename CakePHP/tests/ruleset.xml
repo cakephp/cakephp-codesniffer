@@ -2,10 +2,6 @@
 <ruleset name="CakePHP">
  <description>CakePHP coding standard</description>
 
- <exclude-pattern>\.git</exclude-pattern>
- <exclude-pattern>*/Config/*.ini.php</exclude-pattern>
- <exclude-pattern>/*/tmp/</exclude-pattern>
-
  <rule ref="PSR2"/>
 
  <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
