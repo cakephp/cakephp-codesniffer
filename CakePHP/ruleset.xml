@@ -20,7 +20,7 @@
  </rule>
 
  <!--
- Temporary ignores until API docblock formatting and line length issues in core code are fixed.
+ Temporarily ignore until API docblock formatting and line length issues in core code are fixed.
  -->
  <rule ref="CakePHP.Commenting.FunctionComment.ParamCommentNotCapital">
   <severity>0</severity>
