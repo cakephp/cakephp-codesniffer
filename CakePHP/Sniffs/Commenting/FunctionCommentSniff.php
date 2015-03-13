@@ -157,7 +157,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                             }
                         }
                     }//end if
-                } else if ($content !== 'mixed') {
+                } elseif (!preg_match('/^mixed/', $content)) {
                     // If return type is not void, there needs to be a return statement
                     // somewhere in the function that returns something.
                     if (isset($tokens[$stackPtr]['scope_closer']) === true) {
@@ -166,7 +166,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                         if ($returnToken === false) {
                             $error = 'Function return type is not void, but function has no return statement';
                             $phpcsFile->addWarning($error, $return, 'InvalidNoReturn');
-                        } else {
+                        } elseif (!preg_match('/void/', $content)) {
                             $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
                             if ($tokens[$semicolon]['code'] === T_SEMICOLON) {
                                 $error = 'Function return type is not void, but function is returning void here';

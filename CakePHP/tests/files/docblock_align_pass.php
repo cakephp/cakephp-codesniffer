@@ -1,4 +1,6 @@
 <?php
+namespace Cake;
+
 /**
  * Hello World.
  *

@@ -8,11 +8,33 @@
 
  <rule ref="PSR2"/>
 
+ <!--
+ Property and method names with underscore prefix are allowed in CakePHP.
+ Not using underscore prefix is a recommendation of PSR2 not a requirement.
+ -->
  <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
   <severity>0</severity>
  </rule>
-
  <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
+  <severity>0</severity>
+ </rule>
+
+ <!--
+ Temporarily ignore until API docblock formatting and line length issues in core code are fixed.
+ -->
+ <rule ref="CakePHP.Commenting.FunctionComment.ParamCommentNotCapital">
+  <severity>0</severity>
+ </rule>
+ <rule ref="CakePHP.Commenting.FunctionComment.ParamCommentFullStop">
+  <severity>0</severity>
+ </rule>
+ <rule ref="CakePHP.Commenting.FunctionComment.ThrowsNotCapital">
+  <severity>0</severity>
+ </rule>
+ <rule ref="CakePHP.Commenting.FunctionComment.ThrowsNoFullStop">
+  <severity>0</severity>
+ </rule>
+ <rule ref="Generic.Files.LineLength.TooLong">
   <severity>0</severity>
  </rule>
 
@@ -30,26 +52,10 @@
  <rule ref="Generic.Commenting.Todo"/>
 
  <rule ref="PEAR.ControlStructures.ControlSignature"/>
- <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration"/>
- <rule ref="Squiz.ControlStructures.LowercaseDeclaration"/>
- <rule ref="PSR2.ControlStructures.ControlStructureSpacing"/>
 
- <rule ref="Zend.Files.ClosingTag"/>
  <rule ref="Generic.Files.LineEndings"/>
 
- <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
  <rule ref="Generic.Formatting.NoSpaceAfterCast"/>
-
- <rule ref="Squiz.Functions.FunctionDeclaration"/>
- <rule ref="PEAR.Functions.ValidDefaultValue"/>
-
- <!--
- Disabled and replaced with local copy. See http://pear.php.net/bugs/bug.php?id=19957
- <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
- -->
- <rule ref="PEAR.NamingConventions.ValidClassName">
- 	<exclude-pattern>*/tests/*</exclude-pattern>
- </rule>
 
  <rule ref="Squiz.Operators.ValidLogicalOperators"/>
 
@@ -59,10 +65,8 @@
  <rule ref="Generic.PHP.ForbiddenFunctions"/>
  <rule ref="Squiz.PHP.NonExecutableCode"/>
  <rule ref="Generic.PHP.NoSilencedErrors"/>
- <rule ref="Generic.PHP.LowerCaseConstant"/>
 
  <rule ref="Squiz.Scope.MemberVarScope"/>
- <rule ref="Squiz.Scope.MethodScope"/>
  <rule ref="Squiz.Scope.StaticThisUsage"/>
 
  <rule ref="Squiz.WhiteSpace.CastSpacing"/>
@@ -76,6 +80,9 @@
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="PSR1.Methods.CamelCapsMethodName">
+  <exclude-pattern>*/tests/*</exclude-pattern>
+ </rule>
+ <rule ref="PEAR.NamingConventions.ValidClassName">
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="Squiz.Classes.ValidClassName">

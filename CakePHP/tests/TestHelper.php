@@ -10,15 +10,9 @@ if (!class_exists('PHP_CodeSniffer_CLI')) {
 
 class TestHelper {
 
-	protected $_rootDir;
-
-	protected $_dirName;
-
 	protected $_phpcs;
 
 	public function __construct() {
-		$this->_rootDir = dirname(dirname(__FILE__));
-		$this->_dirName = basename($this->_rootDir);
 		$this->_phpcs = new PHP_CodeSniffer_CLI();
 	}
 
@@ -30,7 +24,7 @@ class TestHelper {
  */
 	public function runPhpCs($file) {
 		$defaults = $this->_phpcs->getDefaults();
-		$standard = $this->_rootDir . '/ruleset.xml';
+		$standard = dirname(__FILE__) . '/ruleset.xml';
 		if (
 			defined('PHP_CodeSniffer::VERSION') &&
 			version_compare(PHP_CodeSniffer::VERSION, '1.5.0') != -1
