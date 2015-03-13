@@ -48,7 +48,22 @@ if (class_exists('PEAR_Sniffs_Commenting_FunctionCommentSniff', true) === false)
  */
 class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenting_FunctionCommentSniff
 {
-
+    /**
+     * Is the comment an inheritdoc?
+     *
+     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param int                  $stackPtr  The position of the current token
+     *                                        in the stack passed in $tokens.
+     *
+     * @return boolean True if the comment is an inheritdoc
+     */
+    protected function isInheritDoc(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    {
+        $start = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $stackPtr - 1);
+        $end = $phpcsFile->findNext(T_DOC_COMMENT_CLOSE_TAG, $start);
+        $content = $phpcsFile->getTokensAsString($start, ($end - $start));
+        return preg_match('#{@inheritDoc}#', $content) === 1;
+    } // end isInheritDoc()
 
     /**
      * Process the return comment of this function comment.
@@ -62,6 +77,10 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
      */
     protected function processReturn(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
     {
+        if ($this->isInheritDoc($phpcsFile, $stackPtr)) {
+            return;
+        }
+
         $tokens = $phpcsFile->getTokens();
 
         // Skip constructor and destructor.
@@ -265,6 +284,10 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
      */
     protected function processParams(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
     {
+        if ($this->isInheritDoc($phpcsFile, $stackPtr)) {
+            return;
+        }
+
         $tokens = $phpcsFile->getTokens();
 
         $params  = array();

@@ -39,4 +39,11 @@ class Foo
         }
         return 'foo';
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function inherited($param)
+    {
+    }
 }
