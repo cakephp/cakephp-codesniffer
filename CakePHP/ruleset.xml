@@ -42,6 +42,7 @@
  </rule>
 
  <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
+ <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
 
  <rule ref="Squiz.Classes.LowercaseClassKeywords"/>
 
