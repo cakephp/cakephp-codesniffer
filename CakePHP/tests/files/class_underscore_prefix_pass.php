@@ -15,4 +15,14 @@ class ClassWithUndercore extends Object
     {
         // code here
     }
+
+    /**
+     * [noUnderscorePrefix description]
+     *
+     * @return void
+     */
+    protected function noUnderscorePrefix()
+    {
+        // code here
+    }
 }
