@@ -1,7 +1,7 @@
 <?php
 $foo = -1;
 
-switch($foo) {
+switch ($foo) {
     case -1:
         break;
     case 'negative':
