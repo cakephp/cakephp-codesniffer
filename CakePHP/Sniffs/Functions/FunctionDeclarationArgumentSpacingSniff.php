@@ -15,8 +15,8 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 if (class_exists('Squiz_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff', true) === false) {
-	$error = 'Class Squiz_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff not found';
-	throw new PHP_CodeSniffer_Exception($error);
+    $error = 'Class Squiz_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff not found';
+    throw new PHP_CodeSniffer_Exception($error);
 }
 
 /**
@@ -24,13 +24,13 @@ if (class_exists('Squiz_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff
  *
  */
 class CakePHP_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff extends
-	Squiz_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff {
+ Squiz_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff
+{
 
-	/**
-	 * How many spaces should surround the equals signs.
-	 *
-	 * @var int
-	 */
-	public $equalsSpacing = 1;
-
+    /**
+     * How many spaces should surround the equals signs.
+     *
+     * @var int
+     */
+    public $equalsSpacing = 1;
 }

@@ -24,7 +24,8 @@ class CakePHP_Sniffs_Commenting_DocBlockAlignmentSniff implements PHP_CodeSniffe
      *
      * @return array
      */
-    public function register() {
+    public function register()
+    {
         return array(T_DOC_COMMENT_OPEN_TAG);
     }
 

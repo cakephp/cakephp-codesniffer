@@ -20,16 +20,18 @@
  * the strings being concatenated.
  *
  */
-class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffer_Sniff {
+class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffer_Sniff
+{
 
 /**
  * Returns an array of tokens this test wants to listen for.
  *
  * @return array
  */
-	public function register() {
-		return array(T_STRING_CONCAT);
-	}
+    public function register()
+    {
+        return array(T_STRING_CONCAT);
+    }
 
 /**
  * Processes this test, when one of its tokens is encountered.
@@ -39,33 +41,33 @@ class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffe
  *    stack passed in $tokens.
  * @return void
  */
-	public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
-		$tokens = $phpcsFile->getTokens();
-		if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
-			$message = 'Expected 1 space before ., but 0 found';
-			$phpcsFile->addError($message, $stackPtr, 'MissingBefore');
-		} else {
-			$content = str_replace("\r\n", "\n", $tokens[($stackPtr - 1)]['content']);
-			$spaces = strlen($content);
-			if ($spaces > 1) {
-				$message = 'Expected 1 space before ., but %d found';
-				$data = array($spaces);
-				$phpcsFile->addError($message, $stackPtr, 'TooManyBefore', $data);
-			}
-		}
+    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    {
+        $tokens = $phpcsFile->getTokens();
+        if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
+            $message = 'Expected 1 space before ., but 0 found';
+            $phpcsFile->addError($message, $stackPtr, 'MissingBefore');
+        } else {
+            $content = str_replace("\r\n", "\n", $tokens[($stackPtr - 1)]['content']);
+            $spaces = strlen($content);
+            if ($spaces > 1) {
+                $message = 'Expected 1 space before ., but %d found';
+                $data = array($spaces);
+                $phpcsFile->addError($message, $stackPtr, 'TooManyBefore', $data);
+            }
+        }
 
-		if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
-			$message = 'Expected 1 space after ., but 0 found';
-			$phpcsFile->addError($message, $stackPtr, 'MissingAfter');
-		} else {
-			$content = str_replace("\r\n", "\n", $tokens[($stackPtr + 1)]['content']);
-			$spaces = strlen($content);
-			if ($spaces > 1) {
-				$message = 'Expected 1 space after ., but %d found';
-				$data = array($spaces);
-				$phpcsFile->addError($message, $stackPtr, 'TooManyAfter', $data);
-			}
-		}
-	}
-
+        if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
+            $message = 'Expected 1 space after ., but 0 found';
+            $phpcsFile->addError($message, $stackPtr, 'MissingAfter');
+        } else {
+            $content = str_replace("\r\n", "\n", $tokens[($stackPtr + 1)]['content']);
+            $spaces = strlen($content);
+            if ($spaces > 1) {
+                $message = 'Expected 1 space after ., but %d found';
+                $data = array($spaces);
+                $phpcsFile->addError($message, $stackPtr, 'TooManyAfter', $data);
+            }
+        }
+    }
 }
