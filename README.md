@@ -32,10 +32,6 @@ you have configured the CodeSniffer `installed_paths` setting.
 If you'd like to contribute to the Code Sniffer, you can fork the project add
 features and send pull requests.
 
-Make sure to clone the repository to something like **cakephp_codesniffer**
-(instead of the default **cakephp-codesniffer**) because otherwise `phpunit`
-will fail to run the tests.
-
 ## Releasing CakePHP Code Sniffer
 
 * Create a signed tag
