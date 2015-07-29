@@ -114,7 +114,7 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 			if (substr($className, -4) === 'Task') {
 				return;
 			}
-		} elseif ($isPrivate === true) {
+		} elseif ($isPrivate === true && strpos($phpcsFile->getFilename(), '/lib/cake') === true) {
 			$filename = $phpcsFile->getFilename();
 			$warning = 'Private method name "%s" in CakePHP core is discouraged';
 			$phpcsFile->addWarning($warning, $stackPtr, 'PrivateMethodInCore', $errorData);
