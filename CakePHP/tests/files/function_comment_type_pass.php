@@ -41,6 +41,15 @@ class Foo
     }
 
     /**
+     * Description
+     *
+     * @return void|string
+     */
+    public function foo()
+    {
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function inherited($param)
