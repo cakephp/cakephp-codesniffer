@@ -19,7 +19,8 @@
  * Ensures trait names are correct depending on the folder of the file.
  *
  */
-class CakePHP_Sniffs_NamingConventions_ValidTraitNameSniff implements PHP_CodeSniffer_Sniff {
+class CakePHP_Sniffs_NamingConventions_ValidTraitNameSniff implements PHP_CodeSniffer_Sniff
+{
 
 /**
  * Returns an array of tokens this test wants to listen for.
@@ -29,12 +30,13 @@ class CakePHP_Sniffs_NamingConventions_ValidTraitNameSniff implements PHP_CodeSn
  *
  * @return array
  */
-	public function register() {
-		if (!defined('T_TRAIT')) {
-			return array();
-		}
-		return array(T_TRAIT);
-	}
+    public function register()
+    {
+        if (!defined('T_TRAIT')) {
+            return array();
+        }
+        return array(T_TRAIT);
+    }
 
 /**
  * Processes this test, when one of its tokens is encountered.
@@ -43,14 +45,14 @@ class CakePHP_Sniffs_NamingConventions_ValidTraitNameSniff implements PHP_CodeSn
  * @param integer $stackPtr  The position of the current token in the stack passed in $tokens.
  * @return void
  */
-	public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
-		$tokens = $phpcsFile->getTokens();
-		$traitName = $tokens[$stackPtr + 2]['content'];
+    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    {
+        $tokens = $phpcsFile->getTokens();
+        $traitName = $tokens[$stackPtr + 2]['content'];
 
-		if (substr($traitName, -5) !== 'Trait') {
-			$error = 'Traits must have a "Trait" suffix.';
-			$phpcsFile->addError($error, $stackPtr, 'InvalidTraitName', array());
-		}
-	}
-
+        if (substr($traitName, -5) !== 'Trait') {
+            $error = 'Traits must have a "Trait" suffix.';
+            $phpcsFile->addError($error, $stackPtr, 'InvalidTraitName', array());
+        }
+    }
 }
