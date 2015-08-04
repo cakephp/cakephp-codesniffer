@@ -152,7 +152,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                 }
 
                 // If the return type is void, make sure there is
-                // no return statement in the function.
+                // no non-void return statements in the function.
                 if ($typeNames === ['void']) {
                     if (isset($tokens[$stackPtr]['scope_closer']) === true) {
                         $endToken = $tokens[$stackPtr]['scope_closer'];
