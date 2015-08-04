@@ -52,9 +52,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
      * Is the comment an inheritdoc?
      *
      * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                  $stackPtr  The position of the current token
-     *                                        in the stack passed in $tokens.
-     *
+     * @param int $stackPtr The position of the current token in the stack passed in $tokens.
      * @return boolean True if the comment is an inheritdoc
      */
     protected function isInheritDoc(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
@@ -68,11 +66,9 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
     /**
      * Process the return comment of this function comment.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
-     * @param int                  $stackPtr     The position of the current token
-     *                                           in the stack passed in $tokens.
-     * @param int                  $commentStart The position in the stack where the comment started.
-     *
+     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param int $stackPtr The position of the current token in the stack passed in $tokens.
+     * @param int $commentStart The position in the stack where the comment started.
      * @return void
      */
     protected function processReturn(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
@@ -92,7 +88,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
             }
         }
 
-        $methodName      = $phpcsFile->getDeclarationName($stackPtr);
+        $methodName = $phpcsFile->getDeclarationName($stackPtr);
         $isSpecialMethod = ($methodName === '__construct' || $methodName === '__destruct');
         if ($methodName !== '_') {
             $methodName = strtolower(ltrim($methodName, '_'));
@@ -129,8 +125,8 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
         }
 
         // Check return type (can be multiple, separated by '|').
-        list($types,)   = explode(' ', $content);
-        $typeNames      = explode('|', $types);
+        list($types,) = explode(' ', $content);
+        $typeNames = explode('|', $types);
         $suggestedNames = array();
         foreach ($typeNames as $i => $typeName) {
             if ($typeName === 'integer') {
@@ -151,7 +147,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
         if ($types !== $suggestedType) {
             $error = 'Function return type "%s" is invalid';
             $error = 'Expected "%s" but found "%s" for function return type';
-            $data  = array(
+            $data = array(
                 $suggestedType,
                 $types,
             );
@@ -211,11 +207,9 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
     /**
      * Process any throw tags that this function comment has.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
-     * @param int                  $stackPtr     The position of the current token
-     *                                           in the stack passed in $tokens.
-     * @param int                  $commentStart The position in the stack where the comment started.
-     *
+     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param int $stackPtr The position of the current token in the stack passed in $tokens.
+     * @param int $commentStart The position in the stack where the comment started.
      * @return void
      */
     protected function processThrows(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
@@ -228,8 +222,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                 continue;
             }
 
-            $exception = null;
-            $comment   = null;
+            $exception = $comment = null;
             if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING) {
                 $matches = array();
                 preg_match('/([^\s]+)(?:\s+(.*))?/', $tokens[($tag + 2)]['content'], $matches);
@@ -280,11 +273,9 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
     /**
      * Process the function parameter comments.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
-     * @param int                  $stackPtr     The position of the current token
-     *                                           in the stack passed in $tokens.
-     * @param int                  $commentStart The position in the stack where the comment started.
-     *
+     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param int $stackPtr The position of the current token in the stack passed in $tokens.
+     * @param int $commentStart The position in the stack where the comment started.
      * @return void
      */
     protected function processParams(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
@@ -295,47 +286,43 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
 
         $tokens = $phpcsFile->getTokens();
 
-        $params  = array();
-        $maxType = 0;
-        $maxVar  = 0;
+        $params = array();
+        $maxType = $maxVar = 0;
         foreach ($tokens[$commentStart]['comment_tags'] as $pos => $tag) {
             if ($tokens[$tag]['content'] !== '@param') {
                 continue;
             }
 
-            $type         = '';
-            $typeSpace    = 0;
-            $var          = '';
-            $varSpace     = 0;
-            $comment      = '';
+            $type = $var = $comment = '';
+            $typeSpace = $varSpace = 0;
             $commentLines = array();
             if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING) {
                 $matches = array();
                 preg_match('/([^$&]+)(?:((?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/', $tokens[($tag + 2)]['content'], $matches);
 
-                $typeLen   = strlen($matches[1]);
-                $type      = trim($matches[1]);
+                $typeLen = strlen($matches[1]);
+                $type = trim($matches[1]);
                 $typeSpace = ($typeLen - strlen($type));
-                $typeLen   = strlen($type);
+                $typeLen = strlen($type);
                 if ($typeLen > $maxType) {
                     $maxType = $typeLen;
                 }
 
                 if (isset($matches[2]) === true) {
-                    $var    = $matches[2];
+                    $var = $matches[2];
                     $varLen = strlen($var);
                     if ($varLen > $maxVar) {
                         $maxVar = $varLen;
                     }
 
                     if (isset($matches[4]) === true) {
-                        $varSpace       = strlen($matches[3]);
-                        $comment        = $matches[4];
+                        $varSpace = strlen($matches[3]);
+                        $comment = $matches[4];
                         $commentLines[] = array(
-                                           'comment' => $comment,
-                                           'token'   => ($tag + 2),
-                                           'indent'  => $varSpace,
-                                          );
+                            'comment' => $comment,
+                            'token' => ($tag + 2),
+                            'indent' => $varSpace,
+                        );
 
                         // Any strings until the next tag belong to this comment.
                         if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true) {
@@ -351,12 +338,12 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                                     $indent = strlen($tokens[($i - 1)]['content']);
                                 }
 
-                                $comment       .= ' '.$tokens[$i]['content'];
+                                $comment .= ' ' . $tokens[$i]['content'];
                                 $commentLines[] = array(
-                                                   'comment' => $tokens[$i]['content'],
-                                                   'token'   => $i,
-                                                   'indent'  => $indent,
-                                                  );
+                                    'comment' => $tokens[$i]['content'],
+                                    'token' => $i,
+                                    'indent' => $indent,
+                                );
                             }
                         }
                     } else {
@@ -373,18 +360,10 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                 $phpcsFile->addError($error, $tag, 'MissingParamType');
             }//end if
 
-            $params[] = array(
-                         'tag'          => $tag,
-                         'type'         => $type,
-                         'var'          => $var,
-                         'comment'      => $comment,
-                         'commentLines' => $commentLines,
-                         'type_space'   => $typeSpace,
-                         'var_space'    => $varSpace,
-                        );
+            $params[] = compact('tag', 'type', 'var', 'comment', 'commentLines', 'type_space', 'var_space');
         }//end foreach
 
-        $realParams  = $phpcsFile->getMethodParameters($stackPtr);
+        $realParams = $phpcsFile->getMethodParameters($stackPtr);
         $foundParams = array();
 
         foreach ($params as $pos => $param) {
@@ -408,14 +387,11 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
 
                 if ($typeName !== $suggestedName) {
                     $error = 'Expected "%s" but found "%s" for parameter type';
-                    $data  = array(
-                              $suggestedName,
-                              $typeName,
-                             );
+                    $data = array($suggestedName, $typeName);
 
                     $fix = $phpcsFile->addFixableError($error, $param['tag'], 'IncorrectParamVarName', $data);
                     if ($fix === true) {
-                        $content  = $suggestedName;
+                        $content = $suggestedName;
                         $content .= str_repeat(' ', $param['type_space']);
                         $content .= $param['var'];
                         $content .= str_repeat(' ', $param['var_space']);
@@ -436,15 +412,12 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                 $realName = $realParams[$pos]['name'];
                 if ($realName !== $param['var']) {
                     $code = 'ParamNameNoMatch';
-                    $data = array(
-                             $param['var'],
-                             $realName,
-                            );
+                    $data = array($param['var'], $realName);
 
                     $error = 'Doc comment for parameter %s does not match ';
                     if (strtolower($param['var']) === strtolower($realName)) {
                         $error .= 'case of ';
-                        $code   = 'ParamNameNoCaseMatch';
+                        $code = 'ParamNameNoCaseMatch';
                     }
 
                     $error .= 'actual variable name %s';
@@ -484,7 +457,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
         $diff = array_diff($realNames, $foundParams);
         foreach ($diff as $neededParam) {
             $error = 'Doc comment for parameter "%s" missing';
-            $data  = array($neededParam);
+            $data = array($neededParam);
             $phpcsFile->addWarning($error, $commentStart, 'MissingParamTag', $data);
         }
 
