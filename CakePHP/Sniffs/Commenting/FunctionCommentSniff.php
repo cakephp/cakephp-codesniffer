@@ -122,7 +122,8 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                 $phpcsFile->addError($error, $return, 'MissingReturnType');
             } else {
                 // Check return type (can be multiple, separated by '|').
-                $typeNames      = explode('|', $content);
+                list($types,)   = explode(' ', $content);
+                $typeNames      = explode('|', $types);
                 $suggestedNames = array();
                 foreach ($typeNames as $i => $typeName) {
                     if ($typeName === 'integer') {
@@ -140,12 +141,12 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                 }
 
                 $suggestedType = implode('|', $suggestedNames);
-                if ($content !== $suggestedType) {
+                if ($types !== $suggestedType) {
                     $error = 'Function return type "%s" is invalid';
                     $error = 'Expected "%s" but found "%s" for function return type';
                     $data  = array(
                               $suggestedType,
-                              $content,
+                              $types,
                              );
                     $phpcsFile->addError($error, $return, 'InvalidReturn', $data);
                 }
