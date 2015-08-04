@@ -19,9 +19,9 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 	public static function testProvider() {
 		$tests = array();
 
-		$standard = dirname(dirname(__FILE__));
+		$standard = dirname(__DIR__);
 
-		$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(dirname(__FILE__) . '/files'));
+		$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__ . '/files'));
 		foreach ($iterator as $dir) {
 			if ($dir->isDir()) {
 				continue;
