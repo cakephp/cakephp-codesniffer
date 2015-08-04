@@ -1,6 +1,8 @@
 <?php
+namespace Beakman;
 
-class Foo {
+class Foo
+{
     /**
      * Some sentence.
      *
