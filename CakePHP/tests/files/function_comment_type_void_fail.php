@@ -3,12 +3,13 @@ namespace Beakman;
 
 class Foo
 {
-    /** 
-     * ^ There is a (disallowed) trailing space after the opening ** in this doc block.
+    /**
+     * Some sentence.
      *
      * @return void
      */
     public function bar()
     {
+        return 'string';
     }
 }
