@@ -204,7 +204,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
  * Variables in CakePHP can either be $fooBar, $FooBar, $_fooBar, or $_FooBar.
  *
  * @param string $string The variable to check.
- * @param boolea $public Whether or not the variable is public.
+ * @param boolean $public Whether or not the variable is public.
  * @return boolean
  */
 	protected function _isValidVar($string, $public = true) {

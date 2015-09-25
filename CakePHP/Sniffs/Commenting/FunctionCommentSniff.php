@@ -469,5 +469,3 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_
 
 
 }//end class
-
-?>
