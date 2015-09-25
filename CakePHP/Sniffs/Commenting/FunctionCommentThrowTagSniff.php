@@ -21,7 +21,6 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractScopeSniff', true) === false
 
 /**
  * Ensures the throws in the code are declared in the PHPDoc
- *
  */
 class CakePHP_Sniffs_Commenting_FunctionCommentThrowTagSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff {
 
