@@ -179,8 +179,8 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
                 }
             }
 
-            // This is a real constant.
-            if (strtoupper($constName) !== $constName) {
+            // This is a real constant. Ignore ::class from php5.5
+            if (strtoupper($constName) !== $constName && $constName !== 'class') {
                 $error = 'Constants must be uppercase; expected %s but found %s';
                 $data = array(
                     strtoupper($constName),
@@ -190,9 +190,7 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
             }
 
         } elseif (strtolower($constName) === 'define' || strtolower($constName) === 'constant') {
-            /*
-				This may be a "define" or "constant" function call.
-			*/
+            // This may be a "define" or "constant" function call.
 
             // Make sure this is not a method call.
             $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
