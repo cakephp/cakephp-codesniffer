@@ -360,7 +360,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                 $phpcsFile->addError($error, $tag, 'MissingParamType');
             }//end if
 
-            $params[] = compact('tag', 'type', 'var', 'comment', 'commentLines', 'type_space', 'var_space');
+            $params[] = compact('tag', 'type', 'var', 'comment', 'commentLines', 'typeSpace', 'varSpace');
         }//end foreach
 
         $realParams = $phpcsFile->getMethodParameters($stackPtr);
@@ -392,9 +392,9 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                     $fix = $phpcsFile->addFixableError($error, $param['tag'], 'IncorrectParamVarName', $data);
                     if ($fix === true) {
                         $content = $suggestedName;
-                        $content .= str_repeat(' ', $param['type_space']);
+                        $content .= str_repeat(' ', $param['typeSpace']);
                         $content .= $param['var'];
-                        $content .= str_repeat(' ', $param['var_space']);
+                        $content .= str_repeat(' ', $param['varSpace']);
                         $content .= $param['commentLines'][0]['comment'];
                         $phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
                     }
