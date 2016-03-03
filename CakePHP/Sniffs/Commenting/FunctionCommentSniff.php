@@ -422,7 +422,16 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
 
                     $error .= 'actual variable name %s';
 
-                    $phpcsFile->addWarning($error, $param['tag'], $code, $data);
+                    $fix = $phpcsFile->addFixableWarning($error, $param['tag'], $code, $data);
+
+                    if ($fix === true) {
+                        $content = $suggestedName;
+                        $content .= str_repeat(' ', $param['typeSpace']);
+                        $content .= $realName;
+                        $content .= str_repeat(' ', $param['varSpace']);
+                        $content .= $param['commentLines'][0]['comment'];
+                        $phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
+                    }
                 }
             } elseif (substr($param['var'], -4) !== ',...') {
                 // We must have an extra parameter comment.
