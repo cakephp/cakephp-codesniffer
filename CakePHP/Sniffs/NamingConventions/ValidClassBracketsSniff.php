@@ -44,6 +44,9 @@ class CakePHP_Sniffs_NamingConventions_ValidClassBracketsSniff implements PHP_Co
         $tokens = $phpcsFile->getTokens();
 
         $found = $phpcsFile->findNext(T_OPEN_CURLY_BRACKET, $stackPtr);
+        if ($found === false) {
+            return;
+        }
         if ($tokens[$found - 1]['code'] != T_WHITESPACE) {
             $error = 'Expected 1 space after class declaration, found 0';
             $phpcsFile->addError($error, $found - 1, 'InvalidSpacing', array());
