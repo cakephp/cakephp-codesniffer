@@ -90,7 +90,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
             $data = array($originalVarName);
             $fix = $phpcsFile->addFixableError($error, $stackPtr, 'NotCamelCaps', $data);
             if ($fix === true) {
-                $this->_fixVar($phpcsFile, $tokens, $stackPtr, $originalVarName);
+                $this->_fixVar($phpcsFile, $stackPtr, $originalVarName);
             }
         }
     }
@@ -152,7 +152,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
                     $data = array($originalVarName);
                     $fix = $phpcsFile->addFixableError($error, $stackPtr, 'StringVarNotCamelCaps', $data);
                     if ($fix === true) {
-                        $this->_fixVar($phpcsFile, $tokens, $stackPtr, $originalVarName);
+                        $this->_fixVar($phpcsFile, $stackPtr, $originalVarName);
                     }
                 }
             }
@@ -166,8 +166,9 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
      * @param string $varName The variable name
      * @return void
      */
-    protected function _fixVar(PHP_CodeSniffer_File $phpcsFile, $tokens, $stackPtr, $varName)
+    protected function _fixVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $varName)
     {
+        $tokens = $phpcsFile->getTokens();
         $phpcsFile->fixer->beginChangeset();
         preg_match('/^(_*)(.+)/', $varName, $matches);
 
