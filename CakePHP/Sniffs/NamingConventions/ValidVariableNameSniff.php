@@ -26,18 +26,18 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractVariableSniff', true) === fa
 class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff
 {
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * Processes variables, we skip processing object properties because
- * they could come from things like PDO which doesn't follow the normal
- * conventions and causes additional failures.
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param integer $stackPtr  The position of the current token in the
- *    stack passed in $tokens.
- * @return void
- */
+    /**
+     * Processes this test, when one of its tokens is encountered.
+     *
+     * Processes variables, we skip processing object properties because
+     * they could come from things like PDO which doesn't follow the normal
+     * conventions and causes additional failures.
+     *
+     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param integer $stackPtr  The position of the current token in the
+     *    stack passed in $tokens.
+     * @return void
+     */
     protected function processVariable(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
@@ -88,29 +88,32 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
         if ($this->_isValidVar($varName) === false) {
             $error = 'Variable "%s" is not in valid camel caps format';
             $data = array($originalVarName);
-            $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
+            $fix = $phpcsFile->addFixableError($error, $stackPtr, 'NotCamelCaps', $data);
+            if ($fix === true) {
+                $this->_fixVar($phpcsFile, $stackPtr, $originalVarName);
+            }
         }
     }
 
-/**
- * Processes class member variables.
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param integer $stackPtr  The position of the current token in the
- *    stack passed in $tokens.
- * @return void
- */
+    /**
+     * Processes class member variables.
+     *
+     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param integer $stackPtr  The position of the current token in the
+     *    stack passed in $tokens.
+     * @return void
+     */
     protected function processMemberVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
     }
 
-/**
- * Processes the variable found within a double quoted string.
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param integer $stackPtr The position of the double quoted string.
- * @return void
- */
+    /**
+     * Processes the variable found within a double quoted string.
+     *
+     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param integer $stackPtr The position of the double quoted string.
+     * @return void
+     */
     protected function processVariableInString(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
@@ -147,21 +150,45 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
                 if ($this->_isValidVar($varName) === false) {
                     $error = 'Variable "%s" is not in valid camel caps format';
                     $data = array($originalVarName);
-                    $phpcsFile->addError($error, $stackPtr, 'StringVarNotCamelCaps', $data);
+                    $fix = $phpcsFile->addFixableError($error, $stackPtr, 'StringVarNotCamelCaps', $data);
+                    if ($fix === true) {
+                        $this->_fixVar($phpcsFile, $stackPtr, $originalVarName);
+                    }
                 }
             }
         }
     }
 
-/**
- * Check that a variable is a valid shape.
- *
- * Variables in CakePHP can either be $fooBar, $FooBar, $_fooBar, or $_FooBar.
- *
- * @param string $string The variable to check.
- * @param boolea $public Whether or not the variable is public.
- * @return boolean
- */
+    /**
+     * @param \PHP_CodeSniffer_File $phpcsFile PHPCS file
+     * @param array $tokens Array of tokens
+     * @param int $stackPtr The pointer
+     * @param string $varName The variable name
+     * @return void
+     */
+    protected function _fixVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $varName)
+    {
+        $tokens = $phpcsFile->getTokens();
+        $phpcsFile->fixer->beginChangeset();
+        preg_match('/^(_*)(.+)/', $varName, $matches);
+
+        $camelCapsVarName = '$' . $matches[1] . \Cake\Utility\Inflector::variable($matches[2]);
+
+        $newToken = str_replace('$' . $varName, $camelCapsVarName, $tokens[$stackPtr]['content']);
+
+        $phpcsFile->fixer->replaceToken($stackPtr, $newToken);
+        $phpcsFile->fixer->endChangeset();
+    }
+
+    /**
+     * Check that a variable is a valid shape.
+     *
+     * Variables in CakePHP can either be $fooBar, $FooBar, $_fooBar, or $_FooBar.
+     *
+     * @param string $string The variable to check.
+     * @param bool $public Whether or not the variable is public.
+     * @return bool
+     */
     protected function _isValidVar($string, $public = true)
     {
         $firstChar = '[a-zA-Z]';

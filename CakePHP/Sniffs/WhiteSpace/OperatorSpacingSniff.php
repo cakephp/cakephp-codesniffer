@@ -87,13 +87,19 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
                 // Check there is one space before the & operator.
                 if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
                     $error = 'Expected 1 space before "&" operator; 0 found';
-                    $phpcsFile->addError($error, $stackPtr, 'NoSpaceBeforeAmp');
+                    $fix = $phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceBeforeAmp');
+                    if ($fix === true) {
+                        $phpcsFile->fixer->addContentBefore($stackPtr, ' ');
+                    }
                 }
 
                 // Check there is one space after the & operator.
                 if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
                     $error = 'Expected 1 space after "&" operator; 0 found';
-                    $phpcsFile->addError($error, $stackPtr, 'NoSpaceAfterAmp');
+                    $fix = $phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceAfterAmp');
+                    if ($fix === true) {
+                        $phpcsFile->fixer->addContent($stackPtr, ' ');
+                    }
                 }
             }
         } else {
@@ -148,12 +154,18 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 
             if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
                 $error = "Expected 1 space before \"$operator\"; 0 found";
-                $phpcsFile->addError($error, $stackPtr, 'NoSpaceBefore');
+                $fix = $phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceBefore');
+                if ($fix === true) {
+                    $phpcsFile->fixer->addContentBefore($stackPtr, ' ');
+                }
             }
 
             if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
                 $error = "Expected 1 space after \"$operator\"; 0 found";
-                $phpcsFile->addError($error, $stackPtr, 'NoSpaceAfter');
+                $fix = $phpcsFile->addFixableError($error, $stackPtr, 'NoSpaceAfter');
+                if ($fix === true) {
+                    $phpcsFile->fixer->addContent($stackPtr, ' ');
+                }
             }
         }
     }

@@ -78,6 +78,7 @@
  <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
  <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
+ <rule ref="Squiz.WhiteSpace.ScopeClosingBrace"/>
 
  <!-- Relax some src/* and tests/* rules -->
  <rule ref="PSR1.Files.SideEffects">
