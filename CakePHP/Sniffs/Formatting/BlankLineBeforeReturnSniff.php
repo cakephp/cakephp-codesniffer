@@ -58,7 +58,8 @@ class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements PHP_CodeSn
 
         if (isset($prevLineTokens[0])
             && ($prevLineTokens[0] === 'T_OPEN_CURLY_BRACKET'
-            || $prevLineTokens[0] === 'T_COLON')
+            || $prevLineTokens[0] === 'T_COLON'
+            || $prevLineTokens[0] === 'T_OPEN_TAG')
         ) {
             return;
         } elseif (count($prevLineTokens) > 0) {
