@@ -63,10 +63,15 @@ class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements PHP_CodeSn
         ) {
             return;
         } elseif (count($prevLineTokens) > 0) {
-            $phpcsFile->addError(
+            $fix = $phpcsFile->addFixableError(
                 'Missing blank line before return statement',
                 $stackPtr
             );
+            if ($fix === true) {
+                $phpcsFile->fixer->beginChangeset();
+                $phpcsFile->fixer->addContentBefore($stackPtr, "\n\n");
+                $phpcsFile->fixer->endChangeset();
+            }
         }
 
         return;
