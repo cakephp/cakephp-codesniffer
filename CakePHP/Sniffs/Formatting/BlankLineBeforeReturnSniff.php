@@ -69,7 +69,7 @@ class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements PHP_CodeSn
             );
             if ($fix === true) {
                 $phpcsFile->fixer->beginChangeset();
-                $phpcsFile->fixer->addContentBefore($stackPtr, "\n\n");
+                $phpcsFile->fixer->addNewlineBefore($stackPtr - 1);
                 $phpcsFile->fixer->endChangeset();
             }
         }
