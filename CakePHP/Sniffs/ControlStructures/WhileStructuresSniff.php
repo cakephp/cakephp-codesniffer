@@ -19,6 +19,7 @@ namespace CakePHP\Sniffs\ControlStructures;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+
 /**
  * Ensures that while and do-while use curly brackets
  *
@@ -26,26 +27,26 @@ use PHP_CodeSniffer\Files\File;
 class WhileStructuresSniff implements Sniff
 {
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+    /**
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return array
+     */
     public function register()
     {
-        return array(T_DO, T_WHILE);
+        return [T_DO, T_WHILE];
     }
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * Checks that while and do-while use curly brackets
- *
- * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
- * @param integer              $stackPtr  The position of the current token in the
- *                                        stack passed in $tokens.
- * @return void
- */
+    /**
+     * Processes this test, when one of its tokens is encountered.
+     *
+     * Checks that while and do-while use curly brackets
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param integer $stackPtr The position of the current token in the
+     *                                        stack passed in $tokens.
+     * @return void
+     */
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();

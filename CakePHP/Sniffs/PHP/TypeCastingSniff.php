@@ -38,14 +38,14 @@ class TypeCastingSniff implements Sniff
      */
     public function register()
     {
-        return array_merge(Tokens::$castTokens, array(T_BOOLEAN_NOT));
+        return array_merge(Tokens::$castTokens, [T_BOOLEAN_NOT]);
     }
 
     /**
      * Processes this test, when one of its tokens is encountered.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param integer              $stackPtr  The position of the current token in the
+     * @param integer $stackPtr The position of the current token in the
      *                                        stack passed in $tokens.
      * @return void
      */
@@ -69,10 +69,10 @@ class TypeCastingSniff implements Sniff
         }
 
         // Only allow short forms if both short and long forms are possible
-        $matching = array(
+        $matching = [
             '(boolean)' => '(bool)',
             '(integer)' => '(int)',
-        );
+        ];
         $content = $tokens[$stackPtr]['content'];
         $key = strtolower($content);
         if (isset($matching[$key])) {

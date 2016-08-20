@@ -29,50 +29,51 @@ use PHP_CodeSniffer\Util\Tokens;
 class ScopeIndentSniff implements Sniff
 {
 
-/**
- * The number of spaces code should be indented.
- *
- * @var integer
- */
+    /**
+     * The number of spaces code should be indented.
+     *
+     * @var integer
+     */
     public $indent = 1;
 
-/**
- * Does the indent need to be exactly right.
- *
- * If TRUE, indent needs to be exactly $ident spaces. If FALSE,
- * indent needs to be at least $ident spaces (but can be more).
- *
- * @var boolean
- */
+    /**
+     * Does the indent need to be exactly right.
+     *
+     * If TRUE, indent needs to be exactly $ident spaces. If FALSE,
+     * indent needs to be at least $ident spaces (but can be more).
+     *
+     * @var boolean
+     */
     public $exact = false;
 
-/**
- * Any scope openers that should not cause an indent.
- *
- * @var array(int)
- */
-    protected $_nonIndentingScopes = array();
+    /**
+     * Any scope openers that should not cause an indent.
+     *
+     * @var array(int)
+     */
+    protected $_nonIndentingScopes = [];
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+    /**
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return array
+     */
     public function register()
     {
         return Tokens::$scopeOpeners;
     }
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * @param \PHP_CodeSniffer\Files\File $phpcsFile All the tokens found in the document.
- * @param integer $stackPtr The position of the current token
- *    in the stack passed in $tokens.
- * @return void
- */
+    /**
+     * Processes this test, when one of its tokens is encountered.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile All the tokens found in the document.
+     * @param integer $stackPtr The position of the current token
+     *    in the stack passed in $tokens.
+     * @return void
+     */
     public function process(File $phpcsFile, $stackPtr)
     {
+        die('yay');
         $tokens = $phpcsFile->getTokens();
 
         // If this is an inline condition (ie. there is no scope opener), then
@@ -127,7 +128,7 @@ class ScopeIndentSniff implements Sniff
         $commentOpen = false;
         $inHereDoc = false;
 
-        // Only loop over the content beween the opening and closing brace, not
+        // Only loop over the content between the opening and closing brace, not
         // the braces themselves.
         for ($i = ($scopeOpener + 1); $i < $scopeCloser; $i++) {
             // If this token is another scope, skip it as it will be handled by
@@ -217,10 +218,10 @@ class ScopeIndentSniff implements Sniff
 
                 // This is a special condition for T_DOC_COMMENT and C-style
                 // comments, which contain whitespace between each line.
-                $comments = array(
+                $comments = [
                     T_COMMENT,
-                    T_DOC_COMMENT
-                );
+                    T_DOC_COMMENT,
+                ];
 
                 $isDocComment = false;
                 if (in_array($tokens[$firstToken]['code'], $comments) === true) {
@@ -256,16 +257,16 @@ class ScopeIndentSniff implements Sniff
         }
     }
 
-/**
- * Calculates the expected indent of a token.
- *
- * @param array $tokens The stack of tokens for this file.
- * @param integer $stackPtr The position of the token to get indent for.
- * @return integer
- */
+    /**
+     * Calculates the expected indent of a token.
+     *
+     * @param array $tokens The stack of tokens for this file.
+     * @param integer $stackPtr The position of the token to get indent for.
+     * @return integer
+     */
     protected function _calculateExpectedIndent(array $tokens, $stackPtr)
     {
-        $conditionStack = array();
+        $conditionStack = [];
 
         // Empty conditions array (top level structure).
         if (empty($tokens[$stackPtr]['conditions']) === true) {

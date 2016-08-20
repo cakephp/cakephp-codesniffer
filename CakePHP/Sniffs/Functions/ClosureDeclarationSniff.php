@@ -18,6 +18,7 @@ namespace CakePHP\Sniffs\Functions;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+
 /**
  * Ensures there is a space after the function keyword for closures.
  *
@@ -27,7 +28,7 @@ class ClosureDeclarationSniff implements Sniff
 
     public function register()
     {
-        return array(T_CLOSURE);
+        return [T_CLOSURE];
     }
 
     public function process(File $phpcsFile, $stackPtr)
@@ -41,7 +42,7 @@ class ClosureDeclarationSniff implements Sniff
 
         if ($spaces !== 1) {
             $error = 'Expected 1 space after closure\'s function keyword; %s found';
-            $data  = array($spaces);
+            $data = [$spaces];
             $phpcsFile->addError($error, $stackPtr, 'SpaceAfterFunction', $data);
         }
     }

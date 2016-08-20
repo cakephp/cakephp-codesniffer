@@ -34,7 +34,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      * conventions and causes additional failures.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param integer $stackPtr  The position of the current token in the
+     * @param integer $stackPtr The position of the current token in the
      *    stack passed in $tokens.
      * @return void
      */
@@ -43,7 +43,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
         $tokens = $phpcsFile->getTokens();
         $varName = ltrim($tokens[$stackPtr]['content'], '$');
 
-        $phpReservedVars = array(
+        $phpReservedVars = [
             '_SERVER',
             '_GET',
             '_POST',
@@ -53,7 +53,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             '_COOKIE',
             '_FILES',
             'GLOBALS',
-        );
+        ];
 
         // If it's a php reserved var, then its ok.
         if (in_array($varName, $phpReservedVars) === true) {
@@ -65,13 +65,13 @@ class ValidVariableNameSniff extends AbstractVariableSniff
         // check the main part of the variable name.
         $originalVarName = $varName;
         if (substr($varName, 0, 1) === '_') {
-            $objOperator = $phpcsFile->findPrevious(array(T_WHITESPACE), ($stackPtr - 1), null, true);
+            $objOperator = $phpcsFile->findPrevious([T_WHITESPACE], ($stackPtr - 1), null, true);
             if ($tokens[$objOperator]['code'] === T_DOUBLE_COLON) {
                 // The variable lives within a class, and is referenced like
                 // this: MyClass::$_variable, so we don't know its scope.
                 $inClass = true;
             } else {
-                $inClass = $phpcsFile->hasCondition($stackPtr, array(T_TRAIT, T_CLASS, T_INTERFACE));
+                $inClass = $phpcsFile->hasCondition($stackPtr, [T_TRAIT, T_CLASS, T_INTERFACE]);
             }
 
             if ($inClass === true) {
@@ -87,7 +87,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
 
         if ($this->_isValidVar($varName) === false) {
             $error = 'Variable "%s" is not in valid camel caps format';
-            $data = array($originalVarName);
+            $data = [$originalVarName];
             $fix = $phpcsFile->addFixableError($error, $stackPtr, 'NotCamelCaps', $data);
             if ($fix === true) {
                 $this->_fixVar($phpcsFile, $stackPtr, $originalVarName);
@@ -99,7 +99,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      * Processes class member variables.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param integer $stackPtr  The position of the current token in the
+     * @param integer $stackPtr The position of the current token in the
      *    stack passed in $tokens.
      * @return void
      */
@@ -118,7 +118,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $phpReservedVars = array(
+        $phpReservedVars = [
             '_SERVER',
             '_GET',
             '_POST',
@@ -128,7 +128,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             '_COOKIE',
             '_FILES',
             'GLOBALS',
-        );
+        ];
 
         if (preg_match_all('|[^\\\]\$([a-zA-Z0-9_]+)|', $tokens[$stackPtr]['content'], $matches) !== 0) {
             foreach ($matches[1] as $varName) {
@@ -142,14 +142,14 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                 // check the main part of the variable name.
                 $originalVarName = $varName;
                 if (substr($varName, 0, 1) === '_') {
-                    if ($phpcsFile->hasCondition($stackPtr, array(T_CLASS, T_INTERFACE)) === true) {
+                    if ($phpcsFile->hasCondition($stackPtr, [T_CLASS, T_INTERFACE]) === true) {
                         $varName = substr($varName, 1);
                     }
                 }
 
                 if ($this->_isValidVar($varName) === false) {
                     $error = 'Variable "%s" is not in valid camel caps format';
-                    $data = array($originalVarName);
+                    $data = [$originalVarName];
                     $fix = $phpcsFile->addFixableError($error, $stackPtr, 'StringVarNotCamelCaps', $data);
                     if ($fix === true) {
                         $this->_fixVar($phpcsFile, $stackPtr, $originalVarName);

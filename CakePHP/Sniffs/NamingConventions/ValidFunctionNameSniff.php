@@ -28,12 +28,12 @@ use PHP_CodeSniffer\Files\File;
 class ValidFunctionNameSniff extends AbstractScopeSniff
 {
 
-/**
- * A list of all PHP magic methods.
- *
- * @var array
- */
-    protected $_magicMethods = array(
+    /**
+     * A list of all PHP magic methods.
+     *
+     * @var array
+     */
+    protected $_magicMethods = [
         'construct',
         'destruct',
         'call',
@@ -49,24 +49,24 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         'set_state',
         'clone',
         'invoke',
-    );
+    ];
 
-/**
- * Constructs a PEAR_Sniffs_NamingConventions_ValidFunctionNameSniff.
- */
+    /**
+     * Constructs a PEAR_Sniffs_NamingConventions_ValidFunctionNameSniff.
+     */
     public function __construct()
     {
-        parent::__construct(array(T_CLASS, T_INTERFACE), array(T_FUNCTION), true);
+        parent::__construct([T_CLASS, T_INTERFACE], [T_FUNCTION], true);
     }
 
-/**
- * Processes the tokens within the scope.
- *
- * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being processed.
- * @param integer $stackPtr The position where this token was found.
- * @param integer $currScope The position of the current scope.
- * @return void
- */
+    /**
+     * Processes the tokens within the scope.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being processed.
+     * @param integer $stackPtr The position where this token was found.
+     * @param integer $currScope The position of the current scope.
+     * @return void
+     */
     protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
     {
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
@@ -76,7 +76,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         }
 
         $className = $phpcsFile->getDeclarationName($currScope);
-        $errorData = array($className . '::' . $methodName);
+        $errorData = [$className . '::' . $methodName];
 
         // PHP4 constructors are allowed to break our rules.
         if ($methodName === $className) {
@@ -129,13 +129,13 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         }
     }
 
-/**
- * Processes the tokens outside the scope.
- *
- * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being processed.
- * @param integer $stackPtr  The position where this token was found.
- * @return void
- */
+    /**
+     * Processes the tokens outside the scope.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being processed.
+     * @param integer $stackPtr The position where this token was found.
+     * @return void
+     */
     protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
     {
     }

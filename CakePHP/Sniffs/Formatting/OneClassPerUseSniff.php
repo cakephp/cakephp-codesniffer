@@ -19,6 +19,7 @@ namespace CakePHP\Sniffs\Formatting;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+
 /**
  * Ensures the use contains only one class.
  *
@@ -26,30 +27,30 @@ use PHP_CodeSniffer\Files\File;
 class OneClassPerUseSniff implements Sniff
 {
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+    /**
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return array
+     */
     public function register()
     {
-        return array(T_USE);
+        return [T_USE];
     }
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
- * @param integer $stackPtr  The position of the current token in the stack passed in $tokens.
- * @return void
- */
+    /**
+     * Processes this test, when one of its tokens is encountered.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param integer $stackPtr The position of the current token in the stack passed in $tokens.
+     * @return void
+     */
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $i = 2; // Ignore use word and whitespace
         $filename = $phpcsFile->getFilename();
 
-        while (in_array($tokens[$stackPtr + $i]['code'], array(T_STRING, T_NS_SEPARATOR, T_WHITESPACE, T_AS))) {
+        while (in_array($tokens[$stackPtr + $i]['code'], [T_STRING, T_NS_SEPARATOR, T_WHITESPACE, T_AS])) {
             $i++;
         }
 

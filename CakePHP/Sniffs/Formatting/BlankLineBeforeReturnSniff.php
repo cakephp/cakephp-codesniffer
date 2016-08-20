@@ -18,10 +18,10 @@ class BlankLineBeforeReturnSniff implements Sniff
      *
      * @var array
      */
-    public $supportedTokenizers = array(
+    public $supportedTokenizers = [
         'PHP',
         'JS',
-    );
+    ];
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -30,24 +30,24 @@ class BlankLineBeforeReturnSniff implements Sniff
      */
     public function register()
     {
-        return array(T_RETURN);
+        return [T_RETURN];
     }
 
     /**
      * Processes this test, when one of its tokens is encountered.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile All the tokens found in the document.
-     * @param int                  $stackPtr  The position of the current token in
+     * @param int $stackPtr The position of the current token in
      *                                        the stack passed in $tokens.
      *
      * @return void
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $tokens          = $phpcsFile->getTokens();
-        $current         = $stackPtr;
-        $previousLine    = $tokens[$stackPtr]['line'] - 1;
-        $prevLineTokens  = array();
+        $tokens = $phpcsFile->getTokens();
+        $current = $stackPtr;
+        $previousLine = $tokens[$stackPtr]['line'] - 1;
+        $prevLineTokens = [];
 
         while ($current >= 0 && $tokens[$current]['line'] >= $previousLine) {
             if ($tokens[$current]['line'] == $previousLine
@@ -63,8 +63,8 @@ class BlankLineBeforeReturnSniff implements Sniff
 
         if (isset($prevLineTokens[0])
             && ($prevLineTokens[0] === 'T_OPEN_CURLY_BRACKET'
-            || $prevLineTokens[0] === 'T_COLON'
-            || $prevLineTokens[0] === 'T_OPEN_TAG')
+                || $prevLineTokens[0] === 'T_COLON'
+                || $prevLineTokens[0] === 'T_OPEN_TAG')
         ) {
             return;
         } elseif (count($prevLineTokens) > 0) {

@@ -27,21 +27,21 @@ use PHP_CodeSniffer\Util\Tokens;
 class OperatorSpacingSniff implements Sniff
 {
 
-/**
- * A list of tokenizers this sniff supports.
- *
- * @var array
- */
-    public $supportedTokenizers = array(
+    /**
+     * A list of tokenizers this sniff supports.
+     *
+     * @var array
+     */
+    public $supportedTokenizers = [
         'PHP',
         'JS',
-    );
+    ];
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+    /**
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return array
+     */
     public function register()
     {
         $comparison = Tokens::$comparisonTokens;
@@ -51,14 +51,14 @@ class OperatorSpacingSniff implements Sniff
         return array_unique(array_merge($comparison, $operators, $assignment));
     }
 
-/**
- * Processes this sniff, when one of its tokens is encountered.
- *
- * @param \PHP_CodeSniffer\Files\File $phpcsFile The current file being checked.
- * @param integer $stackPtr  The position of the current token in the
- *    stack passed in $tokens.
- * @return void
- */
+    /**
+     * Processes this sniff, when one of its tokens is encountered.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The current file being checked.
+     * @param integer $stackPtr The position of the current token in the
+     *    stack passed in $tokens.
+     * @return void
+     */
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
@@ -135,7 +135,7 @@ class OperatorSpacingSniff implements Sniff
 
                 // A list of tokens that indicate that the token is not
                 // part of an arithmetic operation.
-                $invalidTokens = array(
+                $invalidTokens = [
                     T_COMMA,
                     T_OPEN_PARENTHESIS,
                     T_OPEN_SQUARE_BRACKET,
@@ -144,7 +144,7 @@ class OperatorSpacingSniff implements Sniff
                     T_INLINE_THEN,
                     T_INLINE_ELSE,
                     T_CASE,
-                );
+                ];
 
                 if (in_array($tokens[$prev]['code'], $invalidTokens) === true) {
                     // Just trying to use a negative value; eg. myFunction($var, -2).
@@ -176,13 +176,13 @@ class OperatorSpacingSniff implements Sniff
         }
     }
 
-/**
- * Check if the current token is inside an array.
- *
- * @param int $stackPtr The current token offset.
- * @param array $phpcsFile The current token list.
- * @return bool
- */
+    /**
+     * Check if the current token is inside an array.
+     *
+     * @param int $stackPtr The current token offset.
+     * @param array $phpcsFile The current token list.
+     * @return bool
+     */
     protected function _isVariable($stackPtr, $tokens, $phpcsFile)
     {
         $tokenAfter = $phpcsFile->findNext(

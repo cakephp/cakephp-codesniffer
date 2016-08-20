@@ -31,32 +31,32 @@ class DocBlockAlignmentSniff implements Sniff
      */
     public function register()
     {
-        return array(T_DOC_COMMENT_OPEN_TAG);
+        return [T_DOC_COMMENT_OPEN_TAG];
     }
 
     /**
      * Processes this test, when one of its tokens is encountered.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param integer $stackPtr  The position of the current token
+     * @param integer $stackPtr The position of the current token
      * in the stack passed in $tokens.
      * @return void
      */
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $leftWall = array(
+        $leftWall = [
             T_CLASS,
             T_NAMESPACE,
             T_INTERFACE,
             T_TRAIT,
-            T_USE
-        );
-        $oneIndentation = array(
+            T_USE,
+        ];
+        $oneIndentation = [
             T_FUNCTION,
             T_VARIABLE,
-            T_CONST
-        );
+            T_CONST,
+        ];
         $allTokens = array_merge($leftWall, $oneIndentation);
         $notFlatFile = $phpcsFile->findNext(T_NAMESPACE, 0);
         $next = $phpcsFile->findNext($allTokens, $stackPtr + 1);

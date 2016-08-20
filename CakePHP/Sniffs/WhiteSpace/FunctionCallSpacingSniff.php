@@ -28,14 +28,14 @@ use PHP_CodeSniffer\Util\Tokens;
 class FunctionCallSpacingSniff implements Sniff
 {
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+    /**
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return array
+     */
     public function register()
     {
-        return array(
+        return [
             T_ISSET,
             T_EMPTY,
             T_STRING,
@@ -43,16 +43,16 @@ class FunctionCallSpacingSniff implements Sniff
             T_INCLUDE_ONCE,
             T_REQUIRE,
             T_REQUIRE_ONCE,
-        );
+        ];
     }
 
-/**
- * Processes this sniff, when one of its tokens is encountered.
- *
- * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
- * @param integer $stackPtr The position of the current token in the stack passed in $tokens.
- * @return void
- */
+    /**
+     * Processes this sniff, when one of its tokens is encountered.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param integer $stackPtr The position of the current token in the stack passed in $tokens.
+     * @return void
+     */
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();

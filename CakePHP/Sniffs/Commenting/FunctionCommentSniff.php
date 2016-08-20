@@ -128,13 +128,13 @@ class FunctionCommentSniff extends PFCSniff
         // Check return type (can be multiple, separated by '|').
         list($types,) = explode(' ', $content);
         $typeNames = explode('|', $types);
-        $suggestedNames = array();
+        $suggestedNames = [];
         foreach ($typeNames as $i => $typeName) {
             if ($typeName === 'integer') {
                 $suggestedName = 'int';
             } elseif ($typeName === 'boolean') {
                 $suggestedName = 'bool';
-            } elseif (in_array($typeName, array('int', 'bool'))) {
+            } elseif (in_array($typeName, ['int', 'bool'])) {
                 $suggestedName = $typeName;
             } else {
                 $suggestedName = Common::suggestType($typeName);
@@ -148,10 +148,10 @@ class FunctionCommentSniff extends PFCSniff
         if ($types !== $suggestedType) {
             $error = 'Function return type "%s" is invalid';
             $error = 'Expected "%s" but found "%s" for function return type';
-            $data = array(
+            $data = [
                 $suggestedType,
                 $types,
-            );
+            ];
             $phpcsFile->addError($error, $return, 'InvalidReturn', $data);
         }
 
@@ -191,7 +191,7 @@ class FunctionCommentSniff extends PFCSniff
         // If return type is not void, there needs to be a return statement
         // somewhere in the function that returns something.
         if (!in_array('mixed', $typeNames, true) && !in_array('void', $typeNames, true)) {
-            $returnToken = $phpcsFile->findNext(array(T_RETURN, T_YIELD), $stackPtr, $endToken);
+            $returnToken = $phpcsFile->findNext([T_RETURN, T_YIELD], $stackPtr, $endToken);
             if ($returnToken === false) {
                 $error = 'Function return type is not void, but function has no return statement';
                 $phpcsFile->addWarning($error, $return, 'InvalidNoReturn');
@@ -219,7 +219,7 @@ class FunctionCommentSniff extends PFCSniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $throws = array();
+        $throws = [];
         foreach ($tokens[$commentStart]['comment_tags'] as $pos => $tag) {
             if ($tokens[$tag]['content'] !== '@throws') {
                 continue;
@@ -227,7 +227,7 @@ class FunctionCommentSniff extends PFCSniff
 
             $exception = $comment = null;
             if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING) {
-                $matches = array();
+                $matches = [];
                 preg_match('/([^\s]+)(?:\s+(.*))?/', $tokens[($tag + 2)]['content'], $matches);
                 $exception = $matches[1];
                 if (isset($matches[2]) === true) {
@@ -251,7 +251,7 @@ class FunctionCommentSniff extends PFCSniff
 
                 for ($i = ($tag + 3); $i < $end; $i++) {
                     if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
-                        $comment .= ' '.$tokens[$i]['content'];
+                        $comment .= ' ' . $tokens[$i]['content'];
                     }
                 }
 
@@ -289,7 +289,7 @@ class FunctionCommentSniff extends PFCSniff
 
         $tokens = $phpcsFile->getTokens();
 
-        $params = array();
+        $params = [];
         $maxType = $maxVar = 0;
         foreach ($tokens[$commentStart]['comment_tags'] as $pos => $tag) {
             if ($tokens[$tag]['content'] !== '@param') {
@@ -298,9 +298,9 @@ class FunctionCommentSniff extends PFCSniff
 
             $type = $var = $comment = '';
             $typeSpace = $varSpace = 0;
-            $commentLines = array();
+            $commentLines = [];
             if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING) {
-                $matches = array();
+                $matches = [];
                 preg_match('/([^$&]+)(?:((?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/', $tokens[($tag + 2)]['content'], $matches);
 
                 $typeLen = strlen($matches[1]);
@@ -321,11 +321,11 @@ class FunctionCommentSniff extends PFCSniff
                     if (isset($matches[4]) === true) {
                         $varSpace = strlen($matches[3]);
                         $comment = $matches[4];
-                        $commentLines[] = array(
+                        $commentLines[] = [
                             'comment' => $comment,
                             'token' => ($tag + 2),
                             'indent' => $varSpace,
-                        );
+                        ];
 
                         // Any strings until the next tag belong to this comment.
                         if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true) {
@@ -342,17 +342,17 @@ class FunctionCommentSniff extends PFCSniff
                                 }
 
                                 $comment .= ' ' . $tokens[$i]['content'];
-                                $commentLines[] = array(
+                                $commentLines[] = [
                                     'comment' => $tokens[$i]['content'],
                                     'token' => $i,
                                     'indent' => $indent,
-                                );
+                                ];
                             }
                         }
                     } else {
                         $error = 'Missing parameter comment';
                         $phpcsFile->addError($error, $tag, 'MissingParamComment');
-                        $commentLines[] = array('comment' => '');
+                        $commentLines[] = ['comment' => ''];
                     }//end if
                 } else {
                     $error = 'Missing parameter name';
@@ -367,7 +367,7 @@ class FunctionCommentSniff extends PFCSniff
         }//end foreach
 
         $realParams = $phpcsFile->getMethodParameters($stackPtr);
-        $foundParams = array();
+        $foundParams = [];
 
         foreach ($params as $pos => $param) {
             // If the type is empty, the whole line is empty.
@@ -382,7 +382,7 @@ class FunctionCommentSniff extends PFCSniff
                     $suggestedName = 'int';
                 } elseif ($typeName === 'boolean') {
                     $suggestedName = 'bool';
-                } elseif (in_array($typeName, array('int', 'bool'))) {
+                } elseif (in_array($typeName, ['int', 'bool'])) {
                     $suggestedName = $typeName;
                 } else {
                     $suggestedName = Common::suggestType($typeName);
@@ -390,7 +390,7 @@ class FunctionCommentSniff extends PFCSniff
 
                 if ($typeName !== $suggestedName) {
                     $error = 'Expected "%s" but found "%s" for parameter type';
-                    $data = array($suggestedName, $typeName);
+                    $data = [$suggestedName, $typeName];
 
                     $fix = $phpcsFile->addFixableError($error, $param['tag'], 'IncorrectParamVarName', $data);
                     if ($fix === true) {
@@ -415,7 +415,7 @@ class FunctionCommentSniff extends PFCSniff
                 $realName = $realParams[$pos]['name'];
                 if ($realName !== $param['var']) {
                     $code = 'ParamNameNoMatch';
-                    $data = array($param['var'], $realName);
+                    $data = [$param['var'], $realName];
 
                     $error = 'Doc comment for parameter %s does not match ';
                     if (strtolower($param['var']) === strtolower($realName)) {
@@ -460,7 +460,7 @@ class FunctionCommentSniff extends PFCSniff
             }
         }//end foreach
 
-        $realNames = array();
+        $realNames = [];
         foreach ($realParams as $realParam) {
             $realNames[] = $realParam['name'];
         }
@@ -469,7 +469,7 @@ class FunctionCommentSniff extends PFCSniff
         $diff = array_diff($realNames, $foundParams);
         foreach ($diff as $neededParam) {
             $error = 'Doc comment for parameter "%s" missing';
-            $data = array($neededParam);
+            $data = [$neededParam];
             $phpcsFile->addWarning($error, $commentStart, 'MissingParamTag', $data);
         }
 

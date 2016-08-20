@@ -18,6 +18,7 @@ namespace CakePHP\Sniffs\Formatting;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+
 /**
  * Ensures all the use are in alphabetical order.
  *
@@ -25,37 +26,37 @@ use PHP_CodeSniffer\Files\File;
 class UseInAlphabeticalOrderSniff implements Sniff
 {
 
-/**
- * Processed files
- *
- * @var array
- */
-    protected $_processed = array();
+    /**
+     * Processed files
+     *
+     * @var array
+     */
+    protected $_processed = [];
 
-/**
- * The list of use statements, their content and scope.
- *
- * @var array
- */
-    protected $_uses = array();
+    /**
+     * The list of use statements, their content and scope.
+     *
+     * @var array
+     */
+    protected $_uses = [];
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+    /**
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return array
+     */
     public function register()
     {
-        return array(T_USE);
+        return [T_USE];
     }
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
- * @param integer $stackPtr The position of the current token in the stack passed in $tokens.
- * @return void
- */
+    /**
+     * Processes this test, when one of its tokens is encountered.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param integer $stackPtr The position of the current token in the stack passed in $tokens.
+     * @return void
+     */
     public function process(File $phpcsFile, $stackPtr)
     {
         if (isset($this->_processed[$phpcsFile->getFilename()])) {
@@ -63,7 +64,7 @@ class UseInAlphabeticalOrderSniff implements Sniff
         }
         $filename = $phpcsFile->getFilename();
 
-        $this->_uses = array();
+        $this->_uses = [];
         $next = $stackPtr;
 
         while ($next !== false) {
@@ -92,13 +93,13 @@ class UseInAlphabeticalOrderSniff implements Sniff
         }
     }
 
-/**
- * Check all the use tokens in a file.
- *
- * @param \PHP_CodeSniffer\Files\File $phpcsFile The file to check.
- * @param integer $stackPtr The index of the first use token.
- * @return void
- */
+    /**
+     * Check all the use tokens in a file.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file to check.
+     * @param integer $stackPtr The index of the first use token.
+     * @return void
+     */
     protected function _checkUseToken($phpcsFile, $stackPtr)
     {
         // If the use token is for a closure we want to ignore it.
@@ -110,14 +111,14 @@ class UseInAlphabeticalOrderSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         // Only one USE declaration allowed per statement.
-        $next = $phpcsFile->findNext(array(T_COMMA, T_SEMICOLON), ($stackPtr + 1));
+        $next = $phpcsFile->findNext([T_COMMA, T_SEMICOLON], ($stackPtr + 1));
         if ($tokens[$next]['code'] === T_COMMA) {
             $error = 'There must be one USE keyword per declaration';
             $phpcsFile->addError($error, $stackPtr, 'MultipleDeclarations');
         }
 
         $content = '';
-        $end = $phpcsFile->findNext(array(T_SEMICOLON, T_OPEN_CURLY_BRACKET), $stackPtr);
+        $end = $phpcsFile->findNext([T_SEMICOLON, T_OPEN_CURLY_BRACKET], $stackPtr);
         $useTokens = array_slice($tokens, $stackPtr, $end - $stackPtr, true);
 
         foreach ($useTokens as $index => $token) {
@@ -135,17 +136,17 @@ class UseInAlphabeticalOrderSniff implements Sniff
         $this->_uses[$scope][$content] = $stackPtr;
     }
 
-/**
- * Check if the current stackPtr is a use token that is for a closure.
- *
- * @param \PHP_CodeSniffer\Files\File $phpcsFile
- * @param integer $stackPtr
- * @return boolean
- */
+    /**
+     * Check if the current stackPtr is a use token that is for a closure.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile
+     * @param integer $stackPtr
+     * @return boolean
+     */
     protected function _isClosure($phpcsFile, $stackPtr)
     {
         return $phpcsFile->findPrevious(
-            array(T_CLOSURE),
+            [T_CLOSURE],
             ($stackPtr - 1),
             null,
             false,

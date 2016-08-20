@@ -27,29 +27,29 @@ use PHP_CodeSniffer\Files\File;
 class ValidTraitNameSniff implements Sniff
 {
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * If the constant is not defined, ignore because probably the PHP version
- * is under 5.4.0 and don't have traits in use
- *
- * @return array
- */
+    /**
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * If the constant is not defined, ignore because probably the PHP version
+     * is under 5.4.0 and don't have traits in use
+     *
+     * @return array
+     */
     public function register()
     {
         if (!defined('T_TRAIT')) {
-            return array();
+            return [];
         }
-        return array(T_TRAIT);
+        return [T_TRAIT];
     }
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
- * @param integer $stackPtr  The position of the current token in the stack passed in $tokens.
- * @return void
- */
+    /**
+     * Processes this test, when one of its tokens is encountered.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param integer $stackPtr The position of the current token in the stack passed in $tokens.
+     * @return void
+     */
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();

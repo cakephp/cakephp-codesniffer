@@ -26,24 +26,24 @@ use PHP_CodeSniffer\Files\File;
 class FunctionOpeningBraceSpaceSniff implements Sniff
 {
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+    /**
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return array
+     */
     public function register()
     {
-        return array(T_FUNCTION);
+        return [T_FUNCTION];
     }
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
- * @param integer $stackPtr  The position of the current token
- *   in the stack passed in $tokens.
- * @return void
- */
+    /**
+     * Processes this test, when one of its tokens is encountered.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param integer $stackPtr The position of the current token
+     *   in the stack passed in $tokens.
+     * @return void
+     */
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
@@ -69,7 +69,7 @@ class FunctionOpeningBraceSpaceSniff implements Sniff
         $found = ($nextLine - $braceLine - 1);
         if ($found > 0) {
             $error = 'Expected 0 blank lines after opening function brace; %s found';
-            $data = array($found);
+            $data = [$found];
             $phpcsFile->addError($error, $openBrace, 'SpacingAfter', $data);
         }
     }
