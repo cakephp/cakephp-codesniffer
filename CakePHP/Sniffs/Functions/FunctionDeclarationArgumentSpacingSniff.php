@@ -14,17 +14,15 @@
  * @since         CakePHP CodeSniffer 0.1.18
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-if (class_exists('Squiz_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff', true) === false) {
-    $error = 'Class Squiz_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff not found';
-    throw new PHP_CodeSniffer_Exception($error);
-}
+namespace CakePHP\Sniffs\Functions;
+
+use PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\FunctionDeclarationArgumentSpacingSniff as FDASSniff;
 
 /**
  * Ensures the spacing of function declaration arguments is correct.
  *
  */
-class CakePHP_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff extends
- Squiz_Sniffs_Functions_FunctionDeclarationArgumentSpacingSniff
+class FunctionDeclarationArgumentSpacingSniff extends FDASSniff
 {
 
     /**

@@ -17,7 +17,13 @@
  * - bool instead of boolean
  * - int instead of integer
  */
-class CakePHP_Sniffs_PHP_TypeCastingSniff implements PHP_CodeSniffer_Sniff
+namespace CakePHP\Sniffs\PHP;
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
+
+class TypeCastingSniff implements Sniff
 {
 
     /**
@@ -32,18 +38,18 @@ class CakePHP_Sniffs_PHP_TypeCastingSniff implements PHP_CodeSniffer_Sniff
      */
     public function register()
     {
-        return array_merge(PHP_CodeSniffer_Tokens::$castTokens, array(T_BOOLEAN_NOT));
+        return array_merge(Tokens::$castTokens, array(T_BOOLEAN_NOT));
     }
 
     /**
      * Processes this test, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param integer              $stackPtr  The position of the current token in the
      *                                        stack passed in $tokens.
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

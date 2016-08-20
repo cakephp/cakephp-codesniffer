@@ -14,16 +14,16 @@
  * @since         CakePHP CodeSniffer 0.1.1
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+namespace CakePHP\Sniffs\NamingConventions;
 
-if (class_exists('PHP_CodeSniffer_Standards_AbstractVariableSniff', true) === false) {
-    throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_Standards_AbstractVariableSniff not found');
-}
+use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
+use PHP_CodeSniffer\Files\File;
 
 /**
  * Checks the naming of variables and member variables.
  *
  */
-class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff
+class ValidVariableNameSniff extends AbstractVariableSniff
 {
 
     /**
@@ -33,12 +33,12 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
      * they could come from things like PDO which doesn't follow the normal
      * conventions and causes additional failures.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param integer $stackPtr  The position of the current token in the
      *    stack passed in $tokens.
      * @return void
      */
-    protected function processVariable(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function processVariable(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $varName = ltrim($tokens[$stackPtr]['content'], '$');
@@ -98,23 +98,23 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
     /**
      * Processes class member variables.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param integer $stackPtr  The position of the current token in the
      *    stack passed in $tokens.
      * @return void
      */
-    protected function processMemberVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function processMemberVar(File $phpcsFile, $stackPtr)
     {
     }
 
     /**
      * Processes the variable found within a double quoted string.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param integer $stackPtr The position of the double quoted string.
      * @return void
      */
-    protected function processVariableInString(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function processVariableInString(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -160,13 +160,13 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
     }
 
     /**
-     * @param \PHP_CodeSniffer_File $phpcsFile PHPCS file
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile PHPCS file
      * @param array $tokens Array of tokens
      * @param int $stackPtr The pointer
      * @param string $varName The variable name
      * @return void
      */
-    protected function _fixVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $varName)
+    protected function _fixVar(File $phpcsFile, $stackPtr, $varName)
     {
         $tokens = $phpcsFile->getTokens();
         $phpcsFile->fixer->beginChangeset();

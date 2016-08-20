@@ -20,7 +20,12 @@
  * the strings being concatenated.
  *
  */
-class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffer_Sniff
+namespace CakePHP\Sniffs\Strings;
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+
+class ConcatenationSpacingSniff implements Sniff
 {
 
 /**
@@ -36,12 +41,12 @@ class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffe
 /**
  * Processes this test, when one of its tokens is encountered.
  *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+ * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
  * @param integer $stackPtr The position of the current token in the
  *    stack passed in $tokens.
  * @return void
  */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {

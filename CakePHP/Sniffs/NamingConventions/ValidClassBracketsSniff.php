@@ -19,7 +19,12 @@
  * Ensures curly brackets are on the same line as the Class declaration
  *
  */
-class CakePHP_Sniffs_NamingConventions_ValidClassBracketsSniff implements PHP_CodeSniffer_Sniff
+namespace CakePHP\Sniffs\NamingConventions;
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+
+class ValidClassBracketsSniff implements Sniff
 {
 
 /**
@@ -35,11 +40,11 @@ class CakePHP_Sniffs_NamingConventions_ValidClassBracketsSniff implements PHP_Co
 /**
  * Processes this test, when one of its tokens is encountered.
  *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+ * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
  * @param int $stackPtr  The position of the current token in the stack passed in $tokens.
  * @return void
  */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -49,13 +54,13 @@ class CakePHP_Sniffs_NamingConventions_ValidClassBracketsSniff implements PHP_Co
         }
         if ($tokens[$found - 1]['code'] != T_WHITESPACE) {
             $error = 'Expected 1 space after class declaration, found 0';
-            $phpcsFile->addError($error, $found - 1, 'InvalidSpacing', array());
+            $phpcsFile->addError($error, $found - 1, 'InvalidSpacing');
             return;
         }
 
         if (strlen($tokens[$found - 1]['content']) > 1 || $tokens[$found - 2]['code'] == T_WHITESPACE) {
             $error = 'Expected 1 space after class declaration, found ' . strlen($tokens[$found - 1]['content']);
-            $phpcsFile->addError($error, $found - 1, 'InvalidSpacing', array());
+            $phpcsFile->addError($error, $found - 1, 'InvalidSpacing');
         }
     }
 }

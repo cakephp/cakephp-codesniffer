@@ -20,7 +20,13 @@
  * for indentation rather than spaces.
  *
  */
-class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Sniff
+namespace CakePHP\Sniffs\WhiteSpace;
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
+
+class ScopeIndentSniff implements Sniff
 {
 
 /**
@@ -54,18 +60,18 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
  */
     public function register()
     {
-        return PHP_CodeSniffer_Tokens::$scopeOpeners;
+        return Tokens::$scopeOpeners;
     }
 
 /**
  * Processes this test, when one of its tokens is encountered.
  *
- * @param PHP_CodeSniffer_File $phpcsFile All the tokens found in the document.
+ * @param \PHP_CodeSniffer\Files\File $phpcsFile All the tokens found in the document.
  * @param integer $stackPtr The position of the current token
  *    in the stack passed in $tokens.
  * @return void
  */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -77,7 +83,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
 
         if ($tokens[$stackPtr]['code'] === T_ELSE) {
             $next = $phpcsFile->findNext(
-                PHP_CodeSniffer_Tokens::$emptyTokens,
+                Tokens::$emptyTokens,
                 ($stackPtr + 1),
                 null,
                 true
@@ -93,7 +99,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
         $firstToken = $stackPtr;
         for ($i = $stackPtr; $i >= 0; $i--) {
             // Record the first code token on the line.
-            if (in_array($tokens[$i]['code'], PHP_CodeSniffer_Tokens::$emptyTokens) === false) {
+            if (in_array($tokens[$i]['code'], Tokens::$emptyTokens) === false) {
                 $firstToken = $i;
             }
 
@@ -126,7 +132,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
         for ($i = ($scopeOpener + 1); $i < $scopeCloser; $i++) {
             // If this token is another scope, skip it as it will be handled by
             // another call to this sniff.
-            if (in_array($tokens[$i]['code'], PHP_CodeSniffer_Tokens::$scopeOpeners) === true) {
+            if (in_array($tokens[$i]['code'], Tokens::$scopeOpeners) === true) {
                 if (isset($tokens[$i]['scope_opener']) === true) {
                     $i = $tokens[$i]['scope_closer'];
 
@@ -134,7 +140,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
                     // of the closer and should also be ignored. This most commonly happens with
                     // CASE statements that end with "break;", where we don't want to stop
                     // ignoring at the break, but rather at the semi-colon.
-                    $nextToken = $phpcsFile->findNext(PHP_CodeSniffer_Tokens::$emptyTokens, ($i + 1), null, true);
+                    $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, ($i + 1), null, true);
                     if ($tokens[$nextToken]['code'] === T_SEMICOLON) {
                         $i = $nextToken;
                     }
@@ -200,8 +206,8 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
                 // Check to see if this constant string spans multiple lines.
                 // If so, then make sure that the strings on lines other than the
                 // first line are indented appropriately, based on their whitespace.
-                if (in_array($tokens[$firstToken]['code'], PHP_CodeSniffer_Tokens::$stringTokens) === true) {
-                    if (in_array($tokens[($firstToken - 1)]['code'], PHP_CodeSniffer_Tokens::$stringTokens) === true) {
+                if (in_array($tokens[$firstToken]['code'], Tokens::$stringTokens) === true) {
+                    if (in_array($tokens[($firstToken - 1)]['code'], Tokens::$stringTokens) === true) {
                         // If we find a string that directly follows another string
                         // then its just a string that spans multiple lines, so we
                         // don't need to check for indenting.

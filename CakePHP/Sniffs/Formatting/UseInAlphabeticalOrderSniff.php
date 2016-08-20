@@ -14,11 +14,15 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+namespace CakePHP\Sniffs\Formatting;
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
 /**
  * Ensures all the use are in alphabetical order.
  *
  */
-class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeSniffer_Sniff
+class UseInAlphabeticalOrderSniff implements Sniff
 {
 
 /**
@@ -48,11 +52,11 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
 /**
  * Processes this test, when one of its tokens is encountered.
  *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+ * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
  * @param integer $stackPtr The position of the current token in the stack passed in $tokens.
  * @return void
  */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         if (isset($this->_processed[$phpcsFile->getFilename()])) {
             return;
@@ -82,7 +86,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
             foreach ($defined as $i => $name) {
                 if ($name !== $sorted[$i]) {
                     $error = 'Use classes must be in alphabetical order. Was expecting ' . $sorted[$i];
-                    $phpcsFile->addError($error, $used[$name], 'UseInAlphabeticalOrder', array());
+                    $phpcsFile->addError($error, $used[$name], 'UseInAlphabeticalOrder');
                 }
             }
         }
@@ -91,7 +95,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
 /**
  * Check all the use tokens in a file.
  *
- * @param PHP_CodeSniffer_File $phpcsFile The file to check.
+ * @param \PHP_CodeSniffer\Files\File $phpcsFile The file to check.
  * @param integer $stackPtr The index of the first use token.
  * @return void
  */
@@ -134,7 +138,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
 /**
  * Check if the current stackPtr is a use token that is for a closure.
  *
- * @param PHP_CodeSniffer_File $phpcsFile
+ * @param \PHP_CodeSniffer\Files\File $phpcsFile
  * @param integer $stackPtr
  * @return boolean
  */

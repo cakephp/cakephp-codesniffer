@@ -18,7 +18,13 @@
  * Verifies that operators have valid spacing surrounding them.
  *
  */
-class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_Sniff
+namespace CakePHP\Sniffs\WhiteSpace;
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
+
+class OperatorSpacingSniff implements Sniff
 {
 
 /**
@@ -38,9 +44,9 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
  */
     public function register()
     {
-        $comparison = PHP_CodeSniffer_Tokens::$comparisonTokens;
-        $operators = PHP_CodeSniffer_Tokens::$operators;
-        $assignment = PHP_CodeSniffer_Tokens::$assignmentTokens;
+        $comparison = Tokens::$comparisonTokens;
+        $operators = Tokens::$operators;
+        $assignment = Tokens::$assignmentTokens;
 
         return array_unique(array_merge($comparison, $operators, $assignment));
     }
@@ -48,12 +54,12 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
 /**
  * Processes this sniff, when one of its tokens is encountered.
  *
- * @param PHP_CodeSniffer_File $phpcsFile The current file being checked.
+ * @param \PHP_CodeSniffer\Files\File $phpcsFile The current file being checked.
  * @param integer $stackPtr  The position of the current token in the
  *    stack passed in $tokens.
  * @return void
  */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -117,12 +123,12 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
                     return;
                 }
 
-                if (in_array($tokens[$prev]['code'], PHP_CodeSniffer_Tokens::$operators) === true) {
+                if (in_array($tokens[$prev]['code'], Tokens::$operators) === true) {
                     // Just trying to operate on a negative value; eg. ($var * -1).
                     return;
                 }
 
-                if (in_array($tokens[$prev]['code'], PHP_CodeSniffer_Tokens::$comparisonTokens) === true) {
+                if (in_array($tokens[$prev]['code'], Tokens::$comparisonTokens) === true) {
                     // Just trying to compare a negative value; eg. ($var === -1).
                     return;
                 }
@@ -144,7 +150,7 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
                     // Just trying to use a negative value; eg. myFunction($var, -2).
                     return;
                 }
-                if (in_array($tokens[$prev]['code'], PHP_CodeSniffer_Tokens::$assignmentTokens) === true) {
+                if (in_array($tokens[$prev]['code'], Tokens::$assignmentTokens) === true) {
                     // Just trying to assign a negative value; eg. ($var = -1).
                     return;
                 }
@@ -180,13 +186,13 @@ class CakePHP_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_
     protected function _isVariable($stackPtr, $tokens, $phpcsFile)
     {
         $tokenAfter = $phpcsFile->findNext(
-            PHP_CodeSniffer_Tokens::$emptyTokens,
+            Tokens::$emptyTokens,
             ($stackPtr + 1),
             null,
             true
         );
         $tokenBefore = $phpcsFile->findNext(
-            PHP_CodeSniffer_Tokens::$emptyTokens,
+            Tokens::$emptyTokens,
             ($stackPtr - 1),
             null,
             true

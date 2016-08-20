@@ -20,7 +20,12 @@
  * or private, and that functions are named correctly.
  *
  */
-class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff
+namespace CakePHP\Sniffs\NamingConventions;
+
+use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
+use PHP_CodeSniffer\Files\File;
+
+class ValidFunctionNameSniff extends AbstractScopeSniff
 {
 
 /**
@@ -57,12 +62,12 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 /**
  * Processes the tokens within the scope.
  *
- * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
+ * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being processed.
  * @param integer $stackPtr The position where this token was found.
  * @param integer $currScope The position of the current scope.
  * @return void
  */
-    protected function processTokenWithinScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $currScope)
+    protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
     {
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
         if ($methodName === null) {
@@ -127,11 +132,11 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 /**
  * Processes the tokens outside the scope.
  *
- * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
+ * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being processed.
  * @param integer $stackPtr  The position where this token was found.
  * @return void
  */
-    protected function processTokenOutsideScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
     {
     }
 }
