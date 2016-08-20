@@ -4,13 +4,14 @@ php:
   - 5.4
   - 5.5
   - 5.6
+  - 7.0
 
 sudo: false
 
 before_script:
-  - mv ../cakephp-codesniffer ../cakephp_codesniffer && cd ../cakephp_codesniffer
-  - composer selfupdate
-  - composer install
+  - composer self-update
+  - composer install --prefer-source
+  - vendor/bin/phpcs --config-set installed_paths $(pwd)
 
 script:
   - vendor/bin/phpunit
