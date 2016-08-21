@@ -22,8 +22,8 @@
  */
 namespace CakePHP\Sniffs\NamingConventions;
 
-use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
 
 class ValidFunctionNameSniff extends AbstractScopeSniff
 {
@@ -108,6 +108,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
             if ($methodName[0] === '_') {
                 $error = 'Public method name "%s" must not be prefixed with underscore';
                 $phpcsFile->addError($error, $stackPtr, 'PublicWithUnderscore', $errorData);
+
                 return;
             }
             // Underscored public methods in controller are allowed to break our rules.

@@ -29,8 +29,8 @@
  */
 namespace CakePHP\Sniffs\NamingConventions;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 class UpperCaseConstantNameSniff implements Sniff
 {
@@ -193,7 +193,6 @@ class UpperCaseConstantNameSniff implements Sniff
                 ];
                 $phpcsFile->addError($error, $stackPtr, 'ConstantNotUpperCase', $data);
             }
-
         } elseif (strtolower($constName) === 'define' || strtolower($constName) === 'constant') {
             // This may be a "define" or "constant" function call.
 

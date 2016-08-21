@@ -21,8 +21,8 @@
  */
 namespace CakePHP\Sniffs\NamingConventions;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ValidClassBracketsSniff implements Sniff
 {
@@ -55,6 +55,7 @@ class ValidClassBracketsSniff implements Sniff
         if ($tokens[$found - 1]['code'] != T_WHITESPACE) {
             $error = 'Expected 1 space after class declaration, found 0';
             $phpcsFile->addError($error, $found - 1, 'InvalidSpacing');
+
             return;
         }
 

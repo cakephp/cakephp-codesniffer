@@ -20,8 +20,8 @@
  */
 namespace CakePHP\Sniffs\WhiteSpace;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
 
 class OperatorSpacingSniff implements Sniff
@@ -198,15 +198,12 @@ class OperatorSpacingSniff implements Sniff
             true
         );
 
-        if ($tokens[$tokenAfter]['code'] === T_VARIABLE &&
+        return ($tokens[$tokenAfter]['code'] === T_VARIABLE &&
             (
                 $tokens[$tokenBefore]['code'] === T_OPEN_PARENTHESIS ||
                 $tokens[$tokenBefore]['code'] === T_COMMA ||
                 $tokens[$tokenBefore]['code'] === T_OPEN_SHORT_ARRAY
             )
-        ) {
-            return true;
-        }
-        return false;
+        );
     }
 }

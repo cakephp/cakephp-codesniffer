@@ -17,8 +17,8 @@
 
 namespace CakePHP\Sniffs\ControlStructures;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Ensures that elseif is used instead of else if

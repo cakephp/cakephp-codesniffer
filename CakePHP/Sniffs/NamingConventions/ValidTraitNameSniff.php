@@ -21,8 +21,8 @@
  */
 namespace CakePHP\Sniffs\NamingConventions;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ValidTraitNameSniff implements Sniff
 {
@@ -40,6 +40,7 @@ class ValidTraitNameSniff implements Sniff
         if (!defined('T_TRAIT')) {
             return [];
         }
+
         return [T_TRAIT];
     }
 

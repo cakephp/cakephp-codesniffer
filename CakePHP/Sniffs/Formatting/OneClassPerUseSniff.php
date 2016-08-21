@@ -17,8 +17,8 @@
 
 namespace CakePHP\Sniffs\Formatting;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Ensures the use contains only one class.

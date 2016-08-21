@@ -16,8 +16,8 @@
  */
 namespace CakePHP\Sniffs\Functions;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Ensures there is a space after the function keyword for closures.

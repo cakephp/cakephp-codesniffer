@@ -21,8 +21,8 @@
  */
 namespace CakePHP\Sniffs\WhiteSpace;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 class CommaSpacingSniff implements Sniff
 {

@@ -19,8 +19,8 @@
  */
 namespace CakePHP\Sniffs\PHP;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
 
 class TypeCastingSniff implements Sniff
@@ -78,11 +78,13 @@ class TypeCastingSniff implements Sniff
         if (isset($matching[$key])) {
             $error = 'Please use ' . $matching[$key] . ' instead of ' . $content . '.';
             $phpcsFile->addError($error, $stackPtr, 'NotAllowed');
+
             return;
         }
         if ($content !== $key) {
             $error = 'Please use ' . $key . ' instead of ' . $content . '.';
             $phpcsFile->addError($error, $stackPtr, 'NotAllowed');
+
             return;
         }
     }

@@ -23,8 +23,8 @@
 
 namespace CakePHP\Sniffs\ControlStructures;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ControlStructuresSniff implements Sniff
 {

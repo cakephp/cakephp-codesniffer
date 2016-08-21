@@ -15,8 +15,8 @@
 
 namespace CakePHP\Sniffs\Commenting;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Ensures doc block alignments.
@@ -68,7 +68,5 @@ class DocBlockAlignmentSniff implements Sniff
                 $phpcsFile->addError('Expected docblock to be aligned with code.', $stackPtr, 'NotAllowed');
             }
         }
-
-        return;
     }
 }

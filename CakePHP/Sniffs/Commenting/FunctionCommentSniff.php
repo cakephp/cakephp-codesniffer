@@ -61,6 +61,7 @@ class FunctionCommentSniff extends PFCSniff
         $start = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $stackPtr - 1);
         $end = $phpcsFile->findNext(T_DOC_COMMENT_CLOSE_TAG, $start);
         $content = $phpcsFile->getTokensAsString($start, ($end - $start));
+
         return preg_match('#{@inheritDoc}#', $content) === 1;
     } // end isInheritDoc()
 
@@ -101,6 +102,7 @@ class FunctionCommentSniff extends PFCSniff
                 if ($return !== null) {
                     $error = 'Only 1 @return tag is allowed in a function comment';
                     $phpcsFile->addError($error, $tag, 'DuplicateReturn');
+
                     return;
                 }
 
@@ -115,6 +117,7 @@ class FunctionCommentSniff extends PFCSniff
         if ($return === null) {
             $error = 'Missing @return tag in function comment';
             $phpcsFile->addWarning($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
+
             return;
         }//end if
 
@@ -122,11 +125,12 @@ class FunctionCommentSniff extends PFCSniff
         if (empty($content) === true || $tokens[($return + 2)]['code'] !== T_DOC_COMMENT_STRING) {
             $error = 'Return type missing for @return tag in function comment';
             $phpcsFile->addError($error, $return, 'MissingReturnType');
+
             return;
         }
 
         // Check return type (can be multiple, separated by '|').
-        list($types,) = explode(' ', $content);
+        list($types, ) = explode(' ', $content);
         $typeNames = explode('|', $types);
         $suggestedNames = [];
         foreach ($typeNames as $i => $typeName) {
@@ -185,6 +189,7 @@ class FunctionCommentSniff extends PFCSniff
                     $phpcsFile->addWarning($error, $return, 'InvalidReturnVoid');
                 }
             }
+
             return;
         }
 
@@ -203,7 +208,6 @@ class FunctionCommentSniff extends PFCSniff
                 }
             }
         }//end if
-
     }//end processReturn()
 
 
@@ -269,7 +273,6 @@ class FunctionCommentSniff extends PFCSniff
                 }
             }//end if
         }//end foreach
-
     }//end processThrows()
 
 
@@ -472,6 +475,5 @@ class FunctionCommentSniff extends PFCSniff
             $data = [$neededParam];
             $phpcsFile->addWarning($error, $commentStart, 'MissingParamTag', $data);
         }
-
     }//end processParams()
 }//end class

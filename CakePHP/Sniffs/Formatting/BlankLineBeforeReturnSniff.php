@@ -1,8 +1,8 @@
 <?php
 namespace CakePHP\Sniffs\Formatting;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Throws errors if there's no blank line before return statements.
@@ -79,7 +79,5 @@ class BlankLineBeforeReturnSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
-        return;
     }
 }

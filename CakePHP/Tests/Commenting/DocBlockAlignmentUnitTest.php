@@ -16,7 +16,7 @@ class DocBlockAlignmentUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
             case 'DocBlockAlignmentUnitTest.1.inc':
@@ -26,9 +26,8 @@ class DocBlockAlignmentUnitTest extends AbstractSniffUnitTest
                 ];
 
             default:
-                return [];;
+                return [];
         }
-
     }
 
     /**

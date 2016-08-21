@@ -16,7 +16,7 @@ class UseInAlphabeticalOrderUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
             case 'UseInAlphabeticalOrderUnitTest.1.inc':
@@ -28,9 +28,8 @@ class UseInAlphabeticalOrderUnitTest extends AbstractSniffUnitTest
                 ];
 
             default:
-                return [];;
+                return [];
         }
-
     }
 
     /**

@@ -22,8 +22,8 @@
  */
 namespace CakePHP\Sniffs\Strings;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ConcatenationSpacingSniff implements Sniff
 {

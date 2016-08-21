@@ -8,13 +8,24 @@ php:
 
 sudo: false
 
+matrix:
+  fast_finish: true
+
+  include:
+    - php: 7.0
+      env: PHPCS=1
+
+  allow_failures:
+    - php: hhvm
+
 before_script:
   - composer self-update
   - composer install --prefer-source
   - vendor/bin/phpcs --config-set installed_paths $(pwd)
 
 script:
-  - vendor/bin/phpunit
+  - if [[ $PHPCS != 1 ]]; vendor/bin/phpunit; fi
+  - if [[ $PHPCS = 1 ]]; then vendor/bin/phpcs -p --extensions=php --standard=CakePHP ./CakePHP; fi
 
 notifications:
   email: false

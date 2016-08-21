@@ -22,8 +22,8 @@
  */
 namespace CakePHP\Sniffs\WhiteSpace;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
 
 class ScopeIndentSniff implements Sniff
@@ -73,7 +73,6 @@ class ScopeIndentSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        die('yay');
         $tokens = $phpcsFile->getTokens();
 
         // If this is an inline condition (ie. there is no scope opener), then
@@ -291,6 +290,7 @@ class ScopeIndentSniff implements Sniff
                 $conditionStack[$id] = $condition;
             }
         }
+
         return ((count($conditionStack) * $this->indent) + 1);
     }
 }

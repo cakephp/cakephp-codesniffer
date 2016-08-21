@@ -17,7 +17,7 @@ class ValidTraitNameUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [
-            2  => 1,
+            2 => 1,
         ];
     }
 

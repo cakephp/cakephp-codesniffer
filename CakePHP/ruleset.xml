@@ -18,6 +18,12 @@
  <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
   <severity>0</severity>
  </rule>
+ <rule ref ="Squiz.NamingConventions.ValidFunctionName.PublicUnderscore">
+  <severity>0</severity>
+ </rule>
+ <rule ref ="PEAR.NamingConventions.ValidFunctionName.PublicUnderscore">
+  <severity>0</severity>
+ </rule>
 
  <!--
  Temporarily ignore until API docblock formatting and line length issues in core code are fixed.
@@ -91,6 +97,7 @@
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="PEAR.NamingConventions.ValidClassName">
+  <exclude-pattern>*/CakePHP/*</exclude-pattern>
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="Squiz.Classes.ValidClassName">

@@ -16,8 +16,8 @@
  */
 namespace CakePHP\Sniffs\NamingConventions;
 
-use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 
 /**
  * Checks the naming of variables and member variables.
@@ -207,6 +207,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
         if (preg_match("|[^$legalChars]|", substr($string, $firstStringCount)) > 0) {
             return false;
         }
+
         return true;
     }
 }
