@@ -24,7 +24,7 @@ before_script:
   - vendor/bin/phpcs --config-set installed_paths $(pwd)
 
 script:
-  - if [[ $PHPCS != 1 ]]; vendor/bin/phpunit; fi
+  - if [[ $PHPCS != 1 ]]; then vendor/bin/phpunit; fi
   - if [[ $PHPCS = 1 ]]; then vendor/bin/phpcs -p --extensions=php --standard=CakePHP ./CakePHP; fi
 
 notifications:
