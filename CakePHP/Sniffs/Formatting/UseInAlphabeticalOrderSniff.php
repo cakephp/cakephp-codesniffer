@@ -110,13 +110,6 @@ class UseInAlphabeticalOrderSniff implements Sniff
 
         $tokens = $phpcsFile->getTokens();
 
-        // Only one USE declaration allowed per statement.
-        $next = $phpcsFile->findNext([T_COMMA, T_SEMICOLON], ($stackPtr + 1));
-        if ($tokens[$next]['code'] === T_COMMA) {
-            $error = 'There must be one USE keyword per declaration';
-            $phpcsFile->addError($error, $stackPtr, 'MultipleDeclarations');
-        }
-
         $content = '';
         $end = $phpcsFile->findNext([T_SEMICOLON, T_OPEN_CURLY_BRACKET], $stackPtr);
         $useTokens = array_slice($tokens, $stackPtr, $end - $stackPtr, true);
