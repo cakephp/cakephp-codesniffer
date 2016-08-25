@@ -82,6 +82,7 @@
 
  <!-- Relax some src/* and tests/* rules -->
  <rule ref="PSR1.Files.SideEffects">
+  <exclude-pattern>*/config/*</exclude-pattern>
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="PSR1.Classes.ClassDeclaration">
