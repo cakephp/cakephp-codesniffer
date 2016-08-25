@@ -24,7 +24,11 @@
  <rule ref ="PEAR.NamingConventions.ValidFunctionName.PublicUnderscore">
   <severity>0</severity>
  </rule>
-
+ <rule ref ="Zend.NamingConventions.ValidVariableName">
+ </rule>
+ <rule ref ="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore">
+  <severity>0</severity>
+ </rule>
  <!--
  Temporarily ignore until API docblock formatting and line length issues in core code are fixed.
  -->
