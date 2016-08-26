@@ -24,6 +24,7 @@ before_script:
   - vendor/bin/phpcs --config-set installed_paths $(pwd)
 
 script:
+  - sed -i.bak "s/<exclude-pattern>\*\/tests\/\*<\/exclude-pattern>//" CakePHP/ruleset.xml
   - if [[ $PHPCS != 1 ]]; then vendor/bin/phpunit --filter CakePHP; fi
   - if [[ $PHPCS = 1 ]]; then vendor/bin/phpcs -p --extensions=php --standard=CakePHP ./CakePHP; fi
 
