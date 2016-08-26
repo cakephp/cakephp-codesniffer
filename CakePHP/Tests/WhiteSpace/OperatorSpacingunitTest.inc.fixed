@@ -1,10 +1,10 @@
 <?php
-$ten =10 * 2;
-$ten= -10 * 2;
-$ten = 10/-2;
-$bool = true& true;
-$bool = true &true;
-$bool = true&true;
+$ten = 10 * 2;
+$ten = -10 * 2;
+$ten = 10 / -2;
+$bool = true & true;
+$bool = true & true;
+$bool = true & true;
 
 $foo = -1;
 

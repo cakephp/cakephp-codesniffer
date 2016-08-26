@@ -60,7 +60,7 @@ class BlankLineBeforeReturnSniff implements Sniff
         ) {
             return;
         } elseif (count($prevLineTokens) > 0) {
-            $fix = $phpcsFile->addError(
+            $fix = $phpcsFile->addFixableError(
                 'Missing blank line before return statement',
                 $stackPtr,
                 'BlankLineBeforeReturn'

@@ -13,6 +13,7 @@ class BlankLineBeforeReturnUnitTest extends AbstractSniffUnitTest
     {
         return [
             9 => 1,
+            17 => 1,
         ];
     }
 

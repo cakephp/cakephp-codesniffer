@@ -6,6 +6,7 @@ return [
 function invalidFunctionReturnOne()
 {
     echo "";
+
     return null;
 }
 
@@ -14,6 +15,7 @@ function invalidFunctionReturnOne()
     if(true) {
         echo "";
     }
+
     return null;
 }
 
