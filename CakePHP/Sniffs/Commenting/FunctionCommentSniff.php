@@ -54,7 +54,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int $stackPtr The position of the current token in the stack passed in $tokens.
-     * @return boolean True if the comment is an inheritdoc
+     * @return bool True if the comment is an inheritdoc
      */
     protected function isInheritDoc(File $phpcsFile, $stackPtr)
     {

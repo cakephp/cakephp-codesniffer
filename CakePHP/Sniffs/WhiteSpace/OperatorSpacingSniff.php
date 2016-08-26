@@ -55,7 +55,7 @@ class OperatorSpacingSniff implements Sniff
      * Processes this sniff, when one of its tokens is encountered.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The current file being checked.
-     * @param integer $stackPtr The position of the current token in the
+     * @param int $stackPtr The position of the current token in the
      *    stack passed in $tokens.
      * @return void
      */
@@ -180,7 +180,8 @@ class OperatorSpacingSniff implements Sniff
      * Check if the current token is inside an array.
      *
      * @param int $stackPtr The current token offset.
-     * @param array $phpcsFile The current token list.
+     * @param array $tokens The current token list.
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The current file being checked.
      * @return bool
      */
     protected function _isVariable($stackPtr, $tokens, $phpcsFile)

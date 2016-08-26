@@ -25,12 +25,17 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 class ClosureDeclarationSniff implements Sniff
 {
-
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
         return [T_CLOSURE];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();

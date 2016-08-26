@@ -63,8 +63,8 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
      * Processes the tokens within the scope.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being processed.
-     * @param integer $stackPtr The position where this token was found.
-     * @param integer $currScope The position of the current scope.
+     * @param int $stackPtr The position where this token was found.
+     * @param int $currScope The position of the current scope.
      * @return void
      */
     protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
@@ -134,7 +134,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
      * Processes the tokens outside the scope.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being processed.
-     * @param integer $stackPtr The position where this token was found.
+     * @param int $stackPtr The position where this token was found.
      * @return void
      */
     protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
