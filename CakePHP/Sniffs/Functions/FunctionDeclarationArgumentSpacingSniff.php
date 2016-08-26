@@ -16,13 +16,13 @@
  */
 namespace CakePHP\Sniffs\Functions;
 
-use PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\FunctionDeclarationArgumentSpacingSniff as FDASSniff;
+use PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\FunctionDeclarationArgumentSpacingSniff as SquizFunctionDeclarationArgumentSpacingSniff;
 
 /**
  * Ensures the spacing of function declaration arguments is correct.
  *
  */
-class FunctionDeclarationArgumentSpacingSniff extends FDASSniff
+class FunctionDeclarationArgumentSpacingSniff extends SquizFunctionDeclarationArgumentSpacingSniff
 {
 
     /**

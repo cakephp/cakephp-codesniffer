@@ -15,7 +15,7 @@
 namespace CakePHP\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\FunctionCommentSniff as PFCSniff;
+use PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\FunctionCommentSniff as PearFunctionCommentSniff;
 use PHP_CodeSniffer\Util\Common;
 
 /**
@@ -47,7 +47,7 @@ use PHP_CodeSniffer\Util\Common;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class FunctionCommentSniff extends PFCSniff
+class FunctionCommentSniff extends PearFunctionCommentSniff
 {
     /**
      * Is the comment an inheritdoc?
