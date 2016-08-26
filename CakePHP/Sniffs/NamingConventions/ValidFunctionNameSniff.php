@@ -52,7 +52,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     ];
 
     /**
-     * Constructs a PEAR_Sniffs_NamingConventions_ValidFunctionNameSniff.
+     * {@inheritDoc}
      */
     public function __construct()
     {
@@ -60,12 +60,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     }
 
     /**
-     * Processes the tokens within the scope.
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being processed.
-     * @param int $stackPtr The position where this token was found.
-     * @param int $currScope The position of the current scope.
-     * @return void
+     * {@inheritDoc}
      */
     protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
     {
@@ -131,11 +126,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     }
 
     /**
-     * Processes the tokens outside the scope.
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being processed.
-     * @param int $stackPtr The position where this token was found.
-     * @return void
+     * {@inheritDoc}
      */
     protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
     {

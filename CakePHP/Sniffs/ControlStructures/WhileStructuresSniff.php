@@ -28,9 +28,7 @@ class WhileStructuresSniff implements Sniff
 {
 
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function register()
     {
@@ -38,14 +36,7 @@ class WhileStructuresSniff implements Sniff
     }
 
     /**
-     * Processes this test, when one of its tokens is encountered.
-     *
-     * Checks that while and do-while use curly brackets
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param integer $stackPtr The position of the current token in the
-     *                                        stack passed in $tokens.
-     * @return void
+     * {@inheritDoc}
      */
     public function process(File $phpcsFile, $stackPtr)
     {

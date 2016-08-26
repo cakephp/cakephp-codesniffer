@@ -40,9 +40,7 @@ class TabAndSpaceSniff implements Sniff
     ];
 
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function register()
     {
@@ -50,12 +48,7 @@ class TabAndSpaceSniff implements Sniff
     }
 
     /**
-     * Processes this test, when one of its tokens is encountered.
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int $stackPtr The position of the current token
-     *    in the stack passed in $tokens.
-     * @return void
+     * {@inheritDoc}
      */
     public function process(File $phpcsFile, $stackPtr)
     {

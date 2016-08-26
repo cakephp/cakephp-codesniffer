@@ -38,9 +38,7 @@ class OperatorSpacingSniff implements Sniff
     ];
 
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function register()
     {
@@ -52,12 +50,7 @@ class OperatorSpacingSniff implements Sniff
     }
 
     /**
-     * Processes this sniff, when one of its tokens is encountered.
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The current file being checked.
-     * @param int $stackPtr The position of the current token in the
-     *    stack passed in $tokens.
-     * @return void
+     * {@inheritDoc}
      */
     public function process(File $phpcsFile, $stackPtr)
     {
