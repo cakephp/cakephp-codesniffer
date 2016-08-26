@@ -23,7 +23,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 class DocBlockAlignmentSniff implements Sniff
 {
-
     /**
      * {@inheritDoc}
      */
@@ -58,7 +57,7 @@ class DocBlockAlignmentSniff implements Sniff
             $notWalled = (in_array($tokens[$next]['code'], $leftWall) && $tokens[$stackPtr]['column'] !== 1);
             $notIndented = (in_array($tokens[$next]['code'], $oneIndentation) && $tokens[$stackPtr]['column'] !== 5);
             if ($notWalled || $notIndented) {
-                $phpcsFile->addError('Expected docblock to be aligned with code.', $stackPtr, 'NotAllowed');
+                $phpcsFile->addError('Expected docblock to be aligned with code.', $stackPtr, 'NotAllowedbkjbkhkjhkh');
             }
         }
     }
