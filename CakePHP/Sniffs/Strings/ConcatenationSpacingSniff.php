@@ -20,28 +20,26 @@
  * the strings being concatenated.
  *
  */
-class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffer_Sniff
+namespace CakePHP\Sniffs\Strings;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
+class ConcatenationSpacingSniff implements Sniff
 {
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
-        return array(T_STRING_CONCAT);
+        return [T_STRING_CONCAT];
     }
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param integer $stackPtr The position of the current token in the
- *    stack passed in $tokens.
- * @return void
- */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    /**
+     * {@inheritDoc}
+     */
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
@@ -52,7 +50,7 @@ class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffe
             $spaces = strlen($content);
             if ($spaces > 1) {
                 $message = 'Expected 1 space before ., but %d found';
-                $data = array($spaces);
+                $data = [$spaces];
                 $phpcsFile->addError($message, $stackPtr, 'TooManyBefore', $data);
             }
         }
@@ -65,7 +63,7 @@ class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffe
             $spaces = strlen($content);
             if ($spaces > 1) {
                 $message = 'Expected 1 space after ., but %d found';
-                $data = array($spaces);
+                $data = [$spaces];
                 $phpcsFile->addError($message, $stackPtr, 'TooManyAfter', $data);
             }
         }

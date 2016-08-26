@@ -18,27 +18,25 @@
  * Checks the separation between methods in a class or interface.
  *
  */
-class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_Sniff
-{
+namespace CakePHP\Sniffs\WhiteSpace;
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
+class FunctionSpacingSniff implements Sniff
+{
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
-        return array(T_FUNCTION);
+        return [T_FUNCTION];
     }
 
-/**
- * Processes this sniff, when one of its tokens is encountered.
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param integer $stackPtr The position of the current token in the stack passed in $tokens.
- * @return void
- */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    /**
+     * {@inheritDoc}
+     */
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -46,7 +44,6 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
 			Check the number of blank lines
 			after the function.
 		*/
-
         if (isset($tokens[$stackPtr]['scope_closer']) === false) {
             // Must be an interface method, so the closer is the semi-colon.
             $closer = $phpcsFile->findNext(T_SEMICOLON, $stackPtr);
@@ -70,7 +67,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
             // there are 0 blank lines after the function.
             $foundLines = 0;
         } else {
-            $nextContent = $phpcsFile->findNext(array(T_WHITESPACE), ($nextLineToken + 1), null, true);
+            $nextContent = $phpcsFile->findNext([T_WHITESPACE], ($nextLineToken + 1), null, true);
             if ($nextContent === false) {
                 // We are at the end of the file. That is acceptable as well.
                 $foundLines = 1;
@@ -99,7 +96,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
             // there are 0 blank lines before the function.
             $foundLines = 0;
         } else {
-            $prevContent = $phpcsFile->findPrevious(array(T_WHITESPACE, T_DOC_COMMENT), $prevLineToken, null, true);
+            $prevContent = $phpcsFile->findPrevious([T_WHITESPACE, T_DOC_COMMENT], $prevLineToken, null, true);
 
             // Before we throw an error, check that we are not throwing an error
             // for another function. We don't want to error for no blank lines after

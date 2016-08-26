@@ -14,20 +14,29 @@
  * @since         CakePHP CodeSniffer 0.1.28
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+namespace CakePHP\Sniffs\Functions;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Ensures there is a space after the function keyword for closures.
  *
  */
-class CakePHP_Sniffs_Functions_ClosureDeclarationSniff implements PHP_CodeSniffer_Sniff
+class ClosureDeclarationSniff implements Sniff
 {
-
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
-        return array(T_CLOSURE);
+        return [T_CLOSURE];
     }
 
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    /**
+     * {@inheritDoc}
+     */
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $spaces = 0;
@@ -38,7 +47,7 @@ class CakePHP_Sniffs_Functions_ClosureDeclarationSniff implements PHP_CodeSniffe
 
         if ($spaces !== 1) {
             $error = 'Expected 1 space after closure\'s function keyword; %s found';
-            $data  = array($spaces);
+            $data = [$spaces];
             $phpcsFile->addError($error, $stackPtr, 'SpaceAfterFunction', $data);
         }
     }

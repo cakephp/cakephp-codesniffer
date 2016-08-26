@@ -18,10 +18,21 @@
  <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
   <severity>0</severity>
  </rule>
-
+ <rule ref ="Squiz.NamingConventions.ValidFunctionName.PublicUnderscore">
+  <severity>0</severity>
+ </rule>
+ <rule ref ="PEAR.NamingConventions.ValidFunctionName.PublicUnderscore">
+  <severity>0</severity>
+ </rule>
+ <rule ref ="Zend.NamingConventions.ValidVariableName">
+ </rule>
+ <rule ref ="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore">
+  <severity>0</severity>
+ </rule>
  <!--
  Temporarily ignore until API docblock formatting and line length issues in core code are fixed.
  -->
+ <rule ref="CakePHP.Commenting.FunctionComment" />
  <rule ref="CakePHP.Commenting.FunctionComment.ParamCommentNotCapital">
   <severity>0</severity>
  </rule>
@@ -92,13 +103,14 @@
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="PEAR.NamingConventions.ValidClassName">
+  <exclude-pattern>*/CakePHP/*</exclude-pattern>
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="Squiz.Classes.ValidClassName">
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="CakePHP.Commenting.FunctionComment">
-  <exclude-pattern>*/tests/*</exclude-pattern>
+  <!--<exclude-pattern>*/tests/*</exclude-pattern>-->
  </rule>
  <rule ref="Squiz.NamingConventions.ValidFunctionName">
   <exclude-pattern>*/src/*</exclude-pattern>

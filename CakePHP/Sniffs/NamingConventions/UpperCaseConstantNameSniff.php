@@ -27,29 +27,26 @@
  * @version   Release: 1.5.0RC3
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP_CodeSniffer_Sniff
+namespace CakePHP\Sniffs\NamingConventions;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
+class UpperCaseConstantNameSniff implements Sniff
 {
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
-        return array(T_STRING);
+        return [T_STRING];
     }
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param integer              $stackPtr  The position of the current token in the
- *                                        stack passed in $tokens.
- *
- * @return void
- */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    /**
+     * {@inheritDoc}
+     */
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $constName = $tokens[$stackPtr]['content'];
@@ -69,19 +66,19 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
         $openBracket = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
         if ($tokens[$openBracket]['code'] !== T_OPEN_PARENTHESIS) {
             $functionKeyword = $phpcsFile->findPrevious(
-                array(
+                [
                     T_WHITESPACE,
                     T_COMMA,
                     T_COMMENT,
                     T_STRING,
                     T_NS_SEPARATOR,
-                ),
+                ],
                 ($stackPtr - 1),
                 null,
                 true
             );
 
-            $declarations = array(
+            $declarations = [
                 T_FUNCTION,
                 T_CLASS,
                 T_INTERFACE,
@@ -97,8 +94,8 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
                 T_INSTEADOF,
                 T_PROTECTED,
                 T_PRIVATE,
-                T_PUBLIC
-            );
+                T_PUBLIC,
+            ];
 
             if (in_array($tokens[$functionKeyword]['code'], $declarations) === true) {
                 // This is just a declaration; no constants here.
@@ -109,10 +106,10 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
                 // This is a class constant.
                 if (strtoupper($constName) !== $constName) {
                     $error = 'Class constants must be uppercase; expected %s but found %s';
-                    $data = array(
+                    $data = [
                         strtoupper($constName),
                         $constName,
-                    );
+                    ];
                     $phpcsFile->addError($error, $stackPtr, 'ClassConstantNotUpperCase', $data);
                 }
 
@@ -167,14 +164,14 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
             }
 
             // Is this an instance of declare()
-            $prevPtrDeclare = $phpcsFile->findPrevious(array(T_WHITESPACE, T_OPEN_PARENTHESIS), ($stackPtr - 1), null, true);
+            $prevPtrDeclare = $phpcsFile->findPrevious([T_WHITESPACE, T_OPEN_PARENTHESIS], ($stackPtr - 1), null, true);
             if ($tokens[$prevPtrDeclare]['code'] === T_DECLARE) {
                 return;
             }
 
             // Is this a goto label target?
             if ($tokens[$nextPtr]['code'] === T_COLON) {
-                if (in_array($tokens[$prevPtr]['code'], array(T_SEMICOLON, T_OPEN_CURLY_BRACKET, T_COLON), true)) {
+                if (in_array($tokens[$prevPtr]['code'], [T_SEMICOLON, T_OPEN_CURLY_BRACKET, T_COLON], true)) {
                     return;
                 }
             }
@@ -182,13 +179,12 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
             // This is a real constant. Ignore ::class from php5.5
             if (strtoupper($constName) !== $constName && $constName !== 'class') {
                 $error = 'Constants must be uppercase; expected %s but found %s';
-                $data = array(
+                $data = [
                     strtoupper($constName),
                     $constName,
-                );
+                ];
                 $phpcsFile->addError($error, $stackPtr, 'ConstantNotUpperCase', $data);
             }
-
         } elseif (strtolower($constName) === 'define' || strtolower($constName) === 'constant') {
             // This may be a "define" or "constant" function call.
 
@@ -218,10 +214,10 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
 
             if (strtoupper($constName) !== $constName) {
                 $error = 'Constants must be uppercase; expected %s but found %s';
-                $data = array(
+                $data = [
                     $prefix . strtoupper($constName),
                     $prefix . $constName,
-                );
+                ];
                 $phpcsFile->addError($error, $stackPtr, 'ConstantNotUpperCase', $data);
             }
         }

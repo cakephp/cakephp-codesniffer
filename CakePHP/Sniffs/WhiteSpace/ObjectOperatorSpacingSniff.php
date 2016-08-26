@@ -15,35 +15,34 @@
  */
 
 /**
- * Ensure there is no whitespace before a semicolon.
+ * Ensure there is no whitespace after an object operator.
  *
  */
-class CakePHP_Sniffs_WhiteSpace_ObjectOperatorSpacingSniff implements PHP_CodeSniffer_Sniff
-{
+namespace CakePHP\Sniffs\WhiteSpace;
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
+
+class ObjectOperatorSpacingSniff implements Sniff
+{
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
-        return array(T_OBJECT_OPERATOR);
+        return [T_OBJECT_OPERATOR];
     }
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param integer $stackPtr The position of the current token in the stack passed in $tokens.
- * @return void
- */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    /**
+     * {@inheritDoc}
+     */
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
         $nextType = $tokens[($stackPtr + 1)]['code'];
-        if (in_array($nextType, PHP_CodeSniffer_Tokens::$emptyTokens) === true) {
+        if (in_array($nextType, Tokens::$emptyTokens) === true) {
             $error = 'Space found after object operator';
             $phpcsFile->addError($error, $stackPtr, 'After');
         }

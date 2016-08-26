@@ -20,39 +20,37 @@
  * Also check for "\t " - a tab followed by a space, which is a common similar mistake
  *
  */
-class CakePHP_Sniffs_WhiteSpace_TabAndSpaceSniff implements PHP_CodeSniffer_Sniff
+namespace CakePHP\Sniffs\WhiteSpace;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
+class TabAndSpaceSniff implements Sniff
 {
 
-/**
- * A list of tokenizers this sniff supports.
- *
- * @var array
- */
-    public $supportedTokenizers = array(
+    /**
+     * A list of tokenizers this sniff supports.
+     *
+     * @var array
+     */
+    public $supportedTokenizers = [
         'PHP',
         'JS',
-        'CSS'
-    );
+        'CSS',
+    ];
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
-        return array(T_WHITESPACE);
+        return [T_WHITESPACE];
     }
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param integer $stackPtr  The position of the current token
- *    in the stack passed in $tokens.
- * @return void
- */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    /**
+     * {@inheritDoc}
+     */
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -63,15 +61,15 @@ class CakePHP_Sniffs_WhiteSpace_TabAndSpaceSniff implements PHP_CodeSniffer_Snif
 
         if (strpos($tokens[$stackPtr]['content'], '  ') !== false) {
             $error = 'Double space found';
-            $phpcsFile->addError($error, $stackPtr);
+            $phpcsFile->addError($error, $stackPtr, 'DoubleSpace');
         }
         if (strpos($tokens[$stackPtr]['content'], " \t") !== false) {
             $error = 'Space and tab found';
-            $phpcsFile->addError($error, $stackPtr);
+            $phpcsFile->addError($error, $stackPtr, 'SpaceAndTab');
         }
         if (strpos($tokens[$stackPtr]['content'], "\t ") !== false) {
             $error = 'Tab and space found';
-            $phpcsFile->addError($error, $stackPtr);
+            $phpcsFile->addError($error, $stackPtr, 'TabAndSpace');
         }
     }
 }

@@ -20,15 +20,20 @@
  * or private, and that functions are named correctly.
  *
  */
-class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff
+namespace CakePHP\Sniffs\NamingConventions;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
+
+class ValidFunctionNameSniff extends AbstractScopeSniff
 {
 
-/**
- * A list of all PHP magic methods.
- *
- * @var array
- */
-    protected $_magicMethods = array(
+    /**
+     * A list of all PHP magic methods.
+     *
+     * @var array
+     */
+    protected $_magicMethods = [
         'construct',
         'destruct',
         'call',
@@ -44,25 +49,20 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
         'set_state',
         'clone',
         'invoke',
-    );
+    ];
 
-/**
- * Constructs a PEAR_Sniffs_NamingConventions_ValidFunctionNameSniff.
- */
+    /**
+     * {@inheritDoc}
+     */
     public function __construct()
     {
-        parent::__construct(array(T_CLASS, T_INTERFACE), array(T_FUNCTION), true);
+        parent::__construct([T_CLASS, T_INTERFACE], [T_FUNCTION], true);
     }
 
-/**
- * Processes the tokens within the scope.
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
- * @param integer $stackPtr The position where this token was found.
- * @param integer $currScope The position of the current scope.
- * @return void
- */
-    protected function processTokenWithinScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $currScope)
+    /**
+     * {@inheritDoc}
+     */
+    protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
     {
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
         if ($methodName === null) {
@@ -71,7 +71,7 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
         }
 
         $className = $phpcsFile->getDeclarationName($currScope);
-        $errorData = array($className . '::' . $methodName);
+        $errorData = [$className . '::' . $methodName];
 
         // PHP4 constructors are allowed to break our rules.
         if ($methodName === $className) {
@@ -103,6 +103,7 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
             if ($methodName[0] === '_') {
                 $error = 'Public method name "%s" must not be prefixed with underscore';
                 $phpcsFile->addError($error, $stackPtr, 'PublicWithUnderscore', $errorData);
+
                 return;
             }
             // Underscored public methods in controller are allowed to break our rules.
@@ -124,14 +125,10 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
         }
     }
 
-/**
- * Processes the tokens outside the scope.
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
- * @param integer $stackPtr  The position where this token was found.
- * @return void
- */
-    protected function processTokenOutsideScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    /**
+     * {@inheritDoc}
+     */
+    protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
     {
     }
 }
