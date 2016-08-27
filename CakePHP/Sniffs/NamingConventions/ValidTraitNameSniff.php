@@ -28,19 +28,10 @@ class ValidTraitNameSniff implements Sniff
 {
 
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * If the constant is not defined, ignore because probably the PHP version
-     * is under 5.4.0 and don't have traits in use
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function register()
     {
-        if (!defined('T_TRAIT')) {
-            return [];
-        }
-
         return [T_TRAIT];
     }
 
