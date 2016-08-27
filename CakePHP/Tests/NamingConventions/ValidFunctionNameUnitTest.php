@@ -11,7 +11,11 @@ class ValidFunctionNameUnitTest extends AbstractSniffUnitTest
      */
     public function getErrorList()
     {
-        return [];
+        return [
+            6 => 1,
+            87 => 1,
+            96 => 1,
+        ];
     }
 
     /**
@@ -19,6 +23,9 @@ class ValidFunctionNameUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList()
     {
-        return [];
+        return [
+            11 => 1,
+            101 => 1,
+        ];
     }
 }
