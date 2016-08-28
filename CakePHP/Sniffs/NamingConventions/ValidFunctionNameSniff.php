@@ -65,11 +65,6 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
     {
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($methodName === null) {
-            // Ignore closures.
-            return;
-        }
-
         $className = $phpcsFile->getDeclarationName($currScope);
         $errorData = [$className . '::' . $methodName];
 
