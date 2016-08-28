@@ -3,7 +3,7 @@ namespace Beakman;
 
 class FunctionNames
 {
-    public function _forbiden()
+    public function _forbidden()
     {
         echo "I emit an error";
     }
@@ -84,7 +84,7 @@ class FunctionNames
 
 interface FunctionNamesInterface
 {
-    public function _forbiden();
+    public function _forbidden();
 
     public function setVariables();
 
@@ -93,7 +93,7 @@ interface FunctionNamesInterface
 
 trait FunctionNamesTrait
 {
-    public function _forbiden()
+    public function _forbidden()
     {
         echo "I emit an error";
     }
