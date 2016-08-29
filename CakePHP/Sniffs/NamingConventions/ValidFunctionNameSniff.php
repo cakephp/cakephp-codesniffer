@@ -56,7 +56,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
      */
     public function __construct()
     {
-        parent::__construct([T_CLASS, T_INTERFACE], [T_FUNCTION], true);
+        parent::__construct([T_CLASS, T_INTERFACE, T_TRAIT], [T_FUNCTION], true);
     }
 
     /**
@@ -65,23 +65,8 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
     {
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($methodName === null) {
-            // Ignore closures.
-            return;
-        }
-
         $className = $phpcsFile->getDeclarationName($currScope);
         $errorData = [$className . '::' . $methodName];
-
-        // PHP4 constructors are allowed to break our rules.
-        if ($methodName === $className) {
-            return;
-        }
-
-        // PHP4 destructors are allowed to break our rules.
-        if ($methodName === '_' . $className) {
-            return;
-        }
 
         // Ignore magic methods
         if (preg_match('/^__(' . implode('|', $this->_magicMethods) . ')$/', $methodName)) {
@@ -95,31 +80,14 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         }
 
         $isPublic = $methodProps['scope'] === 'public';
-        $isProtected = $methodProps['scope'] === 'protected';
         $isPrivate = $methodProps['scope'] === 'private';
-        $scope = $methodProps['scope'];
 
-        if ($isPublic === true) {
-            if ($methodName[0] === '_') {
-                $error = 'Public method name "%s" must not be prefixed with underscore';
-                $phpcsFile->addError($error, $stackPtr, 'PublicWithUnderscore', $errorData);
+        if ($isPublic === true && $methodName[0] === '_') {
+            $error = 'Public method name "%s" must not be prefixed with underscore';
+            $phpcsFile->addError($error, $stackPtr, 'PublicWithUnderscore', $errorData);
 
-                return;
-            }
-            // Underscored public methods in controller are allowed to break our rules.
-            if (substr($className, -10) === 'Controller') {
-                return;
-            }
-            // Underscored public methods in shells are allowed to break our rules.
-            if (substr($className, -5) === 'Shell') {
-                return;
-            }
-            // Underscored public methods in tasks are allowed to break our rules.
-            if (substr($className, -4) === 'Task') {
-                return;
-            }
+            return;
         } elseif ($isPrivate === true) {
-            $filename = $phpcsFile->getFilename();
             $warning = 'Private method name "%s" in CakePHP core is discouraged';
             $phpcsFile->addWarning($warning, $stackPtr, 'PrivateMethodInCore', $errorData);
         }
