@@ -18,11 +18,33 @@ class Foo
     }
 
     /**
+    * Some sentence.
+    *
+    * @param int $param
+    * @param bool $otherParam
+    * @return void
+    */
+    public function missingParamComment($param, $otherParam)
+    {
+    }
+
+    /**
+     * Some sentence.
+     *
+     * @param
+     * @param
+     * @return void
+     */
+    public function missingParamType($param, $otherParam)
+    {
+    }
+
+    /**
      * Some sentence.
      *
      * @return void
      */
-    public function baz()
+    public function invalidReturnVoid()
     {
         return 'string';
     }
@@ -61,5 +83,162 @@ class Foo
             default:
                 throw new \Exception();
         }
+    }
+
+    /**
+     * @return void
+     * @return void
+     */
+    public function doubleReturn()
+    {
+    }
+
+    /**
+     * @return
+     */
+    public function missingReturnType()
+    {
+    }
+
+    /**
+     * @return integer
+     */
+    public function returnIntegerFail()
+    {
+        return 1;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function returnBooleanFail()
+    {
+        return false;
+    }
+
+    /**
+     * @return int
+     */
+    public function returnIntPass()
+    {
+        return 1;
+    }
+
+    /**
+     * @return bool
+     */
+    public function returnBooleanPass()
+    {
+        return false;
+    }
+
+    /**
+     * @return int
+     */
+    public function invalidReturnNotVoid()
+    {
+        return;
+    }
+
+    /**
+     * @return void
+     * @throws
+     */
+    public function invalidThrows()
+    {
+        throw new \RuntimeException();
+        return;
+    }
+
+    /**
+     * @return void
+     * @throws \RuntimeException()
+     */
+    public function EmptyThrows()
+    {
+        throw new \RuntimeException();
+        return;
+    }
+
+    /**
+     * @return void
+     * @throws \RuntimeException No dot
+     */
+    public function throwsNoFullStop()
+    {
+        throw new \RuntimeException();
+    }
+
+    /**
+     * @return void
+     * @throws \RuntimeException not a capital.
+     */
+    public function throwsNotCapital()
+    {
+        throw new \RuntimeException();
+    }
+
+    /**
+     * @param int $param not a capital.
+     * @return void
+     */
+    public function paramCommentNotCapital($param)
+    {
+    }
+
+    /**
+     * @param int $param No final dot
+     * @return void
+     */
+    public function paramCommentFullStop($param)
+    {
+    }
+
+    /**
+     * @param int $para Comment.
+     * @return void
+     */
+    public function paramNameNoMatch($param)
+    {
+    }
+
+    /**
+     * @param int $Param Comment.
+     * @return void
+     */
+    public function paramNameNoCaseMatch($param)
+    {
+    }
+
+    /**
+     *
+     */
+    public function missingReturn()
+    {
+        return 'what';
+    }
+
+    /**
+     * @param int
+     * @return void
+     */
+    public function missingParamName($param)
+    {
+    }
+
+    /**
+     * @param int $param A description.
+     * @param int $superflous A description.
+     * @return void
+     */
+    public function extraParamComment($param)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function inherited()
+    {
     }
 }
