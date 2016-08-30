@@ -24,7 +24,7 @@ before_script:
   - vendor/bin/phpcs --config-set installed_paths $(pwd)
 
 script:
-  - sed -i.bak "s/<severity>0<\/severity>//" CakePHP/ruleset.xml
+  - if [[ $PHPCS != 1 ]]; then sed -i.bak "s/<severity>0<\/severity>//" CakePHP/ruleset.xml; fi
   - sed -i.bak "s/<exclude-pattern>\*\/tests\/\*<\/exclude-pattern>//" CakePHP/ruleset.xml
   - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION = 7.0 ]]; then vendor/bin/phpunit --filter CakePHP --coverage-clover=clover.xml; fi
   - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION != 7.0 ]]; then vendor/bin/phpunit --filter CakePHP; fi
