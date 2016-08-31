@@ -15,6 +15,8 @@ class ConcatenationSpacingUnitTest extends AbstractSniffUnitTest
             4 => 1,
             5 => 1,
             6 => 2,
+            7 => 1,
+            8 => 1,
         ];
     }
 

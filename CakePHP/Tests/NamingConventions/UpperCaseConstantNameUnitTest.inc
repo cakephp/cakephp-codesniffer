@@ -27,6 +27,10 @@ class ConstantNames
         $className = static::class;
         $const = self::SOME_CONST;
         $constTwo = static::SOME_CONST;
+        $const = Test::SOME_CONST;
+        $const = Cake\Test::SOME_CONST;
+        $test = <<<EOT
+EOT;
     }
 }
 
