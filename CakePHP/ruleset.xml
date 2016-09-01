@@ -41,6 +41,11 @@
   <severity>0</severity>
  </rule>
 
+ <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
+  <properties>
+   <property name="ignoreBlankLines" value="false"/>
+  </properties>
+ </rule>
  <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
  <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
 
