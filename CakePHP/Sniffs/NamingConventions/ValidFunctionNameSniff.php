@@ -95,9 +95,6 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
         }
 
         $isPublic = $methodProps['scope'] === 'public';
-        $isProtected = $methodProps['scope'] === 'protected';
-        $isPrivate = $methodProps['scope'] === 'private';
-        $scope = $methodProps['scope'];
 
         if ($isPublic === true) {
             if ($methodName[0] === '_') {
