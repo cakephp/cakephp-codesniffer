@@ -95,9 +95,6 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
         }
 
         $isPublic = $methodProps['scope'] === 'public';
-        $isProtected = $methodProps['scope'] === 'protected';
-        $isPrivate = $methodProps['scope'] === 'private';
-        $scope = $methodProps['scope'];
 
         if ($isPublic === true) {
             if ($methodName[0] === '_') {
@@ -117,10 +114,6 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
             if (substr($className, -4) === 'Task') {
                 return;
             }
-        } elseif ($isPrivate === true) {
-            $filename = $phpcsFile->getFilename();
-            $warning = 'Private method name "%s" in CakePHP core is discouraged';
-            $phpcsFile->addWarning($warning, $stackPtr, 'PrivateMethodInCore', $errorData);
         }
     }
 
