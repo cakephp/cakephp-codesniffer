@@ -29,7 +29,7 @@ class CakePHP_Sniffs_Formatting_OneClassPerUseSniff implements PHP_CodeSniffer_S
  */
     public function register()
     {
-        return array(T_USE);
+        return [T_USE];
     }
 
 /**
@@ -45,13 +45,13 @@ class CakePHP_Sniffs_Formatting_OneClassPerUseSniff implements PHP_CodeSniffer_S
         $i = 2; // Ignore use word and whitespace
         $filename = $phpcsFile->getFilename();
 
-        while (in_array($tokens[$stackPtr + $i]['code'], array(T_STRING, T_NS_SEPARATOR, T_WHITESPACE, T_AS))) {
+        while (in_array($tokens[$stackPtr + $i]['code'], [T_STRING, T_NS_SEPARATOR, T_WHITESPACE, T_AS])) {
             $i++;
         }
 
         if ($tokens[$stackPtr + $i]['code'] === T_COMMA) {
             $error = 'Only one class is allowed per use';
-            $phpcsFile->addError($error, $stackPtr, 'OneClassPerUse', array());
+            $phpcsFile->addError($error, $stackPtr, 'OneClassPerUse', []);
         }
     }
 }

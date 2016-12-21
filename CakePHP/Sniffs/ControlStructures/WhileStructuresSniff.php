@@ -29,7 +29,7 @@ class CakePHP_Sniffs_ControlStructures_WhileStructuresSniff implements PHP_CodeS
  */
     public function register()
     {
-        return array(T_DO, T_WHILE);
+        return [T_DO, T_WHILE];
     }
 
 /**

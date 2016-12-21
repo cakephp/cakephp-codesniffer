@@ -27,7 +27,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentTypeSniff implements PHP_CodeSnif
      */
     public function register()
     {
-        return array(T_DOC_COMMENT);
+        return [T_DOC_COMMENT];
     }
 
     /**
@@ -44,7 +44,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentTypeSniff implements PHP_CodeSnif
 
         // We are only interested in function/class/interface doc block comments.
         $nextToken = $phpcsFile->findNext(PHP_CodeSniffer_Tokens::$emptyTokens, ($stackPtr + 1), null, true);
-        $ignore = array(
+        $ignore = [
             T_CLASS,
             T_INTERFACE,
             T_FUNCTION,
@@ -53,7 +53,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentTypeSniff implements PHP_CodeSnif
             T_PROTECTED,
             T_STATIC,
             T_ABSTRACT,
-        );
+        ];
 
         if (in_array($tokens[$nextToken]['code'], $ignore) === false) {
             // Could be a file comment.
@@ -63,10 +63,10 @@ class CakePHP_Sniffs_Commenting_FunctionCommentTypeSniff implements PHP_CodeSnif
             }
         }
 
-        $types = array(
+        $types = [
             'boolean' => 'bool',
             'integer' => 'int',
-        );
+        ];
         foreach ($types as $from => $to) {
             $this->_check($phpcsFile, $stackPtr, $from, $to);
         }
@@ -85,7 +85,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentTypeSniff implements PHP_CodeSnif
         $tokens = $phpcsFile->getTokens();
         $content = $tokens[$stackPtr]['content'];
 
-        $matches = array();
+        $matches = [];
         if (preg_match('/\@(\w+)\s+([\w\\|\\\\]*?)' . $from . '\b/i', $content, $matches) === 0) {
             return;
         }

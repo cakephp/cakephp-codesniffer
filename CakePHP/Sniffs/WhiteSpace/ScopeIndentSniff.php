@@ -45,7 +45,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
  *
  * @var array(int)
  */
-    protected $_nonIndentingScopes = array();
+    protected $_nonIndentingScopes = [];
 
 /**
  * Returns an array of tokens this test wants to listen for.
@@ -211,10 +211,10 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
 
                 // This is a special condition for T_DOC_COMMENT and C-style
                 // comments, which contain whitespace between each line.
-                $comments = array(
+                $comments = [
                     T_COMMENT,
                     T_DOC_COMMENT
-                );
+                ];
 
                 $isDocComment = false;
                 if (in_array($tokens[$firstToken]['code'], $comments) === true) {
@@ -259,7 +259,7 @@ class CakePHP_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Snif
  */
     protected function _calculateExpectedIndent(array $tokens, $stackPtr)
     {
-        $conditionStack = array();
+        $conditionStack = [];
 
         // Empty conditions array (top level structure).
         if (empty($tokens[$stackPtr]['conditions']) === true) {

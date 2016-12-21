@@ -30,7 +30,7 @@ class CakePHP_Sniffs_ControlStructures_ControlStructuresSniff implements PHP_Cod
  */
     public function register()
     {
-        return array(T_IF, T_ELSEIF, T_ELSE, T_FOREACH, T_FOR);
+        return [T_IF, T_ELSEIF, T_ELSE, T_FOREACH, T_FOR];
     }
 
 /**

@@ -29,7 +29,7 @@ class CakePHP_Sniffs_WhiteSpace_CommaSpacingSniff implements PHP_CodeSniffer_Sni
  */
     public function register()
     {
-        return array(T_COMMA);
+        return [T_COMMA];
     }
 
 /**

@@ -29,11 +29,11 @@ class CakePHP_Sniffs_WhiteSpace_FunctionCallSpacingSniff implements PHP_CodeSnif
  */
     public function register()
     {
-        return array(
+        return [
             T_ISSET,
             T_EMPTY,
             T_STRING,
-        );
+        ];
     }
 
 /**

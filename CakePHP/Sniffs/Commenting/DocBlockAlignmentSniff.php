@@ -26,7 +26,7 @@ class CakePHP_Sniffs_Commenting_DocBlockAlignmentSniff implements PHP_CodeSniffe
      */
     public function register()
     {
-        return array(T_DOC_COMMENT_OPEN_TAG);
+        return [T_DOC_COMMENT_OPEN_TAG];
     }
 
     /**
@@ -40,18 +40,18 @@ class CakePHP_Sniffs_Commenting_DocBlockAlignmentSniff implements PHP_CodeSniffe
     public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $leftWall = array(
+        $leftWall = [
             T_CLASS,
             T_NAMESPACE,
             T_INTERFACE,
             T_TRAIT,
             T_USE
-        );
-        $oneIndentation = array(
+        ];
+        $oneIndentation = [
             T_FUNCTION,
             T_VARIABLE,
             T_CONST
-        );
+        ];
         $allTokens = array_merge($leftWall, $oneIndentation);
         $notFlatFile = $phpcsFile->findNext(T_NAMESPACE, 0);
         $next = $phpcsFile->findNext($allTokens, $stackPtr + 1);

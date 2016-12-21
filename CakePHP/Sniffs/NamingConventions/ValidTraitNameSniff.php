@@ -33,9 +33,9 @@ class CakePHP_Sniffs_NamingConventions_ValidTraitNameSniff implements PHP_CodeSn
     public function register()
     {
         if (!defined('T_TRAIT')) {
-            return array();
+            return [];
         }
-        return array(T_TRAIT);
+        return [T_TRAIT];
     }
 
 /**
@@ -52,7 +52,7 @@ class CakePHP_Sniffs_NamingConventions_ValidTraitNameSniff implements PHP_CodeSn
 
         if (substr($traitName, -5) !== 'Trait') {
             $error = 'Traits must have a "Trait" suffix.';
-            $phpcsFile->addError($error, $stackPtr, 'InvalidTraitName', array());
+            $phpcsFile->addError($error, $stackPtr, 'InvalidTraitName', []);
         }
     }
 }

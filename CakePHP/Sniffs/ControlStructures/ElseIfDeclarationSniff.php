@@ -29,7 +29,7 @@ class CakePHP_Sniffs_ControlStructures_ElseIfDeclarationSniff implements PHP_Cod
  */
     public function register()
     {
-        return array(T_ELSE);
+        return [T_ELSE];
     }
 
 /**

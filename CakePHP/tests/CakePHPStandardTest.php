@@ -17,7 +17,7 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
  * Run simple syntax checks, if the filename ends with pass.php - expect it to pass
  */
 	public static function testProvider() {
-		$tests = array();
+		$tests = [];
 
 		$standard = dirname(__DIR__);
 
@@ -29,11 +29,11 @@ class CakePHPStandardTest extends PHPUnit_Framework_TestCase {
 
 			$file = $dir->getPathname();
 			$expectPass = (substr($file, -8) === 'pass.php');
-			$tests[] = array(
+			$tests[] = [
 				$file,
 				$standard,
 				$expectPass
-			);
+			];
 		}
 		return $tests;
 	}

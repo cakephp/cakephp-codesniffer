@@ -13,7 +13,7 @@ class Foo extends Bar
      *
      * @var array $brain
      */
-    public $brain = array();
+    public $brain = [];
 
     /**
      * Tell me your thoughts.

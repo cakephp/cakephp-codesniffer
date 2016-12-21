@@ -1,6 +1,6 @@
 <?php
 if ($indented) {
-	$var = array(
+	$var = [
 		 'space' => 'after 2 tabs'
-	 );
+	 ];
 }

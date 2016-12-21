@@ -28,7 +28,7 @@ class CakePHP_Sniffs_WhiteSpace_ObjectOperatorSpacingSniff implements PHP_CodeSn
  */
     public function register()
     {
-        return array(T_OBJECT_OPERATOR);
+        return [T_OBJECT_OPERATOR];
     }
 
 /**

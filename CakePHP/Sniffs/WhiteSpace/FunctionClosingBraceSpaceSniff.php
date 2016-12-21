@@ -28,7 +28,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionClosingBraceSpaceSniff implements PHP_Co
  */
     public function register()
     {
-        return array(T_FUNCTION);
+        return [T_FUNCTION];
     }
 
 /**
@@ -62,13 +62,13 @@ class CakePHP_Sniffs_WhiteSpace_FunctionClosingBraceSpaceSniff implements PHP_Co
                 $phpcsFile->addError($error, $closeBrace, 'ContentBeforeClose');
             } elseif ($found > 0) {
                 $error = 'Expected 0 blank lines before closing brace of nested function; %s found';
-                $data = array($found);
+                $data = [$found];
                 $phpcsFile->addError($error, $closeBrace, 'SpacingBeforeNestedClose', $data);
             }
         } else {
             if ($found !== 0) {
                 $error = 'Expected 0 blank lines before closing function brace; %s found';
-                $data = array($found);
+                $data = [$found];
                 $phpcsFile->addError($error, $closeBrace, 'SpacingBeforeClose', $data);
             }
         }
