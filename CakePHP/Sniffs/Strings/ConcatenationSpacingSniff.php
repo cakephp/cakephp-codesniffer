@@ -30,7 +30,7 @@ class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffe
  */
     public function register()
     {
-        return array(T_STRING_CONCAT);
+        return [T_STRING_CONCAT];
     }
 
 /**
@@ -52,7 +52,7 @@ class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffe
             $spaces = strlen($content);
             if ($spaces > 1) {
                 $message = 'Expected 1 space before ., but %d found';
-                $data = array($spaces);
+                $data = [$spaces];
                 $phpcsFile->addError($message, $stackPtr, 'TooManyBefore', $data);
             }
         }
@@ -65,7 +65,7 @@ class CakePHP_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffe
             $spaces = strlen($content);
             if ($spaces > 1) {
                 $message = 'Expected 1 space after ., but %d found';
-                $data = array($spaces);
+                $data = [$spaces];
                 $phpcsFile->addError($message, $stackPtr, 'TooManyAfter', $data);
             }
         }

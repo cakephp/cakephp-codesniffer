@@ -24,7 +24,7 @@ class CakePHP_Sniffs_Functions_ClosureDeclarationSniff implements PHP_CodeSniffe
 
     public function register()
     {
-        return array(T_CLOSURE);
+        return [T_CLOSURE];
     }
 
     public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
@@ -38,7 +38,7 @@ class CakePHP_Sniffs_Functions_ClosureDeclarationSniff implements PHP_CodeSniffe
 
         if ($spaces !== 1) {
             $error = 'Expected 1 space after closure\'s function keyword; %s found';
-            $data  = array($spaces);
+            $data  = [$spaces];
             $phpcsFile->addError($error, $stackPtr, 'SpaceAfterFunction', $data);
         }
     }

@@ -26,14 +26,14 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
  *
  * @var array
  */
-    protected $_processed = array();
+    protected $_processed = [];
 
 /**
  * The list of use statements, their content and scope.
  *
  * @var array
  */
-    protected $_uses = array();
+    protected $_uses = [];
 
 /**
  * Returns an array of tokens this test wants to listen for.
@@ -42,7 +42,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
  */
     public function register()
     {
-        return array(T_USE);
+        return [T_USE];
     }
 
 /**
@@ -59,7 +59,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
         }
         $filename = $phpcsFile->getFilename();
 
-        $this->_uses = array();
+        $this->_uses = [];
         $next = $stackPtr;
 
         while ($next !== false) {
@@ -82,7 +82,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
             foreach ($defined as $i => $name) {
                 if ($name !== $sorted[$i]) {
                     $error = 'Use classes must be in alphabetical order. Was expecting ' . $sorted[$i];
-                    $phpcsFile->addError($error, $used[$name], 'UseInAlphabeticalOrder', array());
+                    $phpcsFile->addError($error, $used[$name], 'UseInAlphabeticalOrder', []);
                 }
             }
         }
@@ -106,14 +106,14 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
         $tokens = $phpcsFile->getTokens();
 
         // Only one USE declaration allowed per statement.
-        $next = $phpcsFile->findNext(array(T_COMMA, T_SEMICOLON), ($stackPtr + 1));
+        $next = $phpcsFile->findNext([T_COMMA, T_SEMICOLON], ($stackPtr + 1));
         if ($tokens[$next]['code'] === T_COMMA) {
             $error = 'There must be one USE keyword per declaration';
             $phpcsFile->addError($error, $stackPtr, 'MultipleDeclarations');
         }
 
         $content = '';
-        $end = $phpcsFile->findNext(array(T_SEMICOLON, T_OPEN_CURLY_BRACKET), $stackPtr);
+        $end = $phpcsFile->findNext([T_SEMICOLON, T_OPEN_CURLY_BRACKET], $stackPtr);
         $useTokens = array_slice($tokens, $stackPtr, $end - $stackPtr, true);
 
         foreach ($useTokens as $index => $token) {
@@ -141,7 +141,7 @@ class CakePHP_Sniffs_Formatting_UseInAlphabeticalOrderSniff implements PHP_CodeS
     protected function _isClosure($phpcsFile, $stackPtr)
     {
         return $phpcsFile->findPrevious(
-            array(T_CLOSURE),
+            [T_CLOSURE],
             ($stackPtr - 1),
             null,
             false,

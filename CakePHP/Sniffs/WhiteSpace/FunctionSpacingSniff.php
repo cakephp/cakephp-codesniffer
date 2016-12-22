@@ -28,7 +28,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
  */
     public function register()
     {
-        return array(T_FUNCTION);
+        return [T_FUNCTION];
     }
 
 /**
@@ -70,7 +70,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
             // there are 0 blank lines after the function.
             $foundLines = 0;
         } else {
-            $nextContent = $phpcsFile->findNext(array(T_WHITESPACE), ($nextLineToken + 1), null, true);
+            $nextContent = $phpcsFile->findNext([T_WHITESPACE], ($nextLineToken + 1), null, true);
             if ($nextContent === false) {
                 // We are at the end of the file. That is acceptable as well.
                 $foundLines = 1;
@@ -99,7 +99,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
             // there are 0 blank lines before the function.
             $foundLines = 0;
         } else {
-            $prevContent = $phpcsFile->findPrevious(array(T_WHITESPACE, T_DOC_COMMENT), $prevLineToken, null, true);
+            $prevContent = $phpcsFile->findPrevious([T_WHITESPACE, T_DOC_COMMENT], $prevLineToken, null, true);
 
             // Before we throw an error, check that we are not throwing an error
             // for another function. We don't want to error for no blank lines after

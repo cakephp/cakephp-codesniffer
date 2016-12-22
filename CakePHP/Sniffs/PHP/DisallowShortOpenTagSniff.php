@@ -34,10 +34,10 @@ class CakePHP_Sniffs_PHP_DisallowShortOpenTagSniff implements PHP_CodeSniffer_Sn
  */
     public function register()
     {
-        return array(
+        return [
             T_OPEN_TAG,
             T_INLINE_HTML
-        );
+        ];
     }
 
 /**
@@ -56,7 +56,7 @@ class CakePHP_Sniffs_PHP_DisallowShortOpenTagSniff implements PHP_CodeSniffer_Sn
 
         if (trim($openTag['content']) === '<?') {
             $error = 'Short PHP opening tag used; expected "<?php" but found "%s"';
-            $data = array(trim($openTag['content']));
+            $data = [trim($openTag['content'])];
             $phpcsFile->addError($error, $stackPtr, 'Found', $data);
         }
     }

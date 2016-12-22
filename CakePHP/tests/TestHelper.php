@@ -29,14 +29,14 @@ class TestHelper {
 			defined('PHP_CodeSniffer::VERSION') &&
 			version_compare(PHP_CodeSniffer::VERSION, '1.5.0') != -1
 		) {
-			$standard = array($standard);
+			$standard = [$standard];
 		}
-		$options = array(
+		$options = [
 			'encoding' => 'utf-8',
-			'files' => array($file),
+			'files' => [$file],
 			'standard' => $standard,
 			'showSources' => true,
-		) + $defaults;
+		] + $defaults;
 
 		// New PHPCS has a strange issue where the method arguments
 		// are not stored on the instance causing weird errors.

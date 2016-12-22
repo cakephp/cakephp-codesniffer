@@ -29,7 +29,7 @@ class CakePHP_Sniffs_NamingConventions_ValidClassBracketsSniff implements PHP_Co
  */
     public function register()
     {
-        return array(T_CLASS);
+        return [T_CLASS];
     }
 
 /**
@@ -49,13 +49,13 @@ class CakePHP_Sniffs_NamingConventions_ValidClassBracketsSniff implements PHP_Co
         }
         if ($tokens[$found - 1]['code'] != T_WHITESPACE) {
             $error = 'Expected 1 space after class declaration, found 0';
-            $phpcsFile->addError($error, $found - 1, 'InvalidSpacing', array());
+            $phpcsFile->addError($error, $found - 1, 'InvalidSpacing', []);
             return;
         }
 
         if (strlen($tokens[$found - 1]['content']) > 1 || $tokens[$found - 2]['code'] == T_WHITESPACE) {
             $error = 'Expected 1 space after class declaration, found ' . strlen($tokens[$found - 1]['content']);
-            $phpcsFile->addError($error, $found - 1, 'InvalidSpacing', array());
+            $phpcsFile->addError($error, $found - 1, 'InvalidSpacing', []);
         }
     }
 }

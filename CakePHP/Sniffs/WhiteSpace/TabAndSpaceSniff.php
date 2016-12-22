@@ -28,11 +28,11 @@ class CakePHP_Sniffs_WhiteSpace_TabAndSpaceSniff implements PHP_CodeSniffer_Snif
  *
  * @var array
  */
-    public $supportedTokenizers = array(
+    public $supportedTokenizers = [
         'PHP',
         'JS',
         'CSS'
-    );
+    ];
 
 /**
  * Returns an array of tokens this test wants to listen for.
@@ -41,7 +41,7 @@ class CakePHP_Sniffs_WhiteSpace_TabAndSpaceSniff implements PHP_CodeSniffer_Snif
  */
     public function register()
     {
-        return array(T_WHITESPACE);
+        return [T_WHITESPACE];
     }
 
 /**

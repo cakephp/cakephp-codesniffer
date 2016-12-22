@@ -28,7 +28,7 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
  *
  * @var array
  */
-    protected $_magicMethods = array(
+    protected $_magicMethods = [
         'construct',
         'destruct',
         'call',
@@ -44,14 +44,14 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
         'set_state',
         'clone',
         'invoke',
-    );
+    ];
 
 /**
  * Constructs a PEAR_Sniffs_NamingConventions_ValidFunctionNameSniff.
  */
     public function __construct()
     {
-        parent::__construct(array(T_CLASS, T_INTERFACE), array(T_FUNCTION), true);
+        parent::__construct([T_CLASS, T_INTERFACE], [T_FUNCTION], true);
     }
 
 /**
@@ -71,7 +71,7 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
         }
 
         $className = $phpcsFile->getDeclarationName($currScope);
-        $errorData = array($className . '::' . $methodName);
+        $errorData = [$className . '::' . $methodName];
 
         // PHP4 constructors are allowed to break our rules.
         if ($methodName === $className) {

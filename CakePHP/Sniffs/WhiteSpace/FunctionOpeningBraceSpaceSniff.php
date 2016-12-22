@@ -28,7 +28,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionOpeningBraceSpaceSniff implements PHP_Co
  */
     public function register()
     {
-        return array(T_FUNCTION);
+        return [T_FUNCTION];
     }
 
 /**
@@ -64,7 +64,7 @@ class CakePHP_Sniffs_WhiteSpace_FunctionOpeningBraceSpaceSniff implements PHP_Co
         $found = ($nextLine - $braceLine - 1);
         if ($found > 0) {
             $error = 'Expected 0 blank lines after opening function brace; %s found';
-            $data = array($found);
+            $data = [$found];
             $phpcsFile->addError($error, $openBrace, 'SpacingAfter', $data);
         }
     }

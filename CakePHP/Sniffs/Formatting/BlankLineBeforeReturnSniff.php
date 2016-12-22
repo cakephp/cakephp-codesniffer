@@ -13,10 +13,10 @@ class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements PHP_CodeSn
      *
      * @var array
      */
-    public $supportedTokenizers = array(
+    public $supportedTokenizers = [
         'PHP',
         'JS',
-    );
+    ];
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -25,7 +25,7 @@ class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements PHP_CodeSn
      */
     public function register()
     {
-        return array(T_RETURN);
+        return [T_RETURN];
     }
 
     /**
@@ -42,7 +42,7 @@ class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements PHP_CodeSn
         $tokens          = $phpcsFile->getTokens();
         $current         = $stackPtr;
         $previousLine    = $tokens[$stackPtr]['line'] - 1;
-        $prevLineTokens  = array();
+        $prevLineTokens  = [];
 
         while ($current >= 0 && $tokens[$current]['line'] >= $previousLine) {
             if ($tokens[$current]['line'] == $previousLine
