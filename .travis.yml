@@ -1,6 +1,7 @@
 language: php
 
 php:
+  - 7.1
   - 7.0
   - 5.4
   - 5.5
@@ -12,7 +13,7 @@ matrix:
   fast_finish: true
 
   include:
-    - php: 7.0
+    - php: 7.1
       env: PHPCS=1
 
   allow_failures:
@@ -26,8 +27,8 @@ before_script:
 script:
   - if [[ $PHPCS != 1 ]]; then sed -i.bak "s/<severity>0<\/severity>//" CakePHP/ruleset.xml; fi
   - sed -i.bak "s/<exclude-pattern>\*\/tests\/\*<\/exclude-pattern>//" CakePHP/ruleset.xml
-  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION = 7.0 ]]; then vendor/bin/phpunit --filter CakePHP --coverage-clover=clover.xml; fi
-  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION != 7.0 ]]; then vendor/bin/phpunit --filter CakePHP; fi
+  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION = 7.1 ]]; then vendor/bin/phpunit --coverage-clover=clover.xml; fi
+  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION != 7.1 ]]; then vendor/bin/phpunit; fi
   - if [[ $PHPCS = 1 ]]; then vendor/bin/phpcs -p --extensions=php --standard=CakePHP ./CakePHP; fi
 
 after_success:
