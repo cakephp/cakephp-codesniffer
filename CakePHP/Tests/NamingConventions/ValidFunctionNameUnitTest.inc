@@ -8,9 +8,9 @@ class FunctionNames
         echo "I emit an error";
     }
 
-    private function discouraged()
+    private function notDiscouraged()
     {
-        echo "I emit a warning";
+        echo "I don't emit a warning anymore";
     }
 
     public function setVariables()
@@ -98,9 +98,9 @@ trait FunctionNamesTrait
         echo "I emit an error";
     }
 
-    private function discouraged()
+    private function notDiscouraged()
     {
-        echo "I emit a warning";
+        echo "I don't emit a warning anymore";
     }
 
     public function setVariables()
