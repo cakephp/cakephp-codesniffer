@@ -13,7 +13,11 @@ class FunctionClosingBraceSpaceUnitTest extends AbstractSniffUnitTest
     {
         return [
             3 => 1,
-            7 => 1,
+            6 => 1,
+            10 => 1,
+            25 => 1,
+            28 => 1,
+            30 => 1,
         ];
     }
 
