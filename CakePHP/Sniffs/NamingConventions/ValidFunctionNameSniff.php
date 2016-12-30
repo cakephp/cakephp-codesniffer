@@ -80,16 +80,12 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         }
 
         $isPublic = $methodProps['scope'] === 'public';
-        $isPrivate = $methodProps['scope'] === 'private';
 
         if ($isPublic === true && $methodName[0] === '_') {
             $error = 'Public method name "%s" must not be prefixed with underscore';
             $phpcsFile->addError($error, $stackPtr, 'PublicWithUnderscore', $errorData);
 
             return;
-        } elseif ($isPrivate === true) {
-            $warning = 'Private method name "%s" in CakePHP core is discouraged';
-            $phpcsFile->addWarning($warning, $stackPtr, 'PrivateMethodInCore', $errorData);
         }
     }
 

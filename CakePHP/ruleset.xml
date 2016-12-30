@@ -111,6 +111,7 @@
 
  <!-- Relax some src/* and tests/* rules -->
  <rule ref="PSR1.Files.SideEffects">
+  <exclude-pattern>*/config/*</exclude-pattern>
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="PSR1.Classes.ClassDeclaration">
@@ -127,7 +128,7 @@
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="CakePHP.Commenting.FunctionComment">
-  <!--<exclude-pattern>*/tests/*</exclude-pattern>-->
+  <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="Squiz.NamingConventions.ValidFunctionName">
   <exclude-pattern>*/src/*</exclude-pattern>

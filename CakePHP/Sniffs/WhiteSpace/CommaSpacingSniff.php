@@ -45,6 +45,11 @@ class CommaSpacingSniff implements Sniff
         $next = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
 
         if ($tokens[$next]['code'] !== T_WHITESPACE && ($next !== $stackPtr + 2)) {
+            // Skip if immediate char is comma
+            if ($tokens[$next]['code'] === T_COMMA) {
+                return;
+            }
+
             // Last character in a line is ok.
             if ($tokens[$next]['line'] === $tokens[$stackPtr]['line']) {
                 $error = 'Missing space after comma';
