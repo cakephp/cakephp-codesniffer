@@ -32,13 +32,16 @@
  <rule ref ="Zend.NamingConventions.ValidVariableName.ContainsNumbers">
   <severity>0</severity>
  </rule>
+ <rule ref ="Zend.NamingConventions.ValidVariableName.StringVarContainsNumbers">
+  <severity>0</severity>
+ </rule>
+ <rule ref ="Zend.NamingConventions.ValidVariableName.MemberVarContainsNumbers">
+  <severity>0</severity>
+ </rule>
  <rule ref ="Zend.NamingConventions.ValidVariableName.NotCamelCaps">
   <severity>0</severity>
  </rule>
  <rule ref ="Zend.NamingConventions.ValidVariableName.MemberVarNotCamelCaps">
-  <severity>0</severity>
- </rule>
- <rule ref ="Zend.NamingConventions.ValidVariableName.ContainsNumbers">
   <severity>0</severity>
  </rule>
 
