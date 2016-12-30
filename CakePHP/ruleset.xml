@@ -29,6 +29,24 @@
  <rule ref ="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore">
   <severity>0</severity>
  </rule>
+ <rule ref ="Zend.NamingConventions.ValidVariableName.ContainsNumbers">
+  <severity>0</severity>
+ </rule>
+ <rule ref ="Zend.NamingConventions.ValidVariableName.NotCamelCaps">
+  <severity>0</severity>
+ </rule>
+ <rule ref ="Zend.NamingConventions.ValidVariableName.MemberVarNotCamelCaps">
+  <severity>0</severity>
+ </rule>
+ <rule ref ="Zend.NamingConventions.ValidVariableName.ContainsNumbers">
+  <severity>0</severity>
+ </rule>
+
+ <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
+  <properties>
+   <property name="ignoreBlankLines" value="false"/>
+  </properties>
+ </rule>
  <!--
  Temporarily ignore until API docblock formatting and line length issues in core code are fixed.
  -->
