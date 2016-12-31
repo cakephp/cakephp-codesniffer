@@ -18,7 +18,7 @@
  <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
   <severity>0</severity>
  </rule>
- <rule ref ="Squiz.NamingConventions.ValidFunctionName.PublicUnderscore">
+ <rule ref="Squiz.NamingConventions.ValidFunctionName.PublicUnderscore">
   <severity>0</severity>
  </rule>
  <rule ref ="PEAR.NamingConventions.ValidFunctionName.PublicUnderscore">

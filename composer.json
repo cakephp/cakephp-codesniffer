@@ -30,27 +30,19 @@
         }
     },
     "scripts": {
-        "increaseSeverity": "sed -i '' 's/<severity>0<\\/severity>/<!--<severity>0<\\/severity>-->/' CakePHP/ruleset.xml",
-        "includeTestsDirectory": "sed -i '' 's/<exclude-pattern>\\*\\/tests\\/\\*<\\/exclude-pattern>/<!--<exclude-pattern>\\*\\/tests\\/\\*<\\/exclude-pattern>-->/' CakePHP/ruleset.xml",
-        "resetRuleset": [
-            "sed -i '' 's/<!--<severity>0<\\/severity>-->/<severity>0<\\/severity>/' CakePHP/ruleset.xml",
-            "sed -i '' 's/<!--<exclude-pattern>\\*\\/tests\\/\\*<\\/exclude-pattern>-->/<exclude-pattern>\\*\\/tests\\/\\*<\\/exclude-pattern>/' CakePHP/ruleset.xml"
+        "increase-severity": "sed -i.bak 's/<severity>0<\\/severity>/<!--<severity>0<\\/severity>-->/' CakePHP/ruleset.xml",
+        "reset-ruleset": [
+            "sed -i.bak 's/<!--<severity>0<\\/severity>-->/<severity>0<\\/severity>/' CakePHP/ruleset.xml",
+            "rm -f CakePHP/ruleset.xml.bak"
         ],
-        "addStandard" : "phpcs --config-set installed_paths $(pwd)",
+        "add-standard" : "phpcs --config-set installed_paths $(pwd)",
         "test": [
-          "@increaseSeverity",
+          "@add-standard",
+          "@increase-severity",
           "phpunit",
-          "@resetRuleset"
+          "@reset-ruleset"
         ],
-        "cs-check": [
-            "@addStandard",
-            "phpcs --colors -p --extensions=php --standard=CakePHP ./CakePHP",
-            "@resetRuleset"
-        ],
-        "cs-fix":  [
-            "@addStandard",
-            "phpcbf --colors --extensions=php --standard=CakePHP ./CakePHP",
-            "@resetRuleset"
-        ]
+        "cs-check": "phpcs --colors -p --extensions=php --standard=CakePHP ./CakePHP",
+        "cs-fix": "phpcbf --colors --extensions=php --standard=CakePHP ./CakePHP"
     }
 }
