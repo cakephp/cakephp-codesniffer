@@ -28,5 +28,29 @@
         "psr-4": {
             "CakePHP\\": "CakePHP"
         }
+    },
+    "scripts": {
+        "increaseSeverity": "sed -i '' 's/<severity>0<\\/severity>/<!--<severity>0<\\/severity>-->/' CakePHP/ruleset.xml",
+        "includeTestsDirectory": "sed -i '' 's/<exclude-pattern>\\*\\/tests\\/\\*<\\/exclude-pattern>/<!--<exclude-pattern>\\*\\/tests\\/\\*<\\/exclude-pattern>-->/' CakePHP/ruleset.xml",
+        "resetRuleset": [
+            "sed -i '' 's/<!--<severity>0<\\/severity>-->/<severity>0<\\/severity>/' CakePHP/ruleset.xml",
+            "sed -i '' 's/<!--<exclude-pattern>\\*\\/tests\\/\\*<\\/exclude-pattern>-->/<exclude-pattern>\\*\\/tests\\/\\*<\\/exclude-pattern>/' CakePHP/ruleset.xml"
+        ],
+        "addStandard" : "phpcs --config-set installed_paths $(pwd)",
+        "test": [
+          "@increaseSeverity",
+          "phpunit",
+          "@resetRuleset"
+        ],
+        "cs-check": [
+            "@addStandard",
+            "phpcs --colors -p --extensions=php --standard=CakePHP ./CakePHP",
+            "@resetRuleset"
+        ],
+        "cs-fix":  [
+            "@addStandard",
+            "phpcbf --colors --extensions=php --standard=CakePHP ./CakePHP",
+            "@resetRuleset"
+        ]
     }
 }
