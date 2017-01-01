@@ -18,27 +18,30 @@
  <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
   <severity>0</severity>
  </rule>
- <rule ref ="Squiz.NamingConventions.ValidFunctionName.PublicUnderscore">
+ <rule ref="Squiz.NamingConventions.ValidFunctionName.PublicUnderscore">
   <severity>0</severity>
  </rule>
- <rule ref ="PEAR.NamingConventions.ValidFunctionName.PublicUnderscore">
+ <rule ref="PEAR.NamingConventions.ValidFunctionName.PublicUnderscore">
   <severity>0</severity>
  </rule>
- <rule ref ="Zend.NamingConventions.ValidVariableName">
+ <rule ref="Zend.NamingConventions.ValidVariableName">
  </rule>
- <rule ref ="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore">
+ <rule ref="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore">
   <severity>0</severity>
  </rule>
- <rule ref ="Zend.NamingConventions.ValidVariableName.ContainsNumbers">
+ <rule ref="Zend.NamingConventions.ValidVariableName.ContainsNumbers">
   <severity>0</severity>
  </rule>
- <rule ref ="Zend.NamingConventions.ValidVariableName.NotCamelCaps">
+ <rule ref="Zend.NamingConventions.ValidVariableName.StringVarContainsNumbers">
   <severity>0</severity>
  </rule>
- <rule ref ="Zend.NamingConventions.ValidVariableName.MemberVarNotCamelCaps">
+ <rule ref="Zend.NamingConventions.ValidVariableName.MemberVarContainsNumbers">
   <severity>0</severity>
  </rule>
- <rule ref ="Zend.NamingConventions.ValidVariableName.ContainsNumbers">
+ <rule ref="Zend.NamingConventions.ValidVariableName.NotCamelCaps">
+  <severity>0</severity>
+ </rule>
+ <rule ref="Zend.NamingConventions.ValidVariableName.MemberVarNotCamelCaps">
   <severity>0</severity>
  </rule>
 

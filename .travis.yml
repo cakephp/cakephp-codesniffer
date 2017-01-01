@@ -22,17 +22,14 @@ matrix:
 before_script:
   - composer self-update
   - composer install --prefer-source
-  - vendor/bin/phpcs --config-set installed_paths $(pwd)
 
 script:
-  - if [[ $PHPCS != 1 ]]; then sed -i.bak "s/<severity>0<\/severity>//" CakePHP/ruleset.xml; fi
-  - sed -i.bak "s/<exclude-pattern>\*\/tests\/\*<\/exclude-pattern>//" CakePHP/ruleset.xml
-  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION = 7.1 ]]; then vendor/bin/phpunit --coverage-clover=clover.xml; fi
-  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION != 7.1 ]]; then vendor/bin/phpunit; fi
-  - if [[ $PHPCS = 1 ]]; then vendor/bin/phpcs -p --extensions=php --standard=CakePHP ./CakePHP; fi
+  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION = 7.1 ]]; then composer run-script test-coverage --timeout=0; fi
+  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION != 7.1 ]]; then composer test; fi
+  - if [[ $PHPCS = 1 ]]; then composer cs-check; fi
 
 after_success:
-  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION = 7.0 ]]; then bash <(curl -s https://codecov.io/bash); fi
+  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION = 7.1 ]]; then bash <(curl -s https://codecov.io/bash); fi
 
 notifications:
   email: false

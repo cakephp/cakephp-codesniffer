@@ -28,5 +28,27 @@
         "psr-4": {
             "CakePHP\\": "CakePHP"
         }
+    },
+    "scripts": {
+        "increase-severity": "sed -i.bak 's/<severity>0<\\/severity>/<!--<severity>0<\\/severity>-->/' CakePHP/ruleset.xml",
+        "reset-ruleset": [
+            "sed -i.bak 's/<!--<severity>0<\\/severity>-->/<severity>0<\\/severity>/' CakePHP/ruleset.xml",
+            "rm -f CakePHP/ruleset.xml.bak"
+        ],
+        "add-standard" : "phpcs --config-set installed_paths $(pwd)",
+        "test": [
+          "@add-standard",
+          "@increase-severity",
+          "phpunit",
+          "@reset-ruleset"
+        ],
+        "test-coverage": [
+          "@add-standard",
+          "@increase-severity",
+          "phpunit --coverage-clover=clover.xml",
+          "@reset-ruleset"
+        ],
+        "cs-check": "phpcs --colors -p --extensions=php --standard=CakePHP ./CakePHP",
+        "cs-fix": "phpcbf --colors --extensions=php --standard=CakePHP ./CakePHP"
     }
 }
