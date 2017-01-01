@@ -24,7 +24,7 @@ before_script:
   - composer install --prefer-source
 
 script:
-  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION = 7.1 ]]; then composer add-standard; composer increase-severity; vendor/bin/phpunit --coverage-clover=clover.xml; fi
+  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION = 7.1 ]]; then composer run-script test-coverage --timeout=0; fi
   - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION != 7.1 ]]; then composer test; fi
   - if [[ $PHPCS = 1 ]]; then composer cs-check; fi
 
