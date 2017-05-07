@@ -25,7 +25,6 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractVariableSniff', true) === fa
  */
 class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff
 {
-
     /**
      * Processes this test, when one of its tokens is encountered.
      *
@@ -161,7 +160,6 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
 
     /**
      * @param \PHP_CodeSniffer_File $phpcsFile PHPCS file
-     * @param array $tokens Array of tokens
      * @param int $stackPtr The pointer
      * @param string $varName The variable name
      * @return void
@@ -172,7 +170,7 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
         $phpcsFile->fixer->beginChangeset();
         preg_match('/^(_*)(.+)/', $varName, $matches);
 
-        $camelCapsVarName = '$' . $matches[1] . \Cake\Utility\Inflector::variable($matches[2]);
+        $camelCapsVarName = '$' . $matches[1] . $this->variable($matches[2]);
 
         $newToken = str_replace('$' . $varName, $camelCapsVarName, $tokens[$stackPtr]['content']);
 
@@ -208,5 +206,62 @@ class CakePHP_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSn
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns camelBacked version of an underscored string.
+     *
+     * @param string $string String to convert.
+     * @return string in variable form
+     * @link http://book.cakephp.org/3.0/en/core-libraries/inflector.html#creating-variable-names
+     */
+    public function variable($string)
+    {
+        $camelized = $this->camelize($this->delimit(str_replace('-', '_', $string), '_'));
+        $replace = strtolower(substr($camelized, 0, 1));
+        return $replace . substr($camelized, 1);
+    }
+
+    /**
+     * Returns the input lower_case_delimited_string as a CamelCasedString.
+     *
+     * @param string $string String to camelize
+     * @param string $delimiter the delimiter in the input string
+     * @return string CamelizedStringLikeThis.
+     * @link http://book.cakephp.org/3.0/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
+     */
+    public function camelize($string, $delimiter = '_')
+    {
+        return str_replace(' ', '', $this->humanize($string, $delimiter));
+    }
+
+    /**
+     * Returns the input lower_case_delimited_string as 'A Human Readable String'.
+     * (Underscores are replaced by spaces and capitalized following words.)
+     *
+     * @param string $string String to be humanized
+     * @param string $delimiter the character to replace with a space
+     * @return string Human-readable string
+     * @link http://book.cakephp.org/3.0/en/core-libraries/inflector.html#creating-human-readable-forms
+     */
+    public function humanize($string, $delimiter = '_')
+    {
+        $result = explode(' ', str_replace($delimiter, ' ', $string));
+        foreach ($result as &$word) {
+            $word = mb_strtoupper(mb_substr($word, 0, 1)) . mb_substr($word, 1);
+        }
+        return implode(' ', $result);
+    }
+
+    /**
+     * Expects a CamelCasedInputString, and produces a lower_case_delimited_string
+     *
+     * @param string $string String to delimit
+     * @param string $delimiter the character to use as a delimiter
+     * @return string delimited string
+     */
+    public function delimit($string, $delimiter = '_')
+    {
+        return mb_strtolower(preg_replace('/(?<=\\w)([A-Z])/', $delimiter . '\\1', $string));
     }
 }
