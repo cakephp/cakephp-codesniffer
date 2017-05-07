@@ -11,7 +11,7 @@ standard use any of the `1.x` releases.
 
 You should install this codesniffer with composer:
 
-	composer require --dev "cakephp/cakephp-codesniffer=2.*"
+	composer require --dev "cakephp/cakephp-codesniffer"
 	vendor/bin/phpcs --config-set installed_paths /path/to/your/app/vendor/cakephp/cakephp-codesniffer
 
 The second command lets `phpcs` know where to find your new sniffs. Ensure that

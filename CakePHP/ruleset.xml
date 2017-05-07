@@ -18,10 +18,42 @@
  <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
   <severity>0</severity>
  </rule>
+ <rule ref="Squiz.NamingConventions.ValidFunctionName.PublicUnderscore">
+  <severity>0</severity>
+ </rule>
+ <rule ref="PEAR.NamingConventions.ValidFunctionName.PublicUnderscore">
+  <severity>0</severity>
+ </rule>
+ <rule ref="Zend.NamingConventions.ValidVariableName">
+ </rule>
+ <rule ref="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore">
+  <severity>0</severity>
+ </rule>
+ <rule ref="Zend.NamingConventions.ValidVariableName.ContainsNumbers">
+  <severity>0</severity>
+ </rule>
+ <rule ref="Zend.NamingConventions.ValidVariableName.StringVarContainsNumbers">
+  <severity>0</severity>
+ </rule>
+ <rule ref="Zend.NamingConventions.ValidVariableName.MemberVarContainsNumbers">
+  <severity>0</severity>
+ </rule>
+ <rule ref="Zend.NamingConventions.ValidVariableName.NotCamelCaps">
+  <severity>0</severity>
+ </rule>
+ <rule ref="Zend.NamingConventions.ValidVariableName.MemberVarNotCamelCaps">
+  <severity>0</severity>
+ </rule>
 
+ <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
+  <properties>
+   <property name="ignoreBlankLines" value="false"/>
+  </properties>
+ </rule>
  <!--
  Temporarily ignore until API docblock formatting and line length issues in core code are fixed.
  -->
+ <rule ref="CakePHP.Commenting.FunctionComment" />
  <rule ref="CakePHP.Commenting.FunctionComment.ParamCommentNotCapital">
   <severity>0</severity>
  </rule>
@@ -41,11 +73,6 @@
   <severity>0</severity>
  </rule>
 
- <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
-  <properties>
-   <property name="ignoreBlankLines" value="false"/>
-  </properties>
- </rule>
  <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
  <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
 
@@ -97,6 +124,7 @@
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="PEAR.NamingConventions.ValidClassName">
+  <exclude-pattern>*/CakePHP/*</exclude-pattern>
   <exclude-pattern>*/tests/*</exclude-pattern>
  </rule>
  <rule ref="Squiz.Classes.ValidClassName">

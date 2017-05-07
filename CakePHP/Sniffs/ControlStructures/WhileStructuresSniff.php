@@ -15,34 +15,30 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+namespace CakePHP\Sniffs\ControlStructures;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Ensures that while and do-while use curly brackets
  *
  */
-class CakePHP_Sniffs_ControlStructures_WhileStructuresSniff implements PHP_CodeSniffer_Sniff
+class WhileStructuresSniff implements Sniff
 {
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
         return [T_DO, T_WHILE];
     }
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * Checks that while and do-while use curly brackets
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param integer              $stackPtr  The position of the current token in the
- *                                        stack passed in $tokens.
- * @return void
- */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    /**
+     * {@inheritDoc}
+     */
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

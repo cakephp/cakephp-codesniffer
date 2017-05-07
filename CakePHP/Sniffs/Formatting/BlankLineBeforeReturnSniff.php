@@ -1,4 +1,9 @@
 <?php
+namespace CakePHP\Sniffs\Formatting;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Throws errors if there's no blank line before return statements.
  *
@@ -6,7 +11,7 @@
  * @license  http://spdx.org/licenses/MIT MIT License
  * @link     https://github.com/escapestudios/Symfony2-coding-standard
  */
-class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements PHP_CodeSniffer_Sniff
+class BlankLineBeforeReturnSniff implements Sniff
 {
     /**
      * A list of tokenizers this sniff supports.
@@ -19,9 +24,7 @@ class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements PHP_CodeSn
     ];
 
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function register()
     {
@@ -29,20 +32,14 @@ class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements PHP_CodeSn
     }
 
     /**
-     * Processes this test, when one of its tokens is encountered.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile All the tokens found in the document.
-     * @param int                  $stackPtr  The position of the current token in
-     *                                        the stack passed in $tokens.
-     *
-     * @return void
+     * {@inheritDoc}
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
-        $tokens          = $phpcsFile->getTokens();
-        $current         = $stackPtr;
-        $previousLine    = $tokens[$stackPtr]['line'] - 1;
-        $prevLineTokens  = [];
+        $tokens = $phpcsFile->getTokens();
+        $current = $stackPtr;
+        $previousLine = $tokens[$stackPtr]['line'] - 1;
+        $prevLineTokens = [];
 
         while ($current >= 0 && $tokens[$current]['line'] >= $previousLine) {
             if ($tokens[$current]['line'] == $previousLine
@@ -58,14 +55,15 @@ class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements PHP_CodeSn
 
         if (isset($prevLineTokens[0])
             && ($prevLineTokens[0] === 'T_OPEN_CURLY_BRACKET'
-            || $prevLineTokens[0] === 'T_COLON'
-            || $prevLineTokens[0] === 'T_OPEN_TAG')
+                || $prevLineTokens[0] === 'T_COLON'
+                || $prevLineTokens[0] === 'T_OPEN_TAG')
         ) {
             return;
         } elseif (count($prevLineTokens) > 0) {
             $fix = $phpcsFile->addFixableError(
                 'Missing blank line before return statement',
-                $stackPtr
+                $stackPtr,
+                'BlankLineBeforeReturn'
             );
             if ($fix === true) {
                 $phpcsFile->fixer->beginChangeset();
@@ -73,7 +71,5 @@ class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements PHP_CodeSn
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
-        return;
     }
 }

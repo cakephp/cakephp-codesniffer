@@ -27,29 +27,26 @@
  * @version   Release: 1.5.0RC3
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP_CodeSniffer_Sniff
+namespace CakePHP\Sniffs\NamingConventions;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
+class UpperCaseConstantNameSniff implements Sniff
 {
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
         return [T_STRING];
     }
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param integer              $stackPtr  The position of the current token in the
- *                                        stack passed in $tokens.
- *
- * @return void
- */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    /**
+     * {@inheritDoc}
+     */
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $constName = $tokens[$stackPtr]['content'];
@@ -97,7 +94,7 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
                 T_INSTEADOF,
                 T_PROTECTED,
                 T_PRIVATE,
-                T_PUBLIC
+                T_PUBLIC,
             ];
 
             if (in_array($tokens[$functionKeyword]['code'], $declarations) === true) {
@@ -188,7 +185,6 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
                 ];
                 $phpcsFile->addError($error, $stackPtr, 'ConstantNotUpperCase', $data);
             }
-
         } elseif (strtolower($constName) === 'define' || strtolower($constName) === 'constant') {
             // This may be a "define" or "constant" function call.
 

@@ -18,27 +18,25 @@
  * Checks the separation between methods in a class or interface.
  *
  */
-class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_Sniff
-{
+namespace CakePHP\Sniffs\WhiteSpace;
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
+class FunctionSpacingSniff implements Sniff
+{
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
         return [T_FUNCTION];
     }
 
-/**
- * Processes this sniff, when one of its tokens is encountered.
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param integer $stackPtr The position of the current token in the stack passed in $tokens.
- * @return void
- */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    /**
+     * {@inheritDoc}
+     */
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -46,7 +44,6 @@ class CakePHP_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_
 			Check the number of blank lines
 			after the function.
 		*/
-
         if (isset($tokens[$stackPtr]['scope_closer']) === false) {
             // Must be an interface method, so the closer is the semi-colon.
             $closer = $phpcsFile->findNext(T_SEMICOLON, $stackPtr);

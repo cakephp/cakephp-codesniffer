@@ -13,16 +13,18 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+namespace CakePHP\Sniffs\Commenting;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Ensures doc block alignments.
  */
-class CakePHP_Sniffs_Commenting_DocBlockAlignmentSniff implements PHP_CodeSniffer_Sniff
+class DocBlockAlignmentSniff implements Sniff
 {
-
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function register()
     {
@@ -30,14 +32,9 @@ class CakePHP_Sniffs_Commenting_DocBlockAlignmentSniff implements PHP_CodeSniffe
     }
 
     /**
-     * Processes this test, when one of its tokens is encountered.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param integer              $stackPtr  The position of the current token in the
-     *                                        stack passed in $tokens.
-     * @return void
+     * {@inheritDoc}
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $leftWall = [
@@ -45,12 +42,12 @@ class CakePHP_Sniffs_Commenting_DocBlockAlignmentSniff implements PHP_CodeSniffe
             T_NAMESPACE,
             T_INTERFACE,
             T_TRAIT,
-            T_USE
+            T_USE,
         ];
         $oneIndentation = [
             T_FUNCTION,
             T_VARIABLE,
-            T_CONST
+            T_CONST,
         ];
         $allTokens = array_merge($leftWall, $oneIndentation);
         $notFlatFile = $phpcsFile->findNext(T_NAMESPACE, 0);
@@ -63,7 +60,5 @@ class CakePHP_Sniffs_Commenting_DocBlockAlignmentSniff implements PHP_CodeSniffe
                 $phpcsFile->addError('Expected docblock to be aligned with code.', $stackPtr, 'NotAllowed');
             }
         }
-
-        return;
     }
 }

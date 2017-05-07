@@ -12,10 +12,11 @@
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
+namespace CakePHP\Sniffs\Commenting;
 
-if (class_exists('PEAR_Sniffs_Commenting_FunctionCommentSniff', true) === false) {
-    throw new PHP_CodeSniffer_Exception('Class PEAR_Sniffs_Commenting_FunctionCommentSniff not found');
-}
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\FunctionCommentSniff as PearFunctionCommentSniff;
+use PHP_CodeSniffer\Util\Common;
 
 /**
  * Parses and verifies the doc comments for functions.
@@ -46,32 +47,33 @@ if (class_exists('PEAR_Sniffs_Commenting_FunctionCommentSniff', true) === false)
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenting_FunctionCommentSniff
+class FunctionCommentSniff extends PearFunctionCommentSniff
 {
     /**
      * Is the comment an inheritdoc?
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int $stackPtr The position of the current token in the stack passed in $tokens.
-     * @return boolean True if the comment is an inheritdoc
+     * @return bool True if the comment is an inheritdoc
      */
-    protected function isInheritDoc(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function isInheritDoc(File $phpcsFile, $stackPtr)
     {
         $start = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $stackPtr - 1);
         $end = $phpcsFile->findNext(T_DOC_COMMENT_CLOSE_TAG, $start);
         $content = $phpcsFile->getTokensAsString($start, ($end - $start));
+
         return preg_match('/{@inheritDoc}/i', $content) === 1;
     } // end isInheritDoc()
 
     /**
      * Process the return comment of this function comment.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int $stackPtr The position of the current token in the stack passed in $tokens.
      * @param int $commentStart The position in the stack where the comment started.
      * @return void
      */
-    protected function processReturn(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+    protected function processReturn(File $phpcsFile, $stackPtr, $commentStart)
     {
         if ($this->isInheritDoc($phpcsFile, $stackPtr)) {
             return;
@@ -100,6 +102,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                 if ($return !== null) {
                     $error = 'Only 1 @return tag is allowed in a function comment';
                     $phpcsFile->addError($error, $tag, 'DuplicateReturn');
+
                     return;
                 }
 
@@ -114,6 +117,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
         if ($return === null) {
             $error = 'Missing @return tag in function comment';
             $phpcsFile->addWarning($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
+
             return;
         }//end if
 
@@ -121,11 +125,12 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
         if (empty($content) === true || $tokens[($return + 2)]['code'] !== T_DOC_COMMENT_STRING) {
             $error = 'Return type missing for @return tag in function comment';
             $phpcsFile->addError($error, $return, 'MissingReturnType');
+
             return;
         }
 
         // Check return type (can be multiple, separated by '|').
-        list($types,) = explode(' ', $content);
+        list($types, ) = explode(' ', $content);
         $typeNames = explode('|', $types);
         $suggestedNames = [];
         foreach ($typeNames as $i => $typeName) {
@@ -136,7 +141,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
             } elseif (in_array($typeName, ['int', 'bool'])) {
                 $suggestedName = $typeName;
             } else {
-                $suggestedName = PHP_CodeSniffer::suggestType($typeName);
+                $suggestedName = Common::suggestType($typeName);
             }
             if (in_array($suggestedName, $suggestedNames) === false) {
                 $suggestedNames[] = $suggestedName;
@@ -184,6 +189,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                     $phpcsFile->addWarning($error, $return, 'InvalidReturnVoid');
                 }
             }
+
             return;
         }
 
@@ -202,19 +208,18 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                 }
             }
         }//end if
-
     }//end processReturn()
 
 
     /**
      * Process any throw tags that this function comment has.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int $stackPtr The position of the current token in the stack passed in $tokens.
      * @param int $commentStart The position in the stack where the comment started.
      * @return void
      */
-    protected function processThrows(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+    protected function processThrows(File $phpcsFile, $stackPtr, $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -250,7 +255,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
 
                 for ($i = ($tag + 3); $i < $end; $i++) {
                     if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
-                        $comment .= ' '.$tokens[$i]['content'];
+                        $comment .= ' ' . $tokens[$i]['content'];
                     }
                 }
 
@@ -268,19 +273,18 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                 }
             }//end if
         }//end foreach
-
     }//end processThrows()
 
 
     /**
      * Process the function parameter comments.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int $stackPtr The position of the current token in the stack passed in $tokens.
      * @param int $commentStart The position in the stack where the comment started.
      * @return void
      */
-    protected function processParams(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+    protected function processParams(File $phpcsFile, $stackPtr, $commentStart)
     {
         if ($this->isInheritDoc($phpcsFile, $stackPtr)) {
             return;
@@ -384,7 +388,7 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
                 } elseif (in_array($typeName, ['int', 'bool'])) {
                     $suggestedName = $typeName;
                 } else {
-                    $suggestedName = PHP_CodeSniffer::suggestType($typeName);
+                    $suggestedName = Common::suggestType($typeName);
                 }
 
                 if ($typeName !== $suggestedName) {
@@ -471,6 +475,5 @@ class CakePHP_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Comment
             $data = [$neededParam];
             $phpcsFile->addWarning($error, $commentStart, 'MissingParamTag', $data);
         }
-
     }//end processParams()
 }//end class

@@ -20,30 +20,27 @@
  * while and dowhile are covered elsewhere
  *
  */
-class CakePHP_Sniffs_ControlStructures_ControlStructuresSniff implements PHP_CodeSniffer_Sniff
+
+namespace CakePHP\Sniffs\ControlStructures;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
+class ControlStructuresSniff implements Sniff
 {
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
         return [T_IF, T_ELSEIF, T_ELSE, T_FOREACH, T_FOR];
     }
 
-/**
- * Processes this test, when one of its tokens is encountered.
- *
- * Checks that curly brackets are used with if, else, elseif, foreach and for.
- *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
- * @param integer              $stackPtr  The position of the current token in the
- *                                        stack passed in $tokens.
- * @return void
- */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    /**
+     * {@inheritDoc}
+     */
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

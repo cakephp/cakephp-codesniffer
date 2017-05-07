@@ -21,12 +21,16 @@
  * @author Mark Scherer
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
-class CakePHP_Sniffs_WhiteSpace_EmptyLinesSniff implements PHP_CodeSniffer_Sniff
+
+namespace CakePHP\Sniffs\WhiteSpace;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
+class EmptyLinesSniff implements Sniff
 {
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function register()
     {
@@ -34,14 +38,9 @@ class CakePHP_Sniffs_WhiteSpace_EmptyLinesSniff implements PHP_CodeSniffer_Sniff
     }
 
     /**
-     * Processes this test, when one of its tokens is encountered.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile All the tokens found in the document.
-     * @param integer $stackPtr The position of the current token
-     *    in the stack passed in $tokens.
-     * @return void
+     * {@inheritDoc}
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[$stackPtr]['content'] === $phpcsFile->eolChar
