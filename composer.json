@@ -1,7 +1,7 @@
 {
     "name": "cakephp/cakephp-codesniffer",
     "description": "CakePHP CodeSniffer Standards",
-    "type": "library",
+    "type": "phpcodesniffer-standard",
     "keywords": ["framework", "codesniffer"],
     "homepage": "http://cakephp.org",
     "license": "MIT",
