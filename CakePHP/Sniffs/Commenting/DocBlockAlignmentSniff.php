@@ -44,19 +44,12 @@ class DocBlockAlignmentSniff implements Sniff
             T_TRAIT,
             T_USE,
         ];
-        $oneIndentation = [
-            T_FUNCTION,
-            T_VARIABLE,
-            T_CONST,
-        ];
-        $allTokens = array_merge($leftWall, $oneIndentation);
         $notFlatFile = $phpcsFile->findNext(T_NAMESPACE, 0);
-        $next = $phpcsFile->findNext($allTokens, $stackPtr + 1);
+        $next = $phpcsFile->findNext($leftWall, $stackPtr + 1);
 
         if ($next && $notFlatFile) {
             $notWalled = (in_array($tokens[$next]['code'], $leftWall) && $tokens[$stackPtr]['column'] !== 1);
-            $notIndented = (in_array($tokens[$next]['code'], $oneIndentation) && $tokens[$stackPtr]['column'] !== 5);
-            if ($notWalled || $notIndented) {
+            if ($notWalled) {
                 $phpcsFile->addError('Expected docblock to be aligned with code.', $stackPtr, 'NotAllowed');
             }
         }
