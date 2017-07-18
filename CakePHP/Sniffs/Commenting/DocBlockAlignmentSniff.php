@@ -41,8 +41,7 @@ class DocBlockAlignmentSniff implements Sniff
             T_CLASS,
             T_NAMESPACE,
             T_INTERFACE,
-            T_TRAIT,
-            T_USE,
+            T_TRAIT
         ];
         $notFlatFile = $phpcsFile->findNext(T_NAMESPACE, 0);
         $next = $phpcsFile->findNext($leftWall, $stackPtr + 1);
