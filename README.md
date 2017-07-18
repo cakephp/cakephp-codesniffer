@@ -27,6 +27,18 @@ installed phpcs, and this package with PEAR, you can do the following:
 :warning: Warning when these sniffs are installed with composer, ensure that
 you have configured the CodeSniffer `installed_paths` setting.
 
+## Running Tests
+
+You can run tests with composer. Because of how PHPCS test suites work, there is
+additional configuration state in `phpcs` that is required.
+
+```bash
+composer test
+```
+
+Once this has been done once, you can use `phpunit --filter CakePHP` to run the
+tests for the rules in this repository.
+
 ## Contributing
 
 If you'd like to contribute to the Code Sniffer, you can fork the project add
