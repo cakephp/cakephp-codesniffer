@@ -37,20 +37,12 @@ class DocBlockAlignmentSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $leftWall = [
-            T_CLASS,
-            T_NAMESPACE,
-            T_INTERFACE,
-            T_TRAIT
-        ];
-        $notFlatFile = $phpcsFile->findNext(T_NAMESPACE, 0);
-        $next = $phpcsFile->findNext($leftWall, $stackPtr + 1);
-
-        if ($next && $notFlatFile) {
-            $notWalled = (in_array($tokens[$next]['code'], $leftWall) && $tokens[$stackPtr]['column'] !== 1);
-            if ($notWalled) {
-                $phpcsFile->addError('Expected docblock to be aligned with code.', $stackPtr, 'NotAllowed');
-            }
+        $commentClose = $phpcsFile->findNext(T_DOC_COMMENT_CLOSE_TAG, $stackPtr);
+        $afterComment = $phpcsFile->findNext(T_WHITESPACE, $commentClose + 1, null, true);
+        $commentIndentation = $tokens[$stackPtr]['column'];
+        $nextIndentation = $tokens[$afterComment]['column'];
+        if ($commentIndentation != $nextIndentation) {
+            $phpcsFile->addError('Expected docblock to be aligned with code.', $stackPtr, 'NotAllowed');
         }
     }
 }
