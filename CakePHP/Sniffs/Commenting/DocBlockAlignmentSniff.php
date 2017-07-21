@@ -40,18 +40,43 @@ class DocBlockAlignmentSniff implements Sniff
         $commentClose = $phpcsFile->findNext(T_DOC_COMMENT_CLOSE_TAG, $stackPtr);
         $afterComment = $phpcsFile->findNext(T_WHITESPACE, $commentClose + 1, null, true);
         $commentIndentation = $tokens[$stackPtr]['column'] - 1;
-        $nextIndentation = $tokens[$afterComment]['column'] - 1;
-        if ($commentIndentation != $nextIndentation) {
+        $codeIndentation = $tokens[$afterComment]['column'] - 1;
+
+        // Check for doc block opening being misaligned
+        if ($commentIndentation != $codeIndentation) {
             $msg = 'Doc block not aligned with code; expected indentation of %s but found %s';
-            $data = [$nextIndentation, $commentIndentation];
+            $data = [$codeIndentation, $commentIndentation];
             $fix = $phpcsFile->addFixableError($msg, $stackPtr, 'DocBlockMisaligned', $data);
             if ($fix === true) {
-                $indent = str_repeat(' ', $nextIndentation);
-                if ($commentIndentation === 0) {
-                    $phpcsFile->fixer->addContentBefore($stackPtr, $indent);
-                } else {
-                    $phpcsFile->fixer->replaceToken($stackPtr - 1, $indent);
+                // Collect tokens to change indentation of
+                $tokensToIndent = [
+                    $stackPtr => $codeIndentation
+                ];
+                $searchToken = $stackPtr + 1;
+                do {
+                    $commentBorder = $phpcsFile->findNext(
+                        [T_DOC_COMMENT_STAR, T_DOC_COMMENT_CLOSE_TAG],
+                        $searchToken,
+                        $commentClose + 1
+                    );
+                    if ($commentBorder !== false) {
+                        $tokensToIndent[$commentBorder] = $codeIndentation + 1;
+                        $searchToken = $commentBorder + 1;
+                    }
+                } while ($commentBorder !== false);
+
+                // Update indentation
+                $phpcsFile->fixer->beginChangeset();
+                foreach ($tokensToIndent as $searchToken => $indent) {
+                    $indentString = str_repeat(' ', $indent);
+                    $isOpenTag = $tokens[$searchToken]['type'] === 'T_DOC_COMMENT_OPEN_TAG';
+                    if ($isOpenTag && $commentIndentation === 0) {
+                        $phpcsFile->fixer->addContentBefore($searchToken, $indentString);
+                    } else {
+                        $phpcsFile->fixer->replaceToken($searchToken - 1, $indentString);
+                    }
                 }
+                $phpcsFile->fixer->endChangeset();
             }
         }
     }
