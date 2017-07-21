@@ -39,8 +39,8 @@ class DocBlockAlignmentSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
         $commentClose = $phpcsFile->findNext(T_DOC_COMMENT_CLOSE_TAG, $stackPtr);
         $afterComment = $phpcsFile->findNext(T_WHITESPACE, $commentClose + 1, null, true);
-        $commentIndentation = $tokens[$stackPtr]['column'];
-        $nextIndentation = $tokens[$afterComment]['column'];
+        $commentIndentation = $tokens[$stackPtr]['column'] - 1;
+        $nextIndentation = $tokens[$afterComment]['column'] - 1;
         if ($commentIndentation != $nextIndentation) {
             $msg = 'Doc block not aligned with code; expected indentation of %s but found %s';
             $data = [$nextIndentation, $commentIndentation];
