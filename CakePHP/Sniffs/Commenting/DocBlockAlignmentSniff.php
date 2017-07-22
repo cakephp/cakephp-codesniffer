@@ -52,18 +52,23 @@ class DocBlockAlignmentSniff implements Sniff
                 $tokensToIndent = [
                     $stackPtr => $codeIndentation
                 ];
-                $searchToken = $stackPtr + 1;
-                do {
-                    $commentBorder = $phpcsFile->findNext(
-                        [T_DOC_COMMENT_STAR, T_DOC_COMMENT_CLOSE_TAG],
-                        $searchToken,
-                        $commentClose + 1
-                    );
-                    if ($commentBorder !== false) {
-                        $tokensToIndent[$commentBorder] = $codeIndentation + 1;
-                        $searchToken = $commentBorder + 1;
-                    }
-                } while ($commentBorder !== false);
+                $commentOpenLine = $tokens[$stackPtr]['line'];
+                $commentCloseLine = $tokens[$commentClose]['line'];
+                $lineBreaksInComment = $commentCloseLine - $commentOpenLine;
+                if ($lineBreaksInComment !== 0) {
+                    $searchToken = $stackPtr + 1;
+                    do {
+                        $commentBorder = $phpcsFile->findNext(
+                            [T_DOC_COMMENT_STAR, T_DOC_COMMENT_CLOSE_TAG],
+                            $searchToken,
+                            $commentClose + 1
+                        );
+                        if ($commentBorder !== false) {
+                            $tokensToIndent[$commentBorder] = $codeIndentation + 1;
+                            $searchToken = $commentBorder + 1;
+                        }
+                    } while ($commentBorder !== false);
+                }
 
                 // Update indentation
                 $phpcsFile->fixer->beginChangeset();
