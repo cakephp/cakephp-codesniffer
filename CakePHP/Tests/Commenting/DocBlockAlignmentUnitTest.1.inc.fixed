@@ -27,6 +27,7 @@ class Foo extends Bar
     {
         /** @var array $thoughts */
         foreach ($thoughts as $thought) {
+            /** @var string $thought */
             echo $thought;
         }
     }
