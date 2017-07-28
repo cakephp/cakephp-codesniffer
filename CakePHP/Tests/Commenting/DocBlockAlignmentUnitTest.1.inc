@@ -23,9 +23,11 @@ class Foo extends Bar
  *
  * @return void
  */
-    public function dumpThoughts()
+    public function dumpThoughts($thoughts)
     {
+        /** @var array $thoughts */
         foreach ($thoughts as $thought) {
+                /** @var string $thought */
             echo $thought;
         }
     }

@@ -37,27 +37,51 @@ class DocBlockAlignmentSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $leftWall = [
-            T_CLASS,
-            T_NAMESPACE,
-            T_INTERFACE,
-            T_TRAIT,
-            T_USE,
-        ];
-        $oneIndentation = [
-            T_FUNCTION,
-            T_VARIABLE,
-            T_CONST,
-        ];
-        $allTokens = array_merge($leftWall, $oneIndentation);
-        $notFlatFile = $phpcsFile->findNext(T_NAMESPACE, 0);
-        $next = $phpcsFile->findNext($allTokens, $stackPtr + 1);
+        $commentClose = $phpcsFile->findNext(T_DOC_COMMENT_CLOSE_TAG, $stackPtr);
+        $afterComment = $phpcsFile->findNext(T_WHITESPACE, $commentClose + 1, null, true);
+        $commentIndentation = $tokens[$stackPtr]['column'] - 1;
+        $codeIndentation = $tokens[$afterComment]['column'] - 1;
 
-        if ($next && $notFlatFile) {
-            $notWalled = (in_array($tokens[$next]['code'], $leftWall) && $tokens[$stackPtr]['column'] !== 1);
-            $notIndented = (in_array($tokens[$next]['code'], $oneIndentation) && $tokens[$stackPtr]['column'] !== 5);
-            if ($notWalled || $notIndented) {
-                $phpcsFile->addError('Expected docblock to be aligned with code.', $stackPtr, 'NotAllowed');
+        // Check for doc block opening being misaligned
+        if ($commentIndentation != $codeIndentation) {
+            $msg = 'Doc block not aligned with code; expected indentation of %s but found %s';
+            $data = [$codeIndentation, $commentIndentation];
+            $fix = $phpcsFile->addFixableError($msg, $stackPtr, 'DocBlockMisaligned', $data);
+            if ($fix === true) {
+                // Collect tokens to change indentation of
+                $tokensToIndent = [
+                    $stackPtr => $codeIndentation
+                ];
+                $commentOpenLine = $tokens[$stackPtr]['line'];
+                $commentCloseLine = $tokens[$commentClose]['line'];
+                $lineBreaksInComment = $commentCloseLine - $commentOpenLine;
+                if ($lineBreaksInComment !== 0) {
+                    $searchToken = $stackPtr + 1;
+                    do {
+                        $commentBorder = $phpcsFile->findNext(
+                            [T_DOC_COMMENT_STAR, T_DOC_COMMENT_CLOSE_TAG],
+                            $searchToken,
+                            $commentClose + 1
+                        );
+                        if ($commentBorder !== false) {
+                            $tokensToIndent[$commentBorder] = $codeIndentation + 1;
+                            $searchToken = $commentBorder + 1;
+                        }
+                    } while ($commentBorder !== false);
+                }
+
+                // Update indentation
+                $phpcsFile->fixer->beginChangeset();
+                foreach ($tokensToIndent as $searchToken => $indent) {
+                    $indentString = str_repeat(' ', $indent);
+                    $isOpenTag = $tokens[$searchToken]['type'] === 'T_DOC_COMMENT_OPEN_TAG';
+                    if ($isOpenTag && $commentIndentation === 0) {
+                        $phpcsFile->fixer->addContentBefore($searchToken, $indentString);
+                    } else {
+                        $phpcsFile->fixer->replaceToken($searchToken - 1, $indentString);
+                    }
+                }
+                $phpcsFile->fixer->endChangeset();
             }
         }
     }
