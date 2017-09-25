@@ -10,7 +10,7 @@
 
  <!--
  Property and method names with underscore prefix are allowed in CakePHP.
- Not using underscore prefix is a recommendation of PSR2 not a requirement.
+ Not using underscore prefix is a recommendation of PSR2, not a requirement.
  -->
  <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
   <severity>0</severity>
