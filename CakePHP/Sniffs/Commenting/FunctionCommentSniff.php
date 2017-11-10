@@ -150,7 +150,6 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
 
         $suggestedType = implode('|', $suggestedNames);
         if ($types !== $suggestedType) {
-            $error = 'Function return type "%s" is invalid';
             $error = 'Expected "%s" but found "%s" for function return type';
             $data = [
                 $suggestedType,
@@ -223,7 +222,6 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $throws = [];
         foreach ($tokens[$commentStart]['comment_tags'] as $pos => $tag) {
             if ($tokens[$tag]['content'] !== '@throws') {
                 continue;
