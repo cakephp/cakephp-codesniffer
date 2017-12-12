@@ -45,6 +45,9 @@ class BlankLineBeforeReturnSniff implements Sniff
             if ($tokens[$current]['line'] == $previousLine
                 && $tokens[$current]['type'] !== 'T_WHITESPACE'
                 && $tokens[$current]['type'] !== 'T_COMMENT'
+                && $tokens[$current]['type'] !== 'T_DOC_COMMENT_OPEN_TAG'
+                && $tokens[$current]['type'] !== 'T_DOC_COMMENT_TAG'
+                && $tokens[$current]['type'] !== 'T_DOC_COMMENT_STRING'
                 && $tokens[$current]['type'] !== 'T_DOC_COMMENT_CLOSE_TAG'
                 && $tokens[$current]['type'] !== 'T_DOC_COMMENT_WHITESPACE'
             ) {
