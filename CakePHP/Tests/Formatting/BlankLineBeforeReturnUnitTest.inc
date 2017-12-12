@@ -91,3 +91,14 @@ function validFunctionReturnSix()
             return false;
     }
 }
+
+/**
+ * [validFunctionReturnSeven description]
+ *
+ * @return null
+ */
+function validFunctionReturnSeven()
+{
+    /** @var Foo $foo */
+    return null;
+}
