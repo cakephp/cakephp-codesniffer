@@ -41,9 +41,9 @@ class FunctionSpacingSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         /*
-			Check the number of blank lines
-			after the function.
-		*/
+            Check the number of blank lines
+            after the function.
+        */
         if (isset($tokens[$stackPtr]['scope_closer']) === false) {
             // Must be an interface method, so the closer is the semi-colon.
             $closer = $phpcsFile->findNext(T_SEMICOLON, $stackPtr);
@@ -77,9 +77,9 @@ class FunctionSpacingSniff implements Sniff
         }
 
         /*
-			Check the number of blank lines
-			before the function.
-		*/
+            Check the number of blank lines
+            before the function.
+        */
 
         $prevLineToken = null;
         for ($i = $stackPtr; $i > 0; $i--) {
