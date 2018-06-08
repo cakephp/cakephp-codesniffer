@@ -151,6 +151,14 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
 				return;
 			}
 
+			// Is this a return type declarations?
+			if ($tokens[$nextPtr]['code'] === T_OPEN_CURLY_BRACKET) {
+				$prevPtrReturnType = $phpcsFile->findPrevious(array(T_WHITESPACE, T_INLINE_THEN), ($stackPtr - 1), null, true);
+				if ($tokens[$prevPtrReturnType]['code'] === T_COLON) {
+					return;
+				}
+			}
+
 			// Is this a variable name, in the form ${varname} ?
 			if ($tokens[$prevPtr]['code'] === T_OPEN_CURLY_BRACKET) {
 				$nextPtr = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
