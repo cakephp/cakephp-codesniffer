@@ -112,7 +112,7 @@
  <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
  <rule ref="Squiz.WhiteSpace.ScopeClosingBrace"/>
- <rule ref="Generic.NamingConventions.UpperCaseConstant"/>
+ <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
 
  <!-- Relax some src/* and tests/* rules -->
  <rule ref="PSR1.Files.SideEffects">
