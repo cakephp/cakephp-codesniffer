@@ -50,6 +50,7 @@
    <property name="ignoreBlankLines" value="false"/>
   </properties>
  </rule>
+
  <!--
  Temporarily ignore until API docblock formatting and line length issues in core code are fixed.
  -->
@@ -111,6 +112,7 @@
  <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
  <rule ref="Squiz.WhiteSpace.ScopeClosingBrace"/>
+ <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
 
  <!-- Relax some src/* and tests/* rules -->
  <rule ref="PSR1.Files.SideEffects">
