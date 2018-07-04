@@ -15,7 +15,7 @@ class ReturnTypeDeclaration {
  *
  * @return string|null
  */
-	public unction returnTypeNull() : ?string {
+	public function returnTypeNull() : ?string {
 	}
 
 }
