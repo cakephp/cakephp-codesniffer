@@ -154,7 +154,7 @@ class CakePHP_Sniffs_NamingConventions_UpperCaseConstantNameSniff implements PHP
 			// Is this a return type declarations?
 			if ($tokens[$nextPtr]['code'] === T_OPEN_CURLY_BRACKET) {
 				$prevPtrReturnType = $phpcsFile->findPrevious(array(T_WHITESPACE, T_INLINE_THEN), ($stackPtr - 1), null, true);
-				if ($tokens[$prevPtrReturnType]['code'] === T_COLON) {
+				if (in_array($tokens[$prevPtrReturnType]['code'], array(T_COLON, T_INLINE_ELSE), true)) {
 					return;
 				}
 			}
