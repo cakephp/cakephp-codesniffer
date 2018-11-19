@@ -12,12 +12,12 @@ class OperatorSpacingUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [
-            2 => 1,
             3 => 1,
-            4 => 2,
-            5 => 1,
+            4 => 1,
+            5 => 2,
             6 => 1,
-            7 => 2,
+            7 => 1,
+            8 => 2,
         ];
     }
 
