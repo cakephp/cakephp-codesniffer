@@ -19,7 +19,7 @@
     },
     "require": {
         "php": "^7.1",
-        "slevomat/coding-standard": "^4.6",
+        "slevomat/coding-standard": "^4.6.2",
         "squizlabs/php_codesniffer": "^3.2.3"
     },
     "require-dev": {
@@ -36,7 +36,7 @@
             "sed -i.bak 's/<!--<severity>0<\\/severity>-->/<severity>0<\\/severity>/' CakePHP/ruleset.xml",
             "rm -f CakePHP/ruleset.xml.bak"
         ],
-        "add-standard" : "phpcs --config-set installed_paths $(pwd),$(pwd)/vendor/slevomat/coding-standard",
+        "add-standard" : "phpcs --config-set installed_paths $(pwd)",
         "test": [
           "@add-standard",
           "@increase-severity",

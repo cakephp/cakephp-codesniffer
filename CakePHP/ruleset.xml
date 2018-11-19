@@ -2,11 +2,14 @@
 <ruleset name="CakePHP">
     <description>CakePHP coding standard</description>
 
+    <config name="installed_paths" value="../vendor/slevomat/coding-standard,../../../slevomat/coding-standard" />
+
     <exclude-pattern>\.git</exclude-pattern>
-    <exclude-pattern>*/Config/*.ini.php</exclude-pattern>
     <exclude-pattern>/*/tmp/</exclude-pattern>
+    <exclude-pattern>tests/*/templates/*</exclude-pattern>
 
     <rule ref="PSR2" />
+    <rule ref="PSR12" />
 
     <!--
     Property and method names with underscore prefix are allowed in CakePHP.
@@ -151,6 +154,47 @@
     <rule ref="PEAR.NamingConventions.ValidFunctionName">
         <exclude-pattern>*/src/*</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma" />
+    <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements" />
+    <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility">
+        <properties>
+            <property name="fixable" type="boolean" value="true" />
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition" />
+    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison" />
+    <rule ref="SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses" />
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator" />
+    <rule ref="SlevomatCodingStandard.Exceptions.DeadCatch" />
+    <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses" />
+    <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.NamespaceDeclaration" />
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses" />
+    <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash" />
+    <rule ref="SlevomatCodingStandard.Namespaces.UseFromSameNamespace" />
+    <rule ref="SlevomatCodingStandard.PHP.TypeCast" />
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes" >
+        <properties>
+            <property name="newlinesCountAfterDeclare" value="1" />
+            <property name="spacesCountAroundEqualsSign" value="0" />
+            <property name="newlinesCountBetweenOpenTagAndDeclare" value="1" />
+        </properties>
+        <exclude-pattern>*/config/*</exclude-pattern>
+        <exclude-pattern>*/tests/Fixture/*</exclude-pattern>
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints" />
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing" />
+    <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue" />
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing" />
+    <rule ref="SlevomatCodingStandard.Types.EmptyLinesAroundTypeBraces">
+        <properties>
+            <property name="linesCountAfterOpeningBrace" value="0" />
+            <property name="linesCountBeforeClosingBrace" value="0" />
+        </properties>
     </rule>
 
     <!-- All rules in ./Sniffs are included automatically -->
