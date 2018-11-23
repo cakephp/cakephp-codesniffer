@@ -62,7 +62,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
         $end = $phpcsFile->findNext(T_DOC_COMMENT_CLOSE_TAG, $start);
         $content = $phpcsFile->getTokensAsString($start, ($end - $start));
 
-        return preg_match('/{@inheritDoc}/i', $content) === 1;
+        return preg_match('/@inheritDoc\b/i', $content) === 1;
     } // end isInheritDoc()
 
     /**
