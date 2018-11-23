@@ -40,13 +40,13 @@
         "test": [
           "@add-standard",
           "@increase-severity",
-          "phpunit",
+          "cd vendor/squizlabs/php_codesniffer && phpunit",
           "@reset-ruleset"
         ],
         "test-coverage": [
           "@add-standard",
           "@increase-severity",
-          "phpunit --coverage-clover=clover.xml",
+          "cd vendor/squizlabs/php_codesniffer && phpunit --coverage-clover=clover.xml",
           "@reset-ruleset"
         ],
         "cs-check": "phpcs --colors -p --extensions=php --standard=CakePHP ./CakePHP",
