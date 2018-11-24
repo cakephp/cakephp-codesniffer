@@ -6,7 +6,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/cakephp/cakephp-codesniffer.svg?style=flat-square)](https://packagist.org/packages/cakephp/cakephp-codesniffer)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 
-This code works with [phpcs](http://pear.php.net/manual/en/package.php.php-codesniffer.php)
+This code works with [squizlabs/php_codesniffer](https://github.com/squizlabs/PHP_CodeSniffer)
 and checks code against the coding standards used in CakePHP.
 
 :warning: The `master` branch contains codesniffer rules that are based on the
