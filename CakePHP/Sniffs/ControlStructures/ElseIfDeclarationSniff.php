@@ -26,7 +26,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 class ElseIfDeclarationSniff implements Sniff
 {
-
     /**
      * {@inheritDoc}
      */

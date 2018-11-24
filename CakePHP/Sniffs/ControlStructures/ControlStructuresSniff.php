@@ -28,7 +28,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ControlStructuresSniff implements Sniff
 {
-
     /**
      * {@inheritDoc}
      */

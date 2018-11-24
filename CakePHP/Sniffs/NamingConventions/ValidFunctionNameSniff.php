@@ -27,7 +27,6 @@ use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
 
 class ValidFunctionNameSniff extends AbstractScopeSniff
 {
-
     /**
      * A list of all PHP magic methods.
      *

@@ -27,7 +27,6 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class FunctionCallSpacingSniff implements Sniff
 {
-
     /**
      * {@inheritDoc}
      */

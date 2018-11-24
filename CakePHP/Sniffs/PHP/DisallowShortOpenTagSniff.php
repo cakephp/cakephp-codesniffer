@@ -28,7 +28,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class DisallowShortOpenTagSniff implements Sniff
 {
-
     /**
      * Returns an array of tokens this test wants to listen for.
      *

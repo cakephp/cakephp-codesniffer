@@ -25,7 +25,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class FunctionClosingBraceSpaceSniff implements Sniff
 {
-
     /**
      * {@inheritDoc}
      */

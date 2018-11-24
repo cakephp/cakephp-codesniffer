@@ -49,7 +49,7 @@
           "phpunit --coverage-clover=clover.xml",
           "@reset-ruleset"
         ],
-        "cs-check": "phpcs --colors -p --extensions=php --standard=CakePHP ./CakePHP",
-        "cs-fix": "phpcbf --colors --extensions=php --standard=CakePHP ./CakePHP"
+        "cs-check": "phpcs --colors -p --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --standard=CakePHP ./CakePHP/Sniffs",
+        "cs-fix": "phpcbf --colors -p --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --standard=CakePHP ./CakePHP/Sniffs"
     }
 }

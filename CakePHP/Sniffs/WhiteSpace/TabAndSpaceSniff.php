@@ -27,7 +27,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class TabAndSpaceSniff implements Sniff
 {
-
     /**
      * A list of tokenizers this sniff supports.
      *

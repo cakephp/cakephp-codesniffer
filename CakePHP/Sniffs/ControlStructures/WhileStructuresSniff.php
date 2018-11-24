@@ -26,7 +26,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 class WhileStructuresSniff implements Sniff
 {
-
     /**
      * {@inheritDoc}
      */

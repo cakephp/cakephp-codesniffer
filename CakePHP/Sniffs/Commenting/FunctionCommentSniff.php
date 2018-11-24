@@ -158,7 +158,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
             $phpcsFile->addError($error, $return, 'InvalidReturn', $data);
         }
 
-        $endToken = isset($tokens[$stackPtr]['scope_closer']) ? $tokens[$stackPtr]['scope_closer'] : false;
+        $endToken = $tokens[$stackPtr]['scope_closer'] ?? false;
         if (!$endToken) {
             return;
         }
