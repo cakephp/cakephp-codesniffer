@@ -86,8 +86,6 @@
     <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier" />
     <rule ref="Squiz.Commenting.DocCommentAlignment" />
     <rule ref="Generic.Commenting.Todo" />
-    <rule ref="PEAR.ControlStructures.ControlSignature" />
-    <rule ref="Generic.Files.LineEndings" />
     <rule ref="Generic.Formatting.NoSpaceAfterCast" />
     <rule ref="Squiz.Operators.ValidLogicalOperators" />
     <rule ref="Generic.PHP.DeprecatedFunctions" />
