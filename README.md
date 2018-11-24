@@ -4,6 +4,7 @@
 [![Coverage Status](https://img.shields.io/codecov/c/github/cakephp/cakephp-codesniffer.svg?style=flat-square)](https://codecov.io/github/cakephp/cakephp-codesniffer)
 [![Total Downloads](https://img.shields.io/packagist/dt/cakephp/cakephp-codesniffer.svg?style=flat-square)](https://packagist.org/packages/cakephp/cakephp-codesniffer)
 [![Latest Stable Version](https://img.shields.io/packagist/v/cakephp/cakephp-codesniffer.svg?style=flat-square)](https://packagist.org/packages/cakephp/cakephp-codesniffer)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 
 This code works with [phpcs](http://pear.php.net/manual/en/package.php.php-codesniffer.php)
 and checks code against the coding standards used in CakePHP.
