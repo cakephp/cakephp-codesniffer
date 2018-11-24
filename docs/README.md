@@ -142,4 +142,4 @@ Squiz (28 sniffs)
 
 Zend (1 sniff)
 ---------------
-- Zend.NamingConventions.ValidVariableName;
+- Zend.NamingConventions.ValidVariableName

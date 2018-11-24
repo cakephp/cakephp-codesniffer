@@ -18,7 +18,7 @@ $content = implode(PHP_EOL, $output);
 $content = <<<TEXT
 # CakePHP Code Sniffer
 
-$content;
+$content
 TEXT;
 
 $file = __DIR__ . DIRECTORY_SEPARATOR . 'README.md';
