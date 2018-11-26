@@ -72,7 +72,10 @@
         <severity>0</severity>
     </rule>
     <rule ref="Generic.Files.LineLength.TooLong">
-        <severity>0</severity>
+        <properties>
+            <property name="ignoreComments" value="true" />
+        </properties>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
 
     <rule ref="Squiz.Arrays.ArrayBracketSpacing" />
