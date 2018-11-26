@@ -50,7 +50,9 @@ class FunctionClosingBraceSpaceSniff implements Sniff
         $prevLine = $tokens[$prevContent]['line'];
 
         $found = ($braceLine - $prevLine - 1);
-        if ($phpcsFile->hasCondition($stackPtr, T_FUNCTION) === true || isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
+        if ($phpcsFile->hasCondition($stackPtr, T_FUNCTION) === true
+            || isset($tokens[$stackPtr]['nested_parenthesis']) === true
+        ) {
             // Nested function.
             if ($found < 0) {
                 $error = 'Closing brace of nested function must be on a new line';
