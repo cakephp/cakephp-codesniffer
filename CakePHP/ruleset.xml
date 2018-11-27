@@ -71,7 +71,7 @@
     <rule ref="CakePHP.Commenting.FunctionComment.EmptyThrows">
         <severity>0</severity>
     </rule>
-    <rule ref="Generic.Files.LineLength.TooLong">
+    <rule ref="Generic.Files.LineLength">
         <properties>
             <property name="ignoreComments" value="true" />
         </properties>
