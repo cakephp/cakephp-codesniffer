@@ -43,14 +43,16 @@ class EmptyLinesSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
+        // If the current and next two tokens are newlines
+        // We can remove the next token (the first newline)
         if ($tokens[$stackPtr]['content'] === $phpcsFile->eolChar
-            && isset($tokens[($stackPtr + 1)]) === true
-            && $tokens[($stackPtr + 1)]['content'] === $phpcsFile->eolChar
-            && isset($tokens[($stackPtr + 2)]) === true
-            && $tokens[($stackPtr + 2)]['content'] === $phpcsFile->eolChar
+            && isset($tokens[$stackPtr + 1])
+            && $tokens[$stackPtr + 1]['content'] === $phpcsFile->eolChar
+            && isset($tokens[$stackPtr + 2])
+            && $tokens[$stackPtr + 2]['content'] === $phpcsFile->eolChar
         ) {
             $error = 'Found more than a single empty line between content';
-            $fix = $phpcsFile->addFixableError($error, ($stackPtr + 3), 'EmptyLines');
+            $fix = $phpcsFile->addFixableError($error, $stackPtr + 2, 'EmptyLines');
             if ($fix) {
                 $phpcsFile->fixer->replaceToken($stackPtr + 2, '');
             }
