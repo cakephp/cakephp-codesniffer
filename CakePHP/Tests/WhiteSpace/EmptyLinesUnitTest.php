@@ -12,9 +12,13 @@ class EmptyLinesUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [
-            9 => 1,
-            22 => 1,
+            8 => 1,
+            21 => 1,
+            42 => 1,
             43 => 1,
+            47 => 1,
+            48 => 1,
+            49 => 1,
         ];
     }
 
