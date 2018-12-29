@@ -1,6 +1,5 @@
 # CakePHP Code Sniffer
 
-
 The CakePHP standard contains 114 sniffs
 
 CakePHP (16 sniffs)
@@ -30,7 +29,6 @@ Generic (25 sniffs)
 - Generic.CodeAnalysis.JumbledIncrementer
 - Generic.CodeAnalysis.UnconditionalIfStatement
 - Generic.CodeAnalysis.UnnecessaryFinalModifier
-- Generic.Commenting.Todo
 - Generic.ControlStructures.InlineControlStructure
 - Generic.Files.ByteOrderMark
 - Generic.Files.LineEndings
