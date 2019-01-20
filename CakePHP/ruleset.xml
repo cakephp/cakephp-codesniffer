@@ -109,24 +109,6 @@
         </properties>
     </rule>
 
-    <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma" />
-    <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements" />
-    <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility">
-        <properties>
-            <property name="fixable" type="boolean" value="true"/>
-        </properties>
-    </rule>
-    <rule ref="SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses" />
-    <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition" />
-    <rule ref="SlevomatCodingStandard.ControlStructures.NewWithParentheses" />
-    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison" />
-    <rule ref="SlevomatCodingStandard.Exceptions.DeadCatch" />
-    <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses" />
-    <rule ref="SlevomatCodingStandard.Namespaces.NamespaceDeclaration" />
-    <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash" />
-    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses" />
-    <rule ref="SlevomatCodingStandard.PHP.TypeCast" />
-
     <!-- Relax some src/* and tests/* rules -->
     <rule ref="PSR1.Files.SideEffects">
         <exclude-pattern>*/config/*</exclude-pattern>
@@ -171,6 +153,7 @@
     <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition" />
     <rule ref="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison" />
     <rule ref="SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses" />
+    <rule ref="SlevomatCodingStandard.ControlStructures.NewWithParentheses" />
     <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator" />
     <rule ref="SlevomatCodingStandard.Exceptions.DeadCatch" />
     <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses" />
