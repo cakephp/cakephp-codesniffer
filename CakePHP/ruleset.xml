@@ -165,6 +165,8 @@
     <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash" />
     <rule ref="SlevomatCodingStandard.Namespaces.UseFromSameNamespace" />
     <rule ref="SlevomatCodingStandard.PHP.TypeCast" />
+    <rule ref="SlevomatCodingStandard.PHP.UselessParentheses" />
+    <rule ref="SlevomatCodingStandard.PHP.UselessSemicolon" />    
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes" >
         <properties>
             <property name="newlinesCountAfterDeclare" value="1" />
