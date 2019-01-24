@@ -16,8 +16,7 @@ unset($row);
 $content = implode(PHP_EOL, $output);
 
 $content = <<<TEXT
-# CakePHP Code Sniffer
-
+# CakePHP ruleset
 $content
 TEXT;
 

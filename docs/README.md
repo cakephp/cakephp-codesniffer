@@ -1,6 +1,6 @@
-# CakePHP Code Sniffer
+# CakePHP ruleset
 
-The CakePHP standard contains 114 sniffs
+The CakePHP standard contains 115 sniffs
 
 CakePHP (16 sniffs)
 -------------------
@@ -21,7 +21,7 @@ CakePHP (16 sniffs)
 - CakePHP.WhiteSpace.FunctionSpacing
 - CakePHP.WhiteSpace.TabAndSpace
 
-Generic (25 sniffs)
+Generic (24 sniffs)
 -------------------
 - Generic.Arrays.DisallowLongArraySyntax
 - Generic.CodeAnalysis.ForLoopShouldBeWhileLoop
@@ -82,7 +82,7 @@ PSR2 (12 sniffs)
 - PSR2.Namespaces.NamespaceDeclaration
 - PSR2.Namespaces.UseDeclaration
 
-SlevomatCodingStandard (22 sniffs)
+SlevomatCodingStandard (24 sniffs)
 ----------------------------------
 - SlevomatCodingStandard.Arrays.TrailingArrayComma
 - SlevomatCodingStandard.Classes.ClassConstantVisibility
@@ -100,6 +100,8 @@ SlevomatCodingStandard (22 sniffs)
 - SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash
 - SlevomatCodingStandard.Namespaces.UseFromSameNamespace
 - SlevomatCodingStandard.PHP.TypeCast
+- SlevomatCodingStandard.PHP.UselessParentheses
+- SlevomatCodingStandard.PHP.UselessSemicolon
 - SlevomatCodingStandard.TypeHints.DeclareStrictTypes
 - SlevomatCodingStandard.TypeHints.LongTypeHints
 - SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue
