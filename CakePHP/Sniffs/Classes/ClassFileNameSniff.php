@@ -51,16 +51,15 @@ class ClassFileNameSniff implements Sniff
             return;
         }
 
-        $decName = $phpcsFile->findNext(T_STRING, $stackPtr);
-
-        if ($tokens[$decName]['content'] === $fileName) {
+        $declaredNameIndex = $phpcsFile->findNext(T_STRING, $stackPtr);
+        if ($tokens[$declaredNameIndex]['content'] === $fileName) {
             return;
         }
 
-        $error = '%s name doesn\'t match filename; expected "%s %s"';
+        $error = '%s name "%s" doesn\'t match filename; expected "%s"';
         $data = [
             ucfirst($tokens[$stackPtr]['content']),
-            $tokens[$stackPtr]['content'],
+            $tokens[$declaredNameIndex]['content'],
             $fileName,
         ];
         $phpcsFile->addError($error, $stackPtr, 'NoMatch', $data);
