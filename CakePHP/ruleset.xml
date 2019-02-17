@@ -151,6 +151,7 @@
     </rule>
     <rule ref="SlevomatCodingStandard.Classes.ModernClassNameReference" />
     <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements" />
+    <rule ref="SlevomatCodingStandard.Commenting.EmptyComment"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition" />
     <rule ref="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison" />
     <rule ref="SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses" />
@@ -187,7 +188,6 @@
             <property name="linesCountBeforeClosingBrace" value="0" />
         </properties>
     </rule>
-    <rule ref="SlevomatCodingStandard.Commenting.EmptyComment"/>
 
     <!-- All rules in ./Sniffs are included automatically -->
 </ruleset>
