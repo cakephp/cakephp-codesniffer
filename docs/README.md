@@ -1,9 +1,10 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 116 sniffs
+The CakePHP standard contains 117 sniffs
 
-CakePHP (16 sniffs)
+CakePHP (17 sniffs)
 -------------------
+- CakePHP.Classes.ClassFileName
 - CakePHP.Commenting.DocBlockAlignment
 - CakePHP.Commenting.FunctionComment
 - CakePHP.ControlStructures.ControlStructures
