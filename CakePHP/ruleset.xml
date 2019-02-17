@@ -95,6 +95,7 @@
     <rule ref="Generic.PHP.ForbiddenFunctions" />
     <rule ref="Squiz.PHP.NonExecutableCode" />
     <rule ref="Generic.PHP.NoSilencedErrors" />
+    <rule ref="Squiz.Classes.ClassFileName" />
     <rule ref="Squiz.Scope.MemberVarScope" />
     <rule ref="Squiz.Scope.StaticThisUsage" />
     <rule ref="Squiz.WhiteSpace.CastSpacing" />
