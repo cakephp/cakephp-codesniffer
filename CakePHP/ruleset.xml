@@ -187,6 +187,7 @@
             <property name="linesCountBeforeClosingBrace" value="0" />
         </properties>
     </rule>
+    <rule ref="SlevomatCodingStandard.Commenting.EmptyComment"/>
 
     <!-- All rules in ./Sniffs are included automatically -->
 </ruleset>
