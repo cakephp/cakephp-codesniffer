@@ -27,7 +27,7 @@ before_script:
 
 script:
   - if [[ $DEFAULT == 1 ]]; then composer test; fi
-  - if [[ $COVERAGE == 1 ]]; then composer test-coverage --timeout=0; fi
+  - if [[ $COVERAGE == 1 ]]; then composer run-script test-coverage --timeout=0; fi
 
   - if [[ $PREFER_LOWEST == 1 ]]; then composer lowest; fi
 
