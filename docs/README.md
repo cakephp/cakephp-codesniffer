@@ -2,9 +2,8 @@
 
 The CakePHP standard contains 119 sniffs
 
-CakePHP (17 sniffs)
+CakePHP (16 sniffs)
 -------------------
-- CakePHP.Classes.ClassFileName
 - CakePHP.Commenting.DocBlockAlignment
 - CakePHP.Commenting.FunctionComment
 - CakePHP.ControlStructures.ControlStructures
@@ -113,9 +112,10 @@ SlevomatCodingStandard (26 sniffs)
 - SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing
 - SlevomatCodingStandard.Types.EmptyLinesAroundTypeBraces
 
-Squiz (28 sniffs)
+Squiz (29 sniffs)
 -----------------
 - Squiz.Arrays.ArrayBracketSpacing
+- Squiz.Classes.ClassFileName
 - Squiz.Classes.LowercaseClassKeywords
 - Squiz.Classes.ValidClassName
 - Squiz.Commenting.DocCommentAlignment
