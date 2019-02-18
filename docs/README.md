@@ -1,6 +1,6 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 117 sniffs
+The CakePHP standard contains 119 sniffs
 
 CakePHP (17 sniffs)
 -------------------
@@ -61,9 +61,10 @@ PSR1 (3 sniffs)
 - PSR1.Files.SideEffects
 - PSR1.Methods.CamelCapsMethodName
 
-PSR12 (4 sniffs)
+PSR12 (5 sniffs)
 ----------------
 - PSR12.Classes.ClassInstantiation
+- PSR12.Functions.NullableTypeDeclaration
 - PSR12.Keywords.ShortFormTypeKeywords
 - PSR12.Namespaces.CompoundNamespaceDepth
 - PSR12.Operators.OperatorSpacing
@@ -83,12 +84,13 @@ PSR2 (12 sniffs)
 - PSR2.Namespaces.NamespaceDeclaration
 - PSR2.Namespaces.UseDeclaration
 
-SlevomatCodingStandard (25 sniffs)
+SlevomatCodingStandard (26 sniffs)
 ----------------------------------
 - SlevomatCodingStandard.Arrays.TrailingArrayComma
 - SlevomatCodingStandard.Classes.ClassConstantVisibility
 - SlevomatCodingStandard.Classes.ModernClassNameReference
 - SlevomatCodingStandard.Classes.UnusedPrivateElements
+- SlevomatCodingStandard.Commenting.EmptyComment
 - SlevomatCodingStandard.ControlStructures.AssignmentInCondition
 - SlevomatCodingStandard.ControlStructures.DisallowYodaComparison
 - SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses
