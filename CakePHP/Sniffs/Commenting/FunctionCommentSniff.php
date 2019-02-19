@@ -130,7 +130,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
         }
 
         // Check return type (can be multiple, separated by '|').
-        list($types, ) = explode(' ', $content);
+        [$types, ] = explode(' ', $content);
         $typeNames = explode('|', $types);
         $suggestedNames = [];
         foreach ($typeNames as $i => $typeName) {

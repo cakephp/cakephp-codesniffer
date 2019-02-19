@@ -168,6 +168,7 @@
     <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses" />
     <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash" />
     <rule ref="SlevomatCodingStandard.Namespaces.UseFromSameNamespace" />
+    <rule ref="SlevomatCodingStandard.PHP.ShortList" />
     <rule ref="SlevomatCodingStandard.PHP.TypeCast" />
     <rule ref="SlevomatCodingStandard.PHP.UselessParentheses" />
     <rule ref="SlevomatCodingStandard.PHP.UselessSemicolon" />
