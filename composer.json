@@ -51,6 +51,8 @@
         ],
         "cs-check": "phpcs --colors -p --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --standard=CakePHP ./CakePHP/Sniffs",
         "cs-fix": "phpcbf --colors -p --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --standard=CakePHP ./CakePHP/Sniffs",
+        "lowest": " validate-prefer-lowest",
+        "lowest-setup": "composer update --prefer-lowest --prefer-stable --prefer-dist --no-interaction && cp composer.json composer.backup && composer require --dev dereuromark/composer-prefer-lowest && mv composer.backup composer.json",
         "docs": "php docs/generate.php",
         "explain": "phpcs -e --standard=CakePHP"
     }

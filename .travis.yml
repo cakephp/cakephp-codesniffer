@@ -1,31 +1,40 @@
 language: php
 
-dist: trusty
-
 php:
   - 7.1
-  - 7.2
   - 7.3
 
-sudo: false
+env:
+  global:
+    - DEFAULT=1
 
 matrix:
   fast_finish: true
 
   include:
+    - php: 7.1
+      env: PREFER_LOWEST=1
+
     - php: 7.2
-      env: PHPCS=1
+      env: COVERAGE=1
+
+    - php: 7.2
+      env: CHECKS=1
 
 before_script:
-  - composer install
+  - if [[ $PREFER_LOWEST != 1 ]]; then composer install --prefer-source --no-interaction; fi
+  - if [[ $PREFER_LOWEST == 1 ]]; then composer lowest-setup; fi
 
 script:
-  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION = 7.1 ]]; then composer run-script test-coverage --timeout=0; fi
-  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION != 7.1 ]]; then composer test; fi
-  - if [[ $PHPCS = 1 ]]; then composer cs-check; fi
+  - if [[ $DEFAULT == 1 ]]; then composer test; fi
+  - if [[ $COVERAGE == 1 ]]; then composer run-script test-coverage --timeout=0; fi
+
+  - if [[ $PREFER_LOWEST == 1 ]]; then composer lowest; fi
+
+  - if [[ $CHECKS == 1 ]]; then composer cs-check; fi
 
 after_success:
-  - if [[ $PHPCS != 1 && $TRAVIS_PHP_VERSION = 7.1 ]]; then bash <(curl -s https://codecov.io/bash); fi
+  - if [[ $COVERAGE == 1 ]]; then bash <(curl -s https://codecov.io/bash); fi
 
 notifications:
   email: false
