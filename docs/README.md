@@ -1,6 +1,6 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 119 sniffs
+The CakePHP standard contains 123 sniffs
 
 CakePHP (16 sniffs)
 -------------------
@@ -60,10 +60,9 @@ PSR1 (3 sniffs)
 - PSR1.Files.SideEffects
 - PSR1.Methods.CamelCapsMethodName
 
-PSR12 (5 sniffs)
+PSR12 (4 sniffs)
 ----------------
 - PSR12.Classes.ClassInstantiation
-- PSR12.Functions.NullableTypeDeclaration
 - PSR12.Keywords.ShortFormTypeKeywords
 - PSR12.Namespaces.CompoundNamespaceDepth
 - PSR12.Operators.OperatorSpacing
@@ -83,14 +82,16 @@ PSR2 (12 sniffs)
 - PSR2.Namespaces.NamespaceDeclaration
 - PSR2.Namespaces.UseDeclaration
 
-SlevomatCodingStandard (26 sniffs)
+SlevomatCodingStandard (31 sniffs)
 ----------------------------------
 - SlevomatCodingStandard.Arrays.TrailingArrayComma
 - SlevomatCodingStandard.Classes.ClassConstantVisibility
 - SlevomatCodingStandard.Classes.ModernClassNameReference
 - SlevomatCodingStandard.Classes.UnusedPrivateElements
+- SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment
 - SlevomatCodingStandard.Commenting.EmptyComment
 - SlevomatCodingStandard.ControlStructures.AssignmentInCondition
+- SlevomatCodingStandard.ControlStructures.DisallowContinueWithoutIntegerOperandInSwitch
 - SlevomatCodingStandard.ControlStructures.DisallowYodaComparison
 - SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses
 - SlevomatCodingStandard.ControlStructures.NewWithParentheses
@@ -102,6 +103,8 @@ SlevomatCodingStandard (26 sniffs)
 - SlevomatCodingStandard.Namespaces.UnusedUses
 - SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash
 - SlevomatCodingStandard.Namespaces.UseFromSameNamespace
+- SlevomatCodingStandard.Namespaces.UseSpacing
+- SlevomatCodingStandard.PHP.ShortList
 - SlevomatCodingStandard.PHP.TypeCast
 - SlevomatCodingStandard.PHP.UselessParentheses
 - SlevomatCodingStandard.PHP.UselessSemicolon
@@ -111,6 +114,7 @@ SlevomatCodingStandard (26 sniffs)
 - SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing
 - SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing
 - SlevomatCodingStandard.Types.EmptyLinesAroundTypeBraces
+- SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable
 
 Squiz (29 sniffs)
 -----------------
