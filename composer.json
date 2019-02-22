@@ -20,6 +20,7 @@
     "require": {
         "php": "^7.1",
         "slevomat/coding-standard": "^4.8.7",
+        "spryker/code-sniffer": "^0.14.1",
         "squizlabs/php_codesniffer": "^3.4.0"
     },
     "require-dev": {

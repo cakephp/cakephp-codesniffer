@@ -3,6 +3,7 @@
     <description>CakePHP coding standard</description>
 
     <config name="installed_paths" value="../../slevomat/coding-standard,../../../slevomat/coding-standard,../vendor/slevomat/coding-standard" />
+    <config name="installed_paths" value="../../spryker/code-sniffer,../../../spryker/code-sniffer,../vendor/spryker/code-sniffer" />
 
     <exclude-pattern>\.git</exclude-pattern>
     <exclude-pattern>/*/tmp/</exclude-pattern>
@@ -194,6 +195,8 @@
         </properties>
     </rule>
     <rule ref="SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable" />
+
+    <rule ref="Spryker.Commenting.DocBlockPipeSpacing"/>
 
     <!-- All rules in ./Sniffs are included automatically -->
 </ruleset>
