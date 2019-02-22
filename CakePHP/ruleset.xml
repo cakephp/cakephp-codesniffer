@@ -2,8 +2,7 @@
 <ruleset name="CakePHP">
     <description>CakePHP coding standard</description>
 
-    <config name="installed_paths" value="../../slevomat/coding-standard,../../../slevomat/coding-standard,../vendor/slevomat/coding-standard" />
-    <config name="installed_paths" value="../../spryker/code-sniffer,../../../spryker/code-sniffer,../vendor/spryker/code-sniffer" />
+    <config name="installed_paths" value="../../slevomat/coding-standard,../../../slevomat/coding-standard,../vendor/slevomat/coding-standard,../../spryker/code-sniffer,../../../spryker/code-sniffer,../vendor/spryker/code-sniffer" />
 
     <exclude-pattern>\.git</exclude-pattern>
     <exclude-pattern>/*/tmp/</exclude-pattern>
