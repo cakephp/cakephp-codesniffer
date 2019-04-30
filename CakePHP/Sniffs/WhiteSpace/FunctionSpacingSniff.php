@@ -55,7 +55,7 @@ class FunctionSpacingSniff implements Sniff
             if (strpos($tokens[$i]['content'], $phpcsFile->eolChar) === false) {
                 continue;
             } else {
-                $nextLineToken = ($i + 1);
+                $nextLineToken = $i + 1;
                 break;
             }
         }
@@ -70,7 +70,7 @@ class FunctionSpacingSniff implements Sniff
                 // We are at the end of the file. That is acceptable as well.
                 $foundLines = 1;
             } else {
-                $foundLines = ($tokens[$nextContent]['line'] - $tokens[$nextLineToken]['line']);
+                $foundLines = $tokens[$nextContent]['line'] - $tokens[$nextLineToken]['line'];
             }
         }
 
@@ -100,8 +100,8 @@ class FunctionSpacingSniff implements Sniff
             // for another function. We don't want to error for no blank lines after
             // the previous function and no blank lines before this one as well.
             $currentLine = $tokens[$stackPtr]['line'];
-            $prevLine = ($tokens[$prevContent]['line'] - 1);
-            $i = ($stackPtr - 1);
+            $prevLine = $tokens[$prevContent]['line'] - 1;
+            $i = $stackPtr - 1;
             $foundLines = 0;
             while ($currentLine !== $prevLine && $currentLine > 1 && $i > 0) {
                 if (isset($tokens[$i]['scope_condition']) === true) {

@@ -56,7 +56,7 @@ class FunctionOpeningBraceSpaceSniff implements Sniff
         $braceLine = $tokens[$openBrace]['line'];
         $nextLine = $tokens[$nextContent]['line'];
 
-        $found = ($nextLine - $braceLine - 1);
+        $found = $nextLine - $braceLine - 1;
         if ($found > 0) {
             $error = 'Expected 0 blank lines after opening function brace; %s found';
             $data = [$found];

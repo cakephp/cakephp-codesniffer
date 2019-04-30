@@ -251,7 +251,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                     $end = $tokens[$commentStart]['comment_closer'];
                 }
 
-                for ($i = ($tag + 3); $i < $end; $i++) {
+                for ($i = $tag + 3; $i < $end; $i++) {
                     if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
                         $comment .= ' ' . $tokens[$i]['content'];
                     }
@@ -306,7 +306,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
 
                 $typeLen = strlen($matches[1]);
                 $type = trim($matches[1]);
-                $typeSpace = ($typeLen - strlen($type));
+                $typeSpace = $typeLen - strlen($type);
                 $typeLen = strlen($type);
                 if ($typeLen > $maxType) {
                     $maxType = $typeLen;
@@ -335,7 +335,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                             $end = $tokens[$commentStart]['comment_closer'];
                         }
 
-                        for ($i = ($tag + 3); $i < $end; $i++) {
+                        for ($i = $tag + 3; $i < $end; $i++) {
                             if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
                                 $indent = 0;
                                 if ($tokens[($i - 1)]['code'] === T_DOC_COMMENT_WHITESPACE) {
