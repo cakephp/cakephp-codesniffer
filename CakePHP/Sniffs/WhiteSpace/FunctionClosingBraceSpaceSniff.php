@@ -49,7 +49,7 @@ class FunctionClosingBraceSpaceSniff implements Sniff
         $braceLine = $tokens[$closeBrace]['line'];
         $prevLine = $tokens[$prevContent]['line'];
 
-        $found = ($braceLine - $prevLine - 1);
+        $found = $braceLine - $prevLine - 1;
         if ($phpcsFile->hasCondition($stackPtr, T_FUNCTION) === true
             || isset($tokens[$stackPtr]['nested_parenthesis']) === true
         ) {
