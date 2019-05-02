@@ -1,9 +1,10 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 124 sniffs
+The CakePHP standard contains 127 sniffs
 
-CakePHP (16 sniffs)
+CakePHP (17 sniffs)
 -------------------
+- CakePHP.Classes.ReturnTypeHint
 - CakePHP.Commenting.DocBlockAlignment
 - CakePHP.Commenting.FunctionComment
 - CakePHP.ControlStructures.ControlStructures
@@ -21,7 +22,7 @@ CakePHP (16 sniffs)
 - CakePHP.WhiteSpace.FunctionSpacing
 - CakePHP.WhiteSpace.TabAndSpace
 
-Generic (24 sniffs)
+Generic (25 sniffs)
 -------------------
 - Generic.Arrays.DisallowLongArraySyntax
 - Generic.CodeAnalysis.ForLoopShouldBeWhileLoop
@@ -46,6 +47,7 @@ Generic (24 sniffs)
 - Generic.PHP.LowerCaseType
 - Generic.PHP.NoSilencedErrors
 - Generic.WhiteSpace.DisallowTabIndent
+- Generic.WhiteSpace.IncrementDecrementSpacing
 - Generic.WhiteSpace.ScopeIndent
 
 PEAR (3 sniffs)
@@ -60,9 +62,10 @@ PSR1 (3 sniffs)
 - PSR1.Files.SideEffects
 - PSR1.Methods.CamelCapsMethodName
 
-PSR12 (4 sniffs)
+PSR12 (5 sniffs)
 ----------------
 - PSR12.Classes.ClassInstantiation
+- PSR12.Functions.NullableTypeDeclaration
 - PSR12.Keywords.ShortFormTypeKeywords
 - PSR12.Namespaces.CompoundNamespaceDepth
 - PSR12.Operators.OperatorSpacing
@@ -86,6 +89,7 @@ SlevomatCodingStandard (32 sniffs)
 ----------------------------------
 - SlevomatCodingStandard.Arrays.TrailingArrayComma
 - SlevomatCodingStandard.Classes.ClassConstantVisibility
+- SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces
 - SlevomatCodingStandard.Classes.ModernClassNameReference
 - SlevomatCodingStandard.Classes.UnusedPrivateElements
 - SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment
@@ -114,7 +118,6 @@ SlevomatCodingStandard (32 sniffs)
 - SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue
 - SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing
 - SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing
-- SlevomatCodingStandard.Types.EmptyLinesAroundTypeBraces
 - SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable
 
 Squiz (29 sniffs)
