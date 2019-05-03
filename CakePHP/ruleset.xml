@@ -65,6 +65,9 @@
     <rule ref="CakePHP.Commenting.FunctionComment.ThrowsNotCapital">
         <severity>0</severity>
     </rule>
+    <rule ref="CakePHP.Commenting.FunctionComment.EmptyThrows">
+        <severity>0</severity>
+    </rule>
     <rule ref="CakePHP.Commenting.FunctionComment.ThrowsNoFullStop">
         <severity>0</severity>
     </rule>
