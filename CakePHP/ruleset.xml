@@ -183,7 +183,7 @@
     <rule ref="SlevomatCodingStandard.PHP.UselessSemicolon" />
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes" >
         <properties>
-            <property name="newlinesCountAfterDeclare" value="1" />
+            <property name="newlinesCountAfterDeclare" value="2" />
             <property name="spacesCountAroundEqualsSign" value="0" />
             <property name="newlinesCountBetweenOpenTagAndDeclare" value="1" />
         </properties>
