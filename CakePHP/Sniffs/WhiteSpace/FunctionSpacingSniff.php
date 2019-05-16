@@ -27,7 +27,7 @@ use PHP_CodeSniffer\Util\Tokens;
 class FunctionSpacingSniff implements Sniff
 {
     /**
-     * @inheritdoc
+     * {@inheritDoc}
      */
     public function register()
     {
@@ -35,7 +35,7 @@ class FunctionSpacingSniff implements Sniff
     }
 
     /**
-     * @inheritdoc
+     * {@inheritDoc}
      */
     public function process(File $phpCsFile, $stackPointer)
     {
@@ -91,9 +91,9 @@ class FunctionSpacingSniff implements Sniff
     }
 
     /**
-     * @param \PHP_CodeSniffer\Files\File $phpCsFile
-     * @param int $closingBraceIndex
-     * @param int|null $nextContentIndex
+     * @param \PHP_CodeSniffer\Files\File $phpCsFile File
+     * @param int $closingBraceIndex Index
+     * @param int|null $nextContentIndex Index
      *
      * @return void
      */
@@ -112,8 +112,8 @@ class FunctionSpacingSniff implements Sniff
     /**
      * Asserts newline at the beginning, including the doc block.
      *
-     * @param \PHP_CodeSniffer\Files\File $phpCsFile
-     * @param int $stackPointer
+     * @param \PHP_CodeSniffer\Files\File $phpCsFile File
+     * @param int $stackPointer Stack pointer
      *
      * @return void
      */
