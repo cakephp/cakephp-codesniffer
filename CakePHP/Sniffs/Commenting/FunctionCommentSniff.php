@@ -196,7 +196,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
         // somewhere in the function that returns something.
         if (!in_array('mixed', $typeNames, true) && !in_array('void', $typeNames, true)) {
             $returnToken = $phpcsFile->findNext([T_RETURN, T_YIELD], $stackPtr, $endToken);
-            if ($returnToken === false) {
+            if ($returnToken === false && !$this->hasException($phpcsFile, $stackPtr, $endToken)) {
                 $error = 'Function return type is not void, but function has no return statement';
                 $phpcsFile->addWarning($error, $return, 'InvalidNoReturn');
             } else {
@@ -209,6 +209,18 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
         }//end if
     }//end processReturn()
 
+    /**
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile File
+     * @param int $startIndex Start index
+     * @param int $endIndex End index
+     * @return bool
+     */
+    protected function hasException(File $phpcsFile, $startIndex, $endIndex)
+    {
+        $throwIndex = $phpcsFile->findNext([T_THROW], $startIndex, $endIndex);
+
+        return $throwIndex !== false;
+    }
 
     /**
      * Process any throw tags that this function comment has.
