@@ -63,7 +63,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
         $content = $phpcsFile->getTokensAsString($start, ($end - $start));
 
         return preg_match('/@inheritDoc\b/i', $content) === 1;
-    } // end isInheritDoc()
+    }
 
     /**
      * Process the return comment of this function comment.
@@ -119,7 +119,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
             $phpcsFile->addWarning($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
 
             return;
-        }//end if
+        }
 
         $content = $tokens[($return + 2)]['content'];
         if (empty($content) === true || $tokens[($return + 2)]['code'] !== T_DOC_COMMENT_STRING) {
@@ -206,8 +206,8 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                     $phpcsFile->addWarning($error, $returnToken, 'InvalidReturnNotVoid');
                 }
             }
-        }//end if
-    }//end processReturn()
+        }
+    }
 
     /**
      * @param \PHP_CodeSniffer\Files\File $phpcsFile File
@@ -281,10 +281,9 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                     $error = '@throws tag comment must end with a full stop';
                     $phpcsFile->addWarning($error, ($tag + 2), 'ThrowsNoFullStop');
                 }
-            }//end if
-        }//end foreach
-    }//end processThrows()
-
+            }
+        }
+    }
 
     /**
      * Process the function parameter comments.
@@ -366,18 +365,18 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                         $error = 'Missing parameter comment';
                         $phpcsFile->addError($error, $tag, 'MissingParamComment');
                         $commentLines[] = ['comment' => ''];
-                    }//end if
+                    }
                 } else {
                     $error = 'Missing parameter name';
                     $phpcsFile->addError($error, $tag, 'MissingParamName');
-                }//end if
+                }
             } else {
                 $error = 'Missing parameter type';
                 $phpcsFile->addError($error, $tag, 'MissingParamType');
-            }//end if
+            }
 
             $params[] = compact('tag', 'type', 'var', 'comment', 'commentLines', 'typeSpace', 'varSpace');
-        }//end foreach
+        }
 
         $realParams = $phpcsFile->getMethodParameters($stackPtr);
         $foundParams = [];
@@ -415,7 +414,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                         $phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
                     }
                 }
-            }//end foreach
+            }
 
             if ($param['var'] === '') {
                 continue;
@@ -453,7 +452,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                 // We must have an extra parameter comment.
                 $error = 'Superfluous parameter comment';
                 $phpcsFile->addError($error, $param['tag'], 'ExtraParamComment');
-            }//end if
+            }
 
             if ($param['comment'] === '') {
                 continue;
@@ -471,7 +470,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                 $error = 'Parameter comment must end with a full stop';
                 $phpcsFile->addWarning($error, $param['tag'], 'ParamCommentFullStop');
             }
-        }//end foreach
+        }
 
         $realNames = [];
         foreach ($realParams as $realParam) {
@@ -485,5 +484,5 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
             $data = [$neededParam];
             $phpcsFile->addWarning($error, $commentStart, 'MissingParamTag', $data);
         }
-    }//end processParams()
-}//end class
+    }
+}
