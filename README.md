@@ -12,6 +12,15 @@ and checks code against the coding standards used in CakePHP.
 PSR2 standard. If you want to check against the historical CakePHP coding
 standard use any of the `1.x` releases.
 
+## Which version should I use?
+
+| Sniffer version | CakePHP version | PHP min |
+| -------- | ------- | ------- |
+| 1.x | 2.x | PHP 5.4  |
+| 2.x | 3.x | PHP 5.5 |
+| 3.x | 3.x | PHP 5.6 |
+| 4.x | 4.x | PHP 7.1 |
+
 ## Installation
 
 You should install this codesniffer with composer:
