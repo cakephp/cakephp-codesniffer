@@ -397,7 +397,9 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                         $content .= str_repeat(' ', $param['typeSpace']);
                         $content .= $param['var'];
                         $content .= str_repeat(' ', $param['varSpace']);
-                        $content .= $param['commentLines'][0]['comment'];
+                        if (isset($param['commentLines'][0])) {
+                            $content .= $param['commentLines'][0]['comment'];
+                        }
                         $phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
                     }
                 }
