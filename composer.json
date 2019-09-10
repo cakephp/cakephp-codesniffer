@@ -3,7 +3,7 @@
     "description": "CakePHP CodeSniffer Standards",
     "type": "phpcodesniffer-standard",
     "keywords": ["framework", "codesniffer"],
-    "homepage": "http://cakephp.org",
+    "homepage": "https://cakephp.org",
     "license": "MIT",
     "authors": [
         {
@@ -13,7 +13,7 @@
     ],
     "support": {
         "issues": "https://github.com/cakephp/cakephp-codesniffer/issues",
-        "forum": "http://stackoverflow.com/tags/cakephp",
+        "forum": "https://stackoverflow.com/tags/cakephp",
         "irc": "irc://irc.freenode.org/cakephp",
         "source": "https://github.com/cakephp/cakephp-codesniffer"
     },
@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "CakePHP\\": "CakePHP"
+            "CakePHP\\": "CakePHP/"
         }
     },
     "scripts": {
