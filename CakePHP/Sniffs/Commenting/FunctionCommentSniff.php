@@ -257,7 +257,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                 }
 
                 // Starts with a capital letter and ends with a fullstop.
-                $firstChar = $comment{0};
+                $firstChar = $comment[0];
                 if (strtoupper($firstChar) !== $firstChar) {
                     $error = '@throws tag comment must start with a capital letter';
                     $phpcsFile->addWarning($error, ($tag + 2), 'ThrowsNotCapital');
@@ -448,7 +448,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
             }
 
             // Param comments must start with a capital letter and end with the full stop.
-            $firstChar = $param['comment']{0};
+            $firstChar = $param['comment'][0];
             if (preg_match('|\p{Lu}|u', $firstChar) === 0) {
                 $error = 'Parameter comment must start with a capital letter';
                 $phpcsFile->addWarning($error, $param['tag'], 'ParamCommentNotCapital');
