@@ -16,7 +16,7 @@ matrix:
       env: PHPCS=1
 
 before_install:
-  - phpenv config-rm xdebug.ini
+  - if [[ $TRAVIS_PHP_VERSION != "7.4snapshot" ]]; then phpenv config-rm xdebug.ini; fi
 
 before_script:
   - composer install --prefer-source
