@@ -24,9 +24,6 @@ matrix:
 before_install:
   - phpenv config-rm xdebug.ini
 
-before_install:
-  - phpenv config-rm xdebug.ini
-
 before_script:
   - if [[ $PREFER_LOWEST != 1 ]]; then composer install --prefer-source --no-interaction; fi
   - if [[ $PREFER_LOWEST == 1 ]]; then composer lowest-setup; fi
@@ -41,10 +38,6 @@ script:
 
 after_success:
   - if [[ $COVERAGE == 1 ]]; then bash <(curl -s https://codecov.io/bash); fi
-
-cache:
-    directories:
-        - $HOME/.composer/cache
 
 cache:
     directories:
