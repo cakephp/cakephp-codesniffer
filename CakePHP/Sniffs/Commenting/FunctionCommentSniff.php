@@ -174,6 +174,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
 
                 if ($tokens[$returnToken]['code'] === T_RETURN
                     || $tokens[$returnToken]['code'] === T_YIELD
+                    || $tokens[$returnToken]['code'] === T_YIELD_FROM
                 ) {
                     break;
                 }
@@ -195,7 +196,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
         // If return type is not void, there needs to be a return statement
         // somewhere in the function that returns something.
         if (!in_array('mixed', $typeNames, true) && !in_array('void', $typeNames, true)) {
-            $returnToken = $phpcsFile->findNext([T_RETURN, T_YIELD], $stackPtr, $endToken);
+            $returnToken = $phpcsFile->findNext([T_RETURN, T_YIELD, T_YIELD_FROM], $stackPtr, $endToken);
             if ($returnToken === false) {
                 $error = 'Function return type is not void, but function has no return statement';
                 $phpcsFile->addWarning($error, $return, 'InvalidNoReturn');
