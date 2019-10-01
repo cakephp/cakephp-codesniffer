@@ -172,7 +172,8 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                     continue;
                 }
 
-                if ($tokens[$returnToken]['code'] === T_RETURN
+                if (
+                    $tokens[$returnToken]['code'] === T_RETURN
                     || $tokens[$returnToken]['code'] === T_YIELD
                 ) {
                     break;

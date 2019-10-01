@@ -198,13 +198,17 @@ class ReturnTypeHintSniff implements Sniff
             $beginningOfLine--;
         }
 
-        if (!empty($tokens[$beginningOfLine - 2])
-            && $tokens[$beginningOfLine - 2]['type'] === 'T_DOC_COMMENT_CLOSE_TAG') {
+        if (
+            !empty($tokens[$beginningOfLine - 2])
+            && $tokens[$beginningOfLine - 2]['type'] === 'T_DOC_COMMENT_CLOSE_TAG'
+        ) {
             return $beginningOfLine - 2;
         }
 
-        if (!empty($tokens[$beginningOfLine - 3])
-            && $tokens[$beginningOfLine - 3]['type'] === 'T_DOC_COMMENT_CLOSE_TAG') {
+        if (
+            !empty($tokens[$beginningOfLine - 3])
+            && $tokens[$beginningOfLine - 3]['type'] === 'T_DOC_COMMENT_CLOSE_TAG'
+        ) {
             return $beginningOfLine - 3;
         }
 
