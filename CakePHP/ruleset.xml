@@ -208,6 +208,7 @@
             <property name="newlinesCountBetweenOpenTagAndDeclare" value="1" />
         </properties>
         <exclude-pattern>*/config/*</exclude-pattern>
+        <exclude-pattern>*/templates/*</exclude-pattern>
         <exclude-pattern>*/tests/Fixture/*</exclude-pattern>
     </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints" />
