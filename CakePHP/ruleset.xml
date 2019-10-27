@@ -11,10 +11,10 @@
     <rule ref="PSR2" />
     <rule ref="PSR12" />
 
-    <!-- https://github.com/squizlabs/PHP_CodeSniffer/issues/2619 -->
-    <rule ref="PSR12.Files.FileHeader">
-        <exclude-pattern>*/test_app/config/bootstrap.php</exclude-pattern>
-        <exclude-pattern>*/test_app/config/empty.php</exclude-pattern>
+    <rule ref="PSR12.Files.FileHeader.SpacingAfterBlock">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PSR12.Files.FileHeader.IncorrectOrder">
         <severity>0</severity>
     </rule>
 
@@ -75,7 +75,9 @@
     <!--
     Temporarily ignore until API docblock formatting and line length issues in core code are fixed.
     -->
-    <rule ref="CakePHP.Commenting.FunctionComment" />
+    <rule ref="CakePHP.Commenting.FunctionComment">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
     <rule ref="CakePHP.Commenting.FunctionComment.ParamCommentNotCapital">
         <severity>0</severity>
     </rule>
@@ -135,35 +137,12 @@
         <exclude-pattern>*/config/*</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
-    <rule ref="PSR1.Classes.ClassDeclaration">
-        <exclude-pattern>*/tests/*</exclude-pattern>
-    </rule>
     <rule ref="PSR1.Methods.CamelCapsMethodName">
+        <exclude-pattern>*/src/Controller/*</exclude-pattern>
+        <exclude-pattern>*/src/Command/*</exclude-pattern>
+        <exclude-pattern>*/src/Shell/*</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
-    <rule ref="PEAR.NamingConventions.ValidClassName">
-        <exclude-pattern>*/CakePHP/*</exclude-pattern>
-        <exclude-pattern>*/tests/*</exclude-pattern>
-    </rule>
-    <rule ref="Squiz.Classes.ValidClassName">
-        <exclude-pattern>*/tests/*</exclude-pattern>
-    </rule>
-    <rule ref="CakePHP.Commenting.FunctionComment">
-        <exclude-pattern>*/tests/*</exclude-pattern>
-    </rule>
-    <rule ref="Squiz.NamingConventions.ValidFunctionName">
-        <exclude-pattern>*/src/*</exclude-pattern>
-        <exclude-pattern>*/tests/*</exclude-pattern>
-    </rule>
-    <rule ref="Generic.NamingConventions.CamelCapsFunctionName">
-        <exclude-pattern>*/src/*</exclude-pattern>
-        <exclude-pattern>*/tests/*</exclude-pattern>
-    </rule>
-    <rule ref="PEAR.NamingConventions.ValidFunctionName">
-        <exclude-pattern>*/src/*</exclude-pattern>
-        <exclude-pattern>*/tests/*</exclude-pattern>
-    </rule>
-
     <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma" />
     <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility">
         <properties>
