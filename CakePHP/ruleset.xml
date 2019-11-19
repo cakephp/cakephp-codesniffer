@@ -67,6 +67,13 @@
         <severity>0</severity>
     </rule>
 
+    <!--
+    These are not applicable for PHP5.6+
+    -->
+    <rule ref="PSR12.Properties.ConstantVisibility">
+        <severity>0</severity>
+    </rule>
+
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
         <properties>
             <property name="ignoreBlankLines" value="false"/>
