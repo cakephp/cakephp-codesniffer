@@ -5,7 +5,7 @@
 >
     <testsuites>
         <testsuite name="CakePHP-CodeSniffer">
-            <file>./vendor/squizlabs/php_codesniffer/tests/AllTests.php</file>
+            <file>vendor/squizlabs/php_codesniffer/tests/AllTests.php</file>
         </testsuite>
     </testsuites>
 

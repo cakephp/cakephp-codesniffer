@@ -3,6 +3,7 @@ language: php
 php:
   - 7.1
   - 7.3
+  - 7.4snapshot
 
 env:
   global:
@@ -22,7 +23,7 @@ matrix:
       env: CHECKS=1
 
 before_install:
-  - phpenv config-rm xdebug.ini
+  - if [[ $TRAVIS_PHP_VERSION != "7.4snapshot" ]]; then phpenv config-rm xdebug.ini; fi
 
 before_script:
   - if [[ $PREFER_LOWEST != 1 ]]; then composer install --prefer-source --no-interaction; fi
