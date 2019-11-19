@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHP Version 5
  *
@@ -14,6 +15,7 @@
  * @since         CakePHP CodeSniffer 0.1.28
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace CakePHP\Sniffs\Functions;
 
 use PHP_CodeSniffer\Files\File;

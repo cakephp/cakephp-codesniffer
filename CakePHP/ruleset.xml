@@ -9,6 +9,16 @@
     <rule ref="PSR2"/>
 
     <!--
+    Rules from PS2 and PS12 clash. Prioritize PS12
+    -->
+    <!--
+    This rule conflicts with PSR12.ControlStructures.ControlStructureSpacing.FirstExpressionLine
+    -->
+    <rule ref="PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace">
+        <severity>0</severity>
+    </rule>
+
+    <!--
     Property and method names with underscore prefix are allowed in CakePHP.
     Not using underscore prefix is a recommendation of PSR2, not a requirement.
     -->

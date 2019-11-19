@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHP Version 5
  *
@@ -14,6 +15,7 @@
  * @since         CakePHP CodeSniffer 0.1.18
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace CakePHP\Sniffs\Functions;
 
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\FunctionDeclarationArgumentSpacingSniff as SquizFunctionDeclarationArgumentSpacingSniff;

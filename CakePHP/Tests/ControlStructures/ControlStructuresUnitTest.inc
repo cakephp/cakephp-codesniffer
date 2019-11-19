@@ -12,3 +12,15 @@ if ($i < 10) {
 
 if($abc == true)
         echo 'hello';
+
+// PSR12.ControlStructures.ControlStructureSpacing.FirstExpressionLine
+$foo = true;
+$bar = true;
+$bat = true;
+if (
+    $foo
+    && $bar
+    && $bat
+) {
+    echo 'Hello';
+}

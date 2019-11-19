@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Parses and verifies the doc comments for functions.
  *
@@ -12,6 +13,7 @@
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
+
 namespace CakePHP\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
@@ -172,7 +174,8 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                     continue;
                 }
 
-                if ($tokens[$returnToken]['code'] === T_RETURN
+                if (
+                    $tokens[$returnToken]['code'] === T_RETURN
                     || $tokens[$returnToken]['code'] === T_YIELD
                     || $tokens[$returnToken]['code'] === T_YIELD_FROM
                 ) {
