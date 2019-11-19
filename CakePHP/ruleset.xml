@@ -46,6 +46,12 @@
     </rule>
 
     <rule ref="PSR12"/>
+    <rule ref="PSR12.Files.FileHeader.SpacingAfterBlock">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PSR12.Files.FileHeader.IncorrectOrder">
+        <severity>0</severity>
+    </rule>
 
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
         <properties>
