@@ -42,7 +42,8 @@ class BlankLineBeforeReturnSniff implements Sniff
         $prevLineTokens = [];
 
         while ($current >= 0 && $tokens[$current]['line'] >= $previousLine) {
-            if ($tokens[$current]['line'] == $previousLine
+            if (
+                $tokens[$current]['line'] == $previousLine
                 && $tokens[$current]['type'] !== 'T_WHITESPACE'
                 && $tokens[$current]['type'] !== 'T_COMMENT'
                 && $tokens[$current]['type'] !== 'T_DOC_COMMENT_OPEN_TAG'
@@ -56,7 +57,8 @@ class BlankLineBeforeReturnSniff implements Sniff
             $current--;
         }
 
-        if (isset($prevLineTokens[0])
+        if (
+            isset($prevLineTokens[0])
             && ($prevLineTokens[0] === 'T_OPEN_CURLY_BRACKET'
                 || $prevLineTokens[0] === 'T_COLON'
                 || $prevLineTokens[0] === 'T_OPEN_TAG')

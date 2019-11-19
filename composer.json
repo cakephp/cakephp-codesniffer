@@ -49,6 +49,6 @@
           "@reset-ruleset"
         ],
         "cs-check": "phpcs --colors -p --extensions=php --standard=CakePHP ./CakePHP",
-        "cs-fix": "phpcbf --colors --extensions=php --standard=CakePHP ./CakePHP"
+        "cs-fix": "phpcbf --colors -p --extensions=php --standard=CakePHP ./CakePHP"
     }
 }

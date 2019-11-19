@@ -46,10 +46,24 @@
     </rule>
 
     <rule ref="PSR12"/>
+
     <rule ref="PSR12.Files.FileHeader.SpacingAfterBlock">
         <severity>0</severity>
     </rule>
     <rule ref="PSR12.Files.FileHeader.IncorrectOrder">
+        <severity>0</severity>
+    </rule>
+
+    <!--
+    These are contradictory to PSR12
+    -->
+    <rule ref="PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.ControlStructures.ForLoopDeclaration.SpacingAfterSecond">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.ControlStructures.ForLoopDeclaration.SpacingAfterFirst">
         <severity>0</severity>
     </rule>
 

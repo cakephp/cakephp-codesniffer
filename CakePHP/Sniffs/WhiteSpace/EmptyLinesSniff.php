@@ -45,7 +45,8 @@ class EmptyLinesSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
         // If the current and next two tokens are newlines
         // We can remove the next token (the first newline)
-        if ($tokens[$stackPtr]['content'] === $phpcsFile->eolChar
+        if (
+            $tokens[$stackPtr]['content'] === $phpcsFile->eolChar
             && isset($tokens[$stackPtr + 1])
             && $tokens[$stackPtr + 1]['content'] === $phpcsFile->eolChar
             && isset($tokens[$stackPtr + 2])
