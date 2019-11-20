@@ -48,8 +48,8 @@
           "phpunit --coverage-clover=clover.xml",
           "@reset-ruleset"
         ],
-        "cs-check": "phpcs --colors -p -s --extensions=php --standard=CakePHP CakePHP/",
-        "cs-fix": "phpcbf --colors -p --extensions=php --standard=CakePHP CakePHP/",
-        "explain": "phpcs -e --standard=CakePHP"
+        "cs-check": "vendor/bin/phpcs --colors -p -s --extensions=php CakePHP/",
+        "cs-fix": "vendor/bin/phpcbf --colors -p --extensions=php CakePHP/",
+        "explain": "vendor/bin/phpcs -e"
     }
 }
