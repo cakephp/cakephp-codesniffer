@@ -47,16 +47,13 @@ include/exclude as needed. With this file in place, you can run:
 
 	vendor/bin/phpcs --colors -p -s /path/to/code
 
-If you are using composer to manage your CakePHP project, you can also add the below to your composer.json file:
+If you are using Composer to manage your CakePHP project, you can also add the below to your composer.json file:
 
 ```json
 {
-    // ... Other settings ...
     "scripts": {
-        ...
-        "cs-check": "vendor/bin/phpcs --colors -p -s --extensions=ctp,php ./src ./tests",
+        "cs-check": "vendor/bin/phpcs --colors -p -s --extensions=ctp,php ./src ./tests"
     }
-    // ... Other settings ...
 }
 ```
 
