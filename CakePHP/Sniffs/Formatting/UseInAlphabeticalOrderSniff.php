@@ -18,6 +18,7 @@ namespace CakePHP\Sniffs\Formatting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Ensures all the use are in alphabetical order.
@@ -104,6 +105,16 @@ class UseInAlphabeticalOrderSniff implements Sniff
 
         $tokens = $phpcsFile->getTokens();
 
+        $scope = 'use';
+        $useType = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        if ($useType !== false && $tokens[$useType]['code'] === T_STRING) {
+            $useContent = strtolower($tokens[$useType]['content']);
+            if ($useContent === 'function' || $useContent === 'const') {
+                $scope .= ' ' . $useContent;
+                $stackPtr = $useType + 1;
+            }
+        }
+
         $content = '';
         $end = $phpcsFile->findNext([T_SEMICOLON, T_OPEN_CURLY_BRACKET], $stackPtr);
         $useTokens = array_slice($tokens, $stackPtr, $end - $stackPtr, true);
@@ -116,9 +127,8 @@ class UseInAlphabeticalOrderSniff implements Sniff
 
         // Check for class scoping on use. Traits should be
         // ordered independently.
-        $scope = 0;
         if (!empty($token['conditions'])) {
-            $scope = key($token['conditions']);
+            $scope .= key($token['conditions']);
         }
         $this->_uses[$scope][$content] = $stackPtr;
     }
