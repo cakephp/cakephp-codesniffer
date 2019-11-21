@@ -50,7 +50,7 @@ class DocBlockAlignmentSniff implements Sniff
             if ($fix === true) {
                 // Collect tokens to change indentation of
                 $tokensToIndent = [
-                    $stackPtr => $codeIndentation
+                    $stackPtr => $codeIndentation,
                 ];
                 $commentOpenLine = $tokens[$stackPtr]['line'];
                 $commentCloseLine = $tokens[$commentClose]['line'];
