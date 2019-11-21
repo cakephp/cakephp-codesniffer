@@ -33,13 +33,29 @@ you do not overwrite any existing `installed_paths` value.
 
 ## Usage
 
+:warning: Warning when these sniffs are installed with composer, ensure that
+you have configured the CodeSniffer `installed_paths` setting.
+
 Depending on how you installed the code sniffer changes how you run it. If you have
 installed phpcs, and this package with PEAR, you can do the following:
 
-	vendor/bin/phpcs --standard=CakePHP /path/to/code
+	vendor/bin/phpcs --colors -p -s --standard=CakePHP /path/to/code
 
-:warning: Warning when these sniffs are installed with composer, ensure that
-you have configured the CodeSniffer `installed_paths` setting.
+You can also copy the `phpcs.xml.dist` file to your project's root folder as `phpcs.xml`.
+This file will import the CakePHP Coding Standard. From there you can edit it to
+include/exclude as needed. With this file in place, you can run:
+
+	vendor/bin/phpcs --colors -p -s /path/to/code
+
+If you are using Composer to manage your CakePHP project, you can also add the below to your composer.json file:
+
+```json
+{
+    "scripts": {
+        "cs-check": "vendor/bin/phpcs --colors -p -s --extensions=ctp,php ./src ./tests"
+    }
+}
+```
 
 ## Running Tests
 
