@@ -16,7 +16,6 @@ use PHP_CodeSniffer\Util\Tokens;
  */
 class CommaAfterArrayItemSniff implements Sniff
 {
-
     /**
      * @var bool
      */
