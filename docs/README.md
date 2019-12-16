@@ -1,8 +1,8 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 127 sniffs
+The CakePHP standard contains 138 sniffs
 
-CakePHP (17 sniffs)
+CakePHP (18 sniffs)
 -------------------
 - CakePHP.Classes.ReturnTypeHint
 - CakePHP.Commenting.DocBlockAlignment
@@ -14,6 +14,7 @@ CakePHP (17 sniffs)
 - CakePHP.Functions.ClosureDeclaration
 - CakePHP.NamingConventions.ValidFunctionName
 - CakePHP.NamingConventions.ValidTraitName
+- CakePHP.PHP.CommaAfterArrayItem
 - CakePHP.PHP.DisallowShortOpenTag
 - CakePHP.WhiteSpace.EmptyLines
 - CakePHP.WhiteSpace.FunctionCallSpacing
@@ -37,9 +38,9 @@ Generic (25 sniffs)
 - Generic.Formatting.DisallowMultipleStatements
 - Generic.Formatting.NoSpaceAfterCast
 - Generic.Functions.FunctionCallArgumentSpacing
-- Generic.NamingConventions.CamelCapsFunctionName
 - Generic.NamingConventions.UpperCaseConstantName
 - Generic.PHP.DeprecatedFunctions
+- Generic.PHP.DisallowAlternativePHPTags
 - Generic.PHP.DisallowShortOpenTag
 - Generic.PHP.ForbiddenFunctions
 - Generic.PHP.LowerCaseConstant
@@ -50,10 +51,9 @@ Generic (25 sniffs)
 - Generic.WhiteSpace.IncrementDecrementSpacing
 - Generic.WhiteSpace.ScopeIndent
 
-PEAR (3 sniffs)
+PEAR (2 sniffs)
 ---------------
 - PEAR.Functions.ValidDefaultValue
-- PEAR.NamingConventions.ValidClassName
 - PEAR.NamingConventions.ValidFunctionName
 
 PSR1 (3 sniffs)
@@ -62,13 +62,24 @@ PSR1 (3 sniffs)
 - PSR1.Files.SideEffects
 - PSR1.Methods.CamelCapsMethodName
 
-PSR12 (5 sniffs)
-----------------
+PSR12 (16 sniffs)
+-----------------
+- PSR12.Classes.AnonClassDeclaration
 - PSR12.Classes.ClassInstantiation
+- PSR12.Classes.ClosingBrace
+- PSR12.ControlStructures.BooleanOperatorPlacement
+- PSR12.ControlStructures.ControlStructureSpacing
+- PSR12.Files.DeclareStatement
+- PSR12.Files.FileHeader
+- PSR12.Files.ImportStatement
+- PSR12.Files.OpenTag
 - PSR12.Functions.NullableTypeDeclaration
+- PSR12.Functions.ReturnTypeDeclaration
 - PSR12.Keywords.ShortFormTypeKeywords
 - PSR12.Namespaces.CompoundNamespaceDepth
 - PSR12.Operators.OperatorSpacing
+- PSR12.Properties.ConstantVisibility
+- PSR12.Traits.UseDeclaration
 
 PSR2 (12 sniffs)
 ----------------
