@@ -1,16 +1,16 @@
 <?php
 /**
- * Parses and verifies the doc comments for functions.
+ * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  *
- * PHP version 5
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
  *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
- * @link      http://pear.php.net/package/PHP_CodeSniffer
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * @link          https://github.com/cakephp/cakephp-codesniffer
+ * @since         CakePHP CodeSniffer 0.1.24
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 namespace CakePHP\Sniffs\Commenting;
 
@@ -62,7 +62,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
         $end = $phpcsFile->findNext(T_DOC_COMMENT_CLOSE_TAG, $start);
         $content = $phpcsFile->getTokensAsString($start, ($end - $start));
 
-        return preg_match('/{@inheritDoc}|@inheritDoc/i', $content) === 1;
+        return preg_match('/@inheritDoc\b/i', $content) === 1;
     }
 
     /**
@@ -130,7 +130,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
         }
 
         // Check return type (can be multiple, separated by '|').
-        list($types, ) = explode(' ', $content);
+        [$types, ] = explode(' ', $content);
         $typeNames = explode('|', $types);
         $suggestedNames = [];
         foreach ($typeNames as $i => $typeName) {
@@ -158,7 +158,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
             $phpcsFile->addError($error, $return, 'InvalidReturn', $data);
         }
 
-        $endToken = isset($tokens[$stackPtr]['scope_closer']) ? $tokens[$stackPtr]['scope_closer'] : false;
+        $endToken = $tokens[$stackPtr]['scope_closer'] ?? false;
         if (!$endToken) {
             return;
         }
@@ -198,7 +198,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
         // somewhere in the function that returns something.
         if (!in_array('mixed', $typeNames, true) && !in_array('void', $typeNames, true)) {
             $returnToken = $phpcsFile->findNext([T_RETURN, T_YIELD, T_YIELD_FROM], $stackPtr, $endToken);
-            if ($returnToken === false) {
+            if ($returnToken === false && !$this->hasException($phpcsFile, $stackPtr, $endToken)) {
                 $error = 'Function return type is not void, but function has no return statement';
                 $phpcsFile->addWarning($error, $return, 'InvalidNoReturn');
             } else {
@@ -209,6 +209,19 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                 }
             }
         }
+    }
+
+    /**
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile File
+     * @param int $startIndex Start index
+     * @param int $endIndex End index
+     * @return bool
+     */
+    protected function hasException(File $phpcsFile, $startIndex, $endIndex)
+    {
+        $throwIndex = $phpcsFile->findNext([T_THROW], $startIndex, $endIndex);
+
+        return $throwIndex !== false;
     }
 
     /**
@@ -252,7 +265,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                     $end = $tokens[$commentStart]['comment_closer'];
                 }
 
-                for ($i = ($tag + 3); $i < $end; $i++) {
+                for ($i = $tag + 3; $i < $end; $i++) {
                     if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
                         $comment .= ' ' . $tokens[$i]['content'];
                     }
@@ -302,11 +315,11 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
             $commentLines = [];
             if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING) {
                 $matches = [];
-                preg_match('/([^$&]+)(?:((?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/', $tokens[($tag + 2)]['content'], $matches);
+                preg_match('/([^$]+)(?:((?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/', $tokens[($tag + 2)]['content'], $matches);
 
                 $typeLen = strlen($matches[1]);
                 $type = trim($matches[1]);
-                $typeSpace = ($typeLen - strlen($type));
+                $typeSpace = $typeLen - strlen($type);
                 $typeLen = strlen($type);
                 if ($typeLen > $maxType) {
                     $maxType = $typeLen;
@@ -335,7 +348,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                             $end = $tokens[$commentStart]['comment_closer'];
                         }
 
-                        for ($i = ($tag + 3); $i < $end; $i++) {
+                        for ($i = $tag + 3; $i < $end; $i++) {
                             if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
                                 $indent = 0;
                                 if ($tokens[($i - 1)]['code'] === T_DOC_COMMENT_WHITESPACE) {
