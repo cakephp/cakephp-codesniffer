@@ -19,6 +19,7 @@
     },
     "require": {
         "php": "^7.1",
+        "cakephp/cakephp": "^4.0",
         "slevomat/coding-standard": "^5.0",
         "squizlabs/php_codesniffer": "~3.5.0"
     },
