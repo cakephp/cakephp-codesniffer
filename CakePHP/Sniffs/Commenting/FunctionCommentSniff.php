@@ -60,7 +60,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
     {
         $start = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $stackPtr - 1);
         $end = $phpcsFile->findNext(T_DOC_COMMENT_CLOSE_TAG, $start);
-        $content = $phpcsFile->getTokensAsString($start, ($end - $start));
+        $content = $phpcsFile->getTokensAsString($start, $end - $start);
 
         return preg_match('/@inheritDoc\b/i', $content) === 1;
     }
@@ -121,8 +121,8 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
             return;
         }
 
-        $content = $tokens[($return + 2)]['content'];
-        if (empty($content) === true || $tokens[($return + 2)]['code'] !== T_DOC_COMMENT_STRING) {
+        $content = $tokens[$return + 2]['content'];
+        if (empty($content) === true || $tokens[$return + 2]['code'] !== T_DOC_COMMENT_STRING) {
             $error = 'Return type missing for @return tag in function comment';
             $phpcsFile->addError($error, $return, 'MissingReturnType');
 
@@ -184,7 +184,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
             if ($returnToken !== $endToken) {
                 // If the function is not returning anything, just
                 // exiting, then there is no problem.
-                $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
+                $semicolon = $phpcsFile->findNext(T_WHITESPACE, $returnToken + 1, null, true);
                 if ($tokens[$semicolon]['code'] !== T_SEMICOLON) {
                     $error = 'Function return type is void, but function contains return statement';
                     $phpcsFile->addWarning($error, $return, 'InvalidReturnVoid');
@@ -202,7 +202,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                 $error = 'Function return type is not void, but function has no return statement';
                 $phpcsFile->addWarning($error, $return, 'InvalidNoReturn');
             } else {
-                $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
+                $semicolon = $phpcsFile->findNext(T_WHITESPACE, $returnToken + 1, null, true);
                 if ($tokens[$semicolon]['code'] === T_SEMICOLON) {
                     $error = 'Function return type is not void, but function is returning void here';
                     $phpcsFile->addWarning($error, $returnToken, 'InvalidReturnNotVoid');
@@ -242,9 +242,9 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
             }
 
             $exception = $comment = null;
-            if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING) {
+            if ($tokens[$tag + 2]['code'] === T_DOC_COMMENT_STRING) {
                 $matches = [];
-                preg_match('/([^\s]+)(?:\s+(.*))?/', $tokens[($tag + 2)]['content'], $matches);
+                preg_match('/([^\s]+)(?:\s+(.*))?/', $tokens[$tag + 2]['content'], $matches);
                 $exception = $matches[1];
                 if (isset($matches[2]) === true) {
                     $comment = $matches[2];
@@ -259,8 +259,8 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                 $phpcsFile->addWarning($error, $tag, 'EmptyThrows');
             } else {
                 // Any strings until the next tag belong to this comment.
-                if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true) {
-                    $end = $tokens[$commentStart]['comment_tags'][($pos + 1)];
+                if (isset($tokens[$commentStart]['comment_tags'][$pos + 1]) === true) {
+                    $end = $tokens[$commentStart]['comment_tags'][$pos + 1];
                 } else {
                     $end = $tokens[$commentStart]['comment_closer'];
                 }
@@ -275,13 +275,13 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                 $firstChar = $comment[0];
                 if (strtoupper($firstChar) !== $firstChar) {
                     $error = '@throws tag comment must start with a capital letter';
-                    $phpcsFile->addWarning($error, ($tag + 2), 'ThrowsNotCapital');
+                    $phpcsFile->addWarning($error, $tag + 2, 'ThrowsNotCapital');
                 }
 
                 $lastChar = substr($comment, -1);
                 if ($lastChar !== '.') {
                     $error = '@throws tag comment must end with a full stop';
-                    $phpcsFile->addWarning($error, ($tag + 2), 'ThrowsNoFullStop');
+                    $phpcsFile->addWarning($error, $tag + 2, 'ThrowsNoFullStop');
                 }
             }
         }
@@ -313,9 +313,9 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
             $type = $var = $comment = '';
             $typeSpace = $varSpace = 0;
             $commentLines = [];
-            if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING) {
+            if ($tokens[$tag + 2]['code'] === T_DOC_COMMENT_STRING) {
                 $matches = [];
-                preg_match('/([^$]+)(?:((?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/', $tokens[($tag + 2)]['content'], $matches);
+                preg_match('/([^$]+)(?:((?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/', $tokens[$tag + 2]['content'], $matches);
 
                 $typeLen = strlen($matches[1]);
                 $type = trim($matches[1]);
@@ -337,13 +337,13 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                         $comment = $matches[4];
                         $commentLines[] = [
                             'comment' => $comment,
-                            'token' => ($tag + 2),
+                            'token' => $tag + 2,
                             'indent' => $varSpace,
                         ];
 
                         // Any strings until the next tag belong to this comment.
-                        if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true) {
-                            $end = $tokens[$commentStart]['comment_tags'][($pos + 1)];
+                        if (isset($tokens[$commentStart]['comment_tags'][$pos + 1]) === true) {
+                            $end = $tokens[$commentStart]['comment_tags'][$pos + 1];
                         } else {
                             $end = $tokens[$commentStart]['comment_closer'];
                         }
@@ -351,8 +351,8 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                         for ($i = $tag + 3; $i < $end; $i++) {
                             if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
                                 $indent = 0;
-                                if ($tokens[($i - 1)]['code'] === T_DOC_COMMENT_WHITESPACE) {
-                                    $indent = strlen($tokens[($i - 1)]['content']);
+                                if ($tokens[$i - 1]['code'] === T_DOC_COMMENT_WHITESPACE) {
+                                    $indent = strlen($tokens[$i - 1]['content']);
                                 }
 
                                 $comment .= ' ' . $tokens[$i]['content'];
@@ -415,7 +415,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                         if (isset($param['commentLines'][0])) {
                             $content .= $param['commentLines'][0]['comment'];
                         }
-                        $phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
+                        $phpcsFile->fixer->replaceToken($param['tag'] + 2, $content);
                     }
                 }
             }
@@ -449,7 +449,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                         $content .= $realName;
                         $content .= str_repeat(' ', $param['varSpace']);
                         $content .= $param['commentLines'][0]['comment'];
-                        $phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
+                        $phpcsFile->fixer->replaceToken($param['tag'] + 2, $content);
                     }
                 }
             } elseif (substr($param['var'], -4) !== ',...') {

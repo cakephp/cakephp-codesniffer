@@ -52,7 +52,7 @@ class TabAndSpaceSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         $line = $tokens[$stackPtr]['line'];
-        if ($stackPtr > 0 && $tokens[($stackPtr - 1)]['line'] !== $line) {
+        if ($stackPtr > 0 && $tokens[$stackPtr - 1]['line'] !== $line) {
             return;
         }
 

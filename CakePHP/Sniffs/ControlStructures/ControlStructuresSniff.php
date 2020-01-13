@@ -41,7 +41,7 @@ class ControlStructuresSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $nextToken = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
+        $nextToken = $phpcsFile->findNext(T_WHITESPACE, $stackPtr + 1, null, true);
         if ($tokens[$nextToken]['code'] === T_OPEN_PARENTHESIS) {
             $closer = $tokens[$nextToken]['parenthesis_closer'];
             $diff = $closer - $stackPtr;

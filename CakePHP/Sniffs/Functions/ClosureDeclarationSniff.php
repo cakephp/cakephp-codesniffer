@@ -39,8 +39,8 @@ class ClosureDeclarationSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
         $spaces = 0;
 
-        if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
-            $spaces = strlen($tokens[($stackPtr + 1)]['content']);
+        if ($tokens[$stackPtr + 1]['code'] === T_WHITESPACE) {
+            $spaces = strlen($tokens[$stackPtr + 1]['content']);
         }
 
         if ($spaces !== 1) {
