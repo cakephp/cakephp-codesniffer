@@ -2,7 +2,6 @@ language: php
 
 php:
   - 7.1
-  - 7.3
   - 7.4
 
 env:
@@ -17,10 +16,7 @@ matrix:
       env: PREFER_LOWEST=1
 
     - php: 7.2
-      env: COVERAGE=1
-
-    - php: 7.2
-      env: CHECKS=1
+      env: CHECKS=1 DEFAULT=0
 
 before_install:
   - phpenv config-rm xdebug.ini
@@ -31,14 +27,10 @@ before_script:
 
 script:
   - if [[ $DEFAULT == 1 ]]; then composer test; fi
-  - if [[ $COVERAGE == 1 ]]; then composer run-script test-coverage --timeout=0; fi
 
   - if [[ $PREFER_LOWEST == 1 ]]; then composer lowest; fi
 
   - if [[ $CHECKS == 1 ]]; then composer cs-check; fi
-
-after_success:
-  - if [[ $COVERAGE == 1 ]]; then bash <(curl -s https://codecov.io/bash); fi
 
 cache:
     directories:

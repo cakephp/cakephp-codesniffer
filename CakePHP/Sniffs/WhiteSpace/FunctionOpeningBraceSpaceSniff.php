@@ -44,7 +44,7 @@ class FunctionOpeningBraceSpaceSniff implements Sniff
         }
 
         $openBrace = $tokens[$stackPtr]['scope_opener'];
-        $nextContent = $phpcsFile->findNext(T_WHITESPACE, ($openBrace + 1), null, true);
+        $nextContent = $phpcsFile->findNext(T_WHITESPACE, $openBrace + 1, null, true);
 
         if ($nextContent === $tokens[$stackPtr]['scope_closer']) {
             // The next bit of content is the closing brace, so this
