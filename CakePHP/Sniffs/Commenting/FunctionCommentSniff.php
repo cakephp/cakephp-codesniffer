@@ -58,11 +58,22 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
      */
     protected function isInheritDoc(File $phpcsFile, $stackPtr)
     {
-        $start = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $stackPtr - 1);
-        $end = $phpcsFile->findNext(T_DOC_COMMENT_CLOSE_TAG, $start);
-        $content = $phpcsFile->getTokensAsString($start, $end - $start);
+        $tokens = $phpcsFile->getTokens();
 
-        return preg_match('/@inheritDoc\b/i', $content) === 1;
+        $start = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $stackPtr - 1);
+        $end = $tokens[$start]['comment_closer'];
+
+        $empty = [
+            T_DOC_COMMENT_WHITESPACE,
+            T_DOC_COMMENT_STAR,
+        ];
+
+        $inheritDoc = $phpcsFile->findNext($empty, $start + 1, $end, true);
+        if ($inheritDoc === false) {
+            return false;
+        }
+
+        return preg_match('/^@inheritDoc$/i', $tokens[$inheritDoc]['content']) === 1;
     }
 
     /**

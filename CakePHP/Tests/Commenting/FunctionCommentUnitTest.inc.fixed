@@ -236,14 +236,14 @@ class Foo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function inherited()
     {
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function inheritedCaseInsentive()
     {
