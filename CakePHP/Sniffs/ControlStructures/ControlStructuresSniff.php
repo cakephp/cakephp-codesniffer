@@ -16,7 +16,6 @@
 /**
  * Ensures curly brackets are used with if, else, elseif, foreach and for.
  * while and dowhile are covered elsewhere
- *
  */
 
 namespace CakePHP\Sniffs\ControlStructures;
@@ -27,7 +26,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class ControlStructuresSniff implements Sniff
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function register()
     {
@@ -35,7 +34,7 @@ class ControlStructuresSniff implements Sniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {

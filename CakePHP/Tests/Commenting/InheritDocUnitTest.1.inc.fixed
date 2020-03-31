@@ -9,7 +9,7 @@ class Foo extends Bar
     public $brain = [];
 
     /**
-     * @INHERITDOC
+     * @inheritDoc
      */
     public $head = [];
 
@@ -21,7 +21,7 @@ class Foo extends Bar
     public $body = [];
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public $toe = [];
 

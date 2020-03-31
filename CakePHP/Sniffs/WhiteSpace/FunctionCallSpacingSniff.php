@@ -15,7 +15,6 @@
 
 /**
  * Checks the separation between methods in a class or interface.
- *
  */
 namespace CakePHP\Sniffs\WhiteSpace;
 
@@ -26,7 +25,7 @@ use PHP_CodeSniffer\Util\Tokens;
 class FunctionCallSpacingSniff implements Sniff
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function register()
     {
@@ -42,7 +41,7 @@ class FunctionCallSpacingSniff implements Sniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {

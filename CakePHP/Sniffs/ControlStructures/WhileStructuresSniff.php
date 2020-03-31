@@ -20,12 +20,11 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Ensures that while and do-while use curly brackets
- *
  */
 class WhileStructuresSniff implements Sniff
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function register()
     {
@@ -33,7 +32,7 @@ class WhileStructuresSniff implements Sniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {

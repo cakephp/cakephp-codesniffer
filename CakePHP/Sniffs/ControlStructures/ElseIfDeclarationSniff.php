@@ -20,12 +20,11 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Ensures that elseif is used instead of else if
- *
  */
 class ElseIfDeclarationSniff implements Sniff
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function register()
     {
@@ -33,7 +32,7 @@ class ElseIfDeclarationSniff implements Sniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {

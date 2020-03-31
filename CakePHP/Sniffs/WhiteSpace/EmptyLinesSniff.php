@@ -28,7 +28,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class EmptyLinesSniff implements Sniff
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function register()
     {
@@ -36,7 +36,7 @@ class EmptyLinesSniff implements Sniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {
