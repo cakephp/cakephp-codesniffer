@@ -9,12 +9,12 @@
 This code works with [squizlabs/php_codesniffer](https://github.com/squizlabs/PHP_CodeSniffer)
 and checks code against the coding standards used in CakePHP.
 
-This sniffer package follows [PSR-2](http://www.php-fig.org/psr/psr-2/) completely and ships with a lot of additional fixers on top.
+This sniffer package follows [PSR-12](https://www.php-fig.org/psr/psr-12/) completely and ships with a lot of additional fixers on top.
 
 [List of included sniffs](/docs)
 
 :warning: The `master` branch contains codesniffer rules that are based on the
-PSR2 standard. The `next` branch is for CakePHP 4.0+ and requires PHP 7.1+. 
+PSR2 standard. The `next` branch is for CakePHP 4.0+ and requires PHP 7.2+. 
 If you want to check against the historical CakePHP coding
 standard use any of the `1.x` releases.
 
@@ -25,7 +25,7 @@ standard use any of the `1.x` releases.
 | 1.x | 2.x | PHP 5.4  |
 | 2.x | 3.x | PHP 5.5 |
 | 3.x | 3.x | PHP 5.6 |
-| 4.x | 4.x | PHP 7.1 |
+| 4.x | 4.x | PHP 7.2 |
 
 ## Installation
 
