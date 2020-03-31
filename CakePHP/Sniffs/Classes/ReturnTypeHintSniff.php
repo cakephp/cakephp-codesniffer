@@ -23,7 +23,7 @@ use SlevomatCodingStandard\Helpers\TokenHelper;
 class ReturnTypeHintSniff implements Sniff
 {
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function register()
     {
@@ -31,7 +31,7 @@ class ReturnTypeHintSniff implements Sniff
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {
@@ -92,7 +92,6 @@ class ReturnTypeHintSniff implements Sniff
     /**
      * @param \PHP_CodeSniffer\Files\File $phpCsFile File
      * @param int $stackPointer Stack pointer
-     *
      * @return bool
      */
     protected function isChainingMethod(File $phpCsFile, int $stackPointer): bool
@@ -135,7 +134,6 @@ class ReturnTypeHintSniff implements Sniff
     /**
      * @param \PHP_CodeSniffer\Files\File $phpCsFile File
      * @param int $stackPointer Stack pointer
-     *
      * @return void
      */
     protected function assertNotThisOrStatic(File $phpCsFile, int $stackPointer): void
@@ -185,7 +183,6 @@ class ReturnTypeHintSniff implements Sniff
     /**
      * @param \PHP_CodeSniffer\Files\File $phpCsFile File
      * @param int $stackPointer Stack pointer
-     *
      * @return int|null Stackpointer value of docblock end tag, or null if cannot be found
      */
     protected function findRelatedDocBlock(File $phpCsFile, int $stackPointer): ?int
@@ -217,7 +214,6 @@ class ReturnTypeHintSniff implements Sniff
 
     /**
      * @param \PHP_CodeSniffer\Files\File $phpCsFile File
-     *
      * @return string|null
      */
     protected function getClassNameWithNamespace(File $phpCsFile): ?string

@@ -16,7 +16,6 @@
 /**
  * Ensures method names are correct depending on whether they are public
  * or private, and that functions are named correctly.
- *
  */
 namespace CakePHP\Sniffs\NamingConventions;
 
@@ -49,7 +48,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     ];
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function __construct()
     {
@@ -57,7 +56,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
     {
@@ -87,7 +86,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
     {

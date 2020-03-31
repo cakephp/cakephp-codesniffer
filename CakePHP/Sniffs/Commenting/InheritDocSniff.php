@@ -46,18 +46,41 @@ class InheritDocSniff implements Sniff
             T_DOC_COMMENT_STAR,
         ];
 
-        $comment = $phpcsFile->findNext($empty, $stackPtr + 1, $commentEnd, true);
-        if ($comment === false) {
+        $inheritDoc = $phpcsFile->findNext($empty, $stackPtr + 1, $commentEnd, true);
+        if ($inheritDoc === false) {
             // Ignore empty comments
             return;
         }
 
         if (
-            preg_match('/^@inheritDoc$/i', $tokens[$comment]['content']) === 1 &&
-            $phpcsFile->findNext($empty, $comment + 1, $commentEnd, true) !== false
+            preg_match('/@inheritDoc/i', $tokens[$inheritDoc]['content']) === 1 &&
+            preg_match('/@inheritDoc/', $tokens[$inheritDoc]['content']) === 0
         ) {
-            $msg = '@inheritDoc doc comments must not contain anything else';
-            $phpcsFile->addError($msg, $comment, 'InvalidInheritDoc');
+            $msg = 'inheritDoc not capitalized correctly';
+            $fix = $phpcsFile->addFixableWarning($msg, $inheritDoc, 'BadSpelling');
+            if ($fix === true) {
+                $fixed = preg_replace('/inheritDoc/i', 'inheritDoc', $tokens[$inheritDoc]['content']);
+                $phpcsFile->fixer->replaceToken($inheritDoc, $fixed);
+            }
+        }
+
+        if (
+            preg_match('/^@inheritDoc$/i', $tokens[$inheritDoc]['content']) === 1 &&
+            $phpcsFile->findNext($empty, $inheritDoc + 1, $commentEnd, true) !== false
+        ) {
+            $msg = '@inheritDoc should be the only comment';
+            $phpcsFile->addError($msg, $inheritDoc, 'NotEmpty');
+        }
+
+        if (
+            preg_match('/^{@inheritDoc}$/i', $tokens[$inheritDoc]['content']) === 1 &&
+            $phpcsFile->findNext($empty, $inheritDoc + 1, $commentEnd, true) === false
+        ) {
+            $msg = '@inheritDoc should not be wrapepd in {} when only comment';
+            $fix = $phpcsFile->addFixableError($msg, $inheritDoc, 'ShouldNotWrap');
+            if ($fix === true) {
+                $phpcsFile->fixer->replaceToken($inheritDoc, '@inheritDoc');
+            }
         }
     }
 }

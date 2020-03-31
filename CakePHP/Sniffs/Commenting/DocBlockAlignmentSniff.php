@@ -24,7 +24,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class DocBlockAlignmentSniff implements Sniff
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function register()
     {
@@ -32,7 +32,7 @@ class DocBlockAlignmentSniff implements Sniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {

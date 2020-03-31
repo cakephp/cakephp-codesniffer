@@ -38,7 +38,7 @@ class BlankLineBeforeReturnSniff implements Sniff
     ];
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function register()
     {
@@ -46,7 +46,7 @@ class BlankLineBeforeReturnSniff implements Sniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {

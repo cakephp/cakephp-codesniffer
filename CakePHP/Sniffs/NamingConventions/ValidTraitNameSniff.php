@@ -15,7 +15,6 @@
 
 /**
  * Ensures trait names are correct depending on the folder of the file.
- *
  */
 namespace CakePHP\Sniffs\NamingConventions;
 
@@ -25,7 +24,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class ValidTraitNameSniff implements Sniff
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function register()
     {
@@ -33,7 +32,7 @@ class ValidTraitNameSniff implements Sniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {

@@ -14,7 +14,6 @@
 
 /**
  * Checks that there is no empty line after the opening brace of a function.
- *
  */
 namespace CakePHP\Sniffs\WhiteSpace;
 
@@ -24,7 +23,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class FunctionOpeningBraceSpaceSniff implements Sniff
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function register()
     {
@@ -32,7 +31,7 @@ class FunctionOpeningBraceSpaceSniff implements Sniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {

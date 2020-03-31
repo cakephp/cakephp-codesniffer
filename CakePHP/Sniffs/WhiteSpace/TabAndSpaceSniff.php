@@ -16,7 +16,6 @@
 /**
  * Check for any line starting with 2 spaces - which would indicate space indenting
  * Also check for "\t " - a tab followed by a space, which is a common similar mistake
- *
  */
 namespace CakePHP\Sniffs\WhiteSpace;
 
@@ -37,7 +36,7 @@ class TabAndSpaceSniff implements Sniff
     ];
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function register()
     {
@@ -45,7 +44,7 @@ class TabAndSpaceSniff implements Sniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {

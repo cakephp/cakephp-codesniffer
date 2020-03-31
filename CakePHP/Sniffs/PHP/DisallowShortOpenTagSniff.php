@@ -17,7 +17,6 @@
  * Disallow short open tags
  *
  * But permit short-open echo tags (<?=) [T_OPEN_TAG_WITH_ECHO] as they are part of PHP 5.4+
- *
  */
 namespace CakePHP\Sniffs\PHP;
 
@@ -43,7 +42,7 @@ class DisallowShortOpenTagSniff implements Sniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {

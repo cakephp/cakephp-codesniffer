@@ -19,12 +19,11 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Ensures there is a space after the function keyword for closures.
- *
  */
 class ClosureDeclarationSniff implements Sniff
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function register()
     {
@@ -32,7 +31,7 @@ class ClosureDeclarationSniff implements Sniff
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {
