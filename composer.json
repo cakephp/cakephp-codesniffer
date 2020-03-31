@@ -18,7 +18,7 @@
         "source": "https://github.com/cakephp/cakephp-codesniffer"
     },
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "slevomat/coding-standard": "^6.0",
         "squizlabs/php_codesniffer": "~3.5.0"
     },
@@ -31,20 +31,13 @@
         }
     },
     "scripts": {
-        "increase-severity": "sed -i.bak 's/<severity>0<\\/severity>/<!--<severity>0<\\/severity>-->/' CakePHP/ruleset.xml",
-        "reset-ruleset": [
-            "sed -i.bak 's/<!--<severity>0<\\/severity>-->/<severity>0<\\/severity>/' CakePHP/ruleset.xml",
-            "rm -f CakePHP/ruleset.xml.bak"
-        ],
         "add-standard" : "phpcs --config-set installed_paths $(pwd)",
         "test": [
           "@add-standard",
-          "@increase-severity",
-          "phpunit",
-          "@reset-ruleset"
+          "phpunit"
         ],
-        "cs-check": "phpcs --colors -p -s --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --standard=CakePHP CakePHP/Sniffs/",
-        "cs-fix": "phpcbf --colors -p --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --standard=CakePHP CakePHP/Sniffs/",
+        "cs-check": "phpcs -p -s --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --standard=CakePHP CakePHP/Sniffs/",
+        "cs-fix": "phpcbf -p --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --standard=CakePHP CakePHP/Sniffs/",
         "lowest": " validate-prefer-lowest",
         "lowest-setup": "composer update --prefer-lowest --prefer-stable --prefer-dist --no-interaction && cp composer.json composer.backup && composer require --dev dereuromark/composer-prefer-lowest && mv composer.backup composer.json",
         "docs": "php docs/generate.php",
