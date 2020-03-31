@@ -14,8 +14,9 @@ class InheritDocUnitTest extends AbstractSniffUnitTest
         switch ($testFile) {
             case 'InheritDocUnitTest.1.inc':
                 return [
-                    '24' => 1,
-                    '29' => 1,
+                    '26' => 1,
+                    '33' => 1,
+                    '38' => 1,
                 ];
 
             default:

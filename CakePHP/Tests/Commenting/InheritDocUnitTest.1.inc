@@ -16,9 +16,18 @@ class Foo extends Bar
     /**
      * {@inheritDoc}
      *
+     * Extra description.
+     *
      * @var int[]
      */
     public $body = [];
+
+    /**
+     * {@inheritDoc} Extra description.
+     *
+     * @var int[]
+     */
+    public $hand = [];
 
     /**
      * {@inheritDoc}

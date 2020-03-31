@@ -56,7 +56,7 @@ class InheritDocSniff implements Sniff
             preg_match('/@inheritDoc/i', $tokens[$inheritDoc]['content']) === 1 &&
             preg_match('/@inheritDoc/', $tokens[$inheritDoc]['content']) === 0
         ) {
-            $msg = 'inheritDoc not capitalized correctly';
+            $msg = 'inheritDoc is not capitalized correctly';
             $fix = $phpcsFile->addFixableWarning($msg, $inheritDoc, 'BadSpelling');
             if ($fix === true) {
                 $fixed = preg_replace('/inheritDoc/i', 'inheritDoc', $tokens[$inheritDoc]['content']);
@@ -65,10 +65,12 @@ class InheritDocSniff implements Sniff
         }
 
         if (
-            preg_match('/^@inheritDoc$/i', $tokens[$inheritDoc]['content']) === 1 &&
-            $phpcsFile->findNext($empty, $inheritDoc + 1, $commentEnd, true) !== false
+            preg_match('/^@inheritDoc/i', $tokens[$inheritDoc]['content']) === 1 &&
+            ( preg_match('/^@inheritDoc$/i', $tokens[$inheritDoc]['content']) !== 1 ||
+              $phpcsFile->findNext($empty, $inheritDoc + 1, $commentEnd, true) !== false
+            )
         ) {
-            $msg = '@inheritDoc should be the only comment';
+            $msg = '@inheritDoc must be the only comment';
             $phpcsFile->addError($msg, $inheritDoc, 'NotEmpty');
         }
 
@@ -76,10 +78,22 @@ class InheritDocSniff implements Sniff
             preg_match('/^{@inheritDoc}$/i', $tokens[$inheritDoc]['content']) === 1 &&
             $phpcsFile->findNext($empty, $inheritDoc + 1, $commentEnd, true) === false
         ) {
-            $msg = '@inheritDoc should not be wrapepd in {} when only comment';
+            $msg = '{@inheritDoc} must be @inheritDoc when only comment';
             $fix = $phpcsFile->addFixableError($msg, $inheritDoc, 'ShouldNotWrap');
             if ($fix === true) {
                 $phpcsFile->fixer->replaceToken($inheritDoc, '@inheritDoc');
+            }
+        }
+
+        if (preg_match('/^{@inheritDoc}/i', $tokens[$inheritDoc]['content']) === 1) {
+            $extra = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $inheritDoc + 1, $commentEnd);
+            if (
+                preg_match('/^{@inheritDoc}$/i', $tokens[$inheritDoc]['content']) !== 1 ||
+                ( $extra !== false && $tokens[$extra]['line'] != $tokens[$inheritDoc]['line'] + 2
+                )
+            ) {
+                $msg = '{@inheritDoc} must be the first line by itself';
+                $phpcsFile->addError($msg, $inheritDoc, 'FirstLine');
             }
         }
     }
