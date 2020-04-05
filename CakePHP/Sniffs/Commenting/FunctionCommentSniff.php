@@ -265,7 +265,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
             if ($exception === null) {
                 $error = 'Exception type and comment missing for @throws tag in function comment';
                 $phpcsFile->addWarning($error, $tag, 'InvalidThrows');
-            } elseif ($comment === null) {
+            } elseif (empty($comment)) {
                 $error = 'Comment missing for @throws tag in function comment';
                 $phpcsFile->addWarning($error, $tag, 'EmptyThrows');
             } else {
