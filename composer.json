@@ -19,7 +19,7 @@
     },
     "require": {
         "php": "^7.2",
-        "slevomat/coding-standard": "^6.0",
+        "slevomat/coding-standard": ">=6.0 <6.2",
         "squizlabs/php_codesniffer": "~3.5.3"
     },
     "require-dev": {
