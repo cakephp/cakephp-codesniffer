@@ -31,11 +31,7 @@
         }
     },
     "scripts": {
-        "add-standard" : "phpcs --config-set installed_paths $(pwd)",
-        "test": [
-          "@add-standard",
-          "phpunit"
-        ],
+        "test": "phpunit --filter CakePHP",
         "cs-check": "phpcs --colors --parallel=16 -p -s --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --ignore='*.inc*' CakePHP/",
         "cs-fix": "phpcbf --colors --parallel=16 -p --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --ignore='*.inc*' CakePHP/",
         "lowest": " validate-prefer-lowest",
