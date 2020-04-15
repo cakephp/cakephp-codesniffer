@@ -34,7 +34,9 @@ You should install this codesniffer with composer:
 	vendor/bin/phpcs --config-set installed_paths /path/to/your/app/vendor/cakephp/cakephp-codesniffer
 
 The second command lets `phpcs` know where to find your new sniffs. Ensure that
-you do not overwrite any existing `installed_paths` value.
+you do not overwrite any existing `installed_paths` value. Alternatively, install
+the [`dealerdirect/phpcodesniffer-composer-installer`](https://github.com/Dealerdirect/phpcodesniffer-composer-installer)
+composer package which will handle configuring the `phpcs` `installed_paths` for you.
 
 ## Usage
 
