@@ -36,8 +36,8 @@
           "@add-standard",
           "phpunit"
         ],
-        "cs-check": "phpcs --colors --parallel=16 -p -s --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --standard=CakePHP CakePHP/Sniffs/",
-        "cs-fix": "phpcbf --colors --parallel=16 -p --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --standard=CakePHP CakePHP/Sniffs/",
+        "cs-check": "phpcs --colors --parallel=16 -p -s --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --ignore='*.inc*' CakePHP/",
+        "cs-fix": "phpcbf --colors --parallel=16 -p --exclude=SlevomatCodingStandard.TypeHints.DeclareStrictTypes --ignore='*.inc*' CakePHP/",
         "lowest": " validate-prefer-lowest",
         "lowest-setup": "composer update --prefer-lowest --prefer-stable --prefer-dist --no-interaction && cp composer.json composer.backup && composer require --dev dereuromark/composer-prefer-lowest && mv composer.backup composer.json",
         "docs": "php docs/generate.php",
