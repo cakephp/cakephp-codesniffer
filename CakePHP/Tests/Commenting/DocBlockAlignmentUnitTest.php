@@ -7,7 +7,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 class DocBlockAlignmentUnitTest extends AbstractSniffUnitTest
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getErrorList($testFile = '')
     {
@@ -27,7 +27,7 @@ class DocBlockAlignmentUnitTest extends AbstractSniffUnitTest
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getWarningList()
     {

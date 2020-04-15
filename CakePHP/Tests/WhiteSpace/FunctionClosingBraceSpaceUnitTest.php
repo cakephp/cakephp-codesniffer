@@ -7,7 +7,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 class FunctionClosingBraceSpaceUnitTest extends AbstractSniffUnitTest
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getErrorList()
     {
@@ -22,7 +22,7 @@ class FunctionClosingBraceSpaceUnitTest extends AbstractSniffUnitTest
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getWarningList()
     {

@@ -7,7 +7,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 class WhileStructuresUnitTest extends AbstractSniffUnitTest
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getErrorList()
     {
@@ -18,7 +18,7 @@ class WhileStructuresUnitTest extends AbstractSniffUnitTest
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getWarningList()
     {
