@@ -32,7 +32,7 @@
     },
     "scripts": {
         "test": "phpunit --filter CakePHP",
-        "cs-check": "phpcs --colors --parallel=16 -p -s  CakePHP/",
+        "cs-check": "phpcs --colors --parallel=16 -p -s CakePHP/",
         "cs-fix": "phpcbf --colors --parallel=16 -p CakePHP/",
         "lowest": " validate-prefer-lowest",
         "lowest-setup": "composer update --prefer-lowest --prefer-stable --prefer-dist --no-interaction && cp composer.json composer.backup && composer require --dev dereuromark/composer-prefer-lowest && mv composer.backup composer.json",
