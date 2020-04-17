@@ -12,11 +12,6 @@ This sniffer package follows [PSR-12](https://www.php-fig.org/psr/psr-12/) compl
 
 [List of included sniffs](/docs)
 
-:warning: The `master` branch contains codesniffer rules that are based on the
-PSR-12 standard. The `next` branch is for CakePHP 4.0+ and requires PHP 7.2+. 
-If you want to check against the historical CakePHP coding
-standard use any of the `1.x` releases.
-
 ## Which version should I use?
 
 | Sniffer version | CakePHP version | PHP min |
