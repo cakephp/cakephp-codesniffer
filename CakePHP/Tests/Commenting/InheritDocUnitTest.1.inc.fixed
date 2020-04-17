@@ -30,6 +30,15 @@ class Foo extends Bar
     public $hand = [];
 
     /**
+     * Short description first.
+     *
+     * {@inheritDoc}
+     *
+     * @var int[]
+     */
+    public $finger = [];
+
+    /**
      * @inheritDoc
      */
     public $toe = [];

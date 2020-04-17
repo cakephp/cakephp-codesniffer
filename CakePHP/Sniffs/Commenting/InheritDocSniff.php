@@ -70,31 +70,36 @@ class InheritDocSniff implements Sniff
               $phpcsFile->findNext($empty, $inheritDoc + 1, $commentEnd, true) !== false
             )
         ) {
-            $msg = '@inheritDoc must be the only comment';
-            $phpcsFile->addError($msg, $inheritDoc, 'NotEmpty');
+            $msg = 'When using @inheritDoc, it must be the only doc comment.';
+            $phpcsFile->addWarning($msg, $inheritDoc, 'NotEmpty');
         }
 
         if (
             preg_match('/^{@inheritDoc}$/i', $tokens[$inheritDoc]['content']) === 1 &&
             $phpcsFile->findNext($empty, $inheritDoc + 1, $commentEnd, true) === false
         ) {
-            $msg = '{@inheritDoc} must be @inheritDoc when only comment';
-            $fix = $phpcsFile->addFixableError($msg, $inheritDoc, 'ShouldNotWrap');
+            $msg = 'When inheriting entire doc comment, @inheritDoc must be used instead of {@inheritDoc}.';
+            $fix = $phpcsFile->addFixableWarning($msg, $inheritDoc, 'ShouldNotWrap');
             if ($fix === true) {
                 $phpcsFile->fixer->replaceToken($inheritDoc, '@inheritDoc');
             }
         }
 
-        if (preg_match('/^{@inheritDoc}/i', $tokens[$inheritDoc]['content']) === 1) {
-            $extra = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $inheritDoc + 1, $commentEnd);
-            if (
-                preg_match('/^{@inheritDoc}$/i', $tokens[$inheritDoc]['content']) !== 1 ||
-                ( $extra !== false && $tokens[$extra]['line'] != $tokens[$inheritDoc]['line'] + 2
-                )
-            ) {
-                $msg = '{@inheritDoc} must be the first line by itself';
-                $phpcsFile->addError($msg, $inheritDoc, 'FirstLine');
+        if (
+            preg_match('/^{@inheritDoc}/i', $tokens[$inheritDoc]['content']) === 1 &&
+            preg_match('/^{@inheritDoc}$/i', $tokens[$inheritDoc]['content']) !== 1
+        ) {
+            $msg = 'If using {@inheritDoc} to copy description, it must be the first line in doc comment.';
+            $phpcsFile->addWarning($msg, $inheritDoc, 'FirstLine');
+        }
+
+        $nextComment = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $inheritDoc + 1, $commentEnd);
+        while ($nextComment !== false) {
+            if (preg_match('/^{@inheritDoc}$/i', $tokens[$nextComment]['content']) === 1) {
+                $msg = 'If using {@inheritDoc} to copy description, it must be the first line in doc comment.';
+                $phpcsFile->addWarning($msg, $nextComment, 'FirstLine');
             }
+            $nextComment = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $nextComment + 1, $commentEnd);
         }
     }
 }
