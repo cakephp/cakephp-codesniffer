@@ -31,7 +31,11 @@
         }
     },
     "scripts": {
-        "test": "phpunit --filter CakePHP",
+        "add-standard" : "phpcs --config-set installed_paths $(pwd)",
+        "test": [
+          "@add-standard",
+          "phpunit --filter CakePHP"
+        ],
         "cs-check": "phpcs --colors --parallel=16 -p -s CakePHP/",
         "cs-fix": "phpcbf --colors --parallel=16 -p CakePHP/",
         "lowest": " validate-prefer-lowest",
