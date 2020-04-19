@@ -258,4 +258,33 @@ class Foo
     public function intersectionType($param)
     {
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function withInheritDocNoTags($param)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @throws \Exception Comment.
+     * @see \Exception
+     * @link http://cakephp.org
+     * @psalm-suppress SomeError
+     * @phpstan-tag SomeError
+     */
+    public function withInheritDocAllowedTags($param)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param int $param This is not allowed on its own.
+     */
+    public function withInheritDocIncompleteTags($param)
+    {
+    }
 }

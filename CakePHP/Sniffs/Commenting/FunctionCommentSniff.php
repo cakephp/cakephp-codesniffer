@@ -50,30 +50,43 @@ use PHP_CodeSniffer\Util\Common;
 class FunctionCommentSniff extends PearFunctionCommentSniff
 {
     /**
-     * Is the comment an inheritdoc?
+     * Checks if the doc comment is an inheritDoc comment.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int $stackPtr The position of the current token in the stack passed in $tokens.
+     * @param int $commentStart The position in the stack where the comment started.
      * @return bool True if the comment is an inheritdoc
      */
-    protected function isInheritDoc(File $phpcsFile, $stackPtr)
+    protected function isInheritDoc(File $phpcsFile, $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
-
-        $start = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $stackPtr - 1);
-        $end = $tokens[$start]['comment_closer'];
 
         $empty = [
             T_DOC_COMMENT_WHITESPACE,
             T_DOC_COMMENT_STAR,
         ];
 
-        $inheritDoc = $phpcsFile->findNext($empty, $start + 1, $end, true);
+        $commentEnd = $tokens[$commentStart]['comment_closer'];
+        $inheritDoc = $phpcsFile->findNext($empty, $commentStart + 1, $commentEnd, true);
         if ($inheritDoc === false) {
             return false;
         }
 
-        return preg_match('/^@inheritDoc$/i', $tokens[$inheritDoc]['content']) === 1;
+        if (preg_match('/^@inheritDoc$/i', $tokens[$inheritDoc]['content']) === 1) {
+            return true;
+        }
+
+        if (preg_match('/^{@inheritDoc}$/i', $tokens[$inheritDoc]['content']) !== 1) {
+            return false;
+        }
+
+        $notAllowed = ['@param', '@return'];
+        foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
+            if (in_array($tokens[$tag]['content'], $notAllowed, true)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -86,7 +99,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
      */
     protected function processReturn(File $phpcsFile, $stackPtr, $commentStart)
     {
-        if ($this->isInheritDoc($phpcsFile, $stackPtr)) {
+        if ($this->isInheritDoc($phpcsFile, $commentStart)) {
             return;
         }
 
@@ -308,7 +321,7 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
      */
     protected function processParams(File $phpcsFile, $stackPtr, $commentStart)
     {
-        if ($this->isInheritDoc($phpcsFile, $stackPtr)) {
+        if ($this->isInheritDoc($phpcsFile, $commentStart)) {
             return;
         }
 
