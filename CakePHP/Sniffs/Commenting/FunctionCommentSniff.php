@@ -278,35 +278,6 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
             if ($exception === null) {
                 $error = 'Exception type and comment missing for @throws tag in function comment';
                 $phpcsFile->addWarning($error, $tag, 'InvalidThrows');
-            } elseif (empty($comment)) {
-                $error = 'Comment missing for @throws tag in function comment';
-                $phpcsFile->addWarning($error, $tag, 'EmptyThrows');
-            } else {
-                // Any strings until the next tag belong to this comment.
-                if (isset($tokens[$commentStart]['comment_tags'][$pos + 1]) === true) {
-                    $end = $tokens[$commentStart]['comment_tags'][$pos + 1];
-                } else {
-                    $end = $tokens[$commentStart]['comment_closer'];
-                }
-
-                for ($i = $tag + 3; $i < $end; $i++) {
-                    if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
-                        $comment .= ' ' . $tokens[$i]['content'];
-                    }
-                }
-
-                // Starts with a capital letter and ends with a fullstop.
-                $firstChar = $comment[0];
-                if (strtoupper($firstChar) !== $firstChar) {
-                    $error = '@throws tag comment must start with a capital letter';
-                    $phpcsFile->addWarning($error, $tag + 2, 'ThrowsNotCapital');
-                }
-
-                $lastChar = substr($comment, -1);
-                if ($lastChar !== '.') {
-                    $error = '@throws tag comment must end with a full stop';
-                    $phpcsFile->addWarning($error, $tag + 2, 'ThrowsNoFullStop');
-                }
             }
         }
     }
@@ -480,23 +451,6 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
                 // We must have an extra parameter comment.
                 $error = 'Superfluous parameter comment';
                 $phpcsFile->addError($error, $param['tag'], 'ExtraParamComment');
-            }
-
-            if ($param['comment'] === '') {
-                continue;
-            }
-
-            // Param comments must start with a capital letter and end with the full stop.
-            $firstChar = $param['comment'][0];
-            if (preg_match('|\p{Lu}|u', $firstChar) === 0) {
-                $error = 'Parameter comment must start with a capital letter';
-                $phpcsFile->addWarning($error, $param['tag'], 'ParamCommentNotCapital');
-            }
-
-            $lastChar = substr($param['comment'], -1);
-            if ($lastChar !== '.') {
-                $error = 'Parameter comment must end with a full stop';
-                $phpcsFile->addWarning($error, $param['tag'], 'ParamCommentFullStop');
             }
         }
 

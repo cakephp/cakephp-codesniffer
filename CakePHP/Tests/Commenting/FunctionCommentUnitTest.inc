@@ -151,50 +151,6 @@ class Foo
     }
 
     /**
-     * @return void
-     * @throws \RuntimeException()
-     */
-    public function EmptyThrows()
-    {
-        throw new \RuntimeException();
-        return;
-    }
-
-    /**
-     * @return void
-     * @throws \RuntimeException No dot
-     */
-    public function throwsNoFullStop()
-    {
-        throw new \RuntimeException();
-    }
-
-    /**
-     * @return void
-     * @throws \RuntimeException not a capital.
-     */
-    public function throwsNotCapital()
-    {
-        throw new \RuntimeException();
-    }
-
-    /**
-     * @param int $param not a capital.
-     * @return void
-     */
-    public function paramCommentNotCapital($param)
-    {
-    }
-
-    /**
-     * @param int $param No final dot
-     * @return void
-     */
-    public function paramCommentFullStop($param)
-    {
-    }
-
-    /**
      * @param int $para Comment.
      * @return void
      */
