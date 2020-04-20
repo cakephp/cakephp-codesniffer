@@ -78,21 +78,6 @@
     <rule ref="CakePHP.Commenting.FunctionComment">
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
-    <rule ref="CakePHP.Commenting.FunctionComment.ParamCommentNotCapital">
-        <severity>0</severity>
-    </rule>
-    <rule ref="CakePHP.Commenting.FunctionComment.ParamCommentFullStop">
-        <severity>0</severity>
-    </rule>
-    <rule ref="CakePHP.Commenting.FunctionComment.ThrowsNotCapital">
-        <severity>0</severity>
-    </rule>
-    <rule ref="CakePHP.Commenting.FunctionComment.EmptyThrows">
-        <severity>0</severity>
-    </rule>
-    <rule ref="CakePHP.Commenting.FunctionComment.ThrowsNoFullStop">
-        <severity>0</severity>
-    </rule>
     <rule ref="Generic.Files.LineLength">
         <properties>
             <property name="ignoreComments" value="true"/>
