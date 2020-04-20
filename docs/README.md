@@ -7,6 +7,7 @@ CakePHP (18 sniffs)
 - CakePHP.Classes.ReturnTypeHint
 - CakePHP.Commenting.DocBlockAlignment
 - CakePHP.Commenting.FunctionComment
+- CakePHP.Commenting.InheritDoc
 - CakePHP.ControlStructures.ControlStructures
 - CakePHP.ControlStructures.ElseIfDeclaration
 - CakePHP.ControlStructures.WhileStructures
