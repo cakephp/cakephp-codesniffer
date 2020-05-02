@@ -1,6 +1,6 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 138 sniffs
+The CakePHP standard contains 139 sniffs
 
 CakePHP (18 sniffs)
 -------------------
@@ -15,7 +15,6 @@ CakePHP (18 sniffs)
 - CakePHP.Functions.ClosureDeclaration
 - CakePHP.NamingConventions.ValidFunctionName
 - CakePHP.NamingConventions.ValidTraitName
-- CakePHP.PHP.CommaAfterArrayItem
 - CakePHP.PHP.DisallowShortOpenTag
 - CakePHP.WhiteSpace.EmptyLines
 - CakePHP.WhiteSpace.FunctionCallSpacing
@@ -97,7 +96,7 @@ PSR2 (12 sniffs)
 - PSR2.Namespaces.NamespaceDeclaration
 - PSR2.Namespaces.UseDeclaration
 
-SlevomatCodingStandard (32 sniffs)
+SlevomatCodingStandard (33 sniffs)
 ----------------------------------
 - SlevomatCodingStandard.Arrays.TrailingArrayComma
 - SlevomatCodingStandard.Classes.ClassConstantVisibility
@@ -105,6 +104,7 @@ SlevomatCodingStandard (32 sniffs)
 - SlevomatCodingStandard.Classes.ModernClassNameReference
 - SlevomatCodingStandard.Classes.UnusedPrivateElements
 - SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment
+- SlevomatCodingStandard.Commenting.DocCommentSpacing
 - SlevomatCodingStandard.Commenting.EmptyComment
 - SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration
 - SlevomatCodingStandard.ControlStructures.AssignmentInCondition
