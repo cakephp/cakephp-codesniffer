@@ -72,19 +72,6 @@
         </properties>
     </rule>
 
-    <!--
-    Temporarily ignore until API docblock formatting and line length issues in core code are fixed.
-    -->
-    <rule ref="CakePHP.Commenting.FunctionComment">
-        <exclude-pattern>*/tests/*</exclude-pattern>
-    </rule>
-    <rule ref="Generic.Files.LineLength">
-        <properties>
-            <property name="ignoreComments" value="true"/>
-        </properties>
-        <exclude-pattern>*/tests/*</exclude-pattern>
-    </rule>
-
     <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
     <rule ref="Squiz.Classes.LowercaseClassKeywords"/>
@@ -117,6 +104,19 @@
         </properties>
     </rule>
 
+    <!--
+    Ignore docblock comments and line length related rules in test files.
+    -->
+    <rule ref="CakePHP.Commenting.FunctionComment">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="ignoreComments" value="true"/>
+        </properties>
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
+
     <!-- Relax some src/* and tests/* rules -->
     <rule ref="PSR1.Files.SideEffects">
         <exclude-pattern>*/config/*</exclude-pattern>
@@ -128,6 +128,7 @@
         <exclude-pattern>*/src/Shell/*</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
+    
     <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
     <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility">
         <properties>
