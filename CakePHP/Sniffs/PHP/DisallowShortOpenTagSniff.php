@@ -13,16 +13,16 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-/**
- * Disallow short open tags
- *
- * But permit short-open echo tags (<?=) [T_OPEN_TAG_WITH_ECHO] as they are part of PHP 5.4+
- */
 namespace CakePHP\Sniffs\PHP;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
+/**
+ * Disallow short open tags
+ *
+ * But permit short-open echo tags (<?=) [T_OPEN_TAG_WITH_ECHO] as they are part of PHP 5.4+
+ */
 class DisallowShortOpenTagSniff implements Sniff
 {
     /**
