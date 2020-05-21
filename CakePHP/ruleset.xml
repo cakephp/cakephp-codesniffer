@@ -128,7 +128,7 @@
         <exclude-pattern>*/src/Shell/*</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
-    
+
     <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
     <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility">
         <properties>
@@ -154,7 +154,11 @@
         </properties>
     </rule>
     <rule ref="SlevomatCodingStandard.Commenting.EmptyComment"/>
-    <rule ref="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration"/>
+    <rule ref="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration">
+        <properties>
+            <property name="allowDocCommentAboveReturn" type="boolean" value="true" />
+        </properties>
+    </rule>
     <rule ref="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.NoAssignment">
         <severity>0</severity>
     </rule>
