@@ -101,22 +101,6 @@ class Foo
     }
 
     /**
-     * @return integer
-     */
-    public function returnIntegerFail()
-    {
-        return 1;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function returnBooleanFail()
-    {
-        return false;
-    }
-
-    /**
      * @return int
      */
     public function returnIntPass()

@@ -153,39 +153,13 @@ class FunctionCommentSniff extends PearFunctionCommentSniff
             return;
         }
 
-        // Check return type (can be multiple, separated by '|').
-        [$types, ] = explode(' ', $content);
-        $typeNames = explode('|', $types);
-        $suggestedNames = [];
-        foreach ($typeNames as $i => $typeName) {
-            if ($typeName === 'integer') {
-                $suggestedName = 'int';
-            } elseif ($typeName === 'boolean') {
-                $suggestedName = 'bool';
-            } elseif (in_array($typeName, ['int', 'bool'])) {
-                $suggestedName = $typeName;
-            } else {
-                $suggestedName = Common::suggestType($typeName);
-            }
-            if (in_array($suggestedName, $suggestedNames) === false) {
-                $suggestedNames[] = $suggestedName;
-            }
-        }
-
-        $suggestedType = implode('|', $suggestedNames);
-        if ($types !== $suggestedType) {
-            $error = 'Expected "%s" but found "%s" for function return type';
-            $data = [
-                $suggestedType,
-                $types,
-            ];
-            $phpcsFile->addError($error, $return, 'InvalidReturn', $data);
-        }
-
         $endToken = $tokens[$stackPtr]['scope_closer'] ?? false;
         if (!$endToken) {
             return;
         }
+
+        [$types, ] = explode(' ', $content);
+        $typeNames = explode('|', $types);
 
         // If the return type is void, make sure there is
         // no non-void return statements in the function.
