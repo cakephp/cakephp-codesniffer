@@ -129,6 +129,13 @@
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
 
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>*/config/Migrations/*</exclude-pattern>
+    </rule>
+    <rule ref="Squiz.Classes.ClassFileName.NoMatch">
+        <exclude-pattern>*/config/Migrations/*</exclude-pattern>
+    </rule>
+    
     <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
     <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility">
         <properties>
