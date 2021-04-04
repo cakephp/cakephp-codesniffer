@@ -8,7 +8,6 @@
     <exclude-pattern>/*/tmp/</exclude-pattern>
     <exclude-pattern>tests/*/templates/*</exclude-pattern>
 
-    <rule ref="PSR2"/>
     <rule ref="PSR12"/>
 
     <rule ref="PSR12.Files.FileHeader.SpacingAfterBlock">
@@ -135,7 +134,7 @@
     <rule ref="Squiz.Classes.ClassFileName.NoMatch">
         <exclude-pattern>*/config/Migrations/*</exclude-pattern>
     </rule>
-    
+
     <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
     <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility">
         <properties>
