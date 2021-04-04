@@ -18,19 +18,6 @@
     </rule>
 
     <!--
-    These are contradictory to PSR12
-    -->
-    <rule ref="PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace">
-        <severity>0</severity>
-    </rule>
-    <rule ref="Squiz.ControlStructures.ForLoopDeclaration.SpacingAfterSecond">
-        <severity>0</severity>
-    </rule>
-    <rule ref="Squiz.ControlStructures.ForLoopDeclaration.SpacingAfterFirst">
-        <severity>0</severity>
-    </rule>
-
-    <!--
     Property and method names with underscore prefix are allowed in CakePHP.
     Not using underscore prefix is a recommendation of PSR2, not a requirement.
     -->
