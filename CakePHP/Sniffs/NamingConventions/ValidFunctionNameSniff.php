@@ -41,6 +41,8 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         'unset',
         'sleep',
         'wakeup',
+        'serialize',
+        'unserialize',
         'toString',
         'set_state',
         'clone',
