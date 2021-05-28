@@ -136,7 +136,7 @@
     </rule>
     <rule ref="SlevomatCodingStandard.Classes.ModernClassNameReference">
         <properties>
-            <property name"enableOnObjects" value="false"/>
+            <property name="enableOnObjects" value="false"/>
         </properties>
     </rule>
     <rule ref="SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment"/>
