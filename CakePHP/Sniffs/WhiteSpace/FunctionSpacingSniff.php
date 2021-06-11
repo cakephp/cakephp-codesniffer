@@ -134,6 +134,11 @@ class FunctionSpacingSniff implements Sniff
         }
 
         $prevContentIndex = $phpCsFile->findPrevious(T_WHITESPACE, $firstTokenInLineIndex - 1, null, true);
+
+        if ($tokens[$prevContentIndex]['type'] === 'T_ATTRIBUTE_END') {
+            return;
+        }
+
         if ($tokens[$prevContentIndex]['type'] === 'T_DOC_COMMENT_CLOSE_TAG') {
             $firstTokenInLineIndex = $tokens[$prevContentIndex]['comment_opener'];
             while ($tokens[$firstTokenInLineIndex - 1]['line'] === $line) {
