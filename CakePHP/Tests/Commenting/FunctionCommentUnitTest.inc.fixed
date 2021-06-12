@@ -227,4 +227,16 @@ class Foo
     public function withInheritDocIncompleteTags($param)
     {
     }
+
+    /**
+     * Some sentence.
+     *
+     * @param integer $param Some Param.
+     * @param boolean $otherParam Some Other Param.
+     * @return string Something.
+     */
+    #[ReturnTypeWillChange]
+    public function returnWillChange($param, $otherParam)
+    {
+    }
 }
