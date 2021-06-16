@@ -1,6 +1,6 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 140 sniffs
+The CakePHP standard contains 136 sniffs
 
 CakePHP (19 sniffs)
 -------------------
@@ -82,11 +82,10 @@ PSR12 (16 sniffs)
 - PSR12.Properties.ConstantVisibility
 - PSR12.Traits.UseDeclaration
 
-PSR2 (12 sniffs)
-----------------
+PSR2 (9 sniffs)
+---------------
 - PSR2.Classes.ClassDeclaration
 - PSR2.Classes.PropertyDeclaration
-- PSR2.ControlStructures.ControlStructureSpacing
 - PSR2.ControlStructures.ElseIfDeclaration
 - PSR2.ControlStructures.SwitchDeclaration
 - PSR2.Files.ClosingTag
@@ -94,8 +93,6 @@ PSR2 (12 sniffs)
 - PSR2.Methods.FunctionCallSignature
 - PSR2.Methods.FunctionClosingBrace
 - PSR2.Methods.MethodDeclaration
-- PSR2.Namespaces.NamespaceDeclaration
-- PSR2.Namespaces.UseDeclaration
 
 SlevomatCodingStandard (32 sniffs)
 ----------------------------------
