@@ -9,39 +9,6 @@ class Foo
     /**
      * Some sentence.
      *
-     * @param integer $param Some Param.
-     * @param boolean $otherParam Some Other Param.
-     * @return string Something.
-     */
-    public function bar($param, $otherParam)
-    {
-    }
-
-    /**
-    * Some sentence.
-    *
-    * @param int $param
-    * @param bool $otherParam
-    * @return void
-    */
-    public function missingParamComment($param, $otherParam)
-    {
-    }
-
-    /**
-     * Some sentence.
-     *
-     * @param
-     * @param
-     * @return void
-     */
-    public function missingParamType($param, $otherParam)
-    {
-    }
-
-    /**
-     * Some sentence.
-     *
      * @return void
      */
     public function invalidReturnVoid()
@@ -135,44 +102,11 @@ class Foo
     }
 
     /**
-     * @param int $para Comment.
-     * @return void
-     */
-    public function paramNameNoMatch($param)
-    {
-    }
-
-    /**
-     * @param int $Param Comment.
-     * @return void
-     */
-    public function paramNameNoCaseMatch($param)
-    {
-    }
-
-    /**
      *
      */
     public function missingReturn()
     {
         return 'what';
-    }
-
-    /**
-     * @param int
-     * @return void
-     */
-    public function missingParamName($param)
-    {
-    }
-
-    /**
-     * @param int $param A description.
-     * @param int $superflous A description.
-     * @return void
-     */
-    public function extraParamComment($param)
-    {
     }
 
     /**
