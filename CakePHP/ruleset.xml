@@ -142,6 +142,9 @@
     <rule ref="SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment"/>
     <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
         <properties>
+            <property name="annotationsGroups" type="array">
+                <element value="@var,@param,@return"/>
+            </property>
             <property name="linesCountBeforeFirstContent" value="0" />
             <property name="linesCountBetweenDescriptionAndAnnotations" value="1" />
             <property name="linesCountBetweenDifferentAnnotationsTypes" value="0" />
@@ -220,6 +223,5 @@
     <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing"/>
     <rule ref="SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable"/>
 
-    <rule ref="SlevomatCodingStandard.Functions.UnusedInheritedVariablePassedToClosure"/>
     <!-- All rules in ./Sniffs are included automatically -->
 </ruleset>
