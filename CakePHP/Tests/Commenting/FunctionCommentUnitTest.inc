@@ -7,26 +7,6 @@ use Other\Error as OtherError;
 class Foo
 {
     /**
-     * Some sentence.
-     *
-     * @return void
-     */
-    public function invalidReturnVoid()
-    {
-        return 'string';
-    }
-
-    /**
-     * [doThing description]
-     *
-     * @param string $foo Foo foo foo.
-     * @return void
-     */
-    public function doThing($foo)
-    {
-    }
-
-    /**
      * Test throws
      *
      * @throws Exception An expection happened.
@@ -54,123 +34,11 @@ class Foo
 
     /**
      * @return void
-     * @return void
-     */
-    public function doubleReturn()
-    {
-    }
-
-    /**
-     * @return
-     */
-    public function missingReturnType()
-    {
-    }
-
-    /**
-     * @return int
-     */
-    public function returnIntPass()
-    {
-        return 1;
-    }
-
-    /**
-     * @return bool
-     */
-    public function returnBooleanPass()
-    {
-        return false;
-    }
-
-    /**
-     * @return int
-     */
-    public function invalidReturnNotVoid()
-    {
-        return;
-    }
-
-    /**
-     * @return void
      * @throws
      */
     public function invalidThrows()
     {
         throw new \RuntimeException();
         return;
-    }
-
-    /**
-     *
-     */
-    public function missingReturn()
-    {
-        return 'what';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function inherited()
-    {
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function inheritedCaseInsentive()
-    {
-    }
-
-    /**
-     * Some sentence.
-     *
-     * @param \Foo&\Bar $param Some Param.
-     * @return void
-     */
-    public function intersectionType($param)
-    {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function withInheritDocNoTags($param)
-    {
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @throws \Exception Comment.
-     * @see \Exception
-     * @link http://cakephp.org
-     * @psalm-suppress SomeError
-     * @phpstan-tag SomeError
-     */
-    public function withInheritDocAllowedTags($param)
-    {
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param int $param This is not allowed on its own.
-     */
-    public function withInheritDocIncompleteTags($param)
-    {
-    }
-
-    /**
-     * Some sentence.
-     *
-     * @param integer $param Some Param.
-     * @param boolean $otherParam Some Other Param.
-     * @return string Something.
-     */
-    #[ReturnTypeWillChange]
-    public function returnWillChange($param, $otherParam)
-    {
     }
 }
