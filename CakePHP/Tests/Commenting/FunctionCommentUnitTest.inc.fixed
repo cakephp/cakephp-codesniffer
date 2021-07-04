@@ -9,39 +9,6 @@ class Foo
     /**
      * Some sentence.
      *
-     * @param int $param Some Param.
-     * @param bool $otherParam Some Other Param.
-     * @return string Something.
-     */
-    public function bar($param, $otherParam)
-    {
-    }
-
-    /**
-    * Some sentence.
-    *
-    * @param int $param
-    * @param bool $otherParam
-    * @return void
-    */
-    public function missingParamComment($param, $otherParam)
-    {
-    }
-
-    /**
-     * Some sentence.
-     *
-     * @param
-     * @param
-     * @return void
-     */
-    public function missingParamType($param, $otherParam)
-    {
-    }
-
-    /**
-     * Some sentence.
-     *
      * @return void
      */
     public function invalidReturnVoid()
