@@ -8,53 +8,28 @@
     <exclude-pattern>/*/tmp/</exclude-pattern>
     <exclude-pattern>tests/*/templates/*</exclude-pattern>
 
-    <rule ref="PSR12"/>
+    <rule ref="PSR12">
+        <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock"/>
+        <exclude name="PSR12.Files.FileHeader.IncorrectOrder"/>
+        <!--
+        Property and method names with underscore prefix are allowed in CakePHP.
+        Not using underscore prefix is a recommendation of PSR2, not a requirement.
+        -->
+        <exclude name="PSR2.Classes.PropertyDeclaration.Underscore"/>
+        <exclude name="PSR2.Methods.MethodDeclaration.Underscore"/>
+    </rule>
 
-    <rule ref="PSR12.Files.FileHeader.SpacingAfterBlock">
-        <severity>0</severity>
-    </rule>
-    <rule ref="PSR12.Files.FileHeader.IncorrectOrder">
-        <severity>0</severity>
-    </rule>
-
-    <!--
-    Property and method names with underscore prefix are allowed in CakePHP.
-    Not using underscore prefix is a recommendation of PSR2, not a requirement.
-    -->
-    <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
-        <severity>0</severity>
-    </rule>
-    <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
-        <severity>0</severity>
-    </rule>
-    <rule ref="Squiz.NamingConventions.ValidFunctionName.PublicUnderscore">
-        <severity>0</severity>
-    </rule>
-    <rule ref="PEAR.NamingConventions.ValidFunctionName.PublicUnderscore">
-        <severity>0</severity>
-    </rule>
-    <rule ref="Zend.NamingConventions.ValidVariableName"/>
-    <rule ref="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore">
-        <severity>0</severity>
-    </rule>
-    <rule ref="Zend.NamingConventions.ValidVariableName.ContainsNumbers">
-        <severity>0</severity>
-    </rule>
-    <rule ref="Zend.NamingConventions.ValidVariableName.StringVarContainsNumbers">
-        <severity>0</severity>
-    </rule>
-    <rule ref="Zend.NamingConventions.ValidVariableName.MemberVarContainsNumbers">
-        <severity>0</severity>
-    </rule>
-    <rule ref="Zend.NamingConventions.ValidVariableName.NotCamelCaps">
-        <severity>0</severity>
-    </rule>
-    <rule ref="Zend.NamingConventions.ValidVariableName.MemberVarNotCamelCaps">
-        <severity>0</severity>
+    <rule ref="Zend.NamingConventions.ValidVariableName">
+        <exclude name="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
+        <exclude name="Zend.NamingConventions.ValidVariableName.ContainsNumbers"/>
+        <exclude name="Zend.NamingConventions.ValidVariableName.StringVarContainsNumbers"/>
+        <exclude name="Zend.NamingConventions.ValidVariableName.MemberVarContainsNumbers"/>
+        <exclude name="Zend.NamingConventions.ValidVariableName.NotCamelCaps"/>
+        <exclude name="Zend.NamingConventions.ValidVariableName.MemberVarNotCamelCaps"/>
     </rule>
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
         <properties>
-            <property name="ignoreBlankLines" value="false"/>
+            <property name="ignoreBlankLines" type="boolean" value="false"/>
         </properties>
     </rule>
 
@@ -98,7 +73,7 @@
     </rule>
     <rule ref="Generic.Files.LineLength">
         <properties>
-            <property name="ignoreComments" value="true"/>
+            <property name="ignoreComments" type="boolean" value="true"/>
         </properties>
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
@@ -154,12 +129,8 @@
         <properties>
             <property name="allowDocCommentAboveReturn" type="boolean" value="true" />
         </properties>
-    </rule>
-    <rule ref="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.NoAssignment">
-        <severity>0</severity>
-    </rule>
-    <rule ref="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.MissingVariable">
-        <severity>0</severity>
+        <exclude name="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.NoAssignment"/>
+        <exclude name="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.MissingVariable"/>
     </rule>
     <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.DisallowContinueWithoutIntegerOperandInSwitch"/>
