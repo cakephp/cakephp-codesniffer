@@ -7,6 +7,62 @@ use Other\Error as OtherError;
 class Foo
 {
     /**
+     */
+    public function testValidComment()
+    {
+    }
+
+    public function missingComment()
+    {
+    }
+
+    // not valid
+    public function invalidComment()
+    {
+    }
+
+    /**
+     */
+    #[
+        ReturnTypeWillChange
+    ]
+    public function testValidAttribute()
+    {
+    }
+
+    /**
+     */
+
+    public function spaceAfterComment()
+    {
+    }
+
+    /**
+     */
+
+    #[ReturnTypeWillChange]
+    public function spaceAfterCommentAndBeforeAttribute()
+    {
+    }
+
+    /**
+     */
+    #[ReturnTypeWillChange]
+
+    public function spaceAfterCommentAndAttribute()
+    {
+    }
+
+    /**
+     */
+    #[ReturnTypeWillChange]
+
+    #[ReturnTypeWillChange2]
+    public function spaceBetweenCommentAndAttribute()
+    {
+    }
+
+    /**
      * Test throws
      *
      * @throws Exception An expection happened.

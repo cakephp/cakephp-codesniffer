@@ -16,7 +16,6 @@ namespace CakePHP\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Parses and verifies the doc comments for functions.
@@ -24,18 +23,8 @@ use PHP_CodeSniffer\Util\Tokens;
  * Verifies that :
  * <ul>
  *  <li>A comment exists</li>
- *  <li>There is a blank newline after the short description</li>
- *  <li>There is a blank newline between the long and short description</li>
- *  <li>There is a blank newline between the long description and tags</li>
- *  <li>Parameter names represent those in the method</li>
- *  <li>Parameter comments are in the correct order</li>
- *  <li>Parameter comments are complete</li>
- *  <li>A type hint is provided for array and custom class</li>
- *  <li>Type hint matches the actual variable/class type</li>
- *  <li>A blank line is present before the first and after the last parameter</li>
- *  <li>A return type exists</li>
+ *  <li>No spacing between doc comment and function</li>
  *  <li>Any throw tag must have a comment</li>
- *  <li>The tag order and indentation are correct</li>
  * </ul>
  *
  * @category  PHP
@@ -49,25 +38,6 @@ use PHP_CodeSniffer\Util\Tokens;
  */
 class FunctionCommentSniff implements Sniff
 {
-    /**
-     * Disable the check for functions with a lower visibility than the value given.
-     *
-     * Allowed values are public, protected, and private.
-     *
-     * @var string
-     */
-    public $minimumVisibility = 'private';
-
-    /**
-     * Array of methods which do not require a return type.
-     *
-     * @var array
-     */
-    public $specialMethods = [
-        '__construct',
-        '__destruct',
-    ];
-
     /**
      * Returns an array of tokens this test wants to listen for.
      *
@@ -87,95 +57,55 @@ class FunctionCommentSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $scopeModifier = $phpcsFile->getMethodProperties($stackPtr)['scope'];
-        if (
-            $scopeModifier === 'protected'
-            && $this->minimumVisibility === 'public'
-            || $scopeModifier === 'private'
-            && ($this->minimumVisibility === 'public' || $this->minimumVisibility === 'protected')
-        ) {
-            return;
-        }
-
         $tokens = $phpcsFile->getTokens();
-        $ignore = Tokens::$methodPrefixes;
-        $ignore[] = T_WHITESPACE;
 
-        $commentEnd = $phpcsFile->findPrevious($ignore, $stackPtr - 1, null, true);
-        if ($tokens[$commentEnd]['code'] === T_COMMENT) {
-            // Inline comments might just be closing comments for
-            // control structures or functions instead of function comments
-            // using the wrong comment type. If there is other code on the line,
-            // assume they relate to that code.
-            $prev = $phpcsFile->findPrevious($ignore, $commentEnd - 1, null, true);
-            if ($prev !== false && $tokens[$prev]['line'] === $tokens[$commentEnd]['line']) {
-                $commentEnd = $prev;
-            }
-        }
-
-        if (
-            $tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
-            && $tokens[$commentEnd]['code'] !== T_COMMENT
-        ) {
-            $previous = $commentEnd;
-            if (
-                $tokens[$commentEnd]['type'] === 'T_ATTRIBUTE_END'
-                || $tokens[$commentEnd]['type'] === 'T_ATTRIBUTE'
-            ) {
-                while ($tokens[$previous]['type'] !== 'T_ATTRIBUTE') {
-                    $previous--;
-                }
-                $previous--;
-
-                $commentEnd = $phpcsFile->findPrevious($ignore, $previous, null, true);
-                if ($tokens[$commentEnd]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
-                    if ($tokens[$commentEnd]['line'] !== $tokens[$previous]['line'] - 1) {
-                        $error = 'There must be no blank lines after the function comment';
-                        $phpcsFile->addError($error, $commentEnd, 'SpacingAfter');
-                    }
-
-                    return;
-                }
-            }
-
-            $function = $phpcsFile->getDeclarationName($stackPtr);
+        $docCommentEnd = $phpcsFile->findPrevious(
+            [T_DOC_COMMENT_CLOSE_TAG, T_SEMICOLON, T_CLOSE_CURLY_BRACKET, T_OPEN_CURLY_BRACKET],
+            $stackPtr - 1,
+            null
+        );
+        if ($docCommentEnd === false || $tokens[$docCommentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG) {
             $phpcsFile->addError(
                 'Missing doc comment for function %s()',
                 $stackPtr,
                 'Missing',
-                [$function]
+                [$phpcsFile->getDeclarationName($stackPtr)]
             );
-            $phpcsFile->recordMetric($stackPtr, 'Function has doc comment', 'no');
-
-            return;
-        } else {
-            $phpcsFile->recordMetric($stackPtr, 'Function has doc comment', 'yes');
-        }
-
-        if ($tokens[$commentEnd]['code'] === T_COMMENT) {
-            $phpcsFile->addError('You must use "/**" style comments for a function comment', $stackPtr, 'WrongStyle');
 
             return;
         }
 
-        if ($tokens[$commentEnd]['line'] !== $tokens[$stackPtr]['line'] - 1) {
-            $error = 'There must be no blank lines after the function comment';
-            $phpcsFile->addError($error, $commentEnd, 'SpacingAfter');
-        }
+        $lastEndToken = $docCommentEnd;
+        do {
+            $attribute = $phpcsFile->findNext(
+                [T_ATTRIBUTE],
+                $lastEndToken + 1,
+                $stackPtr
+            );
+            if ($attribute !== false) {
+                if ($tokens[$lastEndToken]['line'] !== $tokens[$attribute]['line'] - 1) {
+                    $phpcsFile->addError(
+                        'There must be no blank lines after the function comment or attribute',
+                        $lastEndToken,
+                        'SpacingAfter'
+                    );
 
-        $commentStart = $tokens[$commentEnd]['comment_opener'];
-        foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
-            if ($tokens[$tag]['content'] === '@see') {
-                // Make sure the tag isn't empty.
-                $string = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $tag, $commentEnd);
-                if ($string === false || $tokens[$string]['line'] !== $tokens[$tag]['line']) {
-                    $error = 'Content missing for @see tag in function comment';
-                    $phpcsFile->addError($error, $tag, 'EmptySees');
+                    return;
                 }
+
+                $lastEndToken = $tokens[$attribute]['attribute_closer'];
             }
+        } while ($attribute !== false);
+
+        if ($tokens[$lastEndToken]['line'] !== $tokens[$stackPtr]['line'] - 1) {
+            $phpcsFile->addError(
+                'There must be no blank lines after the function comment or attribute',
+                $lastEndToken,
+                'SpacingAfter'
+            );
         }
 
-        $this->processThrows($phpcsFile, $stackPtr, $commentStart);
+        $this->processThrows($phpcsFile, $stackPtr, $tokens[$docCommentEnd]['comment_opener']);
     }
 
     /**
