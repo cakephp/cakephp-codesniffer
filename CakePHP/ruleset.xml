@@ -117,6 +117,10 @@
     <rule ref="SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment"/>
     <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
         <properties>
+            <property name="annotationsGroups" type="array">
+                <element value="dataProvider"/>
+                <element value="var,param,return"/>
+            </property>
             <property name="linesCountBeforeFirstContent" value="0" />
             <property name="linesCountBetweenDescriptionAndAnnotations" value="1" />
             <property name="linesCountBetweenDifferentAnnotationsTypes" value="0" />
