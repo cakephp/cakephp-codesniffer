@@ -105,7 +105,33 @@ class FunctionCommentSniff implements Sniff
             );
         }
 
-        $this->processThrows($phpcsFile, $stackPtr, $tokens[$docCommentEnd]['comment_opener']);
+        $commentStart = $tokens[$docCommentEnd]['comment_opener'];
+        $this->processTagSpacing($phpcsFile, $stackPtr, $commentStart);
+        $this->processThrows($phpcsFile, $stackPtr, $commentStart);
+    }
+
+    /**
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int $stackPtr The position of the current token in the stack passed in $tokens.
+     * @return void
+     */
+    protected function processTagSpacing(File $phpcsFile, int $stackPtr, int $commentStart)
+    {
+        $tokens = $phpcsFile->getTokens();
+        $tags = $tokens[$commentStart]['comment_tags'];
+        foreach ($tags as $tag) {
+            if (
+                $tokens[$tag + 2]['code'] === T_DOC_COMMENT_STRING &&
+                $phpcsFile->fixer->getTokenContent($tag + 1) !== ' '
+            ) {
+                $fix = $phpcsFile->addFixableError('Should be only one space after tag', $tag, 'TagAlignment');
+                if ($fix) {
+                    $phpcsFile->fixer->beginChangeset();
+                    $phpcsFile->fixer->replaceToken($tag + 1, ' ');
+                    $phpcsFile->fixer->endChangeset();
+                }
+            }
+        }
     }
 
     /**
@@ -116,7 +142,7 @@ class FunctionCommentSniff implements Sniff
      * @param int $commentStart The position in the stack where the comment started.
      * @return void
      */
-    protected function processThrows(File $phpcsFile, $stackPtr, $commentStart)
+    protected function processThrows(File $phpcsFile, int $stackPtr, int $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
 
