@@ -119,7 +119,9 @@
         <properties>
             <property name="annotationsGroups" type="array">
                 <element value="@dataProvider"/>
-                <element value="@var,@param,@return"/>
+                <element value="@var,@phpstan-var,@psalm-var"/>
+                <element value="@param,@return,@phpstan-param,@psalm-param,@phpstan-return,@psalm-return"/>
+                <element value="@throws,@see,@link"/>
             </property>
             <property name="linesCountBeforeFirstContent" value="0" />
             <property name="linesCountBetweenDescriptionAndAnnotations" value="1" />
