@@ -124,7 +124,7 @@ class FunctionCommentSniff implements Sniff
                 $tokens[$tag + 2]['code'] === T_DOC_COMMENT_STRING &&
                 $phpcsFile->fixer->getTokenContent($tag + 1) !== ' '
             ) {
-                $fix = $phpcsFile->addFixableError('Should be only one space after tag', $tag, 'TagAlignment');
+                $fix = $phpcsFile->addFixableWarning('Should be only one space after tag', $tag, 'TagAlignment');
                 if ($fix) {
                     $phpcsFile->fixer->beginChangeset();
                     $phpcsFile->fixer->replaceToken($tag + 1, ' ');
