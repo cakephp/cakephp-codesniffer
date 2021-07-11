@@ -22,13 +22,6 @@ class FunctionCommentUnitTest extends AbstractSniffUnitTest
                     58 => 1,
                 ];
 
-            case 'FunctionCommentUnitTest.2.inc':
-                return [
-                    16 => 1,
-                    17 => 1,
-                    18 => 1,
-                ];
-
             default:
                 return [];
         }
@@ -43,6 +36,13 @@ class FunctionCommentUnitTest extends AbstractSniffUnitTest
             case 'FunctionCommentUnitTest.1.inc':
                 return [
                     93 => 1,
+                ];
+
+            case 'FunctionCommentUnitTest.2.inc':
+                return [
+                    16 => 1,
+                    17 => 1,
+                    18 => 1,
                 ];
 
             default:

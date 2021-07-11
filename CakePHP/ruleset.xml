@@ -59,6 +59,9 @@
     <rule ref="CakePHP.Commenting.FunctionComment">
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
+    <rule ref="CakePHP.Commenting.TypeHint">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
 
     <!-- phpcs Squiz sniffs -->
     <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
