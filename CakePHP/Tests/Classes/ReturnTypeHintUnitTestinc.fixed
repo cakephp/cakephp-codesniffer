@@ -1,0 +1,29 @@
+<?php
+namespace Beakman;
+
+use Other\Crap;
+use Other\Error as OtherError;
+
+class Foo
+{
+    /**
+     * @return $this
+     */
+    public function correct()
+    {
+    }
+
+    /**
+     * @return $this
+     */
+    public function incorrect(): Foo
+    {
+    }
+
+    /**
+     * @return $this
+     */
+    public function incorrectSelf()
+    {
+    }
+}
