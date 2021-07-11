@@ -61,8 +61,8 @@ class ReturnTypeHintSniff implements Sniff
             return [];
         }
 
-        $returnTokenType = $tokens[$startIndex]['type'];
-        if ($returnTokenType !== 'T_SELF') {
+        $returnTokenCode = $tokens[$startIndex]['code'];
+        if ($returnTokenCode !== T_SELF) {
             // Then we can only warn, but not auto-fix
             $phpcsFile->addError(
                 'Chaining methods (@return $this) should not have any return-type-hint.',
@@ -107,7 +107,7 @@ class ReturnTypeHintSniff implements Sniff
         $docBlockStartIndex = $tokens[$docBlockEndIndex]['comment_opener'];
 
         for ($i = $docBlockStartIndex + 1; $i < $docBlockEndIndex; $i++) {
-            if ($tokens[$i]['type'] !== 'T_DOC_COMMENT_TAG') {
+            if ($tokens[$i]['code'] !== T_DOC_COMMENT_TAG) {
                 continue;
             }
             if ($tokens[$i]['content'] !== '@return') {
@@ -116,7 +116,7 @@ class ReturnTypeHintSniff implements Sniff
 
             $classNameIndex = $i + 2;
 
-            if ($tokens[$classNameIndex]['type'] !== 'T_DOC_COMMENT_STRING') {
+            if ($tokens[$classNameIndex]['code'] !== T_DOC_COMMENT_STRING) {
                 continue;
             }
 
@@ -149,7 +149,7 @@ class ReturnTypeHintSniff implements Sniff
         $docBlockStartIndex = $tokens[$docBlockEndIndex]['comment_opener'];
 
         for ($i = $docBlockStartIndex + 1; $i < $docBlockEndIndex; $i++) {
-            if ($tokens[$i]['type'] !== 'T_DOC_COMMENT_TAG') {
+            if ($tokens[$i]['code'] !== T_DOC_COMMENT_TAG) {
                 continue;
             }
             if ($tokens[$i]['content'] !== '@return') {
@@ -158,7 +158,7 @@ class ReturnTypeHintSniff implements Sniff
 
             $classNameIndex = $i + 2;
 
-            if ($tokens[$classNameIndex]['type'] !== 'T_DOC_COMMENT_STRING') {
+            if ($tokens[$classNameIndex]['code'] !== T_DOC_COMMENT_STRING) {
                 continue;
             }
 
@@ -197,14 +197,14 @@ class ReturnTypeHintSniff implements Sniff
 
         if (
             !empty($tokens[$beginningOfLine - 2])
-            && $tokens[$beginningOfLine - 2]['type'] === 'T_DOC_COMMENT_CLOSE_TAG'
+            && $tokens[$beginningOfLine - 2]['code'] === T_DOC_COMMENT_CLOSE_TAG
         ) {
             return $beginningOfLine - 2;
         }
 
         if (
             !empty($tokens[$beginningOfLine - 3])
-            && $tokens[$beginningOfLine - 3]['type'] === 'T_DOC_COMMENT_CLOSE_TAG'
+            && $tokens[$beginningOfLine - 3]['code'] === T_DOC_COMMENT_CLOSE_TAG
         ) {
             return $beginningOfLine - 3;
         }
