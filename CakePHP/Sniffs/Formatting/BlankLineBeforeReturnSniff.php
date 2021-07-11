@@ -58,24 +58,24 @@ class BlankLineBeforeReturnSniff implements Sniff
         while ($current >= 0 && $tokens[$current]['line'] >= $previousLine) {
             if (
                 $tokens[$current]['line'] == $previousLine
-                && $tokens[$current]['type'] !== 'T_WHITESPACE'
-                && $tokens[$current]['type'] !== 'T_COMMENT'
-                && $tokens[$current]['type'] !== 'T_DOC_COMMENT_OPEN_TAG'
-                && $tokens[$current]['type'] !== 'T_DOC_COMMENT_TAG'
-                && $tokens[$current]['type'] !== 'T_DOC_COMMENT_STRING'
-                && $tokens[$current]['type'] !== 'T_DOC_COMMENT_CLOSE_TAG'
-                && $tokens[$current]['type'] !== 'T_DOC_COMMENT_WHITESPACE'
+                && $tokens[$current]['code'] !== T_WHITESPACE
+                && $tokens[$current]['code'] !== T_COMMENT
+                && $tokens[$current]['code'] !== T_DOC_COMMENT_OPEN_TAG
+                && $tokens[$current]['code'] !== T_DOC_COMMENT_TAG
+                && $tokens[$current]['code'] !== T_DOC_COMMENT_STRING
+                && $tokens[$current]['code'] !== T_DOC_COMMENT_CLOSE_TAG
+                && $tokens[$current]['code'] !== T_DOC_COMMENT_WHITESPACE
             ) {
-                $prevLineTokens[] = $tokens[$current]['type'];
+                $prevLineTokens[] = $tokens[$current]['code'];
             }
             $current--;
         }
 
         if (
             isset($prevLineTokens[0])
-            && ($prevLineTokens[0] === 'T_OPEN_CURLY_BRACKET'
-                || $prevLineTokens[0] === 'T_COLON'
-                || $prevLineTokens[0] === 'T_OPEN_TAG')
+            && ($prevLineTokens[0] === T_OPEN_CURLY_BRACKET
+                || $prevLineTokens[0] === T_COLON
+                || $prevLineTokens[0] === T_OPEN_TAG)
         ) {
             return;
         } elseif (count($prevLineTokens) > 0) {

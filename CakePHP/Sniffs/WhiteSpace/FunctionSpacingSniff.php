@@ -57,7 +57,7 @@ class FunctionSpacingSniff implements Sniff
             $nextContentIndex = $phpCsFile->findNext(T_WHITESPACE, $semicolonIndex + 1, null, true);
 
             // Do not mess with the end of the class
-            if ($tokens[$nextContentIndex]['type'] === 'T_CLOSE_CURLY_BRACKET') {
+            if ($tokens[$nextContentIndex]['code'] === T_CLOSE_CURLY_BRACKET) {
                 return;
             }
 
@@ -86,7 +86,7 @@ class FunctionSpacingSniff implements Sniff
         $nextContentIndex = $phpCsFile->findNext(T_WHITESPACE, $closingBraceIndex + 1, null, true);
 
         // Do not mess with the end of the class
-        if ($tokens[$nextContentIndex]['type'] === 'T_CLOSE_CURLY_BRACKET') {
+        if ($tokens[$nextContentIndex]['code'] === T_CLOSE_CURLY_BRACKET) {
             return;
         }
 
@@ -135,11 +135,11 @@ class FunctionSpacingSniff implements Sniff
 
         $prevContentIndex = $phpCsFile->findPrevious(T_WHITESPACE, $firstTokenInLineIndex - 1, null, true);
 
-        if ($tokens[$prevContentIndex]['type'] === 'T_ATTRIBUTE_END') {
+        if ($tokens[$prevContentIndex]['code'] === T_ATTRIBUTE_END) {
             return;
         }
 
-        if ($tokens[$prevContentIndex]['type'] === 'T_DOC_COMMENT_CLOSE_TAG') {
+        if ($tokens[$prevContentIndex]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
             $firstTokenInLineIndex = $tokens[$prevContentIndex]['comment_opener'];
             while ($tokens[$firstTokenInLineIndex - 1]['line'] === $line) {
                 $firstTokenInLineIndex--;
@@ -149,7 +149,7 @@ class FunctionSpacingSniff implements Sniff
         $prevContentIndex = $phpCsFile->findPrevious(T_WHITESPACE, $firstTokenInLineIndex - 1, null, true);
 
         // Do not mess with the start of the class
-        if ($tokens[$prevContentIndex]['type'] === 'T_OPEN_CURLY_BRACKET') {
+        if ($tokens[$prevContentIndex]['code'] === T_OPEN_CURLY_BRACKET) {
             return;
         }
 

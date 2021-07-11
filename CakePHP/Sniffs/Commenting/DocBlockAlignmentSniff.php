@@ -74,7 +74,7 @@ class DocBlockAlignmentSniff implements Sniff
                 $phpcsFile->fixer->beginChangeset();
                 foreach ($tokensToIndent as $searchToken => $indent) {
                     $indentString = str_repeat(' ', $indent);
-                    $isOpenTag = $tokens[$searchToken]['type'] === 'T_DOC_COMMENT_OPEN_TAG';
+                    $isOpenTag = $tokens[$searchToken]['code'] === T_DOC_COMMENT_OPEN_TAG;
                     if ($isOpenTag && $commentIndentation === 0) {
                         $phpcsFile->fixer->addContentBefore($searchToken, $indentString);
                     } else {
