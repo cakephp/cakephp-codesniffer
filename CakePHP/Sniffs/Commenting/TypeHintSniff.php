@@ -90,12 +90,20 @@ class TypeHintSniff implements Sniff
 
             $tagComment = $phpcsFile->fixer->getTokenContent($tag + 2);
             $valueNode = self::getValueNode($tokens[$tag]['content'], $tagComment);
-            if ($valueNode instanceof InvalidTagValueNode || !$valueNode->type instanceof UnionTypeNode) {
+            if ($valueNode instanceof InvalidTagValueNode) {
                 continue;
             }
 
-            $originalTypeHint = $this->renderUnionTypes($valueNode->type->types);
-            $sortedTypeHint = $this->getSortedTypeHint($valueNode->type->types);
+            if ($valueNode->type instanceof UnionTypeNode) {
+                $types = $valueNode->type->types;
+            } elseif ($valueNode->type instanceof ArrayTypeNode) {
+                $types = [$valueNode->type];
+            } else {
+                continue;
+            }
+
+            $originalTypeHint = $this->renderUnionTypes($types);
+            $sortedTypeHint = $this->getSortedTypeHint($types);
             if ($sortedTypeHint === $originalTypeHint) {
                 continue;
             }
@@ -103,7 +111,7 @@ class TypeHintSniff implements Sniff
             $fix = $phpcsFile->addFixableWarning(
                 '%s type hint is not formatted properly, expected "%s"',
                 $tag,
-                'Format',
+                'IncorrectFormat',
                 [$tokens[$tag]['content'], $sortedTypeHint]
             );
             if (!$fix) {
