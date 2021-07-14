@@ -3,10 +3,10 @@ namespace Beakman;
 
 class Foo
 {
-    /** @var int|string[]|int[] */
+    /** @var string[] */
     protected $testVar;
 
-    /** @var null|string|class-string<\Cake\I18n\Number>|array $testVar2 */
+    /** @var null|string[]|class-string<\Cake\I18n\Number> $testVar2 */
     protected $testVar2;
 
     /**
