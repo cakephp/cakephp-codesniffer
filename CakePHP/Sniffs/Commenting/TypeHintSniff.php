@@ -43,6 +43,9 @@ class TypeHintSniff implements Sniff
      */
     public $convertArraysToGenerics = true;
 
+    /**
+     * @var array<string>
+     */
     protected static $typeHintTags = [
         '@var',
         '@psalm-var',
