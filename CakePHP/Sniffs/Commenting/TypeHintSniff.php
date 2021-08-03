@@ -111,7 +111,7 @@ class TypeHintSniff implements Sniff
                 continue;
             }
 
-            $fix = $phpcsFile->addFixableWarning(
+            $fix = $phpcsFile->addFixableError(
                 '%s type hint is not formatted properly, expected "%s"',
                 $tag,
                 'IncorrectFormat',
