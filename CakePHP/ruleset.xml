@@ -168,8 +168,8 @@
     <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
     <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint">
         <properties>
-            <property name="enableMixedTypeHint" type="boolean" value="false"/>
-            <property name="enableUnionTypeHint" type="boolean" value="false"/>
+            <property name="enableMixedTypeHint" type="boolean" value="true"/>
+            <property name="enableUnionTypeHint" type="boolean" value="true"/>
         </properties>
         <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint"/>
         <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification"/>
@@ -179,9 +179,9 @@
     <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing"/>
     <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint">
         <properties>
-            <property name="enableMixedTypeHint" type="boolean" value="false"/>
-            <property name="enableStaticTypeHint" type="boolean" value="false"/>
-            <property name="enableUnionTypeHint" type="boolean" value="false"/>
+            <property name="enableMixedTypeHint" type="boolean" value="true"/>
+            <property name="enableStaticTypeHint" type="boolean" value="true"/>
+            <property name="enableUnionTypeHint" type="boolean" value="true"/>
         </properties>
         <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint"/>
         <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification"/>
@@ -190,9 +190,9 @@
     </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint">
         <properties>
-            <property name="enableMixedTypeHint" type="boolean" value="false"/>
-            <property name="enableStaticTypeHint" type="boolean" value="false"/>
-            <property name="enableUnionTypeHint" type="boolean" value="false"/>
+            <property name="enableMixedTypeHint" type="boolean" value="true"/>
+            <property name="enableStaticTypeHint" type="boolean" value="true"/>
+            <property name="enableUnionTypeHint" type="boolean" value="true"/>
         </properties>
         <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint"/>
         <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingTraversableTypeHintSpecification"/>
