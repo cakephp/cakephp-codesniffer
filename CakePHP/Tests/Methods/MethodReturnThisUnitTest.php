@@ -1,10 +1,10 @@
 <?php
 
-namespace CakePHP\Tests\Classes;
+namespace CakePHP\Tests\Methods;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ReturnTypeHintUnitTest extends AbstractSniffUnitTest
+class MethodReturnThisUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritDoc
@@ -12,8 +12,9 @@ class ReturnTypeHintUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [
-            16 => 1,
-            23 => 1,
+            8 => 1,
+            14 => 1,
+            20 => 1,
         ];
     }
 

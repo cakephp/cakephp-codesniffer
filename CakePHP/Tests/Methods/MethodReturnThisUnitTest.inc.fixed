@@ -1,0 +1,34 @@
+<?php
+class Test {
+    /**
+     * Comment.
+     *
+     * @return $this
+     */
+    public function shouldReturnThis(): static {
+    }
+
+    /**
+     * @return $this
+     */
+    public function shouldReturnThis2(): static {
+    }
+
+    /**
+     * @return $this
+     */
+    public function shouldReturnThis3(): static {
+    }
+
+    /**
+     * @return int
+     */
+    public function ignoreMe() {
+    }
+}
+
+/**
+ * @return this
+ */
+function ignoreMe() {
+}
