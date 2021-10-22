@@ -34,6 +34,6 @@ function test()
     /** @var class-string<\Cake\I18n\Number>|null */
     $testVar;
 
-    /** @psalm-var null|string|class-string<\Cake\I18n\Number>|array $testVar2 */
+    /** @psalm-var null|scalar|class-string<\Cake\I18n\Number>|array $testVar2 */
     $testVar2;
 }

@@ -176,6 +176,7 @@ class TypeHintSniff implements Sniff
             'callable-string',
             'class-string',
             'interface-string',
+            'scalar',
             'string',
             'float',
             'int',
