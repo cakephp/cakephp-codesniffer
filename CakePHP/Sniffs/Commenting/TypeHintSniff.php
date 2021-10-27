@@ -173,6 +173,7 @@ class TypeHintSniff implements Sniff
             'resource',
             'object',
             'iterable',
+            'list',
             'array',
             'callable-string',
             'class-string',
