@@ -10,4 +10,12 @@
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
         <severity>0</severity>
     </rule>
+
+    <!-- PHP 7.2 compatible code requires to disallow newer language elements -->
+    <rule ref="SlevomatCodingStandard.Functions.DisallowTrailingCommaInCall"/>
+    <rule ref="SlevomatCodingStandard.Functions.DisallowTrailingCommaInDeclaration"/>
+    <rule ref="SlevomatCodingStandard.Functions.DisallowNamedArguments"/>
+    <rule ref="SlevomatCodingStandard.Classes.DisallowConstructorPropertyPromotion"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowNullSafeObjectOperator"/>
+
 </ruleset>
