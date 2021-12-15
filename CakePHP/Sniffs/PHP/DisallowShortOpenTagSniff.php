@@ -32,6 +32,7 @@ class DisallowShortOpenTagSniff implements Sniff
      * So include T_INLINE_HTML which is what "<?" is detected as
      *
      * @return array
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
      */
     public function register()
     {

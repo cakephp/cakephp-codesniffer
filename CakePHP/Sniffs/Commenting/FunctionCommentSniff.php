@@ -42,6 +42,7 @@ class FunctionCommentSniff implements Sniff
      * Returns an array of tokens this test wants to listen for.
      *
      * @return array
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
      */
     public function register()
     {
@@ -49,11 +50,7 @@ class FunctionCommentSniff implements Sniff
     }
 
     /**
-     * Processes this test, when one of its tokens is encountered.
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int $stackPtr The position of the current token in the stack passed in $tokens.
-     * @return void
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {
@@ -115,7 +112,7 @@ class FunctionCommentSniff implements Sniff
      * @param int $stackPtr The position of the current token in the stack passed in $tokens.
      * @return void
      */
-    protected function processTagSpacing(File $phpcsFile, int $stackPtr, int $commentStart)
+    protected function processTagSpacing(File $phpcsFile, int $stackPtr, int $commentStart): void
     {
         $tokens = $phpcsFile->getTokens();
         $tags = $tokens[$commentStart]['comment_tags'];
@@ -142,7 +139,7 @@ class FunctionCommentSniff implements Sniff
      * @param int $commentStart The position in the stack where the comment started.
      * @return void
      */
-    protected function processThrows(File $phpcsFile, int $stackPtr, int $commentStart)
+    protected function processThrows(File $phpcsFile, int $stackPtr, int $commentStart): void
     {
         $tokens = $phpcsFile->getTokens();
 

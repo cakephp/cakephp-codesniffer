@@ -41,12 +41,12 @@ class TypeHintSniff implements Sniff
     /**
      * @var bool
      */
-    public $convertArraysToGenerics = true;
+    public bool $convertArraysToGenerics = true;
 
     /**
      * @var array<string>
      */
-    protected static $typeHintTags = [
+    protected static array $typeHintTags = [
         '@var',
         '@psalm-var',
         '@phpstan-var',
@@ -62,6 +62,7 @@ class TypeHintSniff implements Sniff
      * Returns an array of tokens this test wants to listen for.
      *
      * @return array
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
      */
     public function register()
     {
@@ -69,11 +70,7 @@ class TypeHintSniff implements Sniff
     }
 
     /**
-     * Processes this test, when one of its tokens is encountered.
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int $stackPtr The position of the current token in the stack passed in $tokens.
-     * @return void
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {
@@ -233,7 +230,7 @@ class TypeHintSniff implements Sniff
         }
 
         $sorted = [];
-        array_walk($sortable, function ($types) use (&$sorted) {
+        array_walk($sortable, function ($types) use (&$sorted): void {
             $sorted = array_merge($sorted, $types);
         });
 
@@ -258,7 +255,7 @@ class TypeHintSniff implements Sniff
      * @param string $tagComment tag comment
      * @return \PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
      */
-    protected static function getValueNode(string $tagName, $tagComment): PhpDocTagValueNode
+    protected static function getValueNode(string $tagName, string $tagComment): PhpDocTagValueNode
     {
         static $phpDocParser;
         if (!$phpDocParser) {
