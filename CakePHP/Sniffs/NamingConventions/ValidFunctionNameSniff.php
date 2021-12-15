@@ -29,7 +29,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
      *
      * @var array
      */
-    protected $_magicMethods = [
+    protected array $_magicMethods = [
         'construct',
         'destruct',
         'call',

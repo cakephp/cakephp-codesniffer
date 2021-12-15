@@ -28,16 +28,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class BlankLineBeforeReturnSniff implements Sniff
 {
     /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
-    /**
      * @inheritDoc
      */
     public function register()

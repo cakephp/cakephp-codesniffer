@@ -100,7 +100,7 @@ class FunctionSpacingSniff implements Sniff
      * @param int|null $nextContentIndex Index
      * @return void
      */
-    protected function assertNewLineAtTheEnd(File $phpCsFile, $closingBraceIndex, $nextContentIndex)
+    protected function assertNewLineAtTheEnd(File $phpCsFile, int $closingBraceIndex, ?int $nextContentIndex): void
     {
         $tokens = $phpCsFile->getTokens();
 
@@ -123,7 +123,7 @@ class FunctionSpacingSniff implements Sniff
      * @param int $stackPointer Stack pointer
      * @return void
      */
-    protected function assertNewLineAtTheBeginning(File $phpCsFile, $stackPointer)
+    protected function assertNewLineAtTheBeginning(File $phpCsFile, int $stackPointer): void
     {
         $tokens = $phpCsFile->getTokens();
 

@@ -25,17 +25,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class TabAndSpaceSniff implements Sniff
 {
     /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-        'CSS',
-    ];
-
-    /**
      * @inheritDoc
      */
     public function register()
