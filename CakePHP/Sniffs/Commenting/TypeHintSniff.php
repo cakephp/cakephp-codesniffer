@@ -243,9 +243,10 @@ class TypeHintSniff implements Sniff
      */
     protected function renderUnionTypes(array $typeNodes): string
     {
+        // Remove parenthesis added by phpstan around union and intersection types
         return preg_replace(
-            ['/ ([\|&]) /', '/<\(/', '/\)>/'],
-            ['${1}', '<', '>'],
+            ['/ ([\|&]) /', '/<\(/', '/\)>/', '/\), /', '/, \(/'],
+            ['${1}', '<', '>', ', ', ', '],
             implode('|', $typeNodes)
         );
     }

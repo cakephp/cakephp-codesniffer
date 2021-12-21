@@ -32,6 +32,7 @@ class TypeHintUnitTest extends AbstractSniffUnitTest
                     24 => 1,
                     25 => 1,
                     37 => 1,
+                    40 => 1,
                 ];
 
             default:
