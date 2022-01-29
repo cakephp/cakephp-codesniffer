@@ -165,6 +165,8 @@ class TypeHintSniff implements Sniff
             '\\ArrayObject',
             '\\Stringable',
             '\\Generator',
+            '$this',
+            'self',
             'mixed',
             'callable',
             'resource',
