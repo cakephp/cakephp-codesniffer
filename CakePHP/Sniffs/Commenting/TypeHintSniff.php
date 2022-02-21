@@ -160,11 +160,12 @@ class TypeHintSniff implements Sniff
     {
         static $shouldSort = [
             '\\Closure',
-            '\\Traversable',
-            '\\ArrayAccess',
-            '\\ArrayObject',
-            '\\Stringable',
             '\\Generator',
+            '\\ArrayObject',
+            '\\ArrayAccess',
+            '\\Traversable',
+            '\\Stringable',
+            '\\Countable',
             '$this',
             'self',
             'mixed',

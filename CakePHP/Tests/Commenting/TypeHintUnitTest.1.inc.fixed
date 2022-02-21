@@ -4,39 +4,28 @@ namespace Beakman;
 class Foo
 {
     /** @var array<string> */
-    protected $testVar;
+    protected $convertToGeneric;
 
-    /** @var array<string>|class-string<\Cake\I18n\Number>|null $testVar2 */
-    protected $testVar2;
+    /** @var \Generator<int>|array<string>|class-string<\Cake\I18n\Number>|null $testVar2 */
+    protected $sortGenerics;
+
+    /** @var array|array<int, string>|array{0: string, 1: int}|string */
+    protected $sortArrayShape
+
+    /** @var \CustomClass|\Closure|\Generator|\ArrayObject|\ArrayAccess|\Traversable|\Stringable|\Countable|string */
+    protected $sortSpecificClassesLast
 
     /**
      * @param \Test|\Closure|mixed|array<string|int>|string|int|false $test
-     * @psalm-param \Test|array<int, string>|array{0: string, 1: int}|string $test2
      * @return string|int|void
      */
-    public function testSortedCompound()
-    {
-    }
-
-    /**
-     * @param \Test|\Closure|mixed|array<string>|array<string|int>|string|int|false $test
-     * @psalm-param \Test|list<int>|array{0: string, 1: int}|string $test2
-     * @return \Test|array<string>|array<int>|int|true|false|null|void
-     * @psalm-return \Test|array<string>|array<int>|int|true|false|null|void
-     */
-    public function testUnsortedCompound()
+    public function testFunctionAnotations()
     {
     }
 }
 
 function test()
 {
-    /** @var class-string<\Cake\I18n\Number>|null */
-    $testVar;
-
-    /** @psalm-var array|class-string<\Cake\I18n\Number>|scalar|null $testVar2 */
-    $testVar2;
-
-    /** @var array<string|int, array<mixed, array<string>|string|null>|string|null>|string|null */
-    $arrays;
+    /** @var string|float|int|null */
+    $testInlineVar;
 }
