@@ -30,6 +30,11 @@
             "CakePHP\\": "CakePHP/"
         }
     },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
     "scripts": {
         "add-standard" : "phpcs --config-set installed_paths $(pwd)",
         "test": [
