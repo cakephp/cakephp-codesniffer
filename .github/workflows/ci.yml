@@ -55,9 +55,9 @@ jobs:
           composer install
         fi
 
-    - name: Configure PHPUnit matcher
+    - name: Setup problem matchers for PHPUnit
       if: matrix.php-version == '7.4'
-      uses: mheap/phpunit-matcher-action@v1
+      run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
     - name: Run PHPUnit
       run: |
