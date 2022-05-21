@@ -44,6 +44,13 @@ class TypeHintSniff implements Sniff
     public bool $convertArraysToGenerics = true;
 
     /**
+     * Keeps types in the form: \ClassName|Type[].
+     *
+     * @var bool
+     */
+    public bool $ignoreLegacyGenerics = false;
+
+    /**
      * @var array<string>
      */
     protected static array $typeHintTags = [
@@ -102,6 +109,10 @@ class TypeHintSniff implements Sniff
                 continue;
             }
 
+            if ($this->ignoreLegacyGenerics && $this->isLegacyGenericType($types)) {
+                continue;
+            }
+
             $originalTypeHint = $this->renderUnionTypes($types);
             $sortedTypeHint = $this->getSortedTypeHint($types);
             if ($sortedTypeHint === $originalTypeHint) {
@@ -150,6 +161,21 @@ class TypeHintSniff implements Sniff
             $phpcsFile->fixer->replaceToken($tag + 2, $newComment);
             $phpcsFile->fixer->endChangeset();
         }
+    }
+
+    /**
+     * @param array $types node types
+     * @return bool
+     */
+    protected function isLegacyGenericType(array $types): bool
+    {
+        if (count($types) != 2) {
+            return false;
+        }
+
+        return $types[0] instanceof IdentifierTypeNode &&
+            $types[1] instanceof ArrayTypeNode &&
+            $types[0]->name[0] === '\\';
     }
 
     /**
