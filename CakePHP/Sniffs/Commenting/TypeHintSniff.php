@@ -48,7 +48,7 @@ class TypeHintSniff implements Sniff
      *
      * @var bool
      */
-    public bool $ignoreLegacyGenerics = false;
+    public bool $ignorePhpStormGenerics = false;
 
     /**
      * @var array<string>
@@ -109,7 +109,7 @@ class TypeHintSniff implements Sniff
                 continue;
             }
 
-            if ($this->ignoreLegacyGenerics && $this->isLegacyGenericType($types)) {
+            if ($this->ignorePhpStormGenerics && $this->isPhpStormGenericType($types)) {
                 continue;
             }
 
@@ -167,7 +167,7 @@ class TypeHintSniff implements Sniff
      * @param array $types node types
      * @return bool
      */
-    protected function isLegacyGenericType(array $types): bool
+    protected function isPhpStormGenericType(array $types): bool
     {
         if (count($types) != 2) {
             return false;
