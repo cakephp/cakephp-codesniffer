@@ -29,3 +29,11 @@ function test()
     /** @var string|float|int|null */
     $testInlineVar;
 }
+
+/**
+ * @param (Type1&Type2)|null $param
+ * @return Type1&Type2
+ */
+function intersection($param)
+{
+}
