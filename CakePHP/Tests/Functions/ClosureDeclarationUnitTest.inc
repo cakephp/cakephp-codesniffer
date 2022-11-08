@@ -21,6 +21,9 @@ class TraitUser
             echo 'It works';
         };
         $visitor($this);
+
+        $visitor = fn($expression) => echo 'It Fails';
+        $visitor = fn ($expression) => echo 'It works';
     }
 }
 
