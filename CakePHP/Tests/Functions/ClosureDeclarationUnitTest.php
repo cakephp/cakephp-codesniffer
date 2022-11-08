@@ -13,7 +13,8 @@ class ClosureDeclarationUnitTest extends AbstractSniffUnitTest
     {
         return [
             17 => 1,
-            30 => 1,
+            25 => 1,
+            33 => 1,
         ];
     }
 

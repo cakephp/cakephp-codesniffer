@@ -27,7 +27,7 @@ class ClosureDeclarationSniff implements Sniff
      */
     public function register()
     {
-        return [T_CLOSURE];
+        return [T_CLOSURE, T_FN];
     }
 
     /**
@@ -43,7 +43,8 @@ class ClosureDeclarationSniff implements Sniff
         }
 
         if ($spaces !== 1) {
-            $error = 'Expected 1 space after closure\'s function keyword; %s found';
+            $keyword = $tokens[$stackPtr]['code'] === T_FN ? 'fn' : 'function';
+            $error = "Expected 1 space after closure's $keyword keyword; %s found";
             $data = [$spaces];
             $phpcsFile->addError($error, $stackPtr, 'SpaceAfterFunction', $data);
         }
