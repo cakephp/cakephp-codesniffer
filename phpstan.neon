@@ -1,0 +1,9 @@
+parameters:
+	level: 6
+	paths:
+		- CakePHP/Sniffs/
+	bootstrapFiles:
+		- %rootDir%/../../../tests/phpstan_bootstrap.php
+	ignoreErrors:
+
+	checkMissingIterableValueType: false
