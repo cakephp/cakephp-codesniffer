@@ -143,19 +143,16 @@ class FunctionCommentSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        foreach ($tokens[$commentStart]['comment_tags'] as $pos => $tag) {
+        foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
             if ($tokens[$tag]['content'] !== '@throws') {
                 continue;
             }
 
-            $exception = $comment = null;
+            $exception = null;
             if ($tokens[$tag + 2]['code'] === T_DOC_COMMENT_STRING) {
                 $matches = [];
                 preg_match('/([^\s]+)(?:\s+(.*))?/', $tokens[$tag + 2]['content'], $matches);
                 $exception = $matches[1];
-                if (isset($matches[2]) === true) {
-                    $comment = $matches[2];
-                }
             }
 
             if ($exception === null) {
