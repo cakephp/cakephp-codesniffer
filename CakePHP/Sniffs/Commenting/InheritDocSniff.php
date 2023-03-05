@@ -38,7 +38,6 @@ class InheritDocSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $commentStart = $stackPtr;
         $commentEnd = $tokens[$stackPtr]['comment_closer'];
 
         $empty = [
