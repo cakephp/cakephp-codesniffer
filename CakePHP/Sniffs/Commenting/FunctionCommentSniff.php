@@ -10,7 +10,7 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @link          https://github.com/cakephp/cakephp-codesniffer
  * @since         CakePHP CodeSniffer 0.1.24
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
 namespace CakePHP\Sniffs\Commenting;
 
@@ -46,7 +46,7 @@ use PHP_CodeSniffer\Util\Tokens;
  * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @version   Release: @package_version@
- * @link      http://pear.php.net/package/PHP_CodeSniffer
+ * @link      https://pear.php.net/package/PHP_CodeSniffer
  */
 class FunctionCommentSniff implements Sniff
 {
