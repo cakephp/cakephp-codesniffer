@@ -211,7 +211,7 @@ class Foo
      *
      * @throws \Exception Comment.
      * @see \Exception
-     * @link http://cakephp.org
+     * @link https://cakephp.org
      * @psalm-suppress SomeError
      * @phpstan-tag SomeError
      */

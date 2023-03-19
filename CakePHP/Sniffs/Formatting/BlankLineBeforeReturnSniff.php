@@ -10,7 +10,7 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @link          https://github.com/cakephp/cakephp-codesniffer
  * @since         CakePHP CodeSniffer 2.1.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace CakePHP\Sniffs\Formatting;
@@ -22,7 +22,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  * Throws errors if there's no blank line before return statements.
  *
  * @author   Authors <Symfony2-coding-standard@escapestudios.github.com>
- * @license  http://spdx.org/licenses/MIT MIT License
+ * @license  https://spdx.org/licenses/MIT MIT License
  * @link     https://github.com/escapestudios/Symfony2-coding-standard
  */
 class BlankLineBeforeReturnSniff implements Sniff
