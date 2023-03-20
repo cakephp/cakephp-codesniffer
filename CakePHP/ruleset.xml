@@ -38,7 +38,7 @@
  <rule ref="PSR2.Namespaces.UseDeclaration"/>
 
  <!--
- Disabled and replaced with local copy. See http://pear.php.net/bugs/bug.php?id=19957
+ Disabled and replaced with local copy. See https://pear.php.net/bugs/bug.php?id=19957
  <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
  -->
  <rule ref="PEAR.NamingConventions.ValidClassName"/>
