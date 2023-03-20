@@ -2,14 +2,14 @@
 /**
  * PHP Version 5
  *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  *
  * This file is originally written by Greg Sherwood and Marc McIntyre, but
  * modified for CakePHP.
  *
  * @copyright     2006 Squiz Pty Ltd (ABN 77 084 670 600)
- * @link          http://pear.php.net/package/PHP_CodeSniffer_CakePHP
+ * @link          https://pear.php.net/package/PHP_CodeSniffer_CakePHP
  * @since         CakePHP CodeSniffer 0.1.1
  * @license       https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */

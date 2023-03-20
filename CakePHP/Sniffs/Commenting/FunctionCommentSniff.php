@@ -10,7 +10,7 @@
  * @author    Marc McIntyre <mmcintyre@squiz.net>
  * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
- * @link      http://pear.php.net/package/PHP_CodeSniffer
+ * @link      https://pear.php.net/package/PHP_CodeSniffer
  */
 
 if (class_exists('PHP_CodeSniffer_CommentParser_FunctionCommentParser', true) === false) {
@@ -41,7 +41,7 @@ if (class_exists('PHP_CodeSniffer_CommentParser_FunctionCommentParser', true) ==
  * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @version   Release: @package_version@
- * @link      http://pear.php.net/package/PHP_CodeSniffer
+ * @link      https://pear.php.net/package/PHP_CodeSniffer
  */
 class CakePHP_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sniff
 {
