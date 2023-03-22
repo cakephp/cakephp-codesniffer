@@ -10,7 +10,7 @@
  * @author    Marc McIntyre <mmcintyre@squiz.net>
  * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
- * @link      http://pear.php.net/package/PHP_CodeSniffer
+ * @link      https://pear.php.net/package/PHP_CodeSniffer
  */
 namespace CakePHP\Sniffs\Commenting;
 
@@ -45,7 +45,7 @@ use PHP_CodeSniffer\Util\Common;
  * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @version   Release: @package_version@
- * @link      http://pear.php.net/package/PHP_CodeSniffer
+ * @link      https://pear.php.net/package/PHP_CodeSniffer
  */
 class FunctionCommentSniff extends PearFunctionCommentSniff
 {

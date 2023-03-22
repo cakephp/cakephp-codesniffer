@@ -8,7 +8,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  * Throws errors if there's no blank line before return statements.
  *
  * @author   Authors <Symfony2-coding-standard@escapestudios.github.com>
- * @license  http://spdx.org/licenses/MIT MIT License
+ * @license  https://spdx.org/licenses/MIT MIT License
  * @link     https://github.com/escapestudios/Symfony2-coding-standard
  */
 class BlankLineBeforeReturnSniff implements Sniff
