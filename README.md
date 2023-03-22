@@ -1,6 +1,6 @@
-# CakePHP Code Sniffer [![Build Status](https://travis-ci.org/cakephp/cakephp-codesniffer.png?branch=master)](http://travis-ci.org/cakephp/cakephp-codesniffer)
+# CakePHP Code Sniffer [![Build Status](https://travis-ci.org/cakephp/cakephp-codesniffer.png?branch=master)](https://travis-ci.org/cakephp/cakephp-codesniffer)
 
-This code works with [phpcs](http://pear.php.net/manual/en/package.php.php-codesniffer.php)
+This code works with [phpcs](https://pear.php.net/manual/en/package.php.php-codesniffer.php)
 and checks code against the coding standards used in CakePHP.
 
 ## Installation
