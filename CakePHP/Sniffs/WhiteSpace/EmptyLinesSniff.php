@@ -10,14 +10,14 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @link          https://github.com/cakephp/cakephp-codesniffer
  * @since         CakePHP CodeSniffer 2.4.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 /**
  * Ensures that not more than one blank line occurs
  *
  * @author Mark Scherer
- * @license http://www.opensource.org/licenses/mit-license.php MIT License
+ * @license https://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace CakePHP\Sniffs\WhiteSpace;
