@@ -10,7 +10,7 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @link          https://github.com/cakephp/cakephp-codesniffer
  * @since         CakePHP CodeSniffer 1.0.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace CakePHP\Sniffs\Commenting;
