@@ -18,7 +18,7 @@
         "source": "https://github.com/cakephp/cakephp-codesniffer"
     },
     "require": {
-        "php": ">=7.2.0",
+        "php": ">=8.1.0",
         "phpstan/phpdoc-parser": "^1.4.5",
         "slevomat/coding-standard": "^8.4",
         "squizlabs/php_codesniffer": "^3.7.1"
@@ -38,9 +38,10 @@
     },
     "scripts": {
         "add-standard" : "phpcs --config-set installed_paths $(pwd)",
+        "phpunit": "phpunit vendor/squizlabs/php_codesniffer/tests/AllTests.php --filter CakePHP --no-configuration --bootstrap=vendor/squizlabs/php_codesniffer/tests/bootstrap.php --dont-report-useless-tests",
         "test": [
           "@add-standard",
-          "phpunit --filter CakePHP"
+          "@phpunit"
         ],
         "cs-check": "phpcs --colors --parallel=16 -p -s CakePHP/",
         "cs-fix": "phpcbf --colors --parallel=16 -p CakePHP/",
