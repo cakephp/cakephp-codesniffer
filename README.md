@@ -62,7 +62,7 @@ additional configuration state in `phpcs` that is required.
 composer test
 ```
 
-Once this has been done once, you can use `phpunit --filter CakePHP` to run the
+Once this has been done once, you can use `composer phpunit` to run the
 tests for the rules in this repository.
 
 ## Contributing
