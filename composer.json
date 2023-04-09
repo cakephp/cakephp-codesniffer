@@ -38,9 +38,10 @@
     },
     "scripts": {
         "add-standard" : "phpcs --config-set installed_paths $(pwd)",
+        "phpunit": "phpunit vendor/squizlabs/php_codesniffer/tests/AllTests.php --filter CakePHP --no-configuration --bootstrap=vendor/squizlabs/php_codesniffer/tests/bootstrap.php --dont-report-useless-tests",
         "test": [
           "@add-standard",
-          "phpunit --filter CakePHP"
+          "@phpunit"
         ],
         "cs-check": "phpcs --colors --parallel=16 -p -s CakePHP/",
         "cs-fix": "phpcbf --colors --parallel=16 -p CakePHP/",
