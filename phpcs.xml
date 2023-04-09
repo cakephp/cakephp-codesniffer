@@ -4,6 +4,8 @@
 
     <arg name="extensions" value="php"/>
 
+    <file>CakePHP/</file>
+
     <!-- CakePHP coding standard -->
     <rule ref="CakePHP"/>
 

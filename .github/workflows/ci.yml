@@ -63,4 +63,4 @@ jobs:
         composer-options: --ignore-platform-reqs
 
     - name: Run PHP CodeSniffer
-      run: vendor/bin/phpcs --report=checkstyle CakePHP/ | cs2pr
+      run: vendor/bin/phpcs --report=checkstyle | cs2pr
