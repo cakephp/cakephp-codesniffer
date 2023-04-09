@@ -1,13 +1,14 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 136 sniffs
+The CakePHP standard contains 143 sniffs
 
-CakePHP (19 sniffs)
+CakePHP (20 sniffs)
 -------------------
 - CakePHP.Classes.ReturnTypeHint
 - CakePHP.Commenting.DocBlockAlignment
 - CakePHP.Commenting.FunctionComment
 - CakePHP.Commenting.InheritDoc
+- CakePHP.Commenting.TypeHint
 - CakePHP.ControlStructures.ControlStructures
 - CakePHP.ControlStructures.ElseIfDeclaration
 - CakePHP.ControlStructures.WhileStructures
@@ -52,10 +53,9 @@ Generic (25 sniffs)
 - Generic.WhiteSpace.IncrementDecrementSpacing
 - Generic.WhiteSpace.ScopeIndent
 
-PEAR (2 sniffs)
+PEAR (1 sniff)
 ---------------
 - PEAR.Functions.ValidDefaultValue
-- PEAR.NamingConventions.ValidFunctionName
 
 PSR1 (3 sniffs)
 ---------------
@@ -63,11 +63,12 @@ PSR1 (3 sniffs)
 - PSR1.Files.SideEffects
 - PSR1.Methods.CamelCapsMethodName
 
-PSR12 (16 sniffs)
+PSR12 (17 sniffs)
 -----------------
 - PSR12.Classes.AnonClassDeclaration
 - PSR12.Classes.ClassInstantiation
 - PSR12.Classes.ClosingBrace
+- PSR12.Classes.OpeningBraceSpace
 - PSR12.ControlStructures.BooleanOperatorPlacement
 - PSR12.ControlStructures.ControlStructureSpacing
 - PSR12.Files.DeclareStatement
@@ -94,12 +95,13 @@ PSR2 (9 sniffs)
 - PSR2.Methods.FunctionClosingBrace
 - PSR2.Methods.MethodDeclaration
 
-SlevomatCodingStandard (32 sniffs)
+SlevomatCodingStandard (39 sniffs)
 ----------------------------------
 - SlevomatCodingStandard.Arrays.TrailingArrayComma
 - SlevomatCodingStandard.Classes.ClassConstantVisibility
 - SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces
 - SlevomatCodingStandard.Classes.ModernClassNameReference
+- SlevomatCodingStandard.Classes.PropertyDeclaration
 - SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment
 - SlevomatCodingStandard.Commenting.DocCommentSpacing
 - SlevomatCodingStandard.Commenting.EmptyComment
@@ -114,6 +116,7 @@ SlevomatCodingStandard (32 sniffs)
 - SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses
 - SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation
 - SlevomatCodingStandard.Namespaces.NamespaceDeclaration
+- SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly
 - SlevomatCodingStandard.Namespaces.UnusedUses
 - SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash
 - SlevomatCodingStandard.Namespaces.UseFromSameNamespace
@@ -125,11 +128,16 @@ SlevomatCodingStandard (32 sniffs)
 - SlevomatCodingStandard.TypeHints.DeclareStrictTypes
 - SlevomatCodingStandard.TypeHints.LongTypeHints
 - SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue
+- SlevomatCodingStandard.TypeHints.ParameterTypeHint
 - SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing
+- SlevomatCodingStandard.TypeHints.PropertyTypeHint
+- SlevomatCodingStandard.TypeHints.ReturnTypeHint
 - SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing
+- SlevomatCodingStandard.TypeHints.UnionTypeHintFormat
 - SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable
+- SlevomatCodingStandard.Variables.UnusedVariable
 
-Squiz (29 sniffs)
+Squiz (28 sniffs)
 -----------------
 - Squiz.Arrays.ArrayBracketSpacing
 - Squiz.Classes.ClassFileName
@@ -144,7 +152,6 @@ Squiz (29 sniffs)
 - Squiz.Functions.FunctionDeclarationArgumentSpacing
 - Squiz.Functions.LowercaseFunctionKeywords
 - Squiz.Functions.MultiLineFunctionDeclaration
-- Squiz.NamingConventions.ValidFunctionName
 - Squiz.Operators.ValidLogicalOperators
 - Squiz.PHP.DisallowSizeFunctionsInLoops
 - Squiz.PHP.Eval
