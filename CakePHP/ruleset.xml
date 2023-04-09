@@ -154,9 +154,6 @@
             <property name="linesCountBeforeDeclare" value="0"/>
             <property name="linesCountAfterDeclare" value="1"/>
             <property name="spacesCountAroundEqualsSign" value="0"/>
-            <!-- Property names used in slevomat/coding-standard v6 -->
-            <property name="newlinesCountAfterDeclare" value="2"/>
-            <property name="newlinesCountBetweenOpenTagAndDeclare" value="1"/>
         </properties>
         <exclude-pattern>*/config/*</exclude-pattern>
         <exclude-pattern>*/templates/*</exclude-pattern>
