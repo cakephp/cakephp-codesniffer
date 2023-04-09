@@ -36,10 +36,6 @@ jobs:
         dependency-versions: ${{ matrix.dependencies }}
         composer-options: --ignore-platform-reqs
 
-    - name: Setup problem matchers for PHPUnit
-      if: matrix.php-version == '8.1'
-      run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
     - name: Run PHPUnit
       run: composer phpunit
 
