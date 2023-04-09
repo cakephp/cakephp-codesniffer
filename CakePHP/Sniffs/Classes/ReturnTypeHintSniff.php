@@ -58,7 +58,7 @@ class ReturnTypeHintSniff implements Sniff
 
         // We skip for interface methods
         if (empty($tokens[$stackPtr]['scope_opener']) || empty($tokens[$stackPtr]['scope_closer'])) {
-            return [];
+            return;
         }
 
         $returnTokenCode = $tokens[$startIndex]['code'];
