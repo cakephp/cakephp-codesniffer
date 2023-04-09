@@ -193,7 +193,6 @@
     <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint">
         <properties>
             <property name="enableMixedTypeHint" type="boolean" value="true"/>
-            <property name="enableStaticTypeHint" type="boolean" value="true"/>
             <property name="enableUnionTypeHint" type="boolean" value="true"/>
         </properties>
         <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingTraversableTypeHintSpecification"/>
