@@ -56,17 +56,18 @@ class BlankLineBeforeReturnSniff implements Sniff
         $prevLineTokens = [];
 
         while ($current >= 0 && $tokens[$current]['line'] >= $previousLine) {
+            $currentTokenCode = $tokens[$current]['code'];
             if (
                 $tokens[$current]['line'] == $previousLine
-                && $tokens[$current]['code'] !== T_WHITESPACE
-                && $tokens[$current]['code'] !== T_COMMENT
-                && $tokens[$current]['code'] !== T_DOC_COMMENT_OPEN_TAG
-                && $tokens[$current]['code'] !== T_DOC_COMMENT_TAG
-                && $tokens[$current]['code'] !== T_DOC_COMMENT_STRING
-                && $tokens[$current]['code'] !== T_DOC_COMMENT_CLOSE_TAG
-                && $tokens[$current]['code'] !== T_DOC_COMMENT_WHITESPACE
+                && $currentTokenCode !== T_WHITESPACE
+                && $currentTokenCode !== T_COMMENT
+                && $currentTokenCode !== T_DOC_COMMENT_OPEN_TAG
+                && $currentTokenCode !== T_DOC_COMMENT_TAG
+                && $currentTokenCode !== T_DOC_COMMENT_STRING
+                && $currentTokenCode !== T_DOC_COMMENT_CLOSE_TAG
+                && $currentTokenCode !== T_DOC_COMMENT_WHITESPACE
             ) {
-                $prevLineTokens[] = $tokens[$current]['code'];
+                $prevLineTokens[] = $currentTokenCode;
             }
             $current--;
         }
