@@ -1,6 +1,6 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 143 sniffs
+The CakePHP standard contains 144 sniffs
 
 CakePHP (20 sniffs)
 -------------------
@@ -95,7 +95,7 @@ PSR2 (9 sniffs)
 - PSR2.Methods.FunctionClosingBrace
 - PSR2.Methods.MethodDeclaration
 
-SlevomatCodingStandard (39 sniffs)
+SlevomatCodingStandard (40 sniffs)
 ----------------------------------
 - SlevomatCodingStandard.Arrays.TrailingArrayComma
 - SlevomatCodingStandard.Classes.ClassConstantVisibility
@@ -113,6 +113,7 @@ SlevomatCodingStandard (39 sniffs)
 - SlevomatCodingStandard.ControlStructures.NewWithParentheses
 - SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator
 - SlevomatCodingStandard.Exceptions.DeadCatch
+- SlevomatCodingStandard.Functions.ArrowFunctionDeclaration
 - SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses
 - SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation
 - SlevomatCodingStandard.Namespaces.NamespaceDeclaration
