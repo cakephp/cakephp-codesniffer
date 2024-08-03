@@ -15,14 +15,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: ['8.1', '8.2']
+        php-version: ['8.1', '8.2', '8.3']
         dependencies: ['highest']
         include:
           - php-version: '8.1'
             dependencies: 'lowest'
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
@@ -31,10 +31,9 @@ jobs:
         coverage: none
 
     - name: Composer install
-      uses: ramsey/composer-install@v2
+      uses: ramsey/composer-install@v3
       with:
         dependency-versions: ${{ matrix.dependencies }}
-        composer-options: --ignore-platform-reqs
 
     - name: Run PHPUnit
       run: composer phpunit
@@ -54,9 +53,7 @@ jobs:
         coverage: none
 
     - name: Composer install
-      uses: ramsey/composer-install@v2
-      with:
-        composer-options: --ignore-platform-reqs
+      uses: ramsey/composer-install@v3
 
     - name: Run PHP CodeSniffer
       run: vendor/bin/phpcs --report=checkstyle | cs2pr

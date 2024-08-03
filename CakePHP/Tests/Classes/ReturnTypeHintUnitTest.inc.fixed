@@ -1,9 +1,6 @@
 <?php
 namespace Beakman;
 
-use Other\Crap;
-use Other\Error as OtherError;
-
 class Foo
 {
     /**

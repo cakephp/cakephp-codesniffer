@@ -216,6 +216,7 @@
             <property name="ignoreUnusedValuesWhenOnlyKeysAreUsedInForeach" value="true" />
         </properties>
     </rule>
+    <rule ref="SlevomatCodingStandard.Functions.ArrowFunctionDeclaration" />
 
     <!-- phpcs Zend sniffs -->
     <rule ref="Zend.NamingConventions.ValidVariableName">
