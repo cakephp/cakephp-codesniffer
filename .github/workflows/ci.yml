@@ -34,7 +34,6 @@ jobs:
       uses: ramsey/composer-install@v3
       with:
         dependency-versions: ${{ matrix.dependencies }}
-        composer-options: --ignore-platform-reqs
 
     - name: Run PHPUnit
       run: composer phpunit
@@ -55,8 +54,6 @@ jobs:
 
     - name: Composer install
       uses: ramsey/composer-install@v3
-      with:
-        composer-options: --ignore-platform-reqs
 
     - name: Run PHP CodeSniffer
       run: vendor/bin/phpcs --report=checkstyle | cs2pr
