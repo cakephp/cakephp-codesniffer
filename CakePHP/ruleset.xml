@@ -219,6 +219,7 @@
     <rule ref="SlevomatCodingStandard.Functions.ArrowFunctionDeclaration" />
     <rule ref="SlevomatCodingStandard.Attributes.AttributeAndTargetSpacing"/>
     <rule ref="SlevomatCodingStandard.Attributes.RequireAttributeAfterDocComment"/>
+    <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall"/>
 
     <!-- phpcs Zend sniffs -->
     <rule ref="Zend.NamingConventions.ValidVariableName">
