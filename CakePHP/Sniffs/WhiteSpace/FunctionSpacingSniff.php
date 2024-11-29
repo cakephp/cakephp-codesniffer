@@ -65,7 +65,7 @@ class FunctionSpacingSniff implements Sniff
                 $fix = $phpCsFile->addFixableError(
                     'Every function/method needs a newline afterwards',
                     $closingParenthesisIndex,
-                    'Abstract'
+                    'Abstract',
                 );
                 if ($fix) {
                     $phpCsFile->fixer->addNewline($semicolonIndex);
@@ -108,7 +108,7 @@ class FunctionSpacingSniff implements Sniff
             $fix = $phpCsFile->addFixableError(
                 'Every function/method needs a newline afterwards',
                 $closingBraceIndex,
-                'Concrete'
+                'Concrete',
             );
             if ($fix) {
                 $phpCsFile->fixer->addNewline($closingBraceIndex);
@@ -160,7 +160,7 @@ class FunctionSpacingSniff implements Sniff
         $fix = $phpCsFile->addFixableError(
             'Every function/method needs a newline before',
             $firstTokenInLineIndex,
-            'Concrete'
+            'Concrete',
         );
         if ($fix) {
             $phpCsFile->fixer->addNewline($prevContentIndex);

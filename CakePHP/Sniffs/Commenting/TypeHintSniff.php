@@ -123,7 +123,7 @@ class TypeHintSniff implements Sniff
                 '%s type hint is not formatted properly, expected "%s"',
                 $tag,
                 'IncorrectFormat',
-                [$tokens[$tag]['content'], $sortedTypeHint]
+                [$tokens[$tag]['content'], $sortedTypeHint],
             );
             if (!$fix) {
                 continue;
@@ -135,7 +135,7 @@ class TypeHintSniff implements Sniff
                     '%s %s %s',
                     $sortedTypeHint,
                     $valueNode->variableName,
-                    $valueNode->description
+                    $valueNode->description,
                 ));
                 if ($tagComment[-1] === ' ') {
                     // tags above variables in code have a trailing space
@@ -147,13 +147,13 @@ class TypeHintSniff implements Sniff
                     $sortedTypeHint,
                     $valueNode->isVariadic ? '...' : '',
                     $valueNode->parameterName,
-                    $valueNode->description
+                    $valueNode->description,
                 ));
             } elseif ($valueNode instanceof ReturnTagValueNode) {
                 $newComment = trim(sprintf(
                     '%s %s',
                     $sortedTypeHint,
-                    $valueNode->description
+                    $valueNode->description,
                 ));
             }
 
@@ -276,7 +276,7 @@ class TypeHintSniff implements Sniff
         return preg_replace(
             ['/ ([\|&]) /', '/<\(/', '/\)>/', '/\), /', '/, \(/'],
             ['${1}', '<', '>', ', ', ', '],
-            implode('|', $typeNodes)
+            implode('|', $typeNodes),
         );
     }
 
