@@ -61,7 +61,7 @@ class DocBlockAlignmentSniff implements Sniff
                         $commentBorder = $phpcsFile->findNext(
                             [T_DOC_COMMENT_STAR, T_DOC_COMMENT_CLOSE_TAG],
                             $searchToken,
-                            $commentClose + 1
+                            $commentClose + 1,
                         );
                         if ($commentBorder !== false) {
                             $tokensToIndent[$commentBorder] = $codeIndentation + 1;
