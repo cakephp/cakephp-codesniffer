@@ -152,7 +152,7 @@ class FunctionCommentSniff implements Sniff
             if ($tokens[$tag + 2]['code'] === T_DOC_COMMENT_STRING) {
                 $matches = [];
                 preg_match('/([^\s]+)(?:\s+(.*))?/', $tokens[$tag + 2]['content'], $matches);
-                $exception = $matches[1];
+                $exception = $matches[1] ?? null;
             }
 
             if ($exception === null) {
