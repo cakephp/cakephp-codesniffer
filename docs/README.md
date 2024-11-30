@@ -1,8 +1,8 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 153 sniffs
+The CakePHP standard contains 152 sniffs
 
-CakePHP (20 sniffs)
+CakePHP (19 sniffs)
 -------------------
 - CakePHP.Classes.ReturnTypeHint
 - CakePHP.Commenting.DocBlockAlignment
@@ -13,7 +13,6 @@ CakePHP (20 sniffs)
 - CakePHP.ControlStructures.ElseIfDeclaration
 - CakePHP.ControlStructures.WhileStructures
 - CakePHP.Formatting.BlankLineBeforeReturn
-- CakePHP.Functions.ClosureDeclaration
 - CakePHP.NamingConventions.ValidFunctionName
 - CakePHP.NamingConventions.ValidTraitName
 - CakePHP.PHP.DisallowShortOpenTag
