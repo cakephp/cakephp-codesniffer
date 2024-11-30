@@ -1,6 +1,6 @@
 # CakePHP Code Sniffer
 
-![Build Status](https://github.com/cakephp/cakephp-codesniffer/actions/workflows/ci.yml/badge.svg?branch=master)
+![Build Status](https://github.com/cakephp/cakephp-codesniffer/actions/workflows/ci.yml/badge.svg?branch=5.x)
 [![Total Downloads](https://img.shields.io/packagist/dt/cakephp/cakephp-codesniffer.svg?style=flat-square)](https://packagist.org/packages/cakephp/cakephp-codesniffer)
 [![Latest Stable Version](https://img.shields.io/packagist/v/cakephp/cakephp-codesniffer.svg?style=flat-square)](https://packagist.org/packages/cakephp/cakephp-codesniffer)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
