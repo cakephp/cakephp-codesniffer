@@ -24,7 +24,6 @@
         "squizlabs/php_codesniffer": "^3.9"
     },
     "require-dev": {
-        "phpstan/phpstan": "^2.0.3",
         "phpunit/phpunit": "^9.3.4"
     },
     "autoload": {
@@ -46,7 +45,7 @@
         ],
         "cs-check": "phpcs --colors --parallel=16 -p -s CakePHP/",
         "cs-fix": "phpcbf --colors --parallel=16 -p CakePHP/",
-        "stan": "phpstan analyse",
+        "stan": "tools/phpstan analyse",
         "docs": "php docs/generate.php",
         "explain": "phpcs -e --standard=CakePHP"
     }

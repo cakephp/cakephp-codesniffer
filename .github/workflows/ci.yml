@@ -49,14 +49,17 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.1'
-        tools: cs2pr
+        tools: phive, cs2pr
         coverage: none
 
     - name: Composer install
       uses: ramsey/composer-install@v3
 
+    - name: Install PHP tools with phive.
+      run: "phive install --trust-gpg-keys 'CF1A108D0E7AE720,51C67305FFC2E5C0,12CE0F1D262429A5'"
+
     - name: Run PHP CodeSniffer
       run: vendor/bin/phpcs --report=checkstyle | cs2pr
 
     - name: Run PHPStan
-      run: vendor/bin/phpstan
+      run: tools/phpstan analyse --error-format=github
