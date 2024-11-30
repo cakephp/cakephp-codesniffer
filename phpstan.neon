@@ -5,5 +5,4 @@ parameters:
 	bootstrapFiles:
 		- %rootDir%/../../../tests/phpstan_bootstrap.php
 	ignoreErrors:
-
-	checkMissingIterableValueType: false
+		- identifier: missingType.iterableValue
