@@ -1,6 +1,6 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 152 sniffs
+The CakePHP standard contains 153 sniffs
 
 CakePHP (20 sniffs)
 -------------------
@@ -95,7 +95,7 @@ PSR12 (17 sniffs)
 - PSR12.Properties.ConstantVisibility
 - PSR12.Traits.UseDeclaration
 
-SlevomatCodingStandard (48 sniffs)
+SlevomatCodingStandard (49 sniffs)
 ----------------------------------
 - SlevomatCodingStandard.Arrays.TrailingArrayComma
 - SlevomatCodingStandard.Attributes.AttributeAndTargetSpacing
@@ -119,6 +119,7 @@ SlevomatCodingStandard (48 sniffs)
 - SlevomatCodingStandard.Functions.DisallowTrailingCommaInCall
 - SlevomatCodingStandard.Functions.DisallowTrailingCommaInClosureUse
 - SlevomatCodingStandard.Functions.DisallowTrailingCommaInDeclaration
+- SlevomatCodingStandard.Functions.NamedArgumentSpacing
 - SlevomatCodingStandard.Functions.RequireTrailingCommaInCall
 - SlevomatCodingStandard.Functions.RequireTrailingCommaInClosureUse
 - SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration
