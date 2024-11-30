@@ -101,6 +101,7 @@ class TypeHintSniff implements Sniff
                 continue;
             }
 
+            /** @phpstan-ignore-next-line  */
             if ($valueNode->type instanceof UnionTypeNode) {
                 $types = $valueNode->type->types;
             } elseif ($valueNode->type instanceof ArrayTypeNode) {

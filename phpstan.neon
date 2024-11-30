@@ -1,0 +1,8 @@
+parameters:
+	level: 6
+	paths:
+		- CakePHP/Sniffs/
+	bootstrapFiles:
+		- tests/phpstan_bootstrap.php
+	ignoreErrors:
+		- identifier: missingType.iterableValue
