@@ -65,7 +65,7 @@ composer test
 Once this has been done once, you can use `composer phpunit` to run the
 tests for the rules in this repository.
 
-The tests are present inside the `CakePHP/Tests` folder.
+The tests are present inside the `CakePHP/Tests/` folder.
 
 ## Contributing
 
