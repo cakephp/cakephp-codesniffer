@@ -1,6 +1,6 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 152 sniffs
+The CakePHP standard contains 155 sniffs
 
 CakePHP (19 sniffs)
 -------------------
@@ -94,11 +94,12 @@ PSR12 (17 sniffs)
 - PSR12.Properties.ConstantVisibility
 - PSR12.Traits.UseDeclaration
 
-SlevomatCodingStandard (49 sniffs)
+SlevomatCodingStandard (52 sniffs)
 ----------------------------------
 - SlevomatCodingStandard.Arrays.TrailingArrayComma
 - SlevomatCodingStandard.Attributes.AttributeAndTargetSpacing
 - SlevomatCodingStandard.Attributes.RequireAttributeAfterDocComment
+- SlevomatCodingStandard.Classes.BackedEnumTypeSpacing
 - SlevomatCodingStandard.Classes.ClassConstantVisibility
 - SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces
 - SlevomatCodingStandard.Classes.ModernClassNameReference
@@ -113,6 +114,7 @@ SlevomatCodingStandard (49 sniffs)
 - SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses
 - SlevomatCodingStandard.ControlStructures.NewWithParentheses
 - SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator
+- SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator
 - SlevomatCodingStandard.Exceptions.DeadCatch
 - SlevomatCodingStandard.Functions.ArrowFunctionDeclaration
 - SlevomatCodingStandard.Functions.DisallowTrailingCommaInCall
@@ -123,6 +125,7 @@ SlevomatCodingStandard (49 sniffs)
 - SlevomatCodingStandard.Functions.RequireTrailingCommaInClosureUse
 - SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration
 - SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses
+- SlevomatCodingStandard.Namespaces.DisallowGroupUse
 - SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation
 - SlevomatCodingStandard.Namespaces.NamespaceDeclaration
 - SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly

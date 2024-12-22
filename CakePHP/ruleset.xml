@@ -244,6 +244,8 @@
     </rule>
     <rule ref="SlevomatCodingStandard.Attributes.AttributeAndTargetSpacing"/>
     <rule ref="SlevomatCodingStandard.Attributes.RequireAttributeAfterDocComment"/>
+    <rule ref="SlevomatCodingStandard.Classes.BackedEnumTypeSpacing"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator"/>
 
     <!-- phpcs Zend sniffs -->
     <rule ref="Zend.NamingConventions.ValidVariableName">
