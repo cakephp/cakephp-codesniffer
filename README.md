@@ -65,10 +65,15 @@ composer test
 Once this has been done once, you can use `composer phpunit` to run the
 tests for the rules in this repository.
 
+The tests are present inside the `CakePHP/Tests` folder.
+
 ## Contributing
 
 If you'd like to contribute to the Code Sniffer, you can fork the project add
 features and send pull requests.
+
+> [!NOTE]
+> Please make sure to run `composer docs` if you change the ruleset.xml file.
 
 ## Releasing CakePHP Code Sniffer
 
