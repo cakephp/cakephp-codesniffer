@@ -22,6 +22,14 @@ class Foo
     public function testFunctionAnotations()
     {
     }
+
+    /**
+     * @param $test
+     * @return void
+     */
+    public function testNoParamTypeHint(string $test)
+    {
+    }
 }
 
 function test()

@@ -101,12 +101,16 @@ class TypeHintSniff implements Sniff
                 continue;
             }
 
-            /** @phpstan-ignore-next-line  */
-            if ($valueNode->type instanceof UnionTypeNode) {
-                $types = $valueNode->type->types;
-            } elseif ($valueNode->type instanceof ArrayTypeNode) {
-                $types = [$valueNode->type];
+            if (isset($valueNode->type)) {
+                if ($valueNode->type instanceof UnionTypeNode) {
+                    $types = $valueNode->type->types;
+                } elseif ($valueNode->type instanceof ArrayTypeNode) {
+                    $types = [$valueNode->type];
+                } else {
+                    continue;
+                }
             } else {
+                $phpcsFile->addWarning('@param type hint is missing', $tag, 'MissingParamType');
                 continue;
             }
 
