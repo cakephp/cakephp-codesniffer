@@ -5,7 +5,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/cakephp/cakephp-codesniffer.svg?style=flat-square)](https://packagist.org/packages/cakephp/cakephp-codesniffer)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
-This code works with [squizlabs/php_codesniffer](https://github.com/squizlabs/PHP_CodeSniffer)
+This code works with [squizlabs/php_codesniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer)
 and checks code against the coding standards used in CakePHP.
 
 This sniffer package follows [PSR-12](https://www.php-fig.org/psr/psr-12/) completely and ships with a lot of additional fixers on top.
