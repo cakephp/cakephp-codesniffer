@@ -130,6 +130,7 @@ SlevomatCodingStandard (43 sniffs)
 - SlevomatCodingStandard.PHP.UselessParentheses
 - SlevomatCodingStandard.PHP.UselessSemicolon
 - SlevomatCodingStandard.TypeHints.DeclareStrictTypes
+- SlevomatCodingStandard.TypeHints.DNFTypeHintFormat
 - SlevomatCodingStandard.TypeHints.LongTypeHints
 - SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue
 - SlevomatCodingStandard.TypeHints.ParameterTypeHint
@@ -137,7 +138,6 @@ SlevomatCodingStandard (43 sniffs)
 - SlevomatCodingStandard.TypeHints.PropertyTypeHint
 - SlevomatCodingStandard.TypeHints.ReturnTypeHint
 - SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing
-- SlevomatCodingStandard.TypeHints.UnionTypeHintFormat
 - SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable
 - SlevomatCodingStandard.Variables.UnusedVariable
 

@@ -32,6 +32,7 @@ use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
+use PHPStan\PhpDocParser\ParserConfig;
 
 /**
  * Verifies order of types in type hints
@@ -294,13 +295,16 @@ class TypeHintSniff implements Sniff
     {
         static $phpDocParser;
         if (!$phpDocParser) {
-            $constExprParser = new ConstExprParser();
-            $phpDocParser = new PhpDocParser(new TypeParser($constExprParser), $constExprParser);
+            $config = new ParserConfig(usedAttributes: ['lines' => true, 'indexes' => true]);
+
+            $constExprParser = new ConstExprParser($config);
+            $phpDocParser = new PhpDocParser($config, new TypeParser($config, $constExprParser), $constExprParser);
         }
 
         static $phpDocLexer;
         if (!$phpDocLexer) {
-            $phpDocLexer = new Lexer();
+            $config = new ParserConfig(usedAttributes: ['lines' => true, 'indexes' => true]);
+            $phpDocLexer = new Lexer($config);
         }
 
         return $phpDocParser->parseTagValue(new TokenIterator($phpDocLexer->tokenize($tagComment)), $tagName);
