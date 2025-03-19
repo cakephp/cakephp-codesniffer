@@ -96,6 +96,24 @@
 
     <!-- Slevomat sniffs-->
     <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
+    <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration"/>
+    <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInClosureUse"/>
+    <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall"/>
+    <rule ref="SlevomatCodingStandard.Functions.DisallowTrailingCommaInDeclaration">
+        <properties>
+            <property name="onlySingleLine" type="boolean" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Functions.DisallowTrailingCommaInClosureUse">
+        <properties>
+            <property name="onlySingleLine" type="boolean" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Functions.DisallowTrailingCommaInCall">
+        <properties>
+            <property name="onlySingleLine" type="boolean" value="true"/>
+        </properties>
+    </rule>
     <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility">
         <properties>
             <property name="fixable" type="boolean" value="true"/>
@@ -115,17 +133,17 @@
     <rule ref="SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment"/>
     <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
         <properties>
-            <property name="linesCountBeforeFirstContent" value="0" />
-            <property name="linesCountBetweenDescriptionAndAnnotations" value="1" />
-            <property name="linesCountBetweenDifferentAnnotationsTypes" value="0" />
-            <property name="linesCountBetweenAnnotationsGroups" value="0" />
-            <property name="linesCountAfterLastContent" value="0" />
+            <property name="linesCountBeforeFirstContent" value="0"/>
+            <property name="linesCountBetweenDescriptionAndAnnotations" value="1"/>
+            <property name="linesCountBetweenDifferentAnnotationsTypes" value="0"/>
+            <property name="linesCountBetweenAnnotationsGroups" value="0"/>
+            <property name="linesCountAfterLastContent" value="0"/>
         </properties>
     </rule>
     <rule ref="SlevomatCodingStandard.Commenting.EmptyComment"/>
     <rule ref="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration">
         <properties>
-            <property name="allowDocCommentAboveReturn" type="boolean" value="true" />
+            <property name="allowDocCommentAboveReturn" type="boolean" value="true"/>
         </properties>
         <exclude name="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.NoAssignment"/>
         <exclude name="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.MissingVariable"/>
@@ -141,6 +159,7 @@
     <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation">
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
+
     <rule ref="SlevomatCodingStandard.Namespaces.NamespaceDeclaration"/>
     <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly">
         <properties>
@@ -200,10 +219,11 @@
         <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.UselessAnnotation"/>
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
-    <rule ref="SlevomatCodingStandard.TypeHints.UnionTypeHintFormat">
+    <rule ref="SlevomatCodingStandard.TypeHints.DNFTypeHintFormat">
         <properties>
             <property name="enable" type="boolean" value="true"/>
-            <property name="withSpaces" value="no"/>
+            <property name="withSpacesAroundOperators" value="no"/>
+            <property name="withSpacesInsideParentheses" value="no"/>
             <property name="shortNullable" value="yes"/>
             <property name="nullPosition" value="last"/>
         </properties>
@@ -214,12 +234,19 @@
     <rule ref="SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable"/>
     <rule ref="SlevomatCodingStandard.Variables.UnusedVariable">
         <properties>
-            <property name="ignoreUnusedValuesWhenOnlyKeysAreUsedInForeach" value="true" />
+            <property name="ignoreUnusedValuesWhenOnlyKeysAreUsedInForeach" value="true"/>
         </properties>
     </rule>
-    <rule ref="SlevomatCodingStandard.Functions.ArrowFunctionDeclaration" />
+    <rule ref="SlevomatCodingStandard.Functions.NamedArgumentSpacing"/>
+    <rule ref="SlevomatCodingStandard.Functions.ArrowFunctionDeclaration">
+        <properties>
+            <property name="spacesCountAfterKeyword" value="0"/>
+        </properties>
+    </rule>
     <rule ref="SlevomatCodingStandard.Attributes.AttributeAndTargetSpacing"/>
     <rule ref="SlevomatCodingStandard.Attributes.RequireAttributeAfterDocComment"/>
+    <rule ref="SlevomatCodingStandard.Classes.BackedEnumTypeSpacing"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator"/>
 
     <!-- phpcs Zend sniffs -->
     <rule ref="Zend.NamingConventions.ValidVariableName">

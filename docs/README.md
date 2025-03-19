@@ -1,8 +1,8 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 147 sniffs
+The CakePHP standard contains 155 sniffs
 
-CakePHP (20 sniffs)
+CakePHP (19 sniffs)
 -------------------
 - CakePHP.Classes.ReturnTypeHint
 - CakePHP.Commenting.DocBlockAlignment
@@ -13,7 +13,6 @@ CakePHP (20 sniffs)
 - CakePHP.ControlStructures.ElseIfDeclaration
 - CakePHP.ControlStructures.WhileStructures
 - CakePHP.Formatting.BlankLineBeforeReturn
-- CakePHP.Functions.ClosureDeclaration
 - CakePHP.NamingConventions.ValidFunctionName
 - CakePHP.NamingConventions.ValidTraitName
 - CakePHP.PHP.DisallowShortOpenTag
@@ -95,11 +94,12 @@ PSR12 (17 sniffs)
 - PSR12.Properties.ConstantVisibility
 - PSR12.Traits.UseDeclaration
 
-SlevomatCodingStandard (43 sniffs)
+SlevomatCodingStandard (52 sniffs)
 ----------------------------------
 - SlevomatCodingStandard.Arrays.TrailingArrayComma
 - SlevomatCodingStandard.Attributes.AttributeAndTargetSpacing
 - SlevomatCodingStandard.Attributes.RequireAttributeAfterDocComment
+- SlevomatCodingStandard.Classes.BackedEnumTypeSpacing
 - SlevomatCodingStandard.Classes.ClassConstantVisibility
 - SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces
 - SlevomatCodingStandard.Classes.ModernClassNameReference
@@ -114,8 +114,16 @@ SlevomatCodingStandard (43 sniffs)
 - SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses
 - SlevomatCodingStandard.ControlStructures.NewWithParentheses
 - SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator
+- SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator
 - SlevomatCodingStandard.Exceptions.DeadCatch
 - SlevomatCodingStandard.Functions.ArrowFunctionDeclaration
+- SlevomatCodingStandard.Functions.DisallowTrailingCommaInCall
+- SlevomatCodingStandard.Functions.DisallowTrailingCommaInClosureUse
+- SlevomatCodingStandard.Functions.DisallowTrailingCommaInDeclaration
+- SlevomatCodingStandard.Functions.NamedArgumentSpacing
+- SlevomatCodingStandard.Functions.RequireTrailingCommaInCall
+- SlevomatCodingStandard.Functions.RequireTrailingCommaInClosureUse
+- SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration
 - SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses
 - SlevomatCodingStandard.Namespaces.DisallowGroupUse
 - SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation
@@ -130,6 +138,7 @@ SlevomatCodingStandard (43 sniffs)
 - SlevomatCodingStandard.PHP.UselessParentheses
 - SlevomatCodingStandard.PHP.UselessSemicolon
 - SlevomatCodingStandard.TypeHints.DeclareStrictTypes
+- SlevomatCodingStandard.TypeHints.DNFTypeHintFormat
 - SlevomatCodingStandard.TypeHints.LongTypeHints
 - SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue
 - SlevomatCodingStandard.TypeHints.ParameterTypeHint
@@ -137,7 +146,6 @@ SlevomatCodingStandard (43 sniffs)
 - SlevomatCodingStandard.TypeHints.PropertyTypeHint
 - SlevomatCodingStandard.TypeHints.ReturnTypeHint
 - SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing
-- SlevomatCodingStandard.TypeHints.UnionTypeHintFormat
 - SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable
 - SlevomatCodingStandard.Variables.UnusedVariable
 

@@ -19,8 +19,8 @@
     },
     "require": {
         "php": ">=8.1.0",
-        "phpstan/phpdoc-parser": "^1.4.5",
-        "slevomat/coding-standard": "^8.15",
+        "phpstan/phpdoc-parser": "^2.1.0",
+        "slevomat/coding-standard": "^8.16",
         "squizlabs/php_codesniffer": "^3.9"
     },
     "require-dev": {
@@ -45,6 +45,7 @@
         ],
         "cs-check": "phpcs --colors --parallel=16 -p -s CakePHP/",
         "cs-fix": "phpcbf --colors --parallel=16 -p CakePHP/",
+        "stan": "tools/phpstan analyse",
         "docs": "php docs/generate.php",
         "explain": "phpcs -e --standard=CakePHP"
     }

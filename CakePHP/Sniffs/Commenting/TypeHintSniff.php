@@ -32,6 +32,7 @@ use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
+use PHPStan\PhpDocParser\ParserConfig;
 
 /**
  * Verifies order of types in type hints
@@ -128,7 +129,7 @@ class TypeHintSniff implements Sniff
                 '%s type hint is not formatted properly, expected "%s"',
                 $tag,
                 'IncorrectFormat',
-                [$tokens[$tag]['content'], $sortedTypeHint]
+                [$tokens[$tag]['content'], $sortedTypeHint],
             );
             if (!$fix) {
                 continue;
@@ -140,7 +141,7 @@ class TypeHintSniff implements Sniff
                     '%s %s %s',
                     $sortedTypeHint,
                     $valueNode->variableName,
-                    $valueNode->description
+                    $valueNode->description,
                 ));
                 if ($tagComment[-1] === ' ') {
                     // tags above variables in code have a trailing space
@@ -152,13 +153,13 @@ class TypeHintSniff implements Sniff
                     $sortedTypeHint,
                     $valueNode->isVariadic ? '...' : '',
                     $valueNode->parameterName,
-                    $valueNode->description
+                    $valueNode->description,
                 ));
             } elseif ($valueNode instanceof ReturnTagValueNode) {
                 $newComment = trim(sprintf(
                     '%s %s',
                     $sortedTypeHint,
-                    $valueNode->description
+                    $valueNode->description,
                 ));
             }
 
@@ -278,10 +279,10 @@ class TypeHintSniff implements Sniff
     protected function renderUnionTypes(array $typeNodes): string
     {
         // Remove parenthesis added by phpstan around union and intersection types
-        return preg_replace(
+        return (string)preg_replace(
             ['/ ([\|&]) /', '/<\(/', '/\)>/', '/\), /', '/, \(/'],
             ['${1}', '<', '>', ', ', ', '],
-            implode('|', $typeNodes)
+            implode('|', $typeNodes),
         );
     }
 
@@ -294,13 +295,16 @@ class TypeHintSniff implements Sniff
     {
         static $phpDocParser;
         if (!$phpDocParser) {
-            $constExprParser = new ConstExprParser();
-            $phpDocParser = new PhpDocParser(new TypeParser($constExprParser), $constExprParser);
+            $config = new ParserConfig(usedAttributes: ['lines' => true, 'indexes' => true]);
+
+            $constExprParser = new ConstExprParser($config);
+            $phpDocParser = new PhpDocParser($config, new TypeParser($config, $constExprParser), $constExprParser);
         }
 
         static $phpDocLexer;
         if (!$phpDocLexer) {
-            $phpDocLexer = new Lexer();
+            $config = new ParserConfig(usedAttributes: ['lines' => true, 'indexes' => true]);
+            $phpDocLexer = new Lexer($config);
         }
 
         return $phpDocParser->parseTagValue(new TokenIterator($phpDocLexer->tokenize($tagComment)), $tagName);

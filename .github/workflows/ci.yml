@@ -11,11 +11,11 @@ on:
 
 jobs:
   testsuite:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
-        php-version: ['8.1', '8.2', '8.3']
+        php-version: ['8.1', '8.2', '8.3', '8.4']
         dependencies: ['highest']
         include:
           - php-version: '8.1'
@@ -40,20 +40,26 @@ jobs:
 
   cs-stan:
     name: Coding Standard & Static Analysis
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.1'
-        tools: cs2pr
+        tools: phive, cs2pr
         coverage: none
 
     - name: Composer install
       uses: ramsey/composer-install@v3
 
+    - name: Install PHP tools with phive.
+      run: "phive install --trust-gpg-keys 'CF1A108D0E7AE720,51C67305FFC2E5C0,12CE0F1D262429A5'"
+
     - name: Run PHP CodeSniffer
       run: vendor/bin/phpcs --report=checkstyle | cs2pr
+
+    - name: Run PHPStan
+      run: tools/phpstan analyse --error-format=github

@@ -59,14 +59,14 @@ class FunctionCommentSniff implements Sniff
         $docCommentEnd = $phpcsFile->findPrevious(
             [T_DOC_COMMENT_CLOSE_TAG, T_SEMICOLON, T_CLOSE_CURLY_BRACKET, T_OPEN_CURLY_BRACKET],
             $stackPtr - 1,
-            null
+            null,
         );
         if ($docCommentEnd === false || $tokens[$docCommentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG) {
             $phpcsFile->addError(
                 'Missing doc comment for function %s()',
                 $stackPtr,
                 'Missing',
-                [$phpcsFile->getDeclarationName($stackPtr)]
+                [$phpcsFile->getDeclarationName($stackPtr)],
             );
 
             return;
@@ -77,14 +77,14 @@ class FunctionCommentSniff implements Sniff
             $attribute = $phpcsFile->findNext(
                 [T_ATTRIBUTE],
                 $lastEndToken + 1,
-                $stackPtr
+                $stackPtr,
             );
             if ($attribute !== false) {
                 if ($tokens[$lastEndToken]['line'] !== $tokens[$attribute]['line'] - 1) {
                     $phpcsFile->addError(
                         'There must be no blank lines after the function comment or attribute',
                         $lastEndToken,
-                        'SpacingAfter'
+                        'SpacingAfter',
                     );
 
                     return;
@@ -98,7 +98,7 @@ class FunctionCommentSniff implements Sniff
             $phpcsFile->addError(
                 'There must be no blank lines after the function comment or attribute',
                 $lastEndToken,
-                'SpacingAfter'
+                'SpacingAfter',
             );
         }
 
@@ -152,7 +152,7 @@ class FunctionCommentSniff implements Sniff
             if ($tokens[$tag + 2]['code'] === T_DOC_COMMENT_STRING) {
                 $matches = [];
                 preg_match('/([^\s]+)(?:\s+(.*))?/', $tokens[$tag + 2]['content'], $matches);
-                $exception = $matches[1];
+                $exception = $matches[1] ?? null;
             }
 
             if ($exception === null) {

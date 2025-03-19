@@ -67,7 +67,7 @@ class ReturnTypeHintSniff implements Sniff
             $phpcsFile->addError(
                 'Chaining methods (@return $this) should not have any return-type-hint.',
                 $startIndex,
-                'InvalidSelf'
+                'InvalidSelf',
             );
 
             return;
@@ -76,7 +76,7 @@ class ReturnTypeHintSniff implements Sniff
         $fix = $phpcsFile->addFixableError(
             'Chaining methods (@return $this) should not have any return-type-hint (Remove "self").',
             $startIndex,
-            'InvalidSelf'
+            'InvalidSelf',
         );
         if (!$fix) {
             return;
@@ -175,7 +175,7 @@ class ReturnTypeHintSniff implements Sniff
             $phpCsFile->addError(
                 'Class name repeated, expected `self` or `$this`.',
                 $classNameIndex,
-                'InvalidClass'
+                'InvalidClass',
             );
         }
     }
@@ -228,9 +228,14 @@ class ReturnTypeHintSniff implements Sniff
             return null;
         }
 
+        $classPointer = $phpCsFile->findPrevious(TokenHelper::$typeKeywordTokenCodes, $lastToken);
+        if (!$classPointer) {
+            return null;
+        }
+
         return ClassHelper::getFullyQualifiedName(
             $phpCsFile,
-            $phpCsFile->findPrevious(TokenHelper::$typeKeywordTokenCodes, $lastToken)
+            $classPointer,
         );
     }
 }

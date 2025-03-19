@@ -15,3 +15,6 @@ end_of_line = crlf
 
 [*.yml]
 indent_size = 2
+
+[*.neon]
+indent_style = tab
