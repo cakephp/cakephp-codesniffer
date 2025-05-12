@@ -24,7 +24,7 @@ CakePHP (19 sniffs)
 - CakePHP.WhiteSpace.FunctionSpacing
 - CakePHP.WhiteSpace.TabAndSpace
 
-Generic (25 sniffs)
+Generic (26 sniffs)
 -------------------
 - Generic.Arrays.DisallowLongArraySyntax
 - Generic.CodeAnalysis.ForLoopShouldBeWhileLoop
@@ -37,7 +37,7 @@ Generic (25 sniffs)
 - Generic.Files.LineEndings
 - Generic.Files.LineLength
 - Generic.Formatting.DisallowMultipleStatements
-- Generic.Formatting.NoSpaceAfterCast
+- Generic.Formatting.SpaceAfterCast
 - Generic.Functions.FunctionCallArgumentSpacing
 - Generic.NamingConventions.UpperCaseConstantName
 - Generic.PHP.DeprecatedFunctions
@@ -50,6 +50,7 @@ Generic (25 sniffs)
 - Generic.PHP.NoSilencedErrors
 - Generic.WhiteSpace.DisallowTabIndent
 - Generic.WhiteSpace.IncrementDecrementSpacing
+- Generic.WhiteSpace.LanguageConstructSpacing
 - Generic.WhiteSpace.ScopeIndent
 
 PEAR (1 sniff)
@@ -149,7 +150,7 @@ SlevomatCodingStandard (52 sniffs)
 - SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable
 - SlevomatCodingStandard.Variables.UnusedVariable
 
-Squiz (28 sniffs)
+Squiz (27 sniffs)
 -----------------
 - Squiz.Arrays.ArrayBracketSpacing
 - Squiz.Classes.ClassFileName
@@ -173,7 +174,6 @@ Squiz (28 sniffs)
 - Squiz.Scope.StaticThisUsage
 - Squiz.WhiteSpace.CastSpacing
 - Squiz.WhiteSpace.ControlStructureSpacing
-- Squiz.WhiteSpace.LanguageConstructSpacing
 - Squiz.WhiteSpace.LogicalOperatorSpacing
 - Squiz.WhiteSpace.ScopeClosingBrace
 - Squiz.WhiteSpace.ScopeKeywordSpacing
