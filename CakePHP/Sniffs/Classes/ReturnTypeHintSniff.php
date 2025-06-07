@@ -228,7 +228,10 @@ class ReturnTypeHintSniff implements Sniff
             return null;
         }
 
-        $classPointer = $phpCsFile->findPrevious(TokenHelper::$typeKeywordTokenCodes, $lastToken);
+        $classPointer = $phpCsFile->findPrevious(
+            [T_CLASS, T_TRAIT, T_INTERFACE, T_ENUM],
+            $lastToken,
+        );
         if (!$classPointer) {
             return null;
         }
