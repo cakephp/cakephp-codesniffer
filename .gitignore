@@ -4,3 +4,4 @@ tags
 composer.lock
 vendor/
 /.idea/
+/tools/
