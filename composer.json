@@ -46,6 +46,8 @@
         "cs-check": "phpcs --colors --parallel=16 -p -s CakePHP/",
         "cs-fix": "phpcbf --colors --parallel=16 -p CakePHP/",
         "stan": "tools/phpstan analyse",
+        "stan-baseline": "tools/phpstan --generate-baseline",
+        "stan-setup": "phive install",
         "docs": "php docs/generate.php",
         "explain": "phpcs -e --standard=CakePHP"
     }
