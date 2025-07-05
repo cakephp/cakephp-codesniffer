@@ -230,7 +230,7 @@ class ReturnTypeHintSniff implements Sniff
 
         return ClassHelper::getFullyQualifiedName(
             $phpCsFile,
-            $phpCsFile->findPrevious(TokenHelper::$typeKeywordTokenCodes, $lastToken)
+            $phpCsFile->findPrevious([T_CLASS, T_TRAIT, T_INTERFACE, T_ENUM], $lastToken)
         );
     }
 }
