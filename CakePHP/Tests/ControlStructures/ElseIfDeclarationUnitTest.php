@@ -2,9 +2,9 @@
 
 namespace CakePHP\Tests\ControlStructures;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class ElseIfDeclarationUnitTest extends AbstractSniffUnitTest
+class ElseIfDeclarationUnitTest extends AbstractSniffTestCase
 {
     /**
      * @inheritDoc

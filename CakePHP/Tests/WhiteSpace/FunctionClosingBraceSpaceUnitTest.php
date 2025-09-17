@@ -2,9 +2,9 @@
 
 namespace CakePHP\Tests\WhiteSpace;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class FunctionClosingBraceSpaceUnitTest extends AbstractSniffUnitTest
+class FunctionClosingBraceSpaceUnitTest extends AbstractSniffTestCase
 {
     /**
      * @inheritDoc
