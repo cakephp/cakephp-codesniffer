@@ -6,8 +6,6 @@
 >
     <description>CakePHP coding standard</description>
 
-    <config name="installed_paths" value="../../slevomat/coding-standard,../../../slevomat/coding-standard,../vendor/slevomat/coding-standard"/>
-
     <exclude-pattern>\.git</exclude-pattern>
     <exclude-pattern>/*/tmp/</exclude-pattern>
     <exclude-pattern>tests/*/templates/*</exclude-pattern>
