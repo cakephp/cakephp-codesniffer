@@ -20,3 +20,4 @@ phpunit.xml.dist export-ignore
 phpstan.neon export-ignore
 .phive export-ignore
 /tests export-ignore
+/docs export-ignore

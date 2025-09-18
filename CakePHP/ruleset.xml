@@ -16,6 +16,7 @@
         <exclude name="PSR12.Files.FileHeader.SpacingAfterDocblockBlock"/>
         <exclude name="PSR12.Files.FileHeader.IncorrectOrder"/>
         <exclude name="PSR12.Files.FileHeader.SpacingAfterUseBlock"/>
+        <exclude name="PSR12.Files.FileHeader.SpacingAfterUseFunctionBlock"/>
         <!--
         Property and method names with underscore prefix are allowed in CakePHP.
         Not using underscore prefix is a recommendation of PSR2, not a requirement.
