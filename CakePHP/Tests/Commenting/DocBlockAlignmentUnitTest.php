@@ -2,9 +2,9 @@
 
 namespace CakePHP\Tests\Commenting;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class DocBlockAlignmentUnitTest extends AbstractSniffUnitTest
+class DocBlockAlignmentUnitTest extends AbstractSniffTestCase
 {
     /**
      * @inheritDoc

@@ -2,9 +2,9 @@
 
 namespace CakePHP\Tests\Classes;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class ReturnTypeHintUnitTest extends AbstractSniffUnitTest
+class ReturnTypeHintUnitTest extends AbstractSniffTestCase
 {
     /**
      * @inheritDoc

@@ -2,9 +2,9 @@
 
 namespace CakePHP\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class DisallowShortOpenTagUnitTest extends AbstractSniffUnitTest
+class DisallowShortOpenTagUnitTest extends AbstractSniffTestCase
 {
     /**
      * @inheritDoc

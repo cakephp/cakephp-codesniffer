@@ -2,9 +2,9 @@
 
 namespace CakePHP\Tests\Formatting;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class BlankLineBeforeReturnUnitTest extends AbstractSniffUnitTest
+class BlankLineBeforeReturnUnitTest extends AbstractSniffTestCase
 {
     /**
      * @inheritDoc

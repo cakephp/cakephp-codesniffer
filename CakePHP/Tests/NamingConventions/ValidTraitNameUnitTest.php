@@ -2,9 +2,9 @@
 
 namespace CakePHP\Tests\NamingConventions;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class ValidTraitNameUnitTest extends AbstractSniffUnitTest
+class ValidTraitNameUnitTest extends AbstractSniffTestCase
 {
     /**
      * @inheritDoc
