@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ruleset name="CakePHP">
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    name="CakePHP"
+    namespace="CakePHP"
+    xsi:noNamespaceSchemaLocation="https://schema.phpcodesniffer.com/phpcs.xsd"
+>
     <description>CakePHP coding standard</description>
-
-    <config name="installed_paths" value="../../slevomat/coding-standard,../../../slevomat/coding-standard,../vendor/slevomat/coding-standard"/>
 
     <exclude-pattern>\.git</exclude-pattern>
     <exclude-pattern>/*/tmp/</exclude-pattern>
@@ -10,8 +12,11 @@
 
     <!-- PSR12 Standard -->
     <rule ref="PSR12">
-        <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock"/>
+        <exclude name="PSR12.Files.FileHeader.SpacingAfterTagBlock"/>
+        <exclude name="PSR12.Files.FileHeader.SpacingAfterDocblockBlock"/>
         <exclude name="PSR12.Files.FileHeader.IncorrectOrder"/>
+        <exclude name="PSR12.Files.FileHeader.SpacingAfterUseBlock"/>
+        <exclude name="PSR12.Files.FileHeader.SpacingAfterUseFunctionBlock"/>
         <!--
         Property and method names with underscore prefix are allowed in CakePHP.
         Not using underscore prefix is a recommendation of PSR2, not a requirement.

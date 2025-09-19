@@ -19,3 +19,5 @@ phpunit.xml.dist export-ignore
 /CakePHP/Tests export-ignore
 phpstan.neon export-ignore
 .phive export-ignore
+/tests export-ignore
+/docs export-ignore
