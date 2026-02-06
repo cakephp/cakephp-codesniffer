@@ -9,19 +9,21 @@ class ValidFunctionNameUnitTest extends AbstractSniffTestCase
     /**
      * @inheritDoc
      */
-    public function getErrorList()
+    public function getErrorList(): array
     {
         return [
-            6 => 1,
-            87 => 1,
-            96 => 1,
+            6 => 1,   // public function _forbidden
+            30 => 1,  // protected function _someFunc
+            103 => 1, // public function _forbidden (interface)
+            112 => 1, // public function _forbidden (trait)
+            136 => 1, // protected function _someFunc (trait)
         ];
     }
 
     /**
      * @inheritDoc
      */
-    public function getWarningList()
+    public function getWarningList(): array
     {
         return [];
     }

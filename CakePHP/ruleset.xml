@@ -18,10 +18,9 @@
         <exclude name="PSR12.Files.FileHeader.SpacingAfterUseBlock"/>
         <exclude name="PSR12.Files.FileHeader.SpacingAfterUseFunctionBlock"/>
         <!--
-        Property and method names with underscore prefix are allowed in CakePHP.
-        Not using underscore prefix is a recommendation of PSR2, not a requirement.
+        We use our own CakePHP.NamingConventions.ValidFunctionName sniff which allows
+        Entity accessor/mutator pattern (_getField, _setField) while enforcing PSR naming elsewhere.
         -->
-        <exclude name="PSR2.Classes.PropertyDeclaration.Underscore"/>
         <exclude name="PSR2.Methods.MethodDeclaration.Underscore"/>
     </rule>
 
@@ -256,6 +255,10 @@
     <rule ref="SlevomatCodingStandard.Attributes.RequireAttributeAfterDocComment"/>
     <rule ref="SlevomatCodingStandard.Classes.BackedEnumTypeSpacing"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceEqualOperator"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullSafeObjectOperator"/>
+    <rule ref="SlevomatCodingStandard.Classes.RequireSelfReference"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
 
     <!-- phpcs Zend sniffs -->
     <rule ref="Zend.NamingConventions.ValidVariableName">

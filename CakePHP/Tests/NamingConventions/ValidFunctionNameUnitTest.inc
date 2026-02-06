@@ -29,7 +29,7 @@ class FunctionNames
 
     protected function _someFunc()
     {
-        // code here
+        // code here - error: underscore prefix not allowed
     }
 
     protected function noUnderscorePrefix()
@@ -38,6 +38,22 @@ class FunctionNames
         $closure = function () {
             // code here
         };
+    }
+
+    // Entity accessor/mutator patterns - should be allowed
+    protected function _getName()
+    {
+        return $this->name;
+    }
+
+    protected function _setName($name)
+    {
+        $this->name = $name;
+    }
+
+    protected function _getFullName()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function __call($name, $arguments)
