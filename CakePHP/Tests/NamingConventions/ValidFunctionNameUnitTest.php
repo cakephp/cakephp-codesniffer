@@ -12,11 +12,11 @@ class ValidFunctionNameUnitTest extends AbstractSniffTestCase
     public function getErrorList(): array
     {
         return [
-            6 => 1,   // public function _forbidden
-            30 => 1,  // protected function _someFunc
-            103 => 1, // public function _forbidden (interface)
-            112 => 1, // public function _forbidden (trait)
-            136 => 1, // protected function _someFunc (trait)
+            6 => 1,
+            30 => 1,
+            103 => 1,
+            112 => 1,
+            136 => 1,
         ];
     }
 
