@@ -9,17 +9,27 @@ class ValidEnumNameUnitTest extends AbstractSniffTestCase
     /**
      * @inheritDoc
      */
-    public function getErrorList()
+    public function getErrorList($testFile = '')
     {
-        return [
-            2 => 1,
-        ];
+        switch ($testFile) {
+            case 'ValidEnumNameUnitTest.1.inc':
+                return [
+                    2 => 1,
+                ];
+
+            case 'ValidEnumNameUnitTest.2.inc':
+                // No errors - enums in Enum namespace don't need suffix
+                return [];
+
+            default:
+                return [];
+        }
     }
 
     /**
      * @inheritDoc
      */
-    public function getWarningList()
+    public function getWarningList($testFile = '')
     {
         return [];
     }
