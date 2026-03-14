@@ -233,7 +233,6 @@
             <property name="withSpacesAroundOperators" value="no"/>
             <property name="withSpacesInsideParentheses" value="no"/>
             <property name="shortNullable" value="yes"/>
-            <property name="nullPosition" value="last"/>
         </properties>
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
@@ -258,7 +257,6 @@
     <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceEqualOperator"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullSafeObjectOperator"/>
     <rule ref="SlevomatCodingStandard.Classes.RequireSelfReference"/>
-    <rule ref="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
 
     <!-- phpcs Zend sniffs -->
     <rule ref="Zend.NamingConventions.ValidVariableName">
