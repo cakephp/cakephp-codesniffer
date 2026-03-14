@@ -14,21 +14,21 @@
  */
 
 /**
- * Ensures trait names are correct depending on the folder of the file.
+ * Ensures enum names use the Enum suffix.
  */
 namespace CakePHP\Sniffs\NamingConventions;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
-class ValidTraitNameSniff implements Sniff
+class ValidEnumNameSniff implements Sniff
 {
     /**
      * @inheritDoc
      */
     public function register()
     {
-        return [T_TRAIT];
+        return [T_ENUM];
     }
 
     /**
@@ -36,12 +36,11 @@ class ValidTraitNameSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $tokens = $phpcsFile->getTokens();
-        $traitName = $tokens[$stackPtr + 2]['content'];
+        $enumName = $phpcsFile->getDeclarationName($stackPtr);
 
-        if (!str_ends_with($traitName, 'Trait')) {
-            $error = 'Traits must have a "Trait" suffix.';
-            $phpcsFile->addError($error, $stackPtr, 'InvalidTraitName');
+        if (!str_ends_with($enumName, 'Enum')) {
+            $error = 'Enums must have an "Enum" suffix.';
+            $phpcsFile->addError($error, $stackPtr, 'InvalidEnumName');
         }
     }
 }
