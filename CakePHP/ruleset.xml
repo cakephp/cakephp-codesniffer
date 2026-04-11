@@ -173,6 +173,7 @@
         <properties>
             <property name="allowFallbackGlobalFunctions" type="boolean" value="true"/>
             <property name="allowFallbackGlobalConstants" type="boolean" value="true"/>
+            <property name="allowPartialUses" type="boolean" value="false"/>
         </properties>
     </rule>
     <rule ref="SlevomatCodingStandard.Namespaces.DisallowGroupUse"/>
