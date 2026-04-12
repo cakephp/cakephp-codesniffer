@@ -62,12 +62,14 @@ class FunctionCommentSniff implements Sniff
             null,
         );
         if ($docCommentEnd === false || $tokens[$docCommentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG) {
-            $phpcsFile->addError(
-                'Missing doc comment for function %s()',
-                $stackPtr,
-                'Missing',
-                [$phpcsFile->getDeclarationName($stackPtr)],
-            );
+            if (!$this->hasFullNativeTypes($phpcsFile, $stackPtr)) {
+                $phpcsFile->addError(
+                    'Missing doc comment for function %s()',
+                    $stackPtr,
+                    'Missing',
+                    [$phpcsFile->getDeclarationName($stackPtr)],
+                );
+            }
 
             return;
         }
@@ -105,6 +107,38 @@ class FunctionCommentSniff implements Sniff
         $commentStart = $tokens[$docCommentEnd]['comment_opener'];
         $this->processTagSpacing($phpcsFile, $stackPtr, $commentStart);
         $this->processThrows($phpcsFile, $stackPtr, $commentStart);
+    }
+
+    /**
+     * Checks whether the function has a native return type (or is a constructor)
+     * and every parameter has a native type declaration. A docblock is considered
+     * redundant in that case since all type information is already expressed in
+     * the signature.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int $stackPtr The position of the current token in the stack passed in $tokens.
+     * @return bool
+     */
+    protected function hasFullNativeTypes(File $phpcsFile, int $stackPtr): bool
+    {
+        $name = $phpcsFile->getDeclarationName($stackPtr);
+        $isConstructor = strtolower((string)$name) === '__construct';
+
+        if (!$isConstructor) {
+            $properties = $phpcsFile->getMethodProperties($stackPtr);
+            if (($properties['return_type'] ?? '') === '') {
+                return false;
+            }
+        }
+
+        $parameters = $phpcsFile->getMethodParameters($stackPtr);
+        foreach ($parameters as $parameter) {
+            if (($parameter['type_hint'] ?? '') === '') {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

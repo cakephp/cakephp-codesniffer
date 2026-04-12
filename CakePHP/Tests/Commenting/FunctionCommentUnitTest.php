@@ -20,6 +20,8 @@ class FunctionCommentUnitTest extends AbstractSniffTestCase
                     41 => 1,
                     50 => 1,
                     58 => 1,
+                    111 => 1,
+                    115 => 1,
                 ];
 
             default:

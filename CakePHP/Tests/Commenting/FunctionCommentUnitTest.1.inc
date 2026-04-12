@@ -97,4 +97,22 @@ class Foo
         throw new \RuntimeException();
         return;
     }
+
+    public function fullyTyped(int $a, string $b): void
+    {
+    }
+
+    public function __construct(
+        public readonly int $id,
+        public readonly string $name,
+    ) {
+    }
+
+    public function noReturnType(int $a)
+    {
+    }
+
+    public function missingParamType($a): void
+    {
+    }
 }
