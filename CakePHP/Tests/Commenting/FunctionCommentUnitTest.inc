@@ -239,4 +239,17 @@ class Foo
     public function returnWillChange($param, $otherParam)
     {
     }
+
+    /**
+     * Some sentence.
+     *
+     * @param int $param Some Param.
+     * @param bool $otherParam Some Other Param.
+     * @return string Something.
+     */
+    #[ReturnTypeWillChange]
+    #[NoDiscard]
+    public function withMultipleAttributes($param, $otherParam)
+    {
+    }
 }
