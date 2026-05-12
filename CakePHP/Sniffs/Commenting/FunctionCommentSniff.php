@@ -119,7 +119,7 @@ class FunctionCommentSniff implements Sniff
             && $tokens[$commentEnd]['code'] !== T_COMMENT
         ) {
             $previous = $commentEnd;
-            if (
+            while (
                 $tokens[$commentEnd]['code'] === T_ATTRIBUTE_END
                 || $tokens[$commentEnd]['code'] === T_ATTRIBUTE
             ) {
