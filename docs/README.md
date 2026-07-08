@@ -2,7 +2,7 @@
 
 The CakePHP standard contains 155 sniffs
 
-CakePHP (19 sniffs)
+CakePHP (18 sniffs)
 -------------------
 - CakePHP.Classes.ReturnTypeHint
 - CakePHP.Commenting.DocBlockAlignment
@@ -22,7 +22,6 @@ CakePHP (19 sniffs)
 - CakePHP.WhiteSpace.FunctionClosingBraceSpace
 - CakePHP.WhiteSpace.FunctionOpeningBraceSpace
 - CakePHP.WhiteSpace.FunctionSpacing
-- CakePHP.WhiteSpace.TabAndSpace
 
 Generic (26 sniffs)
 -------------------
@@ -95,7 +94,7 @@ PSR12 (17 sniffs)
 - PSR12.Properties.ConstantVisibility
 - PSR12.Traits.UseDeclaration
 
-SlevomatCodingStandard (52 sniffs)
+SlevomatCodingStandard (53 sniffs)
 ----------------------------------
 - SlevomatCodingStandard.Arrays.TrailingArrayComma
 - SlevomatCodingStandard.Attributes.AttributeAndTargetSpacing
@@ -149,6 +148,7 @@ SlevomatCodingStandard (52 sniffs)
 - SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing
 - SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable
 - SlevomatCodingStandard.Variables.UnusedVariable
+- SlevomatCodingStandard.Whitespaces.DuplicateSpaces
 
 Squiz (27 sniffs)
 -----------------
