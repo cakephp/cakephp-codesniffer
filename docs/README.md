@@ -1,6 +1,6 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 155 sniffs
+The CakePHP standard contains 159 sniffs
 
 CakePHP (19 sniffs)
 -------------------
@@ -13,6 +13,7 @@ CakePHP (19 sniffs)
 - CakePHP.ControlStructures.ElseIfDeclaration
 - CakePHP.ControlStructures.WhileStructures
 - CakePHP.Formatting.BlankLineBeforeReturn
+- CakePHP.NamingConventions.ValidEnumName
 - CakePHP.NamingConventions.ValidFunctionName
 - CakePHP.NamingConventions.ValidTraitName
 - CakePHP.PHP.DisallowShortOpenTag
@@ -22,7 +23,6 @@ CakePHP (19 sniffs)
 - CakePHP.WhiteSpace.FunctionClosingBraceSpace
 - CakePHP.WhiteSpace.FunctionOpeningBraceSpace
 - CakePHP.WhiteSpace.FunctionSpacing
-- CakePHP.WhiteSpace.TabAndSpace
 
 Generic (26 sniffs)
 -------------------
@@ -95,7 +95,7 @@ PSR12 (17 sniffs)
 - PSR12.Properties.ConstantVisibility
 - PSR12.Traits.UseDeclaration
 
-SlevomatCodingStandard (52 sniffs)
+SlevomatCodingStandard (56 sniffs)
 ----------------------------------
 - SlevomatCodingStandard.Arrays.TrailingArrayComma
 - SlevomatCodingStandard.Attributes.AttributeAndTargetSpacing
@@ -105,6 +105,7 @@ SlevomatCodingStandard (52 sniffs)
 - SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces
 - SlevomatCodingStandard.Classes.ModernClassNameReference
 - SlevomatCodingStandard.Classes.PropertyDeclaration
+- SlevomatCodingStandard.Classes.RequireSelfReference
 - SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment
 - SlevomatCodingStandard.Commenting.DocCommentSpacing
 - SlevomatCodingStandard.Commenting.EmptyComment
@@ -114,7 +115,9 @@ SlevomatCodingStandard (52 sniffs)
 - SlevomatCodingStandard.ControlStructures.DisallowYodaComparison
 - SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses
 - SlevomatCodingStandard.ControlStructures.NewWithParentheses
+- SlevomatCodingStandard.ControlStructures.RequireNullCoalesceEqualOperator
 - SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator
+- SlevomatCodingStandard.ControlStructures.RequireNullSafeObjectOperator
 - SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator
 - SlevomatCodingStandard.Exceptions.DeadCatch
 - SlevomatCodingStandard.Functions.ArrowFunctionDeclaration
@@ -149,6 +152,7 @@ SlevomatCodingStandard (52 sniffs)
 - SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing
 - SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable
 - SlevomatCodingStandard.Variables.UnusedVariable
+- SlevomatCodingStandard.Whitespaces.DuplicateSpaces
 
 Squiz (27 sniffs)
 -----------------

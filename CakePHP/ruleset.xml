@@ -258,6 +258,16 @@
     <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceEqualOperator"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullSafeObjectOperator"/>
     <rule ref="SlevomatCodingStandard.Classes.RequireSelfReference"/>
+    <rule ref="SlevomatCodingStandard.Whitespaces.DuplicateSpaces">
+        <properties>
+            <property name="ignoreSpacesInComment" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Attributes.AttributeAndTargetSpacing">
+        <properties>
+            <property name="allowOnSameLine" value="true"/>
+        </properties>
+    </rule>
 
     <!-- phpcs Zend sniffs -->
     <rule ref="Zend.NamingConventions.ValidVariableName">
