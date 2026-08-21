@@ -39,7 +39,7 @@ class ValidTraitNameSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
         $traitName = $tokens[$stackPtr + 2]['content'];
 
-        if (substr($traitName, -5) !== 'Trait') {
+        if (!str_ends_with($traitName, 'Trait')) {
             $error = 'Traits must have a "Trait" suffix.';
             $phpcsFile->addError($error, $stackPtr, 'InvalidTraitName');
         }
