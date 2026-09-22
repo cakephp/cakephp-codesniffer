@@ -41,17 +41,11 @@ class ReturnTypeHintSniff implements Sniff
         $closeParenthesisIndex = $tokens[$openParenthesisIndex]['parenthesis_closer'];
 
         $colonIndex = $phpcsFile->findNext(Tokens::$emptyTokens, $closeParenthesisIndex + 1, null, true);
-        if (!$colonIndex) {
-            return;
-        }
-
-        $startIndex = $phpcsFile->findNext(Tokens::$emptyTokens, $colonIndex + 1, $colonIndex + 3, true);
-        if (!$startIndex) {
-            return;
-        }
 
         if (!$this->isChainingMethod($phpcsFile, $stackPtr)) {
-            $this->assertNotThisOrStatic($phpcsFile, $stackPtr);
+            if ($colonIndex && $tokens[$colonIndex]['code'] === T_COLON) {
+                $this->assertNotThisOrStatic($phpcsFile, $stackPtr);
+            }
 
             return;
         }
@@ -61,20 +55,53 @@ class ReturnTypeHintSniff implements Sniff
             return;
         }
 
+        // No colon means no return type hint - add static
+        if (!$colonIndex || $tokens[$colonIndex]['code'] !== T_COLON) {
+            $fix = $phpcsFile->addFixableError(
+                'Chaining methods (@return $this) should have "static" return type.',
+                $closeParenthesisIndex,
+                'MissingStatic',
+            );
+            if (!$fix) {
+                return;
+            }
+
+            $phpcsFile->fixer->beginChangeset();
+            $phpcsFile->fixer->addContent($closeParenthesisIndex, ': static');
+            $phpcsFile->fixer->endChangeset();
+
+            return;
+        }
+
+        $startIndex = $phpcsFile->findNext(Tokens::$emptyTokens, $colonIndex + 1, $colonIndex + 3, true);
+        if (!$startIndex) {
+            return;
+        }
+
         $returnTokenCode = $tokens[$startIndex]['code'];
+        if ($returnTokenCode === T_STATIC) {
+            return;
+        }
+
         if ($returnTokenCode !== T_SELF) {
-            // Then we can only warn, but not auto-fix
-            $phpcsFile->addError(
-                'Chaining methods (@return $this) should not have any return-type-hint.',
+            $fix = $phpcsFile->addFixableError(
+                'Chaining methods (@return $this) should have "static" return type.',
                 $startIndex,
                 'InvalidSelf',
             );
+            if (!$fix) {
+                return;
+            }
+
+            $phpcsFile->fixer->beginChangeset();
+            $phpcsFile->fixer->replaceToken($startIndex, 'static');
+            $phpcsFile->fixer->endChangeset();
 
             return;
         }
 
         $fix = $phpcsFile->addFixableError(
-            'Chaining methods (@return $this) should not have any return-type-hint (Remove "self").',
+            'Chaining methods (@return $this) should have "static" return type instead of "self".',
             $startIndex,
             'InvalidSelf',
         );
@@ -83,9 +110,7 @@ class ReturnTypeHintSniff implements Sniff
         }
 
         $phpcsFile->fixer->beginChangeset();
-        for ($i = $colonIndex; $i <= $startIndex; $i++) {
-            $phpcsFile->fixer->replaceToken($i, '');
-        }
+        $phpcsFile->fixer->replaceToken($startIndex, 'static');
         $phpcsFile->fixer->endChangeset();
     }
 
@@ -173,7 +198,7 @@ class ReturnTypeHintSniff implements Sniff
             }
 
             $phpCsFile->addError(
-                'Class name repeated, expected `self` or `$this`.',
+                'Class name repeated, expected `static` or `$this`.',
                 $classNameIndex,
                 'InvalidClass',
             );

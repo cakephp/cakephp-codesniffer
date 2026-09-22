@@ -6,14 +6,21 @@ class Foo
     /**
      * @return $this
      */
-    public function correct()
+    public function correct(): static
     {
     }
 
     /**
      * @return $this
      */
-    public function incorrect(): Foo
+    public function incorrect()
+    {
+    }
+
+    /**
+     * @return $this
+     */
+    public function incorrectClass(): Foo
     {
     }
 
