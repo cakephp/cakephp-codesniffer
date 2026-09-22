@@ -1,8 +1,8 @@
 # CakePHP ruleset
 
-The CakePHP standard contains 155 sniffs
+The CakePHP standard contains 159 sniffs
 
-CakePHP (18 sniffs)
+CakePHP (19 sniffs)
 -------------------
 - CakePHP.Classes.ReturnTypeHint
 - CakePHP.Commenting.DocBlockAlignment
@@ -13,6 +13,7 @@ CakePHP (18 sniffs)
 - CakePHP.ControlStructures.ElseIfDeclaration
 - CakePHP.ControlStructures.WhileStructures
 - CakePHP.Formatting.BlankLineBeforeReturn
+- CakePHP.NamingConventions.ValidEnumName
 - CakePHP.NamingConventions.ValidFunctionName
 - CakePHP.NamingConventions.ValidTraitName
 - CakePHP.PHP.DisallowShortOpenTag
@@ -94,7 +95,7 @@ PSR12 (17 sniffs)
 - PSR12.Properties.ConstantVisibility
 - PSR12.Traits.UseDeclaration
 
-SlevomatCodingStandard (53 sniffs)
+SlevomatCodingStandard (56 sniffs)
 ----------------------------------
 - SlevomatCodingStandard.Arrays.TrailingArrayComma
 - SlevomatCodingStandard.Attributes.AttributeAndTargetSpacing
@@ -104,6 +105,7 @@ SlevomatCodingStandard (53 sniffs)
 - SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces
 - SlevomatCodingStandard.Classes.ModernClassNameReference
 - SlevomatCodingStandard.Classes.PropertyDeclaration
+- SlevomatCodingStandard.Classes.RequireSelfReference
 - SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment
 - SlevomatCodingStandard.Commenting.DocCommentSpacing
 - SlevomatCodingStandard.Commenting.EmptyComment
@@ -113,7 +115,9 @@ SlevomatCodingStandard (53 sniffs)
 - SlevomatCodingStandard.ControlStructures.DisallowYodaComparison
 - SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses
 - SlevomatCodingStandard.ControlStructures.NewWithParentheses
+- SlevomatCodingStandard.ControlStructures.RequireNullCoalesceEqualOperator
 - SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator
+- SlevomatCodingStandard.ControlStructures.RequireNullSafeObjectOperator
 - SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator
 - SlevomatCodingStandard.Exceptions.DeadCatch
 - SlevomatCodingStandard.Functions.ArrowFunctionDeclaration
