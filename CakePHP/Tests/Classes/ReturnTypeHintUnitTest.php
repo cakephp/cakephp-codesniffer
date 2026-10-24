@@ -14,6 +14,7 @@ class ReturnTypeHintUnitTest extends AbstractSniffTestCase
         return [
             16 => 1,
             23 => 1,
+            30 => 1,
         ];
     }
 

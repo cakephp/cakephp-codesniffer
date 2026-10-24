@@ -27,9 +27,9 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     /**
      * A list of all PHP magic methods.
      *
-     * @var array
+     * @var array<string>
      */
-    protected array $_magicMethods = [
+    protected array $magicMethods = [
         'construct',
         'destruct',
         'call',
@@ -54,7 +54,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
      */
     public function __construct()
     {
-        parent::__construct([T_CLASS, T_INTERFACE, T_TRAIT], [T_FUNCTION], true);
+        parent::__construct([T_CLASS, T_INTERFACE, T_TRAIT, T_ENUM], [T_FUNCTION], true);
     }
 
     /**
@@ -71,7 +71,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         $errorData = [$className . '::' . $methodName];
 
         // Ignore magic methods
-        if (preg_match('/^__(' . implode('|', $this->_magicMethods) . ')$/', $methodName)) {
+        if (preg_match('/^__(' . implode('|', $this->magicMethods) . ')$/', $methodName)) {
             return;
         }
 
@@ -88,6 +88,17 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
             $phpcsFile->addError($error, $stackPtr, 'PublicWithUnderscore', $errorData);
 
             return;
+        }
+
+        // Check non-public methods for underscore prefix
+        if ($isPublic === false && $methodName[0] === '_') {
+            // Allow CakePHP Entity accessor/mutator pattern: _getField(), _setField()
+            if (preg_match('/^_(get|set)[A-Z]/', $methodName)) {
+                return;
+            }
+
+            $error = 'Non-public method name "%s" should not be prefixed with underscore';
+            $phpcsFile->addError($error, $stackPtr, 'ProtectedWithUnderscore', $errorData);
         }
     }
 

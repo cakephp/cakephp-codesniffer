@@ -45,3 +45,12 @@ function test()
 function intersection($param)
 {
 }
+
+/**
+ * Void must be last, after null.
+ *
+ * @return int|void|null
+ */
+function voidAfterNull()
+{
+}
